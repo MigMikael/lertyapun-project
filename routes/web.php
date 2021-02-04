@@ -15,7 +15,7 @@ use App\Helpers\StringGenerator;
 */
 
 Route::get('/', function () {
-    $slug = (new StringGenerator())->generateSlug();
-    //return view('welcome');
-    return $slug;
+    // $slug = (new StringGenerator())->generateSlug();
+    return view('welcome');
+    // return $slug;
 });
