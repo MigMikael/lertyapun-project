@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Helpers\StringGenerator;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -14,7 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::orderBy('updated_at', 'DESC')->paginate(5);
+        return view('admin.category.index', ['categories' => $categories]);
     }
 
     /**
@@ -24,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.category.create');
     }
 
     /**
@@ -35,7 +37,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newCategory = $request->all();
+        $newCategory['slug'] = (new StringGenerator())->generateSlug();
+
+        $newCategory = Category::create($newCategory);
+        return redirect()->action([CategoryController::class, 'index']);
     }
 
     /**
@@ -57,7 +63,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('admin.category.edit', ['category' => $category]);
     }
 
     /**
@@ -69,7 +75,9 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $newCategory = $request->all();
+        $category->update($newCategory);
+        return redirect()->action([CategoryController::class, 'index']);
     }
 
     /**
@@ -80,6 +88,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->action([CategoryController::class, 'index']);
     }
 }

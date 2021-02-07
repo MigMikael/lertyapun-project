@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Helpers\StringGenerator;
+use App\Traits\ImageTrait;
 
 class ProductController extends Controller
 {
+    use ImageTrait;
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +17,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::orderBy('updated_at', 'DESC')
+            ->with('image')
+            ->paginate(5);
+        return view('admin.product.index', ['products' => $products]);
     }
 
     /**
@@ -24,7 +30,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.product.create');
     }
 
     /**
@@ -35,7 +41,17 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newProduct = $request->all();
+        $newProduct['slug'] = (new StringGenerator())->generateSlug();
+
+        if($request->hasFile('product_image')) {
+            $file = $request->file('product_image');
+            $product_image = $this->storeImage($file, "");
+            $newProduct['image_id'] = $product_image->id;
+        }
+
+        $newProduct = Product::create($newProduct);
+        return redirect()->action([ProductController::class, 'index']);
     }
 
     /**
@@ -57,7 +73,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('admin.product.edit', ['product' => $product]);
     }
 
     /**
@@ -69,7 +85,15 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $newProduct = $request->all();
+        if($request->hasFile('product_image')) {
+            $file = $request->file('product_image');
+            $product_image = $this->storeImage($file, "");
+            $newProduct['image_id'] = $product_image->id;
+        }
+
+        $product->update($newProduct);
+        return redirect()->action([ProductController::class, 'index']);
     }
 
     /**
@@ -80,6 +104,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->action([ProductController::class, 'index']);
     }
 }

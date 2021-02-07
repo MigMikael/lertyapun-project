@@ -24,6 +24,7 @@ class CreateCustomersTable extends Migration
             $table->string('password');
             $table->string('status');
             $table->unsignedBigInteger('proof_image_id');
+            $table->integer('point')->default(0);
 
             $table->foreign('proof_image_id')
                 ->references('id')

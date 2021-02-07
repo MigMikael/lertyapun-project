@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Tag extends Model
 {
     use HasFactory;
+    public $timestamps = true;
+    protected $table = 'tags';
+
+    protected $fillable = [
+        'slug',
+        'name',
+    ];
+
+    public function products()
+    {
+        return $this->belongsToMany('App\Models\Product', 'product_tag', 'tag_id', 'product_id');
+    }
 }

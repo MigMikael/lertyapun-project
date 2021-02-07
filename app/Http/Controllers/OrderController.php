@@ -4,9 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Traits\ImageTrait;
+use App\Helpers\StringGenerator;
 
 class OrderController extends Controller
 {
+    use ImageTrait;
+    public $orderStatus = [
+        'pending' => 'Pending',
+        'success' => 'Success',
+        'cancle' => 'Cancle',
+    ];
+
+    public $paymentStatus = [
+        'pending' => 'Pending',
+        'success' => 'Success',
+        'cancle' => 'Cancle',
+    ];
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +28,10 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::orderBy('updated_at', 'DESC')
+            ->with('customer')
+            ->paginate(5);
+        return view('admin.order.index', ['orders' => $orders]);
     }
 
     /**
@@ -24,7 +41,10 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.order.create', [
+            'paymentStatus' => $this->paymentStatus,
+            'orderStatus' => $this->orderStatus,
+        ]);
     }
 
     /**
@@ -35,7 +55,18 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newOrder = $request->all();
+        $newOrder['slug'] = (new StringGenerator())->generateSlug();
+        $newOrder['payment_method'] = 'direct transfer';
+
+        if($request->hasFile('slip_image')) {
+            $file = $request->file('slip_image');
+            $slip_image = $this->storeImage($file, "");
+            $newOrder['slip_image_id'] = $slip_image->id;
+        }
+
+        $newOrder = Order::create($newOrder);
+        return redirect()->action([OrderController::class, 'index']);
     }
 
     /**
@@ -57,7 +88,11 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        return view('admin.order.edit', [
+            'order' => $order,
+            'paymentStatus' => $this->paymentStatus,
+            'orderStatus' => $this->orderStatus,
+        ]);
     }
 
     /**
@@ -69,7 +104,16 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $newOrder = $request->all();
+
+        if($request->hasFile('slip_image')) {
+            $file = $request->file('slip_image');
+            $slip_image = $this->storeImage($file, "");
+            $newOrder['slip_image_id'] = $slip_image->id;
+        }
+
+        $order->update($newOrder);
+        return redirect()->action([OrderController::class, 'index']);
     }
 
     /**
@@ -80,6 +124,7 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $order->delete();
+        return redirect()->action([OrderController::class, 'index']);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tag;
+use App\Helpers\StringGenerator;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
@@ -14,7 +15,8 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        $tags = Tag::orderBy('updated_at', 'DESC')->paginate(5);
+        return view('admin.tag.index', ['tags' => $tags]);
     }
 
     /**
@@ -24,7 +26,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.tag.create');
     }
 
     /**
@@ -35,7 +37,11 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newTag = $request->all();
+        $newTag['slug'] = (new StringGenerator())->generateSlug();
+
+        $newTag = Tag::create($newTag);
+        return redirect()->action([TagController::class, 'index']);
     }
 
     /**
@@ -57,7 +63,7 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        //
+        return view('admin.tag.edit', ['tag' => $tag]);
     }
 
     /**
@@ -69,7 +75,9 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        //
+        $newTag = $request->all();
+        $tag->update($newTag);
+        return redirect()->action([TagController::class, 'index']);
     }
 
     /**
@@ -80,6 +88,7 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+        return redirect()->action([TagController::class, 'index']);
     }
 }
