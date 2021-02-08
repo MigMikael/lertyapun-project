@@ -77,7 +77,10 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        $order->with('customer');
+        return view('admin.order.show', [
+            'order' => $order,
+        ]);
     }
 
     /**

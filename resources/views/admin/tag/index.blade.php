@@ -16,6 +16,7 @@
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Action</th>
+            <th scope="col">View</th>
           </tr>
         </thead>
         <tbody>
@@ -35,6 +36,11 @@
                             <i class="fas fa-trash"></i>
                         </button>
                         {!! Form::close() !!}
+                    </td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" href="{{ url('admin/tags/'.$tag->slug) }}">
+                            <i class="fas fa-external-link-square-alt"></i>
+                        </a>
                     </td>
                 </tr>
             @endforeach

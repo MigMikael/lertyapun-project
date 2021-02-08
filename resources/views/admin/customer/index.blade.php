@@ -18,6 +18,7 @@
             <th scope="col">Phone</th>
             <th scope="col">Status</th>
             <th scope="col">Action</th>
+            <th scope="col">View</th>
           </tr>
         </thead>
         <tbody>
@@ -39,6 +40,11 @@
                             <i class="fas fa-trash"></i>
                         </button>
                         {!! Form::close() !!}
+                    </td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" href="{{ url('admin/customers/'.$customer->slug) }}">
+                            <i class="fas fa-external-link-square-alt"></i>
+                        </a>
                     </td>
                 </tr>
             @endforeach
