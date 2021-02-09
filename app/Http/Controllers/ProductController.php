@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Helpers\StringGenerator;
+use App\Models\Category;
+use App\Models\CategoryProduct;
 use App\Traits\ImageTrait;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -62,7 +65,15 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        $categories = Category::all()->pluck('name', 'slug');
+        $productCategories = $product->categories()->pluck('name');
+
+        // return $categories->toJson();
+        return view('admin.product.show', [
+            'product' => $product,
+            'categories' => $categories,
+            'productCategories' => $productCategories,
+        ]);
     }
 
     /**
@@ -106,5 +117,33 @@ class ProductController extends Controller
     {
         $product->delete();
         return redirect()->action([ProductController::class, 'index']);
+    }
+
+    /**
+     * Store new product category
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function addCategory(Request $request)
+    {
+        $data = $request->all();
+        $product = Product::where('slug', $data['product_id'])->first();
+
+        if ($data['tags'] != "") {
+            CategoryProduct::where('product_id', $product->id)->delete();
+
+            $newCategories = json_decode($data['tags'], True);
+            foreach($newCategories as $newCategory) {
+                $category = Category::where('slug', $newCategory['value'])->first();
+                $categoryProduct = [
+                    'product_id' => $product->id,
+                    'category_id' => $category->id
+                ];
+                CategoryProduct::create($categoryProduct);
+            }
+        }
+
+        return redirect("admin/products/".$product->slug);
     }
 }

@@ -18,6 +18,6 @@ class Category extends Model
 
     public function products()
     {
-        return $this->belongsToMany('App\Models\Product', 'category_product', 'category_id', 'product_id');
+        return $this->belongsToMany('App\Models\Product', 'category_products', 'category_id', 'product_id');
     }
 }

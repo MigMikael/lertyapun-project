@@ -29,12 +29,12 @@ class Product extends Model
 
     public function categories()
     {
-        return $this->belongsToMany('App\Models\Category', 'category_product', 'product_id', 'category_id');
+        return $this->belongsToMany('App\Models\Category', 'category_products', 'product_id', 'category_id');
     }
 
     public function cart()
     {
-        return $this->belongsToMany('App\Models\Customer', 'customer_product', 'product_id', 'customer_id')
+        return $this->belongsToMany('App\Models\Customer', 'customer_products', 'product_id', 'customer_id')
             ->withPivot('quantity');
     }
 

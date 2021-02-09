@@ -8,6 +8,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\TestController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,6 +42,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::put('products/{product:slug}', [ProductController::class, 'update']);
     Route::get('products/{product:slug}', [ProductController::class, 'show']);
     Route::delete('products/{product:slug}', [ProductController::class, 'destroy']);
+    Route::post('product/category', [ProductController::class, 'addCategory']);
 
 
     Route::get('categories', [CategoryController::class, 'index']);
@@ -77,3 +80,5 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('orders/{order:slug}', [OrderController::class, 'show']);
     Route::delete('orders/{order:slug}', [OrderController::class, 'destroy']);
 });
+
+Route::post('test', [TestController::class, 'index']);

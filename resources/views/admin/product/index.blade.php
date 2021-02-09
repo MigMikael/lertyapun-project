@@ -27,7 +27,7 @@
                 <tr>
                     <th scope="row">{{ $loop->iteration }}</th>
                     <td>
-                        <img src="{{ url('image/thumbnail/'.$product->image->slug) }}" style="height: 30px; width: 30px" class="img-fluid" alt="Responsive image">
+                        <img src="{{ url('image/thumbnail/'.$product->image->slug) }}" style="height: 30px; width: 30px" class="img-fluid" alt="{{ $product->name }}">
                     </td>
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->price }}</td>
