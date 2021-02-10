@@ -6,7 +6,9 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Helpers\StringGenerator;
 use App\Models\Category;
+use App\Models\Tag;
 use App\Models\CategoryProduct;
+use App\Models\ProductTag;
 use App\Traits\ImageTrait;
 use Illuminate\Support\Facades\Log;
 
@@ -68,11 +70,16 @@ class ProductController extends Controller
         $categories = Category::all()->pluck('name', 'slug');
         $productCategories = $product->categories()->pluck('name');
 
+        $tags = Tag::all()->pluck('name', 'slug');
+        $productTags = $product->tags()->pluck('name');
+
         // return $categories->toJson();
         return view('admin.product.show', [
             'product' => $product,
             'categories' => $categories,
             'productCategories' => $productCategories,
+            'promotions' => $tags,
+            'productPromotions' => $productTags,
         ]);
     }
 
@@ -130,10 +137,10 @@ class ProductController extends Controller
         $data = $request->all();
         $product = Product::where('slug', $data['product_id'])->first();
 
-        if ($data['tags'] != "") {
+        if ($data['categoryTag'] != "") {
             CategoryProduct::where('product_id', $product->id)->delete();
 
-            $newCategories = json_decode($data['tags'], True);
+            $newCategories = json_decode($data['categoryTag'], True);
             foreach($newCategories as $newCategory) {
                 $category = Category::where('slug', $newCategory['value'])->first();
                 $categoryProduct = [
@@ -145,5 +152,33 @@ class ProductController extends Controller
         }
 
         return redirect("admin/products/".$product->slug);
+    }
+
+    /**
+     * Store new product category
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function addTag(Request $request)
+    {
+        $data = $request->all();
+        $product = Product::where('slug', $data['product_id'])->first();
+
+        if ($data['promotionTag'] != "") {
+            ProductTag::where('product_id', $product->id)->delete();
+
+            $newPromotions = json_decode($data['promotionTag'], True);
+            foreach($newPromotions as $newPromotion) {
+                $tag = Tag::where('slug', $newPromotion['value'])->first();
+                $productTag = [
+                    'product_id' => $product->id,
+                    'tag_id' => $tag->id
+                ];
+                ProductTag::create($productTag);
+            }
+        }
+
+        return redirect()->back();
     }
 }

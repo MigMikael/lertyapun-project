@@ -43,6 +43,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('products/{product:slug}', [ProductController::class, 'show']);
     Route::delete('products/{product:slug}', [ProductController::class, 'destroy']);
     Route::post('product/category', [ProductController::class, 'addCategory']);
+    Route::post('product/tag', [ProductController::class, 'addTag']);
 
 
     Route::get('categories', [CategoryController::class, 'index']);
