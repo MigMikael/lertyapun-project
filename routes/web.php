@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
@@ -53,6 +54,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::put('categories/{category:slug}', [CategoryController::class, 'update']);
     Route::get('categories/{category:slug}', [CategoryController::class, 'show']);
     Route::delete('categories/{category:slug}', [CategoryController::class, 'destroy']);
+    Route::delete('categories/{category_slug}/products/{product_slug}', [CategoryProductController::class, 'destroy']);
 
 
     Route::get('tags', [TagController::class, 'index']);

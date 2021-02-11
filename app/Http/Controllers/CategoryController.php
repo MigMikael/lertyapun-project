@@ -15,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('updated_at', 'DESC')->paginate(5);
+        $categories = Category::orderBy('updated_at', 'DESC')->paginate(10);
         return view('admin.category.index', ['categories' => $categories]);
     }
 
@@ -52,7 +52,12 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        $products = $category->products()->get();
+        // return $products;
+        return view('admin.category.show', [
+            'category' => $category,
+            'products' => $products,
+        ]);
     }
 
     /**

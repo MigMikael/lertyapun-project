@@ -34,15 +34,17 @@ trait ImageTrait
     {
         $size = Storage::disk('local')->size($file->name);
 
-        if (App::environment('local')) {
-            //windows path
-            $img_path = storage_path().'\\app\\'.$file->name;
-            $des_path = storage_path().'\\app\\cp_'.$file->name;
-        }else{
-            //linux path
-            $img_path = storage_path().'/app/'.$file->name;
-            $des_path = storage_path().'/app/cp_'.$file->name;
-        }
+        // if (App::environment('local')) {
+        //     //windows path
+        //     $img_path = storage_path().'\\app\\'.$file->name;
+        //     $des_path = storage_path().'\\app\\cp_'.$file->name;
+        // }else{
+        //     //linux path
+        //     $img_path = storage_path().'/app/'.$file->name;
+        //     $des_path = storage_path().'/app/cp_'.$file->name;
+        // }
+        $img_path = storage_path().'/app/'.$file->name;
+        $des_path = storage_path().'/app/cp_'.$file->name;
 
         if ($file->mime == 'image/jpeg')
             //$image = imagecreatefrompng($img_path);
@@ -92,13 +94,14 @@ trait ImageTrait
 
         $img = Image::make($image)->resize($width, $height);
 
-        if (App::environment('local')) {
-            //windows path
-            $img->save(storage_path().'\\app\\re_'.$file->name);
-        }else{
-            //linux path
-            $img->save(storage_path().'/app/re_'.$file->name);
-        }
+        // if (App::environment('local')) {
+        //     //windows path
+        //     $img->save(storage_path().'\\app\\re_'.$file->name);
+        // }else{
+        //     //linux path
+        //     $img->save(storage_path().'/app/re_'.$file->name);
+        // }
+        $img->save(storage_path().'/app/re_'.$file->name);
 
         $file->name = 're_'.$file->name;
         $file->save();
@@ -108,13 +111,14 @@ trait ImageTrait
             $constraint->aspectRatio();
         });
 
-        if (App::environment('local')) {
-            //windows path
-            $img->save(storage_path().'\\app\\thumb_'.$file->name);
-        }else{
-            //linux path
-            $img->save(storage_path().'/app/thumb_'.$file->name);
-        }
+        // if (App::environment('local')) {
+        //     //windows path
+        //     $img->save(storage_path().'\\app\\thumb_'.$file->name);
+        // }else{
+        //     //linux path
+        //     $img->save(storage_path().'/app/thumb_'.$file->name);
+        // }
+        $img->save(storage_path().'/app/thumb_'.$file->name);
 
         Storage::delete($old_filename);
     }

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\CategoryProduct;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CategoryProductController extends Controller
 {
@@ -72,14 +75,16 @@ class CategoryProductController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\CategoryProduct  $categoryProduct
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(CategoryProduct $categoryProduct)
+    public function destroy($category_slug, $product_slug)
     {
-        //
+        Log::info("id". $category_slug);
+        Log::info("id". $product_slug);
+        $category = Category::where('slug', $category_slug)->first();
+        $product = Product::where('slug', $product_slug)->first();
+
+        CategoryProduct::where('category_id', $category->id)
+            ->where('product_id', $product->id)
+            ->delete();
+        return redirect()->back();
     }
 }
