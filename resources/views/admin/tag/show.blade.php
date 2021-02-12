@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="d-flex justify-content-between align-items-center" tyle="margin-top: 15px">
-        <h1 class="mt-4">Category > {{ $category->name }}</h1>
+        <h1 class="mt-4">Promotion > {{ $promotion->name }}</h1>
         <div>
             <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#editPanel">
                 <i class="fas fa-plus"></i>
@@ -18,14 +18,14 @@
     <div id="editPanel" class="collapse" style="padding-left: 15px">
         <br>
         <div class="row">
-            {!! Form::open(['url' => 'admin/categories/'. $category->slug .'/products', 'method' => 'post', 'class' => 'form-inline']) !!}
+            {!! Form::open(['url' => 'admin/tags/'. $promotion->slug .'/products', 'method' => 'post', 'class' => 'form-inline']) !!}
                 <input
-                    name="categoryProducts"
+                    name="productTags"
                     placeholder="click..."
                     class="form-control"
                     style="!important width: 100%"
                 />
-                <button type="submit" class="btn btn-primary">Add To Category</button>
+                <button type="submit" class="btn btn-primary">Add To Promotion</button>
             {!! Form::close() !!}
         </div>
         <br>
@@ -50,7 +50,7 @@
                     <td>
                         {!! Form::model($product, [
                             'method' => 'delete',
-                            'url' => 'admin/categories/' . $category->slug . '/' . 'products/' . $product->slug,
+                            'url' => 'admin/tags/' . $promotion->slug . '/' . 'products/' . $product->slug,
                             'class' => 'form-inline']) !!}
                             <button class="btn btn-danger btn-sm" type="submit">
                                 <i class="fas fa-trash"></i>
@@ -74,7 +74,7 @@
 
 @section('script')
 <script>
-    var inputElm = document.querySelector('input[name=categoryProducts]');
+    var inputElm = document.querySelector('input[name=productTags]');
 
     var productList = [
         @foreach($allProducts as $key => $product)
@@ -165,3 +165,4 @@
     }
 </script>
 @endsection
+

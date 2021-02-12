@@ -24,13 +24,27 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::orderBy('updated_at', 'DESC')
-            ->with('customer')
-            ->paginate(5);
+        $page = 10;
+        $sort = $request->query('sort');
+        if($sort == 'name_asc') {
+            $orders = Order::join('customers', 'orders.customer_id', '=', 'customers.id')
+                ->orderBy('first_name', 'ASC')
+                ->paginate($page);
+        } else if($sort == 'name_desc') {
+            $orders = Order::join('customers', 'orders.customer_id', '=', 'customers.id')
+                ->orderBy('first_name', 'DESC')
+                ->paginate($page);
+        } else {
+            $orders = Order::orderBy('updated_at', 'DESC')
+                ->with('customer')
+                ->paginate($page);
+        }
+        // return $orders;
         return view('admin.order.index', ['orders' => $orders]);
     }
 

@@ -9,6 +9,7 @@ use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductTagController;
 use App\Http\Controllers\TestController;
 
 /*
@@ -54,6 +55,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::put('categories/{category:slug}', [CategoryController::class, 'update']);
     Route::get('categories/{category:slug}', [CategoryController::class, 'show']);
     Route::delete('categories/{category:slug}', [CategoryController::class, 'destroy']);
+
+    Route::post('categories/{category_slug}/products', [CategoryProductController::class, 'store']);
     Route::delete('categories/{category_slug}/products/{product_slug}', [CategoryProductController::class, 'destroy']);
 
 
@@ -64,6 +67,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::put('tags/{tag:slug}', [TagController::class, 'update']);
     Route::get('tags/{tag:slug}', [TagController::class, 'show']);
     Route::delete('tags/{tag:slug}', [TagController::class, 'destroy']);
+
+    Route::post('tags/{tag_slug}/products', [ProductTagController::class, 'store']);
+    Route::delete('tags/{tag_slug}/products/{product_slug}', [ProductTagController::class, 'destroy']);
 
 
     Route::get('customers', [CustomerController::class, 'index']);

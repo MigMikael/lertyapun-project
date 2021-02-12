@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Product;
 use App\Helpers\StringGenerator;
 use Illuminate\Http\Request;
 
@@ -11,11 +12,20 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::orderBy('updated_at', 'DESC')->paginate(10);
+        $page = 10;
+        $sort = $request->query('sort');
+        if($sort == 'name_asc') {
+            $categories = Category::orderBy('name', 'ASC')->paginate($page);
+        } else if($sort == 'name_desc') {
+            $categories = Category::orderBy('name', 'DESC')->paginate($page);
+        } else {
+            $categories = Category::orderBy('updated_at', 'DESC')->paginate($page);
+        }
         return view('admin.category.index', ['categories' => $categories]);
     }
 
@@ -53,10 +63,12 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         $products = $category->products()->get();
-        // return $products;
+        $productIds = $products->pluck('id');
+        $allProducts = Product::whereNotIn('id', $productIds)->pluck('name', 'slug');
         return view('admin.category.show', [
             'category' => $category,
             'products' => $products,
+            'allProducts' => $allProducts,
         ]);
     }
 

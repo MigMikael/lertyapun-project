@@ -20,13 +20,26 @@ class CustomerController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $customers = Customer::orderBy('updated_at', 'DESC')
-            ->with('proofImage')
-            ->paginate(5);
+        $page = 10;
+        $sort = $request->query('sort');
+        if($sort == 'name_asc') {
+            $customers = Customer::orderBy('first_name', 'ASC')
+                ->with('proofImage')
+                ->paginate($page);
+        } else if($sort == 'name_desc') {
+            $customers = Customer::orderBy('first_name', 'DESC')
+                ->with('proofImage')
+                ->paginate($page);
+        } else {
+            $customers = Customer::orderBy('updated_at', 'DESC')
+                ->with('proofImage')
+                ->paginate($page);
+        }
         return view('admin.customer.index', ['customers' => $customers]);
     }
 

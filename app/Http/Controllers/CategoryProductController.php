@@ -30,15 +30,23 @@ class CategoryProductController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(Request $request, $category_slug)
     {
-        //
+        $category = Category::where('slug', $category_slug)->first();
+        $data = $request->all();
+
+        if ($data['categoryProducts'] != "") {
+            $newProducts = json_decode($data['categoryProducts'], True);
+            foreach($newProducts as $newProduct) {
+                $product = Product::where('slug', $newProduct['value'])->first();
+                $categoryProduct = [
+                    'product_id' => $product->id,
+                    'category_id' => $category->id
+                ];
+                CategoryProduct::create($categoryProduct);
+            }
+        }
+        return redirect()->back();
     }
 
     /**
@@ -77,8 +85,6 @@ class CategoryProductController extends Controller
 
     public function destroy($category_slug, $product_slug)
     {
-        Log::info("id". $category_slug);
-        Log::info("id". $product_slug);
         $category = Category::where('slug', $category_slug)->first();
         $product = Product::where('slug', $product_slug)->first();
 

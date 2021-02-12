@@ -18,13 +18,43 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::orderBy('updated_at', 'DESC')
-            ->with('image')
-            ->paginate(5);
+        $page = 5;
+        $sort = $request->query('sort');
+
+        if($sort == 'name_asc') {
+            $products = Product::orderBy('name', 'ASC')
+                ->with('image')
+                ->paginate($page);
+        } else if($sort == 'name_desc') {
+            $products = Product::orderBy('name', 'DESC')
+                ->with('image')
+                ->paginate($page);
+        } else if($sort == 'price_asc') {
+            $products = Product::orderBy('price', 'ASC')
+                ->with('image')
+                ->paginate($page);
+        } else if($sort == 'price_desc') {
+            $products = Product::orderBy('price', 'DESC')
+                ->with('image')
+                ->paginate($page);
+        } else if($sort == 'quantity_asc') {
+            $products = Product::orderBy('quantity', 'ASC')
+                ->with('image')
+                ->paginate($page);
+        } else if($sort == 'quantity_desc') {
+            $products = Product::orderBy('quantity', 'DESC')
+                ->with('image')
+                ->paginate($page);
+        } else {
+            $products = Product::orderBy('updated_at', 'DESC')
+                ->with('image')
+                ->paginate($page);
+        }
         return view('admin.product.index', ['products' => $products]);
     }
 
@@ -151,7 +181,7 @@ class ProductController extends Controller
             }
         }
 
-        return redirect("admin/products/".$product->slug);
+        return redirect()->back();
     }
 
     /**

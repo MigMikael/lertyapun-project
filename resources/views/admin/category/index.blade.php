@@ -3,15 +3,19 @@
 @section('content')
     <div class="d-flex justify-content-between align-items-center">
         <h1 class="mt-4">Category</h1>
-        <div>
-            <a class="btn btn-primary" href="{{ url("admin/categories/create") }}">
-                <i class="fas fa-plus"></i>
-            </a>
+        <div class="d-flex" style="flex-direction: row">
+            @include('admin.category._sort')
+            <div>
+                <a class="btn btn-primary" href="{{ url("admin/categories/create") }}">
+                    <i class="fas fa-plus"></i>
+                    Add
+                </a>
+            </div>
         </div>
     </div>
 
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="table table-striped table-hover">
             <thead>
             <tr>
                 <th scope="col">#</th>

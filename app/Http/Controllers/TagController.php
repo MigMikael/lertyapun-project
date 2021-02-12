@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tag;
+use App\Models\Product;
 use App\Helpers\StringGenerator;
 use Illuminate\Http\Request;
 
@@ -11,11 +12,20 @@ class TagController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tags = Tag::orderBy('updated_at', 'DESC')->paginate(5);
+        $page = 10;
+        $sort = $request->query('sort');
+        if($sort == 'name_asc') {
+            $tags = Tag::orderBy('name', 'ASC')->paginate($page);
+        } else if($sort == 'name_desc') {
+            $tags = Tag::orderBy('name', 'DESC')->paginate($page);
+        } else {
+            $tags = Tag::orderBy('updated_at', 'DESC')->paginate($page);
+        }
         return view('admin.tag.index', ['tags' => $tags]);
     }
 
@@ -52,7 +62,14 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        //
+        $products = $tag->products()->get();
+        $productIds = $products->pluck('id');
+        $allProducts = Product::whereNotIn('id', $productIds)->pluck('name', 'slug');
+        return view('admin.tag.show', [
+            'promotion' => $tag,
+            'products' => $products,
+            'allProducts' => $allProducts,
+        ]);
     }
 
     /**
