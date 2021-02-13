@@ -211,4 +211,68 @@ class ProductController extends Controller
 
         return redirect()->back();
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function indexCustomerProduct(Request $request)
+    {
+        $page = 5;
+        $category = [];
+        $category_slug = $request->query('category');
+
+        if ($category_slug != "") {
+            $category = Category::where('slug', $category_slug)->first();
+            $products = $category->products()->orderBy('updated_at', 'DESC')->paginate($page);
+        } else {
+            $products = Product::orderBy('updated_at', 'DESC')
+                ->with('image')
+                ->paginate($page);
+        }
+
+        $categories = Category::all()->pluck('name', 'slug');
+        return view('customer.index', [
+            'products' => $products,
+            'categories' => $categories,
+            'currentCategory' => $category,
+        ]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function showCustomerProduct(Product $product)
+    {
+        return view('customer.show', [
+            'product' => $product
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function indexCustomerPromotion(Request $request)
+    {
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function indexCustomerService(Request $request)
+    {
+
+    }
 }

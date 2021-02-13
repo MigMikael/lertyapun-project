@@ -30,6 +30,14 @@ Route::get('/', function () {
 Route::get('image/show/{image:slug}', [ImageController::class, 'show']);
 Route::get('image/thumbnail/{image:slug}', [ImageController::class, 'showThumbnail']);
 
+Route::group(['prefix' => 'customer'], function () {
+    Route::get('products', [ProductController::class, 'indexCustomerProduct']);
+    Route::get('products/promotions', [ProductController::class, 'indexCustomerPromotion']);
+    Route::get('products/{product:slug}', [ProductController::class, 'showCustomerProduct']);
+
+    Route::get('services', [ProductController::class, 'indexCustomerService']);
+});
+
 Route::group(['prefix' => 'admin'], function () {
     Route::get('', function () { return redirect('admin/dashboard'); });
 

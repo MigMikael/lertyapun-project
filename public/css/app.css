@@ -1,44 +1,144 @@
+.section-heading {
+    margin-bottom: 20px;
+}
+
+.img-wrap img {
+    height: 100%;
+    max-width: 100%;
+    width: auto;
+    display: inline-block;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.img-wrap {
+    overflow: hidden;
+    position: relative;
+}
+
+.card-product-grid {
+    margin-bottom: 20px;
+}
+
+.card-product-grid .img-wrap {
+    border-radius: 0.2rem 0.2rem 0 0;
+    height: 220px;
+}
+
+
+.card-product-grid:hover {
+    box-shadow: 0 4px 15px rgb(153 153 153 / 30%);
+    transition: 0.3s;
+}
+
+.card-product-grid .info-wrap {
+    overflow: hidden;
+    padding: 18px 20px;
+}
+
+.card-product-grid .fix-height {
+    height: 80px;
+    overflow: hidden;
+}
+
+.card .img-wrap {
+    overflow: hidden;
+}
+
+.img-wrap {
+    text-align: center;
+    display: block;
+}
+
+a.title {
+    color: #212529;
+    display: block;
+}
+
+.price {
+    font-weight: 600;
+    color: #212529;
+}
+
+figcaption {
+    padding: 15px;
+    background: #FFF;
+}
+
+.filter-group {
+    border-bottom: 1px solid #e4e4e4;
+}
+
+.filter-group .card-header {
+    border-bottom: 0;
+}
+
+.icon-control {
+    margin-top: 5px;
+    float: right;
+    font-size: 80%;
+}
+
+.card-header .title {
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+.list-menu {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+}
+
+.list-menu li {
+    margin-bottom: 5px;
+}
+
+.filter-content>.card-body {
+    padding-top: 0px;
+}
+
 #wrapper {
     overflow-x: hidden;
  }
 
 #sidebar-wrapper {
-  min-height: 100vh;
-  margin-left: -15rem;
-  -webkit-transition: margin .25s ease-out;
-  -moz-transition: margin .25s ease-out;
-  -o-transition: margin .25s ease-out;
-  transition: margin .25s ease-out;
+    min-height: 100vh;
+    margin-left: -15rem;
+    -webkit-transition: margin .25s ease-out;
+    -moz-transition: margin .25s ease-out;
+    -o-transition: margin .25s ease-out;
+    transition: margin .25s ease-out;
 }
 
 #sidebar-wrapper .sidebar-heading {
-  padding: 0.875rem 1.25rem;
-  font-size: 1.2rem;
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
 }
 
 #sidebar-wrapper .list-group {
-  width: 15rem;
+    width: 15rem;
 }
 
 #page-content-wrapper {
-  min-width: 100vw;
+    min-width: 100vw;
 }
 
 #wrapper.toggled #sidebar-wrapper {
-  margin-left: 0;
+    margin-left: 0;
 }
 
 @media (min-width: 768px) {
-  #sidebar-wrapper {
-    margin-left: 0;
-  }
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
 
-  #page-content-wrapper {
-    min-width: 0;
-    width: 100%;
-  }
+    #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+    }
 
-  #wrapper.toggled #sidebar-wrapper {
-    margin-left: -15rem;
-  }
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: -15rem;
+    }
 }
