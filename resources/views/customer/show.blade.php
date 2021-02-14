@@ -29,6 +29,11 @@
                         <label>ราคา</label>
                         <h5 class="price">฿{{ $product->price }} {{ $product->unit }}</h5>
                     </div>
+                    <div class="mt-3">
+                        @foreach ($product->tags as $tag)
+                            <span class="badge badge-danger" style="font-weight: normal">{{ $tag->name }}</span>
+                        @endforeach
+                    </div>
                     <div class="product-amount mt-3">
                         <label>จำนวน</label>
                         <input type="number" class="form-control" value="1" style="width: 100px;">

@@ -37,6 +37,22 @@
 
         <script src="{{ URL::asset('vendor/jquery/jquery.min.js') }}"></script>
         <script src="{{ URL::asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script>
+            $( document ).ready(function(){
+                $.ajax({
+                    url: '{{ url("customer/cart/product/count") }}',
+                    type: 'get',
+                    success: function(result) {
+                        console.log('result', result)
+                        $('#productCount').text(result.productCount);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        var errorMsg = 'Ajax request failed: ' + xhr.responseText;
+                        $('#content').html(errorMsg);
+                    }
+                });
+            });
+        </script>
         @yield('script')
     </body>
 </html>

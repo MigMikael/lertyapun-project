@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CustomerProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductTagController;
 use App\Http\Controllers\TestController;
@@ -32,10 +33,16 @@ Route::get('image/thumbnail/{image:slug}', [ImageController::class, 'showThumbna
 
 Route::group(['prefix' => 'customer'], function () {
     Route::get('products', [ProductController::class, 'indexCustomerProduct']);
+    Route::post('products/search', [ProductController::class, 'searchCustomerProduct']);
     Route::get('products/promotions', [ProductController::class, 'indexCustomerPromotion']);
     Route::get('products/{product:slug}', [ProductController::class, 'showCustomerProduct']);
 
     Route::get('services', [ProductController::class, 'indexCustomerService']);
+
+    Route::get('cart', [CustomerProductController::class, 'index']);
+    Route::post('cart', [CustomerProductController::class, 'store']);
+    Route::delete('cart/{product:slug}', [CustomerProductController::class, 'destroy']);
+    Route::get('cart/product/count', [CustomerProductController::class, 'productCount']);
 });
 
 Route::group(['prefix' => 'admin'], function () {
@@ -48,6 +55,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('products', [ProductController::class, 'index']);
     Route::post('products', [ProductController::class, 'store']);
     Route::get('products/create', [ProductController::class, 'create']);
+    Route::post('products/search', [ProductController::class, 'search']);
     Route::get('products/{product:slug}/edit', [ProductController::class, 'edit']);
     Route::put('products/{product:slug}', [ProductController::class, 'update']);
     Route::get('products/{product:slug}', [ProductController::class, 'show']);

@@ -25,12 +25,18 @@
                         </header>
                         <div class="filter-content show collapse" id="collapse_1">
                             <div class="card-body">
+                                {!! Form::open(['method' => 'post', 'url' => 'customer/products/search']) !!}
                                 <div class="input-group mr-auto form-group" id="search-product">
-                                    <input type="text" class="form-control" placeholder="ค้นหา...">
+                                    @if ($search != "")
+                                    <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหา...">
+                                    @else
+                                    <input name="query" type="text" class="form-control" placeholder="ค้นหา...">
+                                    @endif
                                     <div class="input-group-append">
                                         <button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button>
                                     </div>
                                 </div>
+                                {!! Form::close() !!}
                                 <ul class="list-menu">
                                     <li>
                                         <a href="{{ url('customer/products') }}">ทั้งหมด</a>
@@ -44,35 +50,6 @@
                             </div>
                         </div>
                     </article>
-                    <article class="filter-group">
-                        <header class="card-header">
-                            <a href="#" data-toggle="collapse" data-target="#collapse_2">
-                                <i class="icon-control fa fa-chevron-down"></i>
-                                <h6>ราคา</h6>
-                            </a>
-                        </header>
-                        <div class="filter-content show collapse" id="collapse_2">
-                            <div class="card-body">
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label>ต่ำสุด</label>
-                                        <input type="number" class="form-control" placeholder="0" min="0"
-                                            max="5000">
-                                    </div>
-                                    <div class="form-group text-right col-md-6">
-                                        <label>สูงสุด</label>
-                                        <input type="number" class="form-control" placeholder="5000" min="0"
-                                            max="5000">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="filter-group">
-                        <div class="card-body">
-                            <button type="button" class="btn btn-primary btn-block">ค้นหา</button>
-                        </div>
-                    </article>
                 </div>
             </aside>
             <main class="col-md-8 col-lg-9 form-group">
@@ -80,6 +57,8 @@
                     <h3 class="section-title">
                         @if($currentCategory != [])
                             {{ $currentCategory->name }}
+                        @elseif($search != "")
+                            ค้นหา : "{{ $search }}"
                         @else
                             สินค้าทั้งหมด
                         @endif
@@ -87,22 +66,7 @@
                 </header>
                 <div class="row">
                     @foreach ($products as $product)
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card card-product-grid">
-                            <a href="{{ url('customer/products/'.$product->slug) }}" class="img-wrap">
-                                <img src="{{ url('image/show/'.$product->image->slug) }}">
-                            </a>
-                            <figcaption class="info-wrap">
-                                <div class="fix-height">
-                                    <a href="{{ url('customer/products/'.$product->slug) }}" class="title">
-                                        {{ $product->name }}
-                                    </a>
-                                    <div class="price mt-1">฿{{ $product->price }}</div>
-                                </div>
-                                <a href="shopping_cart.html" class="btn btn-block btn-primary">เพิ่มใส่ตระกร้า</a>
-                            </figcaption>
-                        </div>
-                    </div>
+                        @include('customer._productCard', $product)
                     @endforeach
                 </div>
                 <div class="row">
@@ -114,4 +78,33 @@
         </div>
     </div>
 </section>
+@endsection
+
+@section('script')
+    @foreach ($products as $product)
+    <script>
+        $("#{{ $product->slug }}").click(function(e) {
+            e.preventDefault();
+            $("#{{ $product->slug }}").html("<span class='spinner-border spinner-border-sm'></span> Loading...");
+
+            $.ajax({
+                type: "post",
+                url: "{{ url('customer/cart') }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "product_id": "{{ $product->slug }}",
+                    "customer_id": "QoUXlBE9kpTtmqy8oTRkIdvKKrOoQdXxAzTE99yr" // Todo dynamic this
+                },
+                success: function(result) {
+                    $('#productCount').text(result.productCount);
+                    $("#{{ $product->slug }}").text("เพิ่มใส่ตระกร้า");
+                },
+                error: function(result) {
+                    alert('error');
+                    $("#{{ $product->slug }}").text("เพิ่มใส่ตระกร้า");
+                }
+            });
+        });
+    </script>
+    @endforeach
 @endsection

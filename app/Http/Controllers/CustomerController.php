@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Product;
 use App\Helpers\StringGenerator;
+use App\Models\CustomerProduct;
 use Illuminate\Http\Request;
 use App\Traits\ImageTrait;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class CustomerController extends Controller
 {
@@ -130,4 +133,5 @@ class CustomerController extends Controller
         $customer->delete();
         return redirect()->action([CustomerController::class, 'index']);
     }
+
 }

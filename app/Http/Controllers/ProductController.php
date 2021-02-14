@@ -23,39 +23,65 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $page = 5;
+        $page = 6;
         $sort = $request->query('sort');
+        $query = $request->query('query');
 
         if($sort == 'name_asc') {
-            $products = Product::orderBy('name', 'ASC')
+            $products = Product::where("name", "like", "%".$query."%")
+                ->orderBy('name', 'ASC')
                 ->with('image')
                 ->paginate($page);
         } else if($sort == 'name_desc') {
-            $products = Product::orderBy('name', 'DESC')
+            $products = Product::where("name", "like", "%".$query."%")
+                ->orderBy('name', 'DESC')
                 ->with('image')
                 ->paginate($page);
         } else if($sort == 'price_asc') {
-            $products = Product::orderBy('price', 'ASC')
+            $products = Product::where("name", "like", "%".$query."%")
+                ->orderBy('price', 'ASC')
                 ->with('image')
                 ->paginate($page);
         } else if($sort == 'price_desc') {
-            $products = Product::orderBy('price', 'DESC')
+            $products = Product::where("name", "like", "%".$query."%")
+                ->orderBy('price', 'DESC')
                 ->with('image')
                 ->paginate($page);
         } else if($sort == 'quantity_asc') {
-            $products = Product::orderBy('quantity', 'ASC')
+            $products = Product::where("name", "like", "%".$query."%")
+                ->orderBy('quantity', 'ASC')
                 ->with('image')
                 ->paginate($page);
         } else if($sort == 'quantity_desc') {
-            $products = Product::orderBy('quantity', 'DESC')
+            $products = Product::where("name", "like", "%".$query."%")
+                ->orderBy('quantity', 'DESC')
                 ->with('image')
                 ->paginate($page);
         } else {
-            $products = Product::orderBy('updated_at', 'DESC')
+            $products = Product::where("name", "like", "%".$query."%")
+                ->orderBy('updated_at', 'DESC')
                 ->with('image')
                 ->paginate($page);
         }
-        return view('admin.product.index', ['products' => $products]);
+        $products->appends(['query' => $query]);
+        $products->appends(['sort' => $sort]);
+        return view('admin.product.index', [
+            'products' => $products,
+            'search' => $query,
+        ]);
+    }
+
+    /**
+     * Search a listing of the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $request = $request->all();
+        $query = $request['query'];
+        return redirect("admin/products?query=".$query);
     }
 
     /**
@@ -220,13 +246,19 @@ class ProductController extends Controller
      */
     public function indexCustomerProduct(Request $request)
     {
-        $page = 5;
+        $page = 6;
+        $query = "";
         $category = [];
         $category_slug = $request->query('category');
+        $query = $request->query('query');
 
         if ($category_slug != "") {
             $category = Category::where('slug', $category_slug)->first();
             $products = $category->products()->orderBy('updated_at', 'DESC')->paginate($page);
+        } else if ($query != "") {
+            $products = Product::where('name', 'like', '%'.$query.'%')
+                ->paginate($page)
+                ->appends(['search' => $query]);
         } else {
             $products = Product::orderBy('updated_at', 'DESC')
                 ->with('image')
@@ -238,7 +270,15 @@ class ProductController extends Controller
             'products' => $products,
             'categories' => $categories,
             'currentCategory' => $category,
+            'search' => $query,
         ]);
+    }
+
+    public function searchCustomerProduct(Request $request)
+    {
+        $request = $request->all();
+        $query = $request['query'];
+        return redirect("customer/products?query=".$query);
     }
 
     /**
@@ -249,6 +289,7 @@ class ProductController extends Controller
      */
     public function showCustomerProduct(Product $product)
     {
+        $product = Product::where('slug', $product->slug)->with('tags')->first();
         return view('customer.show', [
             'product' => $product
         ]);
@@ -262,7 +303,10 @@ class ProductController extends Controller
      */
     public function indexCustomerPromotion(Request $request)
     {
-
+        $products = Product::has('tags')->with('tags')->paginate(6);
+        return view('customer.promotion', [
+            'products' => $products
+        ]);
     }
 
     /**

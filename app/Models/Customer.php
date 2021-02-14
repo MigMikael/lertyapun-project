@@ -30,7 +30,7 @@ class Customer extends Model
 
     public function cart()
     {
-        return $this->belongsToMany('App\Models\Product', 'customer_product', 'customer_id', 'product_id')
+        return $this->belongsToMany('App\Models\Product', 'customer_products', 'customer_id', 'product_id')
             ->withPivot('quantity');
     }
 

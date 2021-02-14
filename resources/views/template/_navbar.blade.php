@@ -12,25 +12,30 @@
             </a>
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ URL::asset('customer/products') }}">สินค้า</a>
+                    <a class="nav-link" href="{{ url('customer/products') }}">สินค้า</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ URL::asset('customer/products/promotions') }}">โปรโมชัน</a>
+                    <a class="nav-link" href="{{ url('customer/products/promotions') }}">โปรโมชัน</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ URL::asset('customer/services') }}">บริการลูกค้า</a>
+                    <a class="nav-link" href="{{ url('customer/services') }}">บริการลูกค้า</a>
                 </li>
             </ul>
-            <div class="input-group mr-auto" id="search-nav">
-                <input type="text" class="form-control" placeholder="ค้นหา...">
+            {!! Form::open(['method' => 'post', 'url' => 'customer/products/search', 'class' => 'input-group mr-auto', 'id' => 'search-nav']) !!}
+                @if (isset($search) && $search != "")
+                <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหา...">
+                @else
+                <input name="query" type="text" class="form-control" placeholder="ค้นหา...">
+                @endif
                 <div class="input-group-append">
                     <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
                 </div>
-            </div>
+            {!! Form::close() !!}
+
             <div class="widget-header mr-3">
-                <a href="shopping_cart.html" class="icon icon-sm rounded-circle border">
+                <a href="{{ url('customer/cart') }}" class="icon icon-sm rounded-circle border">
                     <i class="fa fa-shopping-cart"></i>
-                    <span class="badge badge-pill badge-danger notify">1</span>
+                    <span id="productCount" class="badge badge-pill badge-danger notify"></span>
                 </a>
             </div>
             <div class="btn-group">

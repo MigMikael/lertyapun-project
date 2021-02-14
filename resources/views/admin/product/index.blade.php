@@ -2,11 +2,25 @@
 
 @section('content')
     <div class="d-flex justify-content-between align-items-center">
-        <h1 class="mt-4">Product</h1>
-        <div class="d-flex" style="flex-direction: row">
+        <h1 class="mt-4 mb-2">Product</h1>
+        <div class="d-flex mt-4 mb-2" style="flex-direction: row">
+            {!! Form::open(['method' => 'post', 'url' => 'admin/products/search']) !!}
+            <div class="input-group" style="height: 30px">
+                @if ($search != '')
+                <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="Search">
+                @else
+                <input name="query" type="text" class="form-control" placeholder="Search">
+                @endif
+                <div class="input-group-append">
+                    <button class="btn btn-info" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            {!! Form::close() !!}
             @include('admin.product._sort')
             <div>
-                <a class="btn btn-primary" href="{{ url("admin/products/create") }}">
+                <a class="btn btn-primary" href="{{ url("admin/products/create") }}" style="height: 38px; width:80px">
                     <i class="fas fa-plus"></i>
                     Add
                 </a>

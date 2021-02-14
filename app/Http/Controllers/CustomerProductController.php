@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use App\Models\Customer;
 use App\Models\CustomerProduct;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CustomerProductController extends Controller
 {
@@ -14,7 +17,23 @@ class CustomerProductController extends Controller
      */
     public function index()
     {
-        //
+        $customer = Customer::where('slug', 'QoUXlBE9kpTtmqy8oTRkIdvKKrOoQdXxAzTE99yr')
+            ->with('cart')
+            ->first();
+
+        $sumTotalPrice = 0;
+        foreach($customer->cart as $product) {
+            $totalPrice = $product->price * $product->pivot->quantity;
+            $product['totalPrice'] = $totalPrice;
+
+            $sumTotalPrice += $totalPrice;
+        }
+        $customer['totalPrice'] = $sumTotalPrice;
+
+        // return $customer;
+        return view('customer.cart', [
+            'customer' => $customer
+        ]);
     }
 
     /**
@@ -35,7 +54,23 @@ class CustomerProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $customer = Customer::where('slug', $data['customer_id'])->first();
+        $product = Product::where('slug', $data['product_id'])->first();
+        $customerProductCheck = [
+            'customer_id' => $customer->id,
+            'product_id' => $product->id,
+        ];
+        $customerProduct = [
+            'customer_id' => $customer->id,
+            'product_id' => $product->id,
+            'quantity' => 1,
+        ];
+        CustomerProduct::firstOrCreate($customerProductCheck, $customerProduct);
+
+        $productCount = CustomerProduct::where('customer_id', $customer->id)->count();
+        return response()->json(['productCount' => $productCount], 200);
     }
 
     /**
@@ -75,11 +110,27 @@ class CustomerProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\CustomerProduct  $customerProduct
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CustomerProduct $customerProduct)
+    public function destroy(Product $product)
     {
-        //
+        $customer = Customer::where('slug', 'QoUXlBE9kpTtmqy8oTRkIdvKKrOoQdXxAzTE99yr')->first();
+
+        $customerProduct = CustomerProduct::where('customer_id', $customer->id)
+            ->where('product_id', $product->id)
+            ->first();
+
+        $customerProduct->delete();
+
+        return redirect()->back();
+    }
+
+    public function productCount()
+    {
+        $customer = Customer::where('slug', 'QoUXlBE9kpTtmqy8oTRkIdvKKrOoQdXxAzTE99yr')->first();
+        $productCount = CustomerProduct::where('customer_id', $customer->id)->count();
+
+        return response()->json(['productCount' => $productCount], 200);
     }
 }
