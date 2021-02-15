@@ -86,7 +86,9 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+        return view('admin.customer.show', [
+            'customer' => $customer
+        ]);
     }
 
     /**

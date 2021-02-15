@@ -32,7 +32,17 @@
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $customer->first_name }} {{ $customer->last_name }}</td>
                         <td>{{ $customer->phone }}</td>
-                        <td>{{ $customer->status }}</td>
+                        <td>
+                            @if($customer->status == 'active')
+                            <span class="badge badge-success" style="width: 60px">Active</span>
+                            @elseif($customer->status == 'pending')
+                            <span class="badge badge-warning" style="width: 60px">Pending</span>
+                            @elseif($customer->status == 'suspend')
+                            <span class="badge badge-secondary" style="width: 60px">Suspend</span>
+                            @elseif($customer->status == 'inactive')
+                            <span class="badge badge-danger" style="width: 60px">Inactive</span>
+                            @endif
+                        </td>
                         <td>
                             {!! Form::model($customer, [
                                 'method' => 'delete',
