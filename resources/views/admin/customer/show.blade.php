@@ -54,14 +54,6 @@
             <img src="{{ url('image/show/'.$customer->proofImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $customer->first_name }}">
         </a>
     </div>
-    {{-- <div id="aniimated-thumbnials">
-        <a href="{{ url('image/show/'.$customer->proofImage->slug) }}">
-          <img src="{{ url('image/show/'.$customer->proofImage->slug) }}" />
-        </a>
-        <a href="{{ url('image/show/'.$customer->proofImage->slug) }}">
-          <img src="{{ url('image/show/'.$customer->proofImage->slug) }}" />
-        </a>
-    </div> --}}
 @endsection
 
 @section('script')
