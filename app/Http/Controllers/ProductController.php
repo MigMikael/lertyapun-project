@@ -8,13 +8,20 @@ use App\Helpers\StringGenerator;
 use App\Models\Category;
 use App\Models\Tag;
 use App\Models\CategoryProduct;
+use App\Models\ProductPromotion;
 use App\Models\ProductTag;
+use App\Models\Promotion;
 use App\Traits\ImageTrait;
 use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
     use ImageTrait;
+    public $productStatus = [
+        'active' => 'Active',
+        'suspend' => 'Suspend',
+        'inactive' => 'Inactive',
+    ];
     /**
      * Display a listing of the resource.
      *
@@ -91,7 +98,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.product.create');
+        return view('admin.product.create', ['status' => $this->productStatus]);
     }
 
     /**
@@ -129,13 +136,18 @@ class ProductController extends Controller
         $tags = Tag::all()->pluck('name', 'slug');
         $productTags = $product->tags()->pluck('name');
 
+        $promotions = Promotion::all()->pluck('name', 'slug');
+        $productPromotions = $product->promotions()->pluck('name');
+
         // return $categories->toJson();
         return view('admin.product.show', [
             'product' => $product,
             'categories' => $categories,
             'productCategories' => $productCategories,
-            'promotions' => $tags,
-            'productPromotions' => $productTags,
+            'promotions' => $promotions,
+            'productPromotions' => $productPromotions,
+            'tags' => $tags,
+            'productTags' => $productTags,
         ]);
     }
 
@@ -147,7 +159,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('admin.product.edit', ['product' => $product]);
+        return view('admin.product.edit', ['product' => $product, 'status' => $this->productStatus]);
     }
 
     /**
@@ -180,6 +192,34 @@ class ProductController extends Controller
     {
         $product->delete();
         return redirect()->action([ProductController::class, 'index']);
+    }
+
+    /**
+     * Store new product category
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function addPromotion(Request $request)
+    {
+        $data = $request->all();
+        $product = Product::where('slug', $data['product_id'])->first();
+
+        if ($data['promotionTag'] != "") {
+            ProductPromotion::where('product_id', $product->id)->delete();
+
+            $newPromotions = json_decode($data['promotionTag'], True);
+            foreach($newPromotions as $newPromotion) {
+                $promotion = Promotion::where('slug', $newPromotion['value'])->first();
+                $productPromotion = [
+                    'product_id' => $product->id,
+                    'promotion_id' => $promotion->id
+                ];
+                ProductPromotion::create($productPromotion);
+            }
+        }
+
+        return redirect()->back();
     }
 
     /**
@@ -221,10 +261,10 @@ class ProductController extends Controller
         $data = $request->all();
         $product = Product::where('slug', $data['product_id'])->first();
 
-        if ($data['promotionTag'] != "") {
+        if ($data['tagTag'] != "") {
             ProductTag::where('product_id', $product->id)->delete();
 
-            $newPromotions = json_decode($data['promotionTag'], True);
+            $newPromotions = json_decode($data['tagTag'], True);
             foreach($newPromotions as $newPromotion) {
                 $tag = Tag::where('slug', $newPromotion['value'])->first();
                 $productTag = [

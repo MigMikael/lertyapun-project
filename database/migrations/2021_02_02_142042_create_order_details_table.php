@@ -17,8 +17,8 @@ class CreateOrderDetailsTable extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->integer('sale_quantity');
-            $table->float('order_price');
+            $table->integer('sale_quantity')->default(0);
+            $table->float('order_price')->default(0);
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('product_id');
 
@@ -29,7 +29,8 @@ class CreateOrderDetailsTable extends Migration
 
             $table->foreign('product_id')
                 ->references('id')
-                ->on('products');
+                ->on('products')
+                ->onDelete('cascade');
         });
     }
 

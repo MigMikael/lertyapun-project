@@ -66,7 +66,7 @@ class TagController extends Controller
         $productIds = $products->pluck('id');
         $allProducts = Product::whereNotIn('id', $productIds)->pluck('name', 'slug');
         return view('admin.tag.show', [
-            'promotion' => $tag,
+            'tag' => $tag,
             'products' => $products,
             'allProducts' => $allProducts,
         ]);

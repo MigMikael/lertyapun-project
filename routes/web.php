@@ -10,7 +10,9 @@ use App\Http\Controllers\TagController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomerProductController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductPromotionController;
 use App\Http\Controllers\ProductTagController;
+use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\TestController;
 
 /*
@@ -37,7 +39,9 @@ Route::group(['prefix' => 'customer'], function () {
     Route::get('products/promotions', [ProductController::class, 'indexCustomerPromotion']);
     Route::get('products/{product:slug}', [ProductController::class, 'showCustomerProduct']);
 
+
     Route::get('services', [ProductController::class, 'indexCustomerService']);
+
 
     Route::get('cart', [CustomerProductController::class, 'index']);
     Route::post('cart', [CustomerProductController::class, 'store']);
@@ -60,6 +64,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::put('products/{product:slug}', [ProductController::class, 'update']);
     Route::get('products/{product:slug}', [ProductController::class, 'show']);
     Route::delete('products/{product:slug}', [ProductController::class, 'destroy']);
+    Route::post('product/promotion', [ProductController::class, 'addPromotion']);
     Route::post('product/category', [ProductController::class, 'addCategory']);
     Route::post('product/tag', [ProductController::class, 'addTag']);
 
@@ -74,6 +79,18 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::post('categories/{category_slug}/products', [CategoryProductController::class, 'store']);
     Route::delete('categories/{category_slug}/products/{product_slug}', [CategoryProductController::class, 'destroy']);
+
+
+    Route::get('promotions', [PromotionController::class, 'index']);
+    Route::post('promotions', [PromotionController::class, 'store']);
+    Route::get('promotions/create', [PromotionController::class, 'create']);
+    Route::get('promotions/{promotion:slug}/edit', [PromotionController::class, 'edit']);
+    Route::put('promotions/{promotion:slug}', [PromotionController::class, 'update']);
+    Route::get('promotions/{promotion:slug}', [PromotionController::class, 'show']);
+    Route::delete('promotions/{promotion:slug}', [PromotionController::class, 'destroy']);
+
+    Route::post('promotions/{promotion_slug}/products', [ProductPromotionController::class, 'store']);
+    Route::delete('promotions/{promotion_slug}/products/{product_slug}', [ProductPromotionController::class, 'destroy']);
 
 
     Route::get('tags', [TagController::class, 'index']);

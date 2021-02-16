@@ -20,7 +20,13 @@ class Product extends Model
         'quantity',
         'unit',
         'image_id',
+        'status'
     ];
+
+    public function promotions()
+    {
+        return $this->belongsToMany('App\Models\Promotion', 'product_promotions', 'product_id', 'promotion_id');
+    }
 
     public function tags()
     {

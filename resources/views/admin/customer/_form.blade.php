@@ -10,10 +10,10 @@
     {!! Form::label('phone', 'Phone') !!}
     {!! Form::text('phone', null, ['placeholder' => 'Phone Number', 'class' => 'form-control']) !!}
 </div>
-<div class="form-group" style="margin-bottom: 3%">
+{{-- <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('point', 'Point') !!}
     {!! Form::text('point', null, ['placeholder' => 'Point', 'class' => 'form-control']) !!}
-</div>
+</div> --}}
 <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('Status') !!}
     {!! Form::select('status', $status, null, ['class' => 'form-control']) !!}

@@ -18,12 +18,13 @@ class CreateProductsTable extends Migration
             $table->timestamps();
             $table->string('slug')->unique();
             $table->string('name');
-            $table->text('description');
-            $table->float('price');
-            $table->integer('point');
-            $table->integer('quantity');
-            $table->string('unit');
+            $table->text('description')->nullable();
+            $table->float('price')->default(0);
+            $table->integer('point')->default(0);
+            $table->integer('quantity')->default(0);
+            $table->string('unit')->nullable();
             $table->unsignedBigInteger('image_id');
+            $table->string('status')->default('active');
 
             $table->foreign('image_id')
                 ->references('id')

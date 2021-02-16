@@ -10,10 +10,10 @@
     {!! Form::label('price', 'Price') !!}
     {!! Form::text('price', null, ['placeholder' => 'Price', 'class' => 'form-control']) !!}
 </div>
-<div class="form-group" style="margin-bottom: 3%">
+{{-- <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('point', 'Point') !!}
     {!! Form::text('point', null, ['placeholder' => 'Point', 'class' => 'form-control']) !!}
-</div>
+</div> --}}
 <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('quantity', 'Quantity') !!}
     {!! Form::text('quantity', null, ['placeholder' => 'Quantity', 'class' => 'form-control']) !!}
@@ -21,6 +21,10 @@
 <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('unit', 'Unit') !!}
     {!! Form::text('unit', null, ['placeholder' => 'Unit', 'class' => 'form-control']) !!}
+</div>
+<div class="form-group" style="margin-bottom: 3%">
+    {!! Form::label('Status') !!}
+    {!! Form::select('status', $status, null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('product_image', 'Product Image') !!} (ขั้นต่ำ 500 x 500px)

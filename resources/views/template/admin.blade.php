@@ -22,8 +22,9 @@
                 <div class="list-group list-group-flush">
                     <a href="{{ url('admin/dashboard') }}" class="list-group-item list-group-item-action bg-light">Dashboard</a>
                     <a href="{{ url('admin/products') }}" class="list-group-item list-group-item-action bg-light">Product</a>
+                    <a href="{{ url('admin/promotions') }}" class="list-group-item list-group-item-action bg-light">Promotion</a>
                     <a href="{{ url('admin/categories') }}" class="list-group-item list-group-item-action bg-light">Category</a>
-                    <a href="{{ url('admin/tags') }}" class="list-group-item list-group-item-action bg-light">Promotion (Tag)</a>
+                    <a href="{{ url('admin/tags') }}" class="list-group-item list-group-item-action bg-light">Tag</a>
                     <a href="{{ url('admin/customers') }}" class="list-group-item list-group-item-action bg-light">Customer</a>
                     <a href="{{ url('admin/orders') }}" class="list-group-item list-group-item-action bg-light">Order</a>
                 </div>

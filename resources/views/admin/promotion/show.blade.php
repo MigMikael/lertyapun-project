@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="d-flex justify-content-between align-items-center" tyle="margin-top: 15px">
-        <h1 class="mt-4">Tag > {{ $tag->name }}</h1>
+        <h1 class="mt-4">Promotion > {{ $promotion->name }}</h1>
         <div>
             <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#editPanel">
                 <i class="fas fa-plus"></i>
@@ -18,9 +18,9 @@
     <div id="editPanel" class="collapse" style="padding-left: 15px">
         <br>
         <div class="row">
-            {!! Form::open(['url' => 'admin/tags/'. $tag->slug .'/products', 'method' => 'post', 'class' => 'form-inline']) !!}
+            {!! Form::open(['url' => 'admin/promotions/'. $promotion->slug .'/products', 'method' => 'post', 'class' => 'form-inline']) !!}
                 <input
-                    name="productTags"
+                    name="productPromotions"
                     placeholder="click..."
                     class="form-control"
                     style="!important width: 100%"
@@ -50,7 +50,7 @@
                     <td>
                         {!! Form::model($product, [
                             'method' => 'delete',
-                            'url' => 'admin/tags/' . $tag->slug . '/' . 'products/' . $product->slug,
+                            'url' => 'admin/promotions/' . $promotion->slug . '/' . 'products/' . $product->slug,
                             'class' => 'form-inline']) !!}
                             <button class="btn btn-danger btn-sm" type="submit">
                                 <i class="fas fa-trash"></i>
@@ -74,7 +74,7 @@
 
 @section('script')
 <script>
-    var inputElm = document.querySelector('input[name=productTags]');
+    var inputElm = document.querySelector('input[name=productPromotions]');
 
     var productList = [
         @foreach($allProducts as $key => $product)
@@ -165,4 +165,3 @@
     }
 </script>
 @endsection
-

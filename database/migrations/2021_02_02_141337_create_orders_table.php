@@ -17,18 +17,19 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('slug')->unique();
-            $table->float('total_amount');
-            $table->string('status');
+            $table->float('total_amount')->default(0);
+            $table->string('status')->default('pending');
             $table->dateTime('order_date');
             $table->string('payment_method');
-            $table->string('payment_status');
+            $table->string('payment_status')->default('pending');;
             $table->dateTime('payment_date');
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('slip_image_id');
 
             $table->foreign('customer_id')
                 ->references('id')
-                ->on('customers');
+                ->on('customers')
+                ->onDelete('cascade');
 
             $table->foreign('slip_image_id')
                 ->references('id')

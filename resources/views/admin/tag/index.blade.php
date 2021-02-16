@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="d-flex justify-content-between align-items-center">
-        <h1 class="mt-4">Promotion (Tag)</h1>
+        <h1 class="mt-4">Tag</h1>
         <div class="d-flex" style="flex-direction: row">
             @include('admin.tag._sort')
             <div>
@@ -15,7 +15,7 @@
     </div>
 
     <div class="table-responsive">
-        <table class="table table-striped table-hover">
+        <table class="table table-bordered table-striped table-hover">
             <thead>
               <tr>
                 <th scope="col">#</th>
