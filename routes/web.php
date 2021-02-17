@@ -9,6 +9,7 @@ use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomerProductController;
+use App\Http\Controllers\GuestController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductPromotionController;
 use App\Http\Controllers\ProductTagController;
@@ -26,9 +27,9 @@ use App\Http\Controllers\TestController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [GuestController::class, 'index']);
+Route::get('register', [GuestController::class, 'create']);
+Route::post('register', [GuestController::class, 'store']);
 
 Route::get('image/show/{image:slug}', [ImageController::class, 'show']);
 Route::get('image/thumbnail/{image:slug}', [ImageController::class, 'showThumbnail']);

@@ -18,7 +18,7 @@ class CreatePromotionsTable extends Migration
             $table->timestamps();
             $table->string('slug')->unique();
             $table->string('name');
-            $table->text('description')->nullable();
+            $table->string('type')->default('discount');
             $table->date('valid_start')->default(\Carbon\Carbon::now())->nullable();
             $table->date('valid_end')->default(\Carbon\Carbon::now())->nullable();
         });

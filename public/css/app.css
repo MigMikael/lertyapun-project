@@ -147,6 +147,23 @@ body.loading .overlay{
     display: block;
 }
 
+
+.register-wrapper {
+    padding: 25px;
+    background: #FFF;
+}
+
+@media (max-width: 767.98px) {
+    .register-wrapper {
+    margin: 15px;
+    }
+
+    section {
+    padding: 25px 0;
+    }
+}
+
+
 @media (min-width: 768px) {
     #sidebar-wrapper {
         margin-left: 0;

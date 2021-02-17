@@ -165,7 +165,7 @@
                             <input type="email" class="form-control form-control-lg form-group" placeholder="Enter your email...">
                         </div>
                         <div class="col-md-4">
-                            <a href="login.html" class="btn btn-block btn-lg btn-primary form-group">สมัครสมาชิก</a>
+                            <a href="{{ url('register') }}" class="btn btn-block btn-lg btn-primary form-group">สมัครสมาชิก</a>
                         </div>
                     </div>
                 </form>

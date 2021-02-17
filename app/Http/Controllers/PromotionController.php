@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Log;
 
 class PromotionController extends Controller
 {
+    public $promotionType = [
+        'discount' => 'Discount',
+    ];
     /**
      * Display a listing of the resource.
      *
@@ -38,7 +41,9 @@ class PromotionController extends Controller
      */
     public function create()
     {
-        return view('admin.promotion.create');
+        return view('admin.promotion.create', [
+            'type' => $this->promotionType,
+        ]);
     }
 
     /**
@@ -66,7 +71,6 @@ class PromotionController extends Controller
     {
         $products = $promotion->products()->get();
         $productIds = $products->pluck('id');
-        Log::info($productIds);
         $allProducts = Product::whereNotIn('id', $productIds)->pluck('name', 'slug');
         return view('admin.promotion.show', [
             'promotion' => $promotion,
@@ -84,7 +88,10 @@ class PromotionController extends Controller
      */
     public function edit(Promotion $promotion)
     {
-        return view('admin.promotion.edit', ['promotion' => $promotion]);
+        return view('admin.promotion.edit', [
+            'promotion' => $promotion,
+            'type' => $this->promotionType,
+        ]);
     }
 
     /**

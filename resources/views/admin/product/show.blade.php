@@ -12,14 +12,16 @@
             <img src="{{ url('image/show/'.$product->image->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $product->name }}">
         </div>
         <div class="col-md-8 col-xs-6" style="border: 0px solid black;">
-            <h1 class="mt-4">{{ $product->name }}</h1>
-            <p>Name: {{ $product->name }}</p>
+            <h1 class="mb-4">{{ $product->name }}</h1>
+            <p>Description: {{ $product->description }}</p>
+            <p>Quantity: {{ $product->quantity }} {{ $product->unit }}</p>
+            <h4>฿{{ $product->price }}</h4>
         </div>
     </div>
     <br>
     <br>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <h1>Promotion</h1>
             {!! Form::open(['url' => 'admin/product/promotion', 'method' => 'post']) !!}
                 <input
@@ -31,7 +33,7 @@
                 <button type="submit" class="btn btn-primary">Add Promotion</button>
             {!! Form::close() !!}
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <h1>Category</h1>
             {!! Form::open(['url' => 'admin/product/category', 'method' => 'post']) !!}
                 <input
@@ -43,7 +45,7 @@
                 <button type="submit" class="btn btn-primary">Add Category</button>
             {!! Form::close() !!}
         </div>
-        <div class="col-md-4">
+        {{-- <div class="col-md-4">
             <h1>Tag</h1>
             {!! Form::open(['url' => 'admin/product/tag', 'method' => 'post']) !!}
                 <input
@@ -54,7 +56,7 @@
                 <input name="product_id" type="hidden" value="{{ $product->slug }}" />
                 <button type="submit" class="btn btn-primary">Add Tag</button>
             {!! Form::close() !!}
-        </div>
+        </div> --}}
     </div>
     <br>
     <br>
@@ -245,7 +247,7 @@
         }
     </script>
 
-    <script>
+    {{-- <script>
         var inputElm = document.querySelector('input[name=tagTag]');
 
         var tagList = [
@@ -335,5 +337,5 @@
                 }]
             )
         }
-    </script>
+    </script> --}}
 @endsection

@@ -19,13 +19,44 @@ class Customer extends Model
         'phone',
         'password',
         'status',
-        'proof_image_id',
         'point',
+        'remark',
+        'citizen_card_image',
+        'drug_store_approve_image',
+        'medical_license_image',
+        'commercial_register_image',
+        'juristic_person_image',
+        'vat_register_cert_image'
     ];
 
-    public function proofImage()
+    public function citizenCardImage()
     {
-        return $this->belongsTo(Image::class);
+        return $this->belongsTo(Image::class, 'citizen_card_image');
+    }
+
+    public function drugStoreApproveImage()
+    {
+        return $this->belongsTo(Image::class, 'drug_store_approve_image');
+    }
+
+    public function medicalLicenseImage()
+    {
+        return $this->belongsTo(Image::class, 'medical_license_image');
+    }
+
+    public function commercialRegisterImage()
+    {
+        return $this->belongsTo(Image::class, 'commercial_register_image');
+    }
+
+    public function juristicPersonImage()
+    {
+        return $this->belongsTo(Image::class, 'juristic_person_image');
+    }
+
+    public function vatRegisterCertImage()
+    {
+        return $this->belongsTo(Image::class, 'vat_register_cert_image');
     }
 
     public function cart()

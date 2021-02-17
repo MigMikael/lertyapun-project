@@ -3,8 +3,8 @@
     {!! Form::text('name', null, ['placeholder' => 'Name', 'class' => 'form-control']) !!}
 </div>
 <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('description', 'Description') !!}
-    <textarea name="description" class="form-control" placeholder="Promotion description">{{ $promotion->description ?? '' }}</textarea>
+    {!! Form::label('Type') !!}
+    {!! Form::select('type', $type, null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('Valid From') !!}

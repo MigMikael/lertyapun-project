@@ -18,6 +18,10 @@
     {!! Form::label('Status') !!}
     {!! Form::select('status', $status, null, ['class' => 'form-control']) !!}
 </div>
+<div class="form-group" style="margin-bottom: 3%">
+    {!! Form::label('remark', 'Remark') !!}
+    <textarea name="remark" class="form-control" placeholder="Admin Remark">{{ $customer->remark ?? '' }}</textarea>
+</div>
 <hr>
 <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('email', 'Email') !!}
@@ -27,8 +31,28 @@
     {!! Form::label('password', 'Password') !!}
     {!! Form::password('password', ['placeholder' => 'Passowrd', 'class' => 'form-control']) !!}
 </div>
-<div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('proof_image', 'Proof Image') !!} (ขั้นต่ำ 500 x 500px)
-    {!! Form::file('proof_image', ['accept'=>'image/*', 'class' => 'form-control', 'value' => 'Choose a proof image']) !!}
+<div class="form-group">
+    {!! Form::label('citizen_card_image', 'รูปเลขที่บัตรประชาชน') !!} (ขั้นต่ำ 500 x 500px)
+    {!! Form::file('citizen_card_image', ['accept'=>'image/*', 'class' => 'form-control', 'value' => 'เลือก']) !!}
+</div>
+<div class="form-group">
+    {!! Form::label('drug_store_approve_image', 'รูปเลขที่ใบอนุญาติร้านยา') !!} (ขั้นต่ำ 500 x 500px)
+    {!! Form::file('drug_store_approve_image', ['accept'=>'image/*', 'class' => 'form-control', 'value' => 'เลือก']) !!}
+</div>
+<div class="form-group">
+    {!! Form::label('medical_license_image', 'รูปใบประกอบโรคศิลปะ') !!} (ขั้นต่ำ 500 x 500px)
+    {!! Form::file('medical_license_image', ['accept'=>'image/*', 'class' => 'form-control', 'value' => 'เลือก']) !!}
+</div>
+<div class="form-group">
+    {!! Form::label('commercial_register_image', 'รูปทะเบียนพาณิชย์') !!} (ขั้นต่ำ 500 x 500px)
+    {!! Form::file('commercial_register_image', ['accept'=>'image/*', 'class' => 'form-control', 'value' => 'เลือก']) !!}
+</div>
+<div class="form-group">
+    {!! Form::label('juristic_person_image', 'รูปใบรับรองนิติบุคคล') !!} (ขั้นต่ำ 500 x 500px)
+    {!! Form::file('juristic_person_image', ['accept'=>'image/*', 'class' => 'form-control', 'value' => 'เลือก']) !!}
+</div>
+<div class="form-group">
+    {!! Form::label('vat_register_cert_image', 'รูปใบทะเบียนภาษีมูลค่าเพิ่ม') !!} (ขั้นต่ำ 500 x 500px)
+    {!! Form::file('vat_register_cert_image', ['accept'=>'image/*', 'class' => 'form-control', 'value' => 'เลือก']) !!}
 </div>
 

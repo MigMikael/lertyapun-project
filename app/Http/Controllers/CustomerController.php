@@ -32,15 +32,30 @@ class CustomerController extends Controller
         $sort = $request->query('sort');
         if($sort == 'name_asc') {
             $customers = Customer::orderBy('first_name', 'ASC')
-                ->with('proofImage')
+                // ->with('citizenCardImage')
+                // ->with('drugStoreApproveImage')
+                // ->with('medicalLicenseImage')
+                // ->with('commercialRegisterImage')
+                // ->with('juristicPersonImage')
+                // ->with('vatRegisterCertImage')
                 ->paginate($page);
         } else if($sort == 'name_desc') {
             $customers = Customer::orderBy('first_name', 'DESC')
-                ->with('proofImage')
+                // ->with('citizenCardImage')
+                // ->with('drugStoreApproveImage')
+                // ->with('medicalLicenseImage')
+                // ->with('commercialRegisterImage')
+                // ->with('juristicPersonImage')
+                // ->with('vatRegisterCertImage')
                 ->paginate($page);
         } else {
             $customers = Customer::orderBy('updated_at', 'DESC')
-                ->with('proofImage')
+                // ->with('citizenCardImage')
+                // ->with('drugStoreApproveImage')
+                // ->with('medicalLicenseImage')
+                // ->with('commercialRegisterImage')
+                // ->with('juristicPersonImage')
+                // ->with('vatRegisterCertImage')
                 ->paginate($page);
         }
         return view('admin.customer.index', ['customers' => $customers]);
@@ -68,10 +83,40 @@ class CustomerController extends Controller
         $newCustomer['slug'] = (new StringGenerator())->generateSlug();
         $newCustomer['password'] = Hash::make($request->password);
 
-        if($request->hasFile('proof_image')) {
-            $file = $request->file('proof_image');
-            $proof_image = $this->storeImage($file, "");
-            $newCustomer['proof_image_id'] = $proof_image->id;
+        if($request->hasFile('citizen_card_image')) {
+            $file = $request->file('citizen_card_image');
+            $image_record = $this->storeImage($file, "");
+            $newCustomer['citizen_card_image'] = $image_record->id;
+        }
+
+        if($request->hasFile('drug_store_approve_image')) {
+            $file = $request->file('drug_store_approve_image');
+            $image_record = $this->storeImage($file, "");
+            $newCustomer['drug_store_approve_image'] = $image_record->id;
+        }
+
+        if($request->hasFile('medical_license_image')) {
+            $file = $request->file('medical_license_image');
+            $image_record = $this->storeImage($file, "");
+            $newCustomer['medical_license_image'] = $image_record->id;
+        }
+
+        if($request->hasFile('commercial_register_image')) {
+            $file = $request->file('commercial_register_image');
+            $image_record = $this->storeImage($file, "");
+            $newCustomer['commercial_register_image'] = $image_record->id;
+        }
+
+        if($request->hasFile('juristic_person_image')) {
+            $file = $request->file('juristic_person_image');
+            $image_record = $this->storeImage($file, "");
+            $newCustomer['juristic_person_image'] = $image_record->id;
+        }
+
+        if($request->hasFile('vat_register_cert_image')) {
+            $file = $request->file('vat_register_cert_image');
+            $image_record = $this->storeImage($file, "");
+            $newCustomer['vat_register_cert_image'] = $image_record->id;
         }
 
         $newCustomer = Customer::create($newCustomer);
@@ -86,6 +131,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
+        // $customer = Customer::where('slug', $customer->slug)->first();
         return view('admin.customer.show', [
             'customer' => $customer
         ]);
@@ -114,10 +160,40 @@ class CustomerController extends Controller
         $newCustomer = $request->all();
         $newCustomer['password'] = Hash::make($request->password);
 
-        if($request->hasFile('proof_image')) {
-            $file = $request->file('proof_image');
-            $proof_image = $this->storeImage($file, "");
-            $newCustomer['proof_image_id'] = $proof_image->id;
+        if($request->hasFile('citizen_card_image')) {
+            $file = $request->file('citizen_card_image');
+            $image_record = $this->storeImage($file, "");
+            $newCustomer['citizen_card_image'] = $image_record->id;
+        }
+
+        if($request->hasFile('drug_store_approve_image')) {
+            $file = $request->file('drug_store_approve_image');
+            $image_record = $this->storeImage($file, "");
+            $newCustomer['drug_store_approve_image'] = $image_record->id;
+        }
+
+        if($request->hasFile('medical_license_image')) {
+            $file = $request->file('medical_license_image');
+            $image_record = $this->storeImage($file, "");
+            $newCustomer['medical_license_image'] = $image_record->id;
+        }
+
+        if($request->hasFile('commercial_register_image')) {
+            $file = $request->file('commercial_register_image');
+            $image_record = $this->storeImage($file, "");
+            $newCustomer['commercial_register_image'] = $image_record->id;
+        }
+
+        if($request->hasFile('juristic_person_image')) {
+            $file = $request->file('juristic_person_image');
+            $image_record = $this->storeImage($file, "");
+            $newCustomer['juristic_person_image'] = $image_record->id;
+        }
+
+        if($request->hasFile('vat_register_cert_image')) {
+            $file = $request->file('vat_register_cert_image');
+            $image_record = $this->storeImage($file, "");
+            $newCustomer['vat_register_cert_image'] = $image_record->id;
         }
 
         $customer->update($newCustomer);
