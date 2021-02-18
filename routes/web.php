@@ -28,34 +28,35 @@ use App\Http\Controllers\TestController;
 */
 
 Route::get('/', [GuestController::class, 'index']);
-Route::get('register', [GuestController::class, 'create']);
-Route::post('register', [GuestController::class, 'store']);
+Route::get('register', [GuestController::class, 'showRegisterForm']);
+Route::post('register', [GuestController::class, 'register']);
+Route::get('login', [GuestController::class, 'showLoginForm']);
+Route::post('login', [GuestController::class, 'login']);
 
 Route::get('image/show/{image:slug}', [ImageController::class, 'show']);
 Route::get('image/thumbnail/{image:slug}', [ImageController::class, 'showThumbnail']);
 
-Route::group(['prefix' => 'customer'], function () {
-    Route::get('products', [ProductController::class, 'indexCustomerProduct']);
-    Route::post('products/search', [ProductController::class, 'searchCustomerProduct']);
-    Route::get('products/promotions', [ProductController::class, 'indexCustomerPromotion']);
-    Route::get('products/{product:slug}', [ProductController::class, 'showCustomerProduct']);
 
-
-    Route::get('services', [ProductController::class, 'indexCustomerService']);
-
-
-    Route::get('cart', [CustomerProductController::class, 'index']);
-    Route::post('cart', [CustomerProductController::class, 'store']);
-    Route::delete('cart/{product:slug}', [CustomerProductController::class, 'destroy']);
-    Route::get('cart/product/count', [CustomerProductController::class, 'productCount']);
+Route::group(['prefix' => 'customer', 'middleware' => 'customerAuth'], function () {
+    Route::group(['middleware' => 'customerActiveAuth'], function () {
+        Route::get('products', [ProductController::class, 'indexCustomerProduct']);
+        Route::post('products/search', [ProductController::class, 'searchCustomerProduct']);
+        Route::get('products/promotions', [ProductController::class, 'indexCustomerPromotion']);
+        Route::get('products/{product:slug}', [ProductController::class, 'showCustomerProduct']);
+        Route::get('services', [ProductController::class, 'indexCustomerService']);
+        Route::get('cart', [CustomerProductController::class, 'index']);
+        Route::post('cart', [CustomerProductController::class, 'store']);
+        Route::delete('cart/{product:slug}', [CustomerProductController::class, 'destroy']);
+        Route::get('cart/product/count', [CustomerProductController::class, 'productCount']);
+    });
+    Route::get('pending/{customer:slug}', [GuestController::class, 'registerPending']);
+    Route::get('logout', [GuestController::class, 'customerLogout']);
 });
 
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('', function () { return redirect('admin/dashboard'); });
 
-
+    Route::get('', [AdminController::class, 'dashboard']);
     Route::get('dashboard',  [AdminController::class, 'dashboard']);
-
 
     Route::get('products', [ProductController::class, 'index']);
     Route::post('products', [ProductController::class, 'store']);
@@ -122,6 +123,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::put('orders/{order:slug}', [OrderController::class, 'update']);
     Route::get('orders/{order:slug}', [OrderController::class, 'show']);
     Route::delete('orders/{order:slug}', [OrderController::class, 'destroy']);
+
 });
 
 Route::post('test', [TestController::class, 'index']);

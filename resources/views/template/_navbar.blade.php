@@ -47,7 +47,11 @@
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="purchase.html">การซื้อของฉัน</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="login.html">ออกจากระบบ</a>
+                    @if(auth()->guard('customer')->check())
+                    <a class="dropdown-item" href="{{ url('customer/logout') }}">ออกจากระบบ</a>
+                    @else
+                    <a class="dropdown-item" href="{{ url('') }}">ออกจากระบบ</a>
+                    @endif
                 </div>
             </div>
         </div>

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Helpers\StringGenerator;
 use Illuminate\Support\Facades\Hash;
 use App\Traits\ImageTrait;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class GuestController extends Controller
 {
@@ -17,12 +19,12 @@ class GuestController extends Controller
         return view('welcome');
     }
 
-    public function create()
+    public function showRegisterForm()
     {
         return view('customer.register');
     }
 
-    public function store(Request $request)
+    public function register(Request $request)
     {
         $newCustomer = $request->all();
         $newCustomer['status'] = 'pending';
@@ -66,6 +68,50 @@ class GuestController extends Controller
         }
 
         $newCustomer = Customer::create($newCustomer);
-        return redirect()->action([ProductController::class, 'indexCustomerProduct']);
+        Auth::guard('customer')->login($newCustomer);
+
+        return redirect('customer/pending/'.$newCustomer->slug);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Customer  $customer
+     * @return \Illuminate\Http\Response
+     */
+    public function registerPending(Customer $customer)
+    {
+        return view('customer.pending', [ 'customer' => $customer ]);
+    }
+
+    public function showLoginForm()
+    {
+        return view('customer.login');
+    }
+
+    public function login(Request $request)
+    {
+        $email = $request->get('email');
+        $password = $request->get('password');
+
+        if (Auth::guard('customer')->attempt(['email' => $email, 'password' => $password])) {
+            return redirect('customer/products');
+        } else {
+            return redirect('register');
+        }
+    }
+
+    /**
+     * Log the user out of the application.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function customerLogout(Request $request)
+    {
+        Auth::guard('customer')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
     }
 }

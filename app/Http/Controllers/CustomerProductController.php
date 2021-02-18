@@ -17,7 +17,9 @@ class CustomerProductController extends Controller
      */
     public function index()
     {
-        $customer = Customer::where('slug', 'QoUXlBE9kpTtmqy8oTRkIdvKKrOoQdXxAzTE99yr')
+        $authCustomer = auth()->guard('customer')->user();
+
+        $customer = Customer::where('slug', $authCustomer->slug)
             ->with('cart')
             ->first();
 
@@ -115,7 +117,8 @@ class CustomerProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        $customer = Customer::where('slug', 'QoUXlBE9kpTtmqy8oTRkIdvKKrOoQdXxAzTE99yr')->first();
+        $authCustomer = auth()->guard('customer')->user();
+        $customer = Customer::where('slug', $authCustomer->slug)->first();
 
         $customerProduct = CustomerProduct::where('customer_id', $customer->id)
             ->where('product_id', $product->id)
@@ -128,8 +131,13 @@ class CustomerProductController extends Controller
 
     public function productCount()
     {
-        $customer = Customer::where('slug', 'QoUXlBE9kpTtmqy8oTRkIdvKKrOoQdXxAzTE99yr')->first();
-        $productCount = CustomerProduct::where('customer_id', $customer->id)->count();
+        $authCustomer = auth()->guard('customer')->user();
+        $customer = Customer::where('slug', $authCustomer->slug)->first();
+
+        $productCount = 555;
+        if ($customer != null) {
+            $productCount = CustomerProduct::where('customer_id', $customer->id)->count();
+        }
 
         return response()->json(['productCount' => $productCount], 200);
     }

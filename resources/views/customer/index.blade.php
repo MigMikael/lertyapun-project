@@ -93,7 +93,7 @@
                 data: {
                     "_token": "{{ csrf_token() }}",
                     "product_id": "{{ $product->slug }}",
-                    "customer_id": "QoUXlBE9kpTtmqy8oTRkIdvKKrOoQdXxAzTE99yr" // Todo dynamic this
+                    "customer_id": "{{ auth()->guard('customer')->user()->slug }}"
                 },
                 success: function(result) {
                     $('#productCount').text(result.productCount);

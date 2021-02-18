@@ -163,6 +163,24 @@ body.loading .overlay{
     }
 }
 
+.login-img-wrapper {
+    padding: 0px;
+}
+
+.login-form-wrapper {
+    padding: 0px;
+}
+
+@media (max-width: 767.98px) {
+    .login-img-wrapper {
+        padding: 15px;
+    }
+
+    .login-form-wrapper {
+        padding: 15px;
+    }
+}
+
 
 @media (min-width: 768px) {
     #sidebar-wrapper {

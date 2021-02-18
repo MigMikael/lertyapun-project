@@ -23,15 +23,18 @@
         @yield('head')
     </head>
     <body>
-        {{-- <nav class="navbar navbar-light static-top">
+        @if(auth()->guard('customer')->check())
+        @include('template._navbar')
+        @else
+        <nav class="navbar navbar-light static-top">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ URL::asset('img/logo.jpg') }}" style="width: 60px; height: 60px;">เลิศยาภัณฑ์
                 </a>
-                <a class="btn btn-primary btn-login" href="login.html">เข้าสู่ระบบ</a>
+                <a class="btn btn-primary btn-login" href="{{ url('login') }}">เข้าสู่ระบบ</a>
             </div>
-        </nav> --}}
-        @include('template._navbar')
+        </nav>
+        @endif
 
         @yield('content')
 

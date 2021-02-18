@@ -32,30 +32,12 @@ class CustomerController extends Controller
         $sort = $request->query('sort');
         if($sort == 'name_asc') {
             $customers = Customer::orderBy('first_name', 'ASC')
-                // ->with('citizenCardImage')
-                // ->with('drugStoreApproveImage')
-                // ->with('medicalLicenseImage')
-                // ->with('commercialRegisterImage')
-                // ->with('juristicPersonImage')
-                // ->with('vatRegisterCertImage')
                 ->paginate($page);
         } else if($sort == 'name_desc') {
             $customers = Customer::orderBy('first_name', 'DESC')
-                // ->with('citizenCardImage')
-                // ->with('drugStoreApproveImage')
-                // ->with('medicalLicenseImage')
-                // ->with('commercialRegisterImage')
-                // ->with('juristicPersonImage')
-                // ->with('vatRegisterCertImage')
                 ->paginate($page);
         } else {
             $customers = Customer::orderBy('updated_at', 'DESC')
-                // ->with('citizenCardImage')
-                // ->with('drugStoreApproveImage')
-                // ->with('medicalLicenseImage')
-                // ->with('commercialRegisterImage')
-                // ->with('juristicPersonImage')
-                // ->with('vatRegisterCertImage')
                 ->paginate($page);
         }
         return view('admin.customer.index', ['customers' => $customers]);

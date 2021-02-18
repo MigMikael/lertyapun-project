@@ -343,7 +343,7 @@ class ProductController extends Controller
      */
     public function indexCustomerPromotion(Request $request)
     {
-        $products = Product::has('tags')->with('tags')->paginate(6);
+        $products = Product::has('promotions')->with('promotions')->paginate(6);
         return view('customer.promotion', [
             'products' => $products
         ]);
