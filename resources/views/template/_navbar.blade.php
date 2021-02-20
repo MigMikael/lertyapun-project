@@ -43,10 +43,18 @@
                     <i class="fas fa-user"></i>
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="profile.html">บัญชีของฉัน</a>
+                    @if(auth()->guard('customer')->check())
+                    <a class="dropdown-item" href="{{ url('customer/profile') }}">บัญชีของฉัน</a>
+                    @else
+                    <a class="dropdown-item" href="{{ url('') }}">บัญชีของฉัน</a>
+                    @endif
+
                     <div class="dropdown-divider"></div>
+
                     <a class="dropdown-item" href="purchase.html">การซื้อของฉัน</a>
+
                     <div class="dropdown-divider"></div>
+
                     @if(auth()->guard('customer')->check())
                     <a class="dropdown-item" href="{{ url('customer/logout') }}">ออกจากระบบ</a>
                     @else

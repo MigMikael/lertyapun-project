@@ -7,9 +7,11 @@ use App\Models\Customer;
 use App\Models\CustomerProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use App\Traits\PriceTrait;
 
 class CustomerProductController extends Controller
 {
+    use PriceTrait;
     /**
      * Display a listing of the resource.
      *
@@ -24,13 +26,30 @@ class CustomerProductController extends Controller
             ->first();
 
         $sumTotalPrice = 0;
+        $sumTotalDiscount = 0;
+        $sumFinalPrice = 0;
         foreach($customer->cart as $product) {
-            $totalPrice = $product->price * $product->pivot->quantity;
-            $product['totalPrice'] = $totalPrice;
+            $discountPrice = $this->getDiscountPrice($product);
+            if ($discountPrice < $product->price) {
+                $product['has_discount'] = true;
+            } else {
+                $product['has_discount'] = false;
+            }
+            $product['discount_price'] = $discountPrice;
 
+            $totalPrice = $product->price * $product->pivot->quantity;
+            $product['total_price'] = $totalPrice;
             $sumTotalPrice += $totalPrice;
+
+            $discount = ($product->price - $discountPrice) * $product->pivot->quantity;
+            $sumTotalDiscount += $discount;
+
+            $finalPrice = $totalPrice - $discount;
+            $sumFinalPrice += $finalPrice;
         }
         $customer['totalPrice'] = $sumTotalPrice;
+        $customer['totalDiscount'] = $sumTotalDiscount;
+        $customer['finalPrice'] = $sumFinalPrice;
 
         // return $customer;
         return view('customer.cart', [

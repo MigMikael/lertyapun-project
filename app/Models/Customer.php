@@ -12,7 +12,7 @@ class Customer extends Authenticatable
     use HasFactory;
     public $timestamps = true;
     protected $table = 'customers';
-    protected $guard = 'customers';
+    protected $guard = 'customer';
 
     protected $fillable = [
         'slug',
@@ -24,6 +24,7 @@ class Customer extends Authenticatable
         'status',
         'point',
         'remark',
+        'avatar_image',
         'citizen_card_image',
         'drug_store_approve_image',
         'medical_license_image',
@@ -31,6 +32,11 @@ class Customer extends Authenticatable
         'juristic_person_image',
         'vat_register_cert_image'
     ];
+
+    public function avatarImage()
+    {
+        return $this->belongsTo(Image::class, 'avatar_image');
+    }
 
     public function citizenCardImage()
     {
@@ -71,5 +77,10 @@ class Customer extends Authenticatable
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
     }
 }

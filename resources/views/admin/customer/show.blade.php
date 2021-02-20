@@ -24,9 +24,23 @@
             <p>Phone: {{ $customer->phone }}</p>
         </div>
     </div>
-    <br>
     <hr>
-    <br>
+    <div class="row">
+        <div class="col-md-12">
+            {!! Form::model($customer, ['url' => 'admin/customers/'.$customer->slug.'/status', 'method' => 'put', 'files' => 'true']) !!}
+            <div class="form-group">
+                {!! Form::label('Status') !!}
+                {!! Form::select('status', $status, $customer->status, ['class' => 'form-control']) !!}
+            </div>
+            <div class="form-group">
+                {!! Form::label('remark', 'Admin Remark') !!}
+                <textarea name="remark" class="form-control" placeholder="Admin Remark">{{ $customer->remark ?? '' }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            {!! Form::close() !!}
+        </div>
+    </div>
+    <hr>
     <div id="aniimated-thumbnials" class="row">
         <a class="col-md-2" href="{{ url('image/show/'.$customer->citizenCardImage->slug) }}">
             <img src="{{ url('image/thumbnail/'.$customer->citizenCardImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $customer->first_name }}">

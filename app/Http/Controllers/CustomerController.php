@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\Product;
 use App\Helpers\StringGenerator;
+use App\Models\Address;
 use App\Models\CustomerProduct;
 use Illuminate\Http\Request;
 use App\Traits\ImageTrait;
@@ -65,6 +66,12 @@ class CustomerController extends Controller
         $newCustomer['slug'] = (new StringGenerator())->generateSlug();
         $newCustomer['password'] = Hash::make($request->password);
 
+        if($request->hasFile('avatar_image')) {
+            $file = $request->file('avatar_image');
+            $image_record = $this->storeImage($file, "");
+            $newCustomer['avatar_image'] = $image_record->id;
+        }
+
         if($request->hasFile('citizen_card_image')) {
             $file = $request->file('citizen_card_image');
             $image_record = $this->storeImage($file, "");
@@ -115,7 +122,8 @@ class CustomerController extends Controller
     {
         // $customer = Customer::where('slug', $customer->slug)->first();
         return view('admin.customer.show', [
-            'customer' => $customer
+            'customer' => $customer,
+            'status' => $this->customerStatus,
         ]);
     }
 
@@ -141,6 +149,12 @@ class CustomerController extends Controller
     {
         $newCustomer = $request->all();
         $newCustomer['password'] = Hash::make($request->password);
+
+        if($request->hasFile('avatar_image')) {
+            $file = $request->file('avatar_image');
+            $image_record = $this->storeImage($file, "");
+            $newCustomer['avatar_image'] = $image_record->id;
+        }
 
         if($request->hasFile('citizen_card_image')) {
             $file = $request->file('citizen_card_image');
@@ -183,6 +197,25 @@ class CustomerController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Customer  $customer
+     * @return \Illuminate\Http\Response
+     */
+    public function updateStatus(Request $request, Customer $customer)
+    {
+        $status = $request->get('status');
+        $remark = $request->get('remark');
+
+        $customer['status'] = $status;
+        $customer['remark'] = $remark;
+        $customer->save();
+
+        return redirect()->back();
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Customer  $customer
@@ -194,4 +227,121 @@ class CustomerController extends Controller
         return redirect()->action([CustomerController::class, 'index']);
     }
 
+    public function showProfile()
+    {
+        $authCustomer = auth()->guard('customer')->user();
+        if ($authCustomer) {
+            $customer = Customer::where('slug', $authCustomer->slug)->first();
+            return view('customer.profile', [
+                'customer' => $customer
+            ]);
+        } else {
+            return redirect('login');
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateProfile(Request $request)
+    {
+        $newCustomer = $request->all();
+        $authCustomer = auth()->guard('customer')->user();
+
+        if ($authCustomer) {
+            $customer = Customer::where('slug', $authCustomer->slug)->first();
+
+            if($request->hasFile('avatar_image')) {
+                $file = $request->file('avatar_image');
+                $image_record = $this->storeImage($file, "");
+                $newCustomer['avatar_image'] = $image_record->id;
+            }
+
+            $customer->update($newCustomer);
+            return redirect('customer/profile');
+        }
+    }
+
+    public function showAddress()
+    {
+        $authCustomer = auth()->guard('customer')->user();
+        if ($authCustomer) {
+            $customer = Customer::where('slug', $authCustomer->slug)->first();
+            $address = $customer->addresses->first();
+
+            return view('customer.address', [
+                'customer' => $customer,
+                'address' => $address,
+            ]);
+        } else {
+            return redirect('login');
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateAddress(Request $request)
+    {
+        $newAddress = $request->all();
+        $authCustomer = auth()->guard('customer')->user();
+
+        if ($authCustomer) {
+            $customer = Customer::where('slug', $authCustomer->slug)->first();
+            $newAddress['customer_id'] = $customer->id;
+
+            Address::where('customer_id', $customer->id)->delete();
+            Address::create($newAddress);
+
+            return redirect('customer/address');
+        }
+    }
+
+    public function showPassword()
+    {
+        $authCustomer = auth()->guard('customer')->user();
+        if ($authCustomer) {
+            $customer = Customer::where('slug', $authCustomer->slug)->first();
+            return view('customer.password', [
+                'customer' => $customer
+            ]);
+        } else {
+            return redirect('login');
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updatePassword(Request $request)
+    {
+        $current_password = $request->get('current_password');
+        $new_password = $request->get('new_password');
+        $confirm_new_password = $request->get('confirm_new_password');
+
+        $authCustomer = auth()->guard('customer')->user();
+        if (Hash::check($current_password, $authCustomer->password)) {
+            if ($new_password == $confirm_new_password) {
+                $customer = Customer::where('slug', $authCustomer->slug)->first();
+                $updateCustomer = ['password' => $new_password];
+                $customer->update($updateCustomer);
+
+                Log::info('Change Password Success');
+                return redirect('customer/profile');
+            } else {
+                return redirect()->back();
+            }
+        } else {
+            return redirect()->back();
+        }
+    }
 }

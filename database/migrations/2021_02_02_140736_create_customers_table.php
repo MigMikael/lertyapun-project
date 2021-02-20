@@ -25,12 +25,19 @@ class CreateCustomersTable extends Migration
             $table->string('status')->default('pending');
             $table->integer('point')->default(0);
             $table->text('remark')->nullable();
+            $table->unsignedBigInteger('avatar_image')->nullable();
             $table->unsignedBigInteger('citizen_card_image')->nullable();
             $table->unsignedBigInteger('drug_store_approve_image')->nullable();
             $table->unsignedBigInteger('medical_license_image')->nullable();
             $table->unsignedBigInteger('commercial_register_image')->nullable();
             $table->unsignedBigInteger('juristic_person_image')->nullable();
             $table->unsignedBigInteger('vat_register_cert_image')->nullable();
+            $table->rememberToken();
+
+            $table->foreign('avatar_image')
+                ->references('id')
+                ->on('images')
+                ->onDelete('cascade');
 
             $table->foreign('citizen_card_image')
                 ->references('id')

@@ -81,6 +81,9 @@ class GuestController extends Controller
      */
     public function registerPending(Customer $customer)
     {
+        if ($customer->status != 'pending') {
+            return redirect('customer/products');
+        }
         return view('customer.pending', [ 'customer' => $customer ]);
     }
 
@@ -96,7 +99,11 @@ class GuestController extends Controller
 
         if (Auth::guard('customer')->attempt(['email' => $email, 'password' => $password])) {
             return redirect('customer/products');
-        } else {
+        }
+        else if (Auth::guard('admin')->attempt(['email' => $email, 'password' => $password])) {
+            return redirect('admin/dashboard');
+        }
+        else {
             return redirect('register');
         }
     }

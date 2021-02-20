@@ -16,7 +16,7 @@
 </div> --}}
 <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('Status') !!}
-    {!! Form::select('status', $status, null, ['class' => 'form-control']) !!}
+    {!! Form::select('status', $status, $customer->remark ?? null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('remark', 'Remark') !!}
@@ -30,6 +30,10 @@
 <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('password', 'Password') !!}
     {!! Form::password('password', ['placeholder' => 'Passowrd', 'class' => 'form-control']) !!}
+</div>
+<div class="form-group">
+    {!! Form::label('avatar_image', 'รูปประจำตัว') !!} (ขั้นต่ำ 500 x 500px)
+    {!! Form::file('avatar_image', ['accept'=>'image/*', 'class' => 'form-control', 'value' => 'เลือก']) !!}
 </div>
 <div class="form-group">
     {!! Form::label('citizen_card_image', 'รูปเลขที่บัตรประชาชน') !!} (ขั้นต่ำ 500 x 500px)

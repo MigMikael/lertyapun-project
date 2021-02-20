@@ -9,10 +9,10 @@
                     {{ $product->name }}
                 </a>
                 <div class="price mt-1">฿{{ $product->price }}</div>
-                @if(count($product->tags) != 0)
-                    @foreach ($product->tags as $tag)
-                        <span class="badge badge-danger" style="font-weight: normal">{{ $tag->name }}</span>
-                        @if($loop->iteration == 2)
+                @if(count($product->promotions) != 0)
+                    @foreach ($product->promotions->reverse() as $promotion)
+                        <span class="badge badge-danger" style="font-weight: normal">{{ $promotion->name }}</span>
+                        @if($loop->iteration == 1)
                             @break
                         @endif
                     @endforeach

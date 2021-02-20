@@ -6,6 +6,7 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Traits\ImageTrait;
 use App\Helpers\StringGenerator;
+use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
@@ -143,5 +144,16 @@ class OrderController extends Controller
     {
         $order->delete();
         return redirect()->action([OrderController::class, 'index']);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeOrder(Request $request)
+    {
+        Log::info('Hey');
     }
 }

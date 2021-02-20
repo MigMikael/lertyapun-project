@@ -43,7 +43,18 @@ Route::group(['prefix' => 'customer', 'middleware' => 'customerAuth'], function 
         Route::post('products/search', [ProductController::class, 'searchCustomerProduct']);
         Route::get('products/promotions', [ProductController::class, 'indexCustomerPromotion']);
         Route::get('products/{product:slug}', [ProductController::class, 'showCustomerProduct']);
+
         Route::get('services', [ProductController::class, 'indexCustomerService']);
+
+        Route::get('profile', [CustomerController::class, 'showProfile']);
+        Route::put('profile', [CustomerController::class, 'updateProfile']);
+        Route::get('address', [CustomerController::class, 'showAddress']);
+        Route::put('address', [CustomerController::class, 'updateAddress']);
+        Route::get('password', [CustomerController::class, 'showPassword']);
+        Route::put('password', [CustomerController::class, 'updatePassword']);
+        Route::get('order', [OrderController::class, 'showOrder']);
+        Route::post('order', [OrderController::class, 'storeOrder']);
+
         Route::get('cart', [CustomerProductController::class, 'index']);
         Route::post('cart', [CustomerProductController::class, 'store']);
         Route::delete('cart/{product:slug}', [CustomerProductController::class, 'destroy']);
@@ -53,7 +64,8 @@ Route::group(['prefix' => 'customer', 'middleware' => 'customerAuth'], function 
     Route::get('logout', [GuestController::class, 'customerLogout']);
 });
 
-Route::group(['prefix' => 'admin'], function () {
+
+Route::group(['prefix' => 'admin', 'middleware' => 'adminAuth'], function () {
 
     Route::get('', [AdminController::class, 'dashboard']);
     Route::get('dashboard',  [AdminController::class, 'dashboard']);
@@ -114,6 +126,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::put('customers/{customer:slug}', [CustomerController::class, 'update']);
     Route::get('customers/{customer:slug}', [CustomerController::class, 'show']);
     Route::delete('customers/{customer:slug}', [CustomerController::class, 'destroy']);
+    Route::put('customers/{customer:slug}/status', [CustomerController::class, 'updateStatus']);
 
 
     Route::get('orders', [OrderController::class, 'index']);

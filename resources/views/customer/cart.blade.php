@@ -18,43 +18,63 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="table-responsive">
-                                    <table class="table table-borderless table-shopping-cart">
+                                    <table class="table table-border table-shopping-cart">
                                         <thead>
                                             <tr>
                                                 <th>
                                                     สินค้า
                                                 </th>
-                                                <th width="150">
+                                                <th width="160">
                                                     ราคา
                                                 </th>
-                                                <th width="120">
+                                                <th width="110">
                                                     จำนวน
                                                 </th>
                                                 <th class="text-right">
-
+                                                    ลบ
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach($customer->cart as $product)
-                                            <tr>
-                                                <td>
+                                            <tr id="product-table">
+                                                <td class="align-middle">
                                                     <figure class="itemside">
                                                         <div class="aside">
                                                             <img class="img-sm" src="{{ url('image/thumbnail/'.$product->image->slug) }}">
                                                         </div>
                                                         <figcaption class="info">
-                                                            <a href="{{ url('customer/products/'.$product->slug) }}" class="title text-dark">{{ $product->name }}</a>
+                                                            <a href="{{ url('customer/products/'.$product->slug) }}" class="title text-dark">
+                                                                <p>{{ $product->name }}</p>
+                                                                @foreach ($product->promotions->reverse() as $promotion)
+                                                                    <span class="badge badge-danger" style="font-weight: normal">{{ $promotion->name }}</span>
+                                                                    @if($loop->iteration == 1)
+                                                                        @break
+                                                                    @endif
+                                                                @endforeach
+                                                            </a>
                                                         </figcaption>
                                                     </figure>
                                                 </td>
-                                                <td>
-                                                    ฿{{ number_format($product->price) }} {{ $product->unit }}
+                                                <td id="price" class="align-middle">
+                                                    @if($product->has_discount)<del>@endif
+                                                    <h6>฿<span id="base_price">{{ number_format($product->price) }}</span> ต่อ{{ $product->unit }}</h6>
+                                                    @if($product->has_discount)</del>@endif
+
+                                                    @if($product->has_discount)
+                                                    <h6 style="color: red">฿<span id="discount_price" >{{ number_format($product->discount_price) }}</span></h6>
+                                                    @else
+                                                    <h6 style="display: none">฿<span id="discount_price" >{{ number_format($product->discount_price) }}</span></h6>
+                                                    @endif
                                                 </td>
-                                                <td>
-                                                    <input type="number" class="form-control" value="{{ $product->pivot->quantity }}" style="width: 80px;">
+                                                <td id="quantity" class="align-middle">
+                                                    <input id="input_quantity"
+                                                        name="quantities[]"
+                                                        type="number" class="form-control"
+                                                        value="{{ $product->pivot->quantity }}"
+                                                        style="width: 80px;">
                                                 </td>
-                                                <td>
+                                                <td class="text-right align-middle">
                                                     {!! Form::model($product, [
                                                         'method' => 'delete',
                                                         'url' => 'customer/cart/'.$product->slug ]) !!}
@@ -87,7 +107,7 @@
                                 <label>ยอดรวมสินค้า</label>
                             </div>
                             <div class="col-md-6 text-right">
-                                ฿{{ number_format($customer->totalPrice) }}
+                                ฿<span id="total_price">{{ number_format($customer->totalPrice) }}</span>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -95,7 +115,7 @@
                                 <label>ส่วนลด</label>
                             </div>
                             <div class="col-md-6 text-right">
-                                ฿0
+                                ฿<span id="total_discount">{{ number_format($customer->totalDiscount) }}</span>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -103,19 +123,86 @@
                                 <label>ยอดชำระเงินทั้งหมด</label>
                             </div>
                             <div class="col-md-6 text-right">
-                                <h5>฿{{ number_format($customer->totalPrice) }}</h5>
+                                <h5>฿<span id="final_price">{{ number_format($customer->finalPrice) }}<span></h5>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <button type="button" class="btn btn-primary btn-block">ยืนยันการสั่งซื้อ</button>
+                                <button id="order_submit" type="submit" class="btn btn-primary btn-block">ยืนยันการสั่งซื้อ</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </aside>
-
         </div>
     </div>
 </section>
+@endsection
+
+@section('script')
+    <script>
+        $(document).on('input', '#quantity', function() {
+            var prices = [];
+            var discountPrices = [];
+            var quantities = [];
+
+            $("#product-table #price #base_price").each(function() {
+                var value = $(this).text();
+                prices.push(value.replace(',', ''));
+            });
+
+            $("#product-table #price #discount_price").each(function() {
+                var value = $(this).text();
+                discountPrices.push(value.replace(',', ''));
+            });
+
+            $("#product-table #quantity #input_quantity").each(function() {
+                var value = $(this).val();
+                quantities.push(value.replace(',', ''));
+            })
+
+            var totalPrice = 0;
+            var totalDiscount = 0;
+            for (let i = 0; i < prices.length; i++) {
+                var price = parseFloat(prices[i]);
+                var quantity = parseFloat(quantities[i]);
+                var discountPrice = parseFloat(discountPrices[i]);
+
+                var productPrice = price * quantity;
+                totalPrice += productPrice;
+
+                var discount = (price - discountPrice) * quantity;
+                totalDiscount += discount;
+            }
+            var finalPrice = totalPrice - totalDiscount;
+
+            $("#total_price").text(totalPrice.toLocaleString());
+            $("#total_discount").text(totalDiscount.toLocaleString());
+            $("#final_price").text(finalPrice.toLocaleString());
+        });
+    </script>
+    <script>
+        $("#order_submit").click(function(e) {
+            e.preventDefault();
+            $("#order_submit").html("<span class='spinner-border spinner-border-sm'></span> Loading...");
+
+            // $.ajax({
+            //     type: "post",
+            //     url: "{{ url('customer/cart') }}",
+            //     data: {
+            //         "_token": "{{ csrf_token() }}",
+            //         "product_id": "{{ $product->slug }}",
+            //         "customer_id": "{{ auth()->guard('customer')->user()->slug }}"
+            //     },
+            //     success: function(result) {
+            //         $('#productCount').text(result.productCount);
+            //         $("#{{ $product->slug }}").text("เพิ่มใส่ตระกร้า");
+            //     },
+            //     error: function(result) {
+            //         alert('error');
+            //         $("#{{ $product->slug }}").text("เพิ่มใส่ตระกร้า");
+            //     }
+            // });
+        });
+    </script>
 @endsection
