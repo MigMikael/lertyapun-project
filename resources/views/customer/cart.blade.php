@@ -62,17 +62,19 @@
                                                     @if($product->has_discount)</del>@endif
 
                                                     @if($product->has_discount)
-                                                    <h6 style="color: red">฿<span id="discount_price" >{{ number_format($product->discount_price) }}</span></h6>
+                                                    <h6 style="color: red">฿<span id="discount_price" >{{ number_format($product->discount_price, 2) }}</span></h6>
                                                     @else
-                                                    <h6 style="display: none">฿<span id="discount_price" >{{ number_format($product->discount_price) }}</span></h6>
+                                                    <h6 style="display: none">฿<span id="discount_price" >{{ number_format($product->discount_price, 2) }}</span></h6>
                                                     @endif
                                                 </td>
                                                 <td id="quantity" class="align-middle">
                                                     <input id="input_quantity"
-                                                        name="quantities[]"
                                                         type="number" class="form-control"
                                                         value="{{ $product->pivot->quantity }}"
+                                                        min="1"
+                                                        max="{{ $product->quantity }}"
                                                         style="width: 80px;">
+                                                    <input id="product_slug" type="hidden" value="{{ $product->slug }}">
                                                 </td>
                                                 <td class="text-right align-middle">
                                                     {!! Form::model($product, [
@@ -186,23 +188,34 @@
             e.preventDefault();
             $("#order_submit").html("<span class='spinner-border spinner-border-sm'></span> Loading...");
 
-            // $.ajax({
-            //     type: "post",
-            //     url: "{{ url('customer/cart') }}",
-            //     data: {
-            //         "_token": "{{ csrf_token() }}",
-            //         "product_id": "{{ $product->slug }}",
-            //         "customer_id": "{{ auth()->guard('customer')->user()->slug }}"
-            //     },
-            //     success: function(result) {
-            //         $('#productCount').text(result.productCount);
-            //         $("#{{ $product->slug }}").text("เพิ่มใส่ตระกร้า");
-            //     },
-            //     error: function(result) {
-            //         alert('error');
-            //         $("#{{ $product->slug }}").text("เพิ่มใส่ตระกร้า");
-            //     }
-            // });
+            var productSlug = [];
+            var productQuantity = [];
+
+            $("#product-table #quantity #input_quantity").each(function() {
+                var value = $(this).val();
+                productQuantity.push(value.replace(',', ''));
+            });
+
+            $("#product-table #quantity #product_slug").each(function() {
+                var value = $(this).val();
+                productSlug.push(value.replace(',', ''));
+            });
+
+            $.ajax({
+                type: "post",
+                url: "{{ url('customer/order') }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "product_slug": productSlug,
+                    "product_quantity": productQuantity
+                },
+                success: function(result) {
+                    alert('success', result);
+                },
+                error: function(result) {
+                    alert('error');
+                }
+            });
         });
     </script>
 @endsection

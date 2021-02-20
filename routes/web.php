@@ -137,6 +137,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminAuth'], function () {
     Route::get('orders/{order:slug}', [OrderController::class, 'show']);
     Route::delete('orders/{order:slug}', [OrderController::class, 'destroy']);
 
+    Route::get('logout', [GuestController::class, 'adminLogout']);
 });
 
 Route::post('test', [TestController::class, 'index']);

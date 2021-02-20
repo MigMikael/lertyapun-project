@@ -5,11 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Traits\ImageTrait;
+use App\Traits\PriceTrait;
 use App\Helpers\StringGenerator;
+use App\Models\Product;
+use App\Models\Customer;
+use App\Models\OrderDetail;
 use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
+    use PriceTrait;
     use ImageTrait;
     public $orderStatus = [
         'pending' => 'Pending',
@@ -154,6 +159,62 @@ class OrderController extends Controller
      */
     public function storeOrder(Request $request)
     {
-        Log::info('Hey');
+        $product_slug = $request->get('product_slug');
+        $product_quantity = $request->get('product_quantity');
+
+        $sumTotalPrice = 0;
+        $sumTotalDiscount = 0;
+        $sumFinalPrice = 0;
+        $newOrderDetails = [];
+        for ($i=0; $i < count($product_slug); $i++) {
+            $slug = $product_slug[$i];
+            $quantity = $product_quantity[$i];
+
+            $product = Product::where('slug', $slug)->first();
+            if($quantity > $product->quantity) {
+                return "fail";
+            }
+            $totalPrice = $product->price * $quantity;
+            $sumTotalPrice += $totalPrice;
+
+            $discountPrice = $this->getDiscountPrice($product);
+            $discount = ($product->price - $discountPrice) * $quantity;
+            $sumTotalDiscount += $discount;
+
+            $finalPrice = $totalPrice - $discount;
+            $sumFinalPrice += $finalPrice;
+
+            $newOrderDetail = [
+                'order_id' => 0,
+                'product_id' => $product->id,
+                'sale_quantity' => $quantity,
+                'order_price' => $finalPrice,
+            ];
+            array_push($newOrderDetails, $newOrderDetail);
+        }
+
+        $authCustomer = auth()->guard('customer')->user();
+        $customer = Customer::where('slug', $authCustomer->slug)->first();
+
+        $newOrder = [
+            'slug' => (new StringGenerator())->generateSlug(),
+            'total_amount' => $sumFinalPrice,
+            'status' => 'pending',
+            'order_date' => \Carbon\Carbon::now(),
+            'payment_method' => 'direct transfer',
+            'payment_status' => 'pending',
+            'customer_id' => $customer->id,
+        ];
+
+        $order = Order::create($newOrder);
+        foreach($newOrderDetails as $newOrderDetail) {
+            $newOrderDetail['order_id'] = $order->id;
+            OrderDetail::create($newOrderDetail);
+
+            // $product = Product::where('id', $newOrderDetail['product_id'])->first();
+            // $product
+        }
+
+        return "ok";
     }
 }

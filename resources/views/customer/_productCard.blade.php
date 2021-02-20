@@ -8,7 +8,7 @@
                 <a href="{{ url('customer/products/'.$product->slug) }}" class="title">
                     {{ $product->name }}
                 </a>
-                <div class="price mt-1">฿{{ $product->price }}</div>
+                <div class="price mt-1">฿{{ number_format($product->price) }}</div>
                 @if(count($product->promotions) != 0)
                     @foreach ($product->promotions->reverse() as $promotion)
                         <span class="badge badge-danger" style="font-weight: normal">{{ $promotion->name }}</span>
