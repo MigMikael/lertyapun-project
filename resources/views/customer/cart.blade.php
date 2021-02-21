@@ -75,6 +75,7 @@
                                                         max="{{ $product->quantity }}"
                                                         style="width: 80px;">
                                                     <input id="product_slug" type="hidden" value="{{ $product->slug }}">
+                                                    <p>เหลือ {{ $product->quantity }} ชิ้น</p>
                                                 </td>
                                                 <td class="text-right align-middle">
                                                     {!! Form::model($product, [
@@ -210,10 +211,11 @@
                     "product_quantity": productQuantity
                 },
                 success: function(result) {
-                    alert('success', result);
+                    console.log('success', result);
+                    window.location.replace("{{ url('customer/order') }}");
                 },
                 error: function(result) {
-                    alert('error');
+                    console.log('error', result);
                 }
             });
         });

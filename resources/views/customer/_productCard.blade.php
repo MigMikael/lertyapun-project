@@ -8,7 +8,7 @@
                 <a href="{{ url('customer/products/'.$product->slug) }}" class="title">
                     {{ $product->name }}
                 </a>
-                <div class="price mt-1">฿{{ number_format($product->price) }}</div>
+                <div class="price mt-1">฿{{ number_format($product->price) }}
                 @if(count($product->promotions) != 0)
                     @foreach ($product->promotions->reverse() as $promotion)
                         <span class="badge badge-danger" style="font-weight: normal">{{ $promotion->name }}</span>
@@ -17,9 +17,15 @@
                         @endif
                     @endforeach
                 @endif
+                </div>
+                <p>เหลือสินค้า {{ $product->quantity }} ชิ้น</p>
             </div>
-            <button id="{{ $product->slug }}" class="btn btn-block btn-primary mt-3">
+            <button id="{{ $product->slug }}" @if($product->quantity <= 0) class="btn btn-block btn-secondary mt-3" disabled @else class="btn btn-block btn-primary mt-3" @endif>
+                @if($product->quantity <= 0)
+                สินค้าหมด
+                @else
                 เพิ่มใส่ตระกร้า
+                @endif
             </button>
         </figcaption>
     </div>

@@ -51,7 +51,7 @@
 
                     <div class="dropdown-divider"></div>
 
-                    <a class="dropdown-item" href="purchase.html">การซื้อของฉัน</a>
+                    <a class="dropdown-item" href="{{ url('customer/order') }}">การซื้อของฉัน</a>
 
                     <div class="dropdown-divider"></div>
 

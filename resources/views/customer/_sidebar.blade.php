@@ -23,7 +23,7 @@
                 </ul>
             </li>
             <li>
-                <a href="purchase.html">
+                <a href="{{ url('customer/order') }}">
                     การซื้อของฉัน
                 </a>
             </li>

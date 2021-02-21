@@ -9,6 +9,7 @@ use App\Traits\PriceTrait;
 use App\Helpers\StringGenerator;
 use App\Models\Product;
 use App\Models\Customer;
+use App\Models\CustomerProduct;
 use App\Models\OrderDetail;
 use Illuminate\Support\Facades\Log;
 
@@ -25,7 +26,6 @@ class OrderController extends Controller
     public $paymentStatus = [
         'pending' => 'Pending',
         'success' => 'Success',
-        'cancle' => 'Cancle',
     ];
     /**
      * Display a listing of the resource.
@@ -97,9 +97,12 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        $order->with('customer');
+        $order->products;
+        $order->customer;
+        // return $order;
         return view('admin.order.show', [
             'order' => $order,
+            'status' => $this->orderStatus,
         ]);
     }
 
@@ -152,6 +155,25 @@ class OrderController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function indexOrder(Request $request)
+    {
+        $authCustomer = auth()->guard('customer')->user();
+        $customer = Customer::where('slug', $authCustomer->slug)->first();
+
+        $orders = Order::where('customer_id', $customer->id)->get();
+        // return $orders;
+        return view('customer.order', [
+            'orders' => $orders,
+            'customer' => $customer,
+        ]);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -172,7 +194,7 @@ class OrderController extends Controller
 
             $product = Product::where('slug', $slug)->first();
             if($quantity > $product->quantity) {
-                return "fail";
+                return "fail"; // Todo handle This
             }
             $totalPrice = $product->price * $quantity;
             $sumTotalPrice += $totalPrice;
@@ -211,10 +233,65 @@ class OrderController extends Controller
             $newOrderDetail['order_id'] = $order->id;
             OrderDetail::create($newOrderDetail);
 
-            // $product = Product::where('id', $newOrderDetail['product_id'])->first();
-            // $product
+            // update quantity
+            $product = Product::where('id', $newOrderDetail['product_id'])->first();
+            $product->quantity = $product->quantity - $newOrderDetail['sale_quantity'];
+            $product->save();
+        }
+        CustomerProduct::where('customer_id', $customer->id)->delete();
+
+        return response()->json(['status' => 'order success'], 200);;
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function showOrder(Order $order)
+    {
+        $order->products;
+        // return $order;
+
+        return view('customer.orderDetail', [
+            'order' => $order,
+            'customer' => $order->customer,
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function addSlipToOrder(Request $request, Order $order)
+    {
+        if($request->hasFile('slip_image')) {
+            $file = $request->file('slip_image');
+            $image_record = $this->storeImage($file, "");
+            $order['slip_image_id'] = $image_record->id;
+            $order['payment_status'] = 'success';
+            $order['payment_date'] = \Carbon\Carbon::now();
+            $order->save();
         }
 
-        return "ok";
+        return redirect()->back();
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateStatus(Request $request, Order $order)
+    {
+        $status = $request->get('status');
+        $order['status'] = $status;
+        $order->save();
+
+        return redirect()->back();
     }
 }

@@ -52,8 +52,10 @@ Route::group(['prefix' => 'customer', 'middleware' => 'customerAuth'], function 
         Route::put('address', [CustomerController::class, 'updateAddress']);
         Route::get('password', [CustomerController::class, 'showPassword']);
         Route::put('password', [CustomerController::class, 'updatePassword']);
-        Route::get('order', [OrderController::class, 'showOrder']);
+        Route::get('order', [OrderController::class, 'indexOrder']);
         Route::post('order', [OrderController::class, 'storeOrder']);
+        Route::get('order/{order:slug}', [OrderController::class, 'showOrder']);
+        Route::put('order/{order:slug}/slip', [OrderController::class, 'addSlipToOrder']);
 
         Route::get('cart', [CustomerProductController::class, 'index']);
         Route::post('cart', [CustomerProductController::class, 'store']);
@@ -136,6 +138,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminAuth'], function () {
     Route::put('orders/{order:slug}', [OrderController::class, 'update']);
     Route::get('orders/{order:slug}', [OrderController::class, 'show']);
     Route::delete('orders/{order:slug}', [OrderController::class, 'destroy']);
+    Route::put('orders/{order:slug}/status', [OrderController::class, 'updateStatus']);
 
     Route::get('logout', [GuestController::class, 'adminLogout']);
 });

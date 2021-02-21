@@ -48,4 +48,9 @@ class Product extends Model
     {
         return $this->belongsTo(Image::class);
     }
+
+    public function products()
+    {
+        return $this->belongsToMany('App\Models\Order', 'order_details', 'product_id', 'order_id');
+    }
 }

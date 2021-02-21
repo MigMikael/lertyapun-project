@@ -28,8 +28,19 @@ class Order extends Model
         return $this->belongsTo(Customer::class);
     }
 
-    public function orders()
+    public function orderDetails()
     {
         return $this->hasMany(OrderDetail::class);
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany('App\Models\Product', 'order_details', 'order_id', 'product_id')
+            ->withPivot('sale_quantity', 'order_price');
+    }
+
+    public function slipImage()
+    {
+        return $this->belongsTo(Image::class, 'slip_image_id');
     }
 }
