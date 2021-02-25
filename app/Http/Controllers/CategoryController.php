@@ -51,7 +51,9 @@ class CategoryController extends Controller
         $newCategory['slug'] = (new StringGenerator())->generateSlug();
 
         $newCategory = Category::create($newCategory);
-        return redirect()->action([CategoryController::class, 'index']);
+        return redirect()
+            ->action([CategoryController::class, 'index'])
+            ->with('success', 'Create Success');
     }
 
     /**
@@ -94,7 +96,9 @@ class CategoryController extends Controller
     {
         $newCategory = $request->all();
         $category->update($newCategory);
-        return redirect()->action([CategoryController::class, 'index']);
+        return redirect()
+            ->action([CategoryController::class, 'index'])
+            ->with('success', 'Edit Success');
     }
 
     /**
@@ -106,6 +110,8 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect()->action([CategoryController::class, 'index']);
+        return redirect()
+            ->action([CategoryController::class, 'index'])
+            ->with('success', 'Delete Success');
     }
 }

@@ -1,6 +1,9 @@
 <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('name', 'Name') !!}
-    {!! Form::text('name', null, ['placeholder' => 'Name', 'class' => 'form-control']) !!}
+    {!! Form::text('name', null, ['placeholder' => 'Name', 'class' => 'form-control is-invalid']) !!}
+    <div class="invalid-feedback">
+        Please choose a username.
+    </div>
 </div>
 <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('description', 'Description') !!}
@@ -24,9 +27,11 @@
 </div>
 <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('Status') !!}
-    {!! Form::select('status', $status, null, ['class' => 'form-control']) !!}
+    {!! Form::select('status', $status, null, ['class' => 'form-control is-invalid']) !!}
 </div>
 <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('product_image', 'Product Image') !!} (ขั้นต่ำ 500 x 500px)
     {!! Form::file('product_image', ['accept'=>'image/*', 'class' => 'form-control', 'value' => 'Choose a product image']) !!}
 </div>
+
+{{-- https://getbootstrap.com/docs/4.0/components/forms/? --}}

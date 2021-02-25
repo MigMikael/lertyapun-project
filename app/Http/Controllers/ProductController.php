@@ -119,7 +119,9 @@ class ProductController extends Controller
         }
 
         $newProduct = Product::create($newProduct);
-        return redirect()->action([ProductController::class, 'index']);
+        return redirect()
+            ->action([ProductController::class, 'index'])
+            ->with('success', 'Create Success');
     }
 
     /**
@@ -179,7 +181,9 @@ class ProductController extends Controller
         }
 
         $product->update($newProduct);
-        return redirect()->action([ProductController::class, 'index']);
+        return redirect()
+            ->action([ProductController::class, 'index'])
+            ->with('success', 'Edit Success');
     }
 
     /**
@@ -191,7 +195,9 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect()->action([ProductController::class, 'index']);
+        return redirect()
+            ->action([ProductController::class, 'index'])
+            ->with('success', 'Delete Success');
     }
 
     /**

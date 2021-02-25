@@ -58,7 +58,9 @@ class PromotionController extends Controller
         $newPromotion['slug'] = (new StringGenerator())->generateSlug();
 
         $newPromotion = Promotion::create($newPromotion);
-        return redirect()->action([PromotionController::class, 'index']);
+        return redirect()
+            ->action([PromotionController::class, 'index'])
+            ->with('success', 'Create Success');
     }
 
     /**
@@ -105,7 +107,9 @@ class PromotionController extends Controller
     {
         $newPromotion = $request->all();
         $promotion->update($newPromotion);
-        return redirect()->action([PromotionController::class, 'index']);
+        return redirect()
+            ->action([PromotionController::class, 'index'])
+            ->with('success', 'Edit Success');
     }
 
     /**
@@ -117,6 +121,8 @@ class PromotionController extends Controller
     public function destroy(Promotion $promotion)
     {
         $promotion->delete();
-        return redirect()->action([PromotionController::class, 'index']);
+        return redirect()
+            ->action([PromotionController::class, 'index'])
+            ->with('success', 'Delete Success');
     }
 }

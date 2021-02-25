@@ -7,6 +7,6 @@
     <hr>
     {!! Form::open(['url' => 'admin/products', 'method' => 'post', 'files' => 'true']) !!}
         @include('admin.product._form')
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary btn-block">Submit</button>
     {!! Form::close() !!}
 @endsection

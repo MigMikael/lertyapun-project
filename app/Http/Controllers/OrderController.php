@@ -86,7 +86,9 @@ class OrderController extends Controller
         }
 
         $newOrder = Order::create($newOrder);
-        return redirect()->action([OrderController::class, 'index']);
+        return redirect()
+            ->action([OrderController::class, 'index'])
+            ->with('success', 'Create Success');
     }
 
     /**
@@ -139,7 +141,9 @@ class OrderController extends Controller
         }
 
         $order->update($newOrder);
-        return redirect()->action([OrderController::class, 'index']);
+        return redirect()
+            ->action([OrderController::class, 'index'])
+            ->with('success', 'Edit Success');
     }
 
     /**
@@ -151,7 +155,9 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         $order->delete();
-        return redirect()->action([OrderController::class, 'index']);
+        return redirect()
+            ->action([OrderController::class, 'index'])
+            ->with('success', 'Delete Success');
     }
 
     /**

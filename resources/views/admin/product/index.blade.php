@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="d-flex justify-content-between align-items-center">
-        <h1 class="mt-4 mb-2">Product</h1>
-        <div class="d-flex mt-4 mb-2" style="flex-direction: row">
+        <h1 class="mt-4 mb-1">Product</h1>
+        <div class="d-flex mt-4 mb-1" style="flex-direction: row">
             {!! Form::open(['method' => 'post', 'url' => 'admin/products/search']) !!}
             <div class="input-group" style="height: 30px">
                 @if ($search != '')
@@ -26,6 +26,19 @@
                 </a>
             </div>
         </div>
+    </div>
+
+    <div class="mb-2" style="width: 100%; height: 35px">
+        @if (session('success'))
+            <div style="background-color: #DCEDC8">
+                {{ session('success', 'Success !') }}
+            </div>
+        @endif
+        @if (session('fail'))
+            <div style="background-color: #EF9A9A">
+                {{ session('fail', 'Fail !') }}
+            </div>
+        @endif
     </div>
 
     <div class="table-responsive">

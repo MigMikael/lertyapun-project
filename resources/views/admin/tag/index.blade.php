@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="d-flex justify-content-between align-items-center">
-        <h1 class="mt-4">Tag</h1>
-        <div class="d-flex" style="flex-direction: row">
+        <h1 class="mt-4 mb-1">Tag</h1>
+        <div class="d-flex mt-4 mb-1" style="flex-direction: row">
             @include('admin.tag._sort')
             <div>
                 <a class="btn btn-primary" href="{{ url("admin/tags/create") }}">
@@ -12,6 +12,19 @@
                 </a>
             </div>
         </div>
+    </div>
+
+    <div class="mb-2" style="width: 100%; height: 35px">
+        @if (session('success'))
+            <div style="background-color: #DCEDC8">
+                {{ session('success', 'Success !') }}
+            </div>
+        @endif
+        @if (session('fail'))
+            <div style="background-color: #EF9A9A">
+                {{ session('fail', 'Fail !') }}
+            </div>
+        @endif
     </div>
 
     <div class="table-responsive">

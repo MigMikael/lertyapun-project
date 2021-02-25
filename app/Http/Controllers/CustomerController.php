@@ -109,7 +109,9 @@ class CustomerController extends Controller
         }
 
         $newCustomer = Customer::create($newCustomer);
-        return redirect()->action([CustomerController::class, 'index']);
+        return redirect()
+            ->action([CustomerController::class, 'index'])
+            ->with('success', 'Create Success');
     }
 
     /**
@@ -193,7 +195,9 @@ class CustomerController extends Controller
         }
 
         $customer->update($newCustomer);
-        return redirect()->action([CustomerController::class, 'index']);
+        return redirect()
+            ->action([CustomerController::class, 'index'])
+            ->with('success', 'Edit Success');
     }
 
     /**
@@ -224,7 +228,9 @@ class CustomerController extends Controller
     public function destroy(Customer $customer)
     {
         $customer->delete();
-        return redirect()->action([CustomerController::class, 'index']);
+        return redirect()
+            ->action([CustomerController::class, 'index'])
+            ->with('success', 'Delete Success');
     }
 
     public function showProfile()
