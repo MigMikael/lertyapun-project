@@ -18,7 +18,7 @@ class CustomerActiveAuth
     public function handle(Request $request, Closure $next, $guard = 'customer')
     {
         $customer = Auth::guard($guard)->user();
-        if ($customer->status == 'pending' or $customer->status == 'suspend') {
+        if ($customer->status == 'pending' or $customer->status == 'suspend' or $customer->status == 'inactive') {
             return redirect('customer/pending/'.$customer->slug);
         }
         // Todo Inactive handle

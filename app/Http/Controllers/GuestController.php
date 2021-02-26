@@ -81,7 +81,7 @@ class GuestController extends Controller
      */
     public function registerPending(Customer $customer)
     {
-        if ($customer->status != 'pending') {
+        if ($customer->status == 'active') {
             return redirect('customer/products');
         }
         return view('customer.pending', [ 'customer' => $customer ]);

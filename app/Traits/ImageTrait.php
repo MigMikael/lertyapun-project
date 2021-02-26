@@ -4,15 +4,18 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\App;
 use Intervention\Image\Facades\Image;
-use Log;
 use App\Helpers\StringGenerator;
+use Illuminate\Support\Facades\Log;
 
 trait ImageTrait
 {
     public function storeImage($file, $type)
     {
-//        Log::info($file);
         $ex = $file->getClientOriginalExtension();
+        [$width, $height] = getimagesize($file);
+        // Log::info($width);
+        // Log::info($height);
+
         Storage::disk('local')->put($file->getFilename() . '.' . $ex, File::get($file));
 
         $fileRecord = [
@@ -25,7 +28,7 @@ trait ImageTrait
         $file = \App\Models\Image::create($fileRecord);
 
         self::compress($file);
-        self::resizeImage($file, $type);
+        self::resizeImage($file, $type, $width, $height);
 
         return $file;
     }
@@ -75,21 +78,30 @@ trait ImageTrait
         $file->save();
     }
 
-    public function resizeImage($file, $type)
+    public function resizeImage($file, $type, $width, $height)
     {
         $image = Storage::disk('local')->get($file->name);
         $old_filename = $file->name;
 
         if($type == 'profile'){
+            $height = strval(($height / $width) * 900);
             $width = '900';
-            $height = $width;
         }elseif ($type == 'cover'){
+            $height = strval(($height / $width) * 1920);
             $width = '1920';
-            $height = $width/4*3;
         }else{
             // default value
-            $width = '500';
-            $height = $width;
+            if ($width > 400) {
+                if ($width == $height) {
+                    $height = '400';
+                    $width = '400';
+                } else {
+                    $height = strval(($height / $width) * 400);
+                    $width = '400';
+                }
+            }
+            // Log::info($width);
+            // Log::info($height);
         }
 
         $img = Image::make($image)->resize($width, $height);

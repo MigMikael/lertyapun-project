@@ -28,14 +28,16 @@
         </div>
     </div>
 
-    <div class="mb-2" style="width: 100%; height: 35px">
+    <div class="mb-2" style="width: 100%; height: 40px">
         @if (session('success'))
-            <div style="background-color: #DCEDC8">
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
                 {{ session('success', 'Success !') }}
             </div>
         @endif
         @if (session('fail'))
-            <div style="background-color: #EF9A9A">
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
                 {{ session('fail', 'Fail !') }}
             </div>
         @endif

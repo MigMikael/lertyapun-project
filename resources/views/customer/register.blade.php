@@ -12,7 +12,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>ชื่อ <span class="required">*</span></label>
-                        <input name="first_name" type="text" id="fname" class="form-control" placeholder="ชื่อ" required>
+                        <input name="first_name" type="text" id="fname" class="form-control  is-invalid" placeholder="ชื่อ" required>
                     </div>
                     <div class="form-group">
                         <label>นามสกุล <span class="required">*</span></label>
@@ -33,31 +33,73 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="form-group">
-                        <label>รูปเลขที่บัตรประชาชน <span class="required">*</span></label>
-                        <input name="citizen_card_image" type="file" id="card_file" class="form-control" required>
+                    <label class="mb-0 pb-0">รูปเลขที่บัตรประชาชน <span class="required">*</span></label>
+                    <div class="border mb-4">
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input required name="citizen_card_image" type="file" onchange="document.getElementById('citizen_card_image').src = window.URL.createObjectURL(this.files[0])">
+                            </div>
+                        </div>
+                        <div class="rounded-lg text-center" style="background-color: #f4f4f4">
+                            <img src="{{ URL::asset('img/placeholder-image.jpg') }}" id="citizen_card_image" height="100" />
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>รูปเลขที่ใบอนุญาติร้านยา <span class="required">*</span></label>
-                        <input name="drug_store_approve_image" type="file" id="license_file" class="form-control" required>
+                    <label class="mb-0 pb-0">รูปเลขที่ใบอนุญาติร้านยา <span class="required">*</span></label>
+                    <div class="border mb-4">
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input required name="drug_store_approve_image" type="file" onchange="document.getElementById('drug_store_approve_image').src = window.URL.createObjectURL(this.files[0])">
+                            </div>
+                        </div>
+                        <div class="rounded-lg text-center" style="background-color: #f4f4f4">
+                            <img src="{{ URL::asset('img/placeholder-image.jpg') }}" id="drug_store_approve_image" height="100" />
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>รูปใบประกอบโรคศิลปะ <span class="required">*</span></label>
-                        <input name="medical_license_image" type="file" id="license_art_file" class="form-control" required>
+                    <label class="mb-0 pb-0">รูปใบประกอบโรคศิลปะ <span class="required">*</span></label>
+                    <div class="border mb-4">
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input required name="medical_license_image" type="file" onchange="document.getElementById('medical_license_image').src = window.URL.createObjectURL(this.files[0])">
+                            </div>
+                        </div>
+                        <div class="rounded-lg text-center" style="background-color: #f4f4f4">
+                            <img src="{{ URL::asset('img/placeholder-image.jpg') }}" id="medical_license_image" height="100" />
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="form-group">
-                        <label>รูปทะเบียนพาณิชย์</label>
-                        <input name="commercial_register_image" type="file" id="license_art_file" class="form-control" required>
+                    <label class="mb-0 pb-0">รูปทะเบียนพาณิชย์</label>
+                    <div class="border mb-4">
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input name="commercial_register_image" type="file" onchange="document.getElementById('commercial_register_image').src = window.URL.createObjectURL(this.files[0])">
+                            </div>
+                        </div>
+                        <div class="rounded-lg text-center" style="background-color: #f4f4f4">
+                            <img src="{{ URL::asset('img/placeholder-image.jpg') }}" id="commercial_register_image" height="100" />
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>รูปใบรับรองนิติบุคคล </label>
-                        <input name="juristic_person_image" type="file" id="corp_license_file" class="form-control" required>
+                    <label class="mb-0 pb-0">รูปใบรับรองนิติบุคคล</label>
+                    <div class="border mb-4">
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input name="juristic_person_image" type="file" onchange="document.getElementById('juristic_person_image').src = window.URL.createObjectURL(this.files[0])">
+                            </div>
+                        </div>
+                        <div class="rounded-lg text-center" style="background-color: #f4f4f4">
+                            <img src="{{ URL::asset('img/placeholder-image.jpg') }}" id="juristic_person_image" height="100" />
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>รูปใบทะเบียนภาษีมูลค่าเพิ่ม</label>
-                        <input name="vat_register_cert_image" type="file" id="tax_file" class="form-control" required>
+                    <label class="mb-0 pb-0">รูปใบทะเบียนภาษีมูลค่าเพิ่ม</label>
+                    <div class="border mb-4">
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input name="vat_register_cert_image" type="file" onchange="document.getElementById('vat_register_cert_image').src = window.URL.createObjectURL(this.files[0])">
+                            </div>
+                        </div>
+                        <div class="rounded-lg text-center" style="background-color: #f4f4f4">
+                            <img src="{{ URL::asset('img/placeholder-image.jpg') }}" id="vat_register_cert_image" height="100" />
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-12">
