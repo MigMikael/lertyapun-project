@@ -9,11 +9,13 @@ use App\Models\Address;
 use App\Models\CustomerProduct;
 use Illuminate\Http\Request;
 use App\Traits\ImageTrait;
+use App\Traits\ValidateTrait;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
 class CustomerController extends Controller
 {
+    use ValidateTrait;
     use ImageTrait;
     public $customerStatus = [
         'active' => 'Active',
@@ -150,7 +152,9 @@ class CustomerController extends Controller
     public function update(Request $request, Customer $customer)
     {
         $newCustomer = $request->all();
-        $newCustomer['password'] = Hash::make($request->password);
+        if($request->has('password')) {
+            $newCustomer['password'] = Hash::make($request->password);
+        }
 
         if($request->hasFile('avatar_image')) {
             $file = $request->file('avatar_image');
@@ -254,6 +258,8 @@ class CustomerController extends Controller
      */
     public function updateProfile(Request $request)
     {
+        $this->validateCustomerProfile($request);
+
         $newCustomer = $request->all();
         $authCustomer = auth()->guard('customer')->user();
 
@@ -267,7 +273,9 @@ class CustomerController extends Controller
             }
 
             $customer->update($newCustomer);
-            return redirect('customer/profile');
+            return redirect('customer/profile')->with('success', 'Edit Success');
+        } else {
+            return redirect('login');
         }
     }
 
@@ -295,6 +303,8 @@ class CustomerController extends Controller
      */
     public function updateAddress(Request $request)
     {
+        $this->validateCustomerAddress($request);
+
         $newAddress = $request->all();
         $authCustomer = auth()->guard('customer')->user();
 
@@ -305,7 +315,9 @@ class CustomerController extends Controller
             Address::where('customer_id', $customer->id)->delete();
             Address::create($newAddress);
 
-            return redirect('customer/address');
+            return redirect('customer/address')->with('success', 'Edit Success');
+        } else {
+            return redirect('login');
         }
     }
 
@@ -330,6 +342,8 @@ class CustomerController extends Controller
      */
     public function updatePassword(Request $request)
     {
+        $this->validateCustomerPassword($request);
+
         $current_password = $request->get('current_password');
         $new_password = $request->get('new_password');
         $confirm_new_password = $request->get('confirm_new_password');
@@ -341,13 +355,88 @@ class CustomerController extends Controller
                 $updateCustomer = ['password' => $new_password];
                 $customer->update($updateCustomer);
 
-                Log::info('Change Password Success');
-                return redirect('customer/profile');
+                return redirect('customer/profile')->with('success', 'Edit Success');
             } else {
                 return redirect()->back();
             }
         } else {
             return redirect()->back();
+        }
+    }
+
+    public function showDocument()
+    {
+        $authCustomer = auth()->guard('customer')->user();
+        if ($authCustomer) {
+            $customer = Customer::where('slug', $authCustomer->slug)->first();
+            return view('customer.document', [
+                'customer' => $customer,
+            ]);
+        } else {
+            return redirect('login');
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateDocument(Request $request)
+    {
+        $this->validateCustomerDocument($request);
+
+        $authCustomer = auth()->guard('customer')->user();
+        if ($authCustomer) {
+            $customer = Customer::where('slug', $authCustomer->slug)->first();
+
+            if($request->hasFile('avatar_image')) {
+                $file = $request->file('avatar_image');
+                $image_record = $this->storeImage($file, "");
+                $customer->avatar_image = $image_record->id;
+            }
+
+            if($request->hasFile('citizen_card_image')) {
+                $file = $request->file('citizen_card_image');
+                $image_record = $this->storeImage($file, "");
+                $customer->citizen_card_image = $image_record->id;
+            }
+
+            if($request->hasFile('drug_store_approve_image')) {
+                $file = $request->file('drug_store_approve_image');
+                $image_record = $this->storeImage($file, "");
+                $customer->drug_store_approve_image = $image_record->id;
+            }
+
+            if($request->hasFile('medical_license_image')) {
+                $file = $request->file('medical_license_image');
+                $image_record = $this->storeImage($file, "");
+                $customer->medical_license_image = $image_record->id;
+            }
+
+            if($request->hasFile('commercial_register_image')) {
+                $file = $request->file('commercial_register_image');
+                $image_record = $this->storeImage($file, "");
+                $customer->commercial_register_image = $image_record->id;
+            }
+
+            if($request->hasFile('juristic_person_image')) {
+                $file = $request->file('juristic_person_image');
+                $image_record = $this->storeImage($file, "");
+                $customer->juristic_person_image = $image_record->id;
+            }
+
+            if($request->hasFile('vat_register_cert_image')) {
+                $file = $request->file('vat_register_cert_image');
+                $image_record = $this->storeImage($file, "");
+                $customer->vat_register_cert_image = $image_record->id;
+            }
+
+            $customer->save();
+            return redirect('customer/document')->with('success', 'Edit Success');
+        } else {
+            return redirect('login');
         }
     }
 }

@@ -14,6 +14,9 @@
                     <a href="{{ url('customer/profile') }}">
                         ข้อมูลส่วนตัว
                     </a>
+                    <a href="{{ url('customer/document') }}">
+                        ข้อมูลเอกสาร
+                    </a>
                     <a href="{{ url('customer/address') }}">
                         ที่อยู่
                     </a>

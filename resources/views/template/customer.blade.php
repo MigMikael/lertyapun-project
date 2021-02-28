@@ -36,6 +36,7 @@
         </nav>
         @endif
 
+        @include('customer._errorModal')
         @yield('content')
 
         <script src="{{ URL::asset('vendor/jquery/jquery.min.js') }}"></script>

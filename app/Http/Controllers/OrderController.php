@@ -200,7 +200,7 @@ class OrderController extends Controller
 
             $product = Product::where('slug', $slug)->first();
             if($quantity > $product->quantity) {
-                return "fail"; // Todo handle This
+                return response()->json(['errors' => 'จำนวนสินค้าเกินกว่าในสต็อก กรุณารีเฟรชหน้าใหม่อีกครั้ง'], 422);
             }
             $totalPrice = $product->price * $quantity;
             $sumTotalPrice += $totalPrice;
@@ -246,7 +246,7 @@ class OrderController extends Controller
         }
         CustomerProduct::where('customer_id', $customer->id)->delete();
 
-        return response()->json(['status' => 'order success'], 200);;
+        return response()->json(['status' => 'order success'], 200);
     }
 
     /**

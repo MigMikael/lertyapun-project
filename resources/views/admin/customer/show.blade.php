@@ -54,17 +54,23 @@
             <img src="{{ url('image/thumbnail/'.$customer->medicalLicenseImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $customer->first_name }}">
         </a>
 
+        @if ($customer->commercialRegisterImage != null)
         <a class="col-md-2" href="{{ url('image/show/'.$customer->commercialRegisterImage->slug) }}">
             <img src="{{ url('image/thumbnail/'.$customer->commercialRegisterImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $customer->first_name }}">
         </a>
+        @endif
 
+        @if ($customer->juristicPersonImage != null)
         <a class="col-md-2" href="{{ url('image/show/'.$customer->juristicPersonImage->slug) }}">
             <img src="{{ url('image/thumbnail/'.$customer->juristicPersonImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $customer->first_name }}">
         </a>
+        @endif
 
+        @if ($customer->vatRegisterCertImage != null)
         <a class="col-md-2" href="{{ url('image/show/'.$customer->vatRegisterCertImage->slug) }}">
             <img src="{{ url('image/thumbnail/'.$customer->vatRegisterCertImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $customer->first_name }}">
         </a>
+        @endif
     </div>
 @endsection
 

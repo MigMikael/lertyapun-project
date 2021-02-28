@@ -10,6 +10,10 @@ trait PriceTrait
     {
         $discount_price = $product->price;
         foreach($product->promotions as $promotion) {
+            if ($promotion->name == 'ลด 5%') {
+                $discount_price = floatval($product->price) * 0.95;
+            }
+
             if ($promotion->name == 'ลด 10%') {
                 $discount_price = floatval($product->price) * 0.9;
             }

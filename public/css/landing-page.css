@@ -156,7 +156,21 @@ label {
 }
 
 .border {
-  border: 1px solid #e4e4e4 !important;
+  border: 1px solid #e4e4e4;
+}
+
+.image-preview {
+  background-color: #f4f4f4;
+}
+
+.image-preview > img {
+  height: 100px;
+}
+
+.text-danger {
+  font-size: 10px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
 }
 
 .widget-header {
@@ -180,7 +194,7 @@ label {
 
 .bg-white {
   background: #FFF;
-} 
+}
 
 .section-page-top {
   padding: 45px 0;
@@ -305,11 +319,11 @@ figure {
   border-radius: 50%;
   background-size: cover;
   background-repeat: no-repeat;
-  cursor: pointer; 
+  cursor: pointer;
 }
 
 #profile-wrapper .profile-img-wrapper .profile-btn {
-  margin: 20px 0;                             
+  margin: 20px 0;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;

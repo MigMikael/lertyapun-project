@@ -10,6 +10,10 @@
                     @if($customer->remark != "")
                         <p>{{ $customer->remark }}</p>
                     @endif
+                    <div class="col-md-12">
+                        <hr class="my-4">
+                    </div>
+                    <a class="btn btn-warning" href="{{ url('customer/pending/'. $customer->slug .'/edit') }}">Edit</a>
                 </div>
             </div>
         </div>

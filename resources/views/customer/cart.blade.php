@@ -27,7 +27,7 @@
                                                 <th width="160">
                                                     ราคา
                                                 </th>
-                                                <th width="110">
+                                                <th width="120">
                                                     จำนวน
                                                 </th>
                                                 <th class="text-right">
@@ -73,9 +73,9 @@
                                                         value="{{ $product->pivot->quantity }}"
                                                         min="1"
                                                         max="{{ $product->quantity }}"
-                                                        style="width: 80px;">
+                                                        style="width: 90px;">
                                                     <input id="product_slug" type="hidden" value="{{ $product->slug }}">
-                                                    <p>เหลือ {{ $product->quantity }} ชิ้น</p>
+                                                    <p style="font-size: 12px">เหลือ {{ number_format($product->quantity) }} ชิ้น</p>
                                                 </td>
                                                 <td class="text-right align-middle">
                                                     {!! Form::model($product, [
@@ -161,7 +161,11 @@
 
             $("#product-table #quantity #input_quantity").each(function() {
                 var value = $(this).val();
-                quantities.push(value.replace(',', ''));
+                if (!value) {
+                    quantities.push("0");
+                } else {
+                    quantities.push(value.replace(',', ''));
+                }
             })
 
             var totalPrice = 0;
@@ -187,6 +191,7 @@
     <script>
         $("#order_submit").click(function(e) {
             e.preventDefault();
+            $("#order_submit").prop("disabled", true);
             $("#order_submit").html("<span class='spinner-border spinner-border-sm'></span> Loading...");
 
             var productSlug = [];
@@ -211,11 +216,18 @@
                     "product_quantity": productQuantity
                 },
                 success: function(result) {
-                    console.log('success', result);
+                    // console.log('success', result);
                     window.location.replace("{{ url('customer/order') }}");
                 },
                 error: function(result) {
-                    console.log('error', result);
+                    // console.log('error', result);
+                    // alert(result.responseJSON.errors)
+                    $("#errorModal .modal-dialog .modal-content #title").html("เกิดข้อผิดพลาด...");
+                    $("#errorModal .modal-dialog .modal-content #message").html(result.responseJSON.errors);
+                    $('#errorModal').modal('show');
+
+                    $("#order_submit").prop("disabled", false);
+                    $("#order_submit").html("ยืนยันการสั่งซื้อ");
                 }
             });
         });

@@ -48,6 +48,8 @@ Route::group(['prefix' => 'customer', 'middleware' => 'customerAuth'], function 
 
         Route::get('profile', [CustomerController::class, 'showProfile']);
         Route::put('profile', [CustomerController::class, 'updateProfile']);
+        Route::get('document', [CustomerController::class, 'showDocument']);
+        Route::put('document', [CustomerController::class, 'updateDocument']);
         Route::get('address', [CustomerController::class, 'showAddress']);
         Route::put('address', [CustomerController::class, 'updateAddress']);
         Route::get('password', [CustomerController::class, 'showPassword']);
@@ -62,6 +64,8 @@ Route::group(['prefix' => 'customer', 'middleware' => 'customerAuth'], function 
         Route::delete('cart/{product:slug}', [CustomerProductController::class, 'destroy']);
         Route::get('cart/product/count', [CustomerProductController::class, 'productCount']);
     });
+    Route::get('pending/{customer:slug}/edit', [GuestController::class, 'registerEdit']);
+    Route::put('pending/{customer:slug}', [GuestController::class, 'registerUpdate']);
     Route::get('pending/{customer:slug}', [GuestController::class, 'registerPending']);
     Route::get('logout', [GuestController::class, 'customerLogout']);
 });
