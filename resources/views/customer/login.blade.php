@@ -17,6 +17,12 @@
                 {!! Form::open(['url' => 'login', 'method' => 'post', 'files' => 'true', 'class' => 'form-signin']) !!}
                     <h5>ลงชื่อเข้าใช้งาน</h5>
                     <hr class="my-4">
+                    @if (session('fail'))
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            {{ session('fail', 'Fail !') }}
+                        </div>
+                    @endif
                     <div class="form-group">
                         <label>อีเมล์</label>
                         <input name="email" type="email" class="form-control" placeholder="อีเมล์" required>

@@ -189,7 +189,7 @@ class GuestController extends Controller
             return redirect('admin/dashboard');
         }
         else {
-            return redirect('register');
+            return redirect('login')->with('fail', 'username หรือ password ไม่ถูกต้อง');
         }
     }
 

@@ -187,6 +187,16 @@ class OrderController extends Controller
      */
     public function storeOrder(Request $request)
     {
+        $authCustomer = auth()->guard('customer')->user();
+        $customer = Customer::where('slug', $authCustomer->slug)->first();
+        if ($customer == null) {
+            return response()->json(['errors' => 'กรุณาล็อกอินใหม่อีกครั้ง'], 422);
+        }
+
+        if (!$request->has('product_slug') || !$request->has('product_quantity')) {
+            return response()->json(['errors' => 'กรุณาลองใหม่อีกครั้ง'], 422);
+        }
+
         $product_slug = $request->get('product_slug');
         $product_quantity = $request->get('product_quantity');
 
@@ -220,9 +230,6 @@ class OrderController extends Controller
             ];
             array_push($newOrderDetails, $newOrderDetail);
         }
-
-        $authCustomer = auth()->guard('customer')->user();
-        $customer = Customer::where('slug', $authCustomer->slug)->first();
 
         $newOrder = [
             'slug' => (new StringGenerator())->generateSlug(),
