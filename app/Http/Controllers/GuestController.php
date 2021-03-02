@@ -22,12 +22,35 @@ class GuestController extends Controller
         return view('welcome');
     }
 
-    public function showRegisterForm()
+    public function about()
     {
+        return view('customer.about');
+    }
+
+    public function contact()
+    {
+        return view('customer.contact');
+    }
+
+    public function termOfUse()
+    {
+        return view('customer.term');
+    }
+
+    public function privacyPolicy()
+    {
+        return view('customer.privacy');
+    }
+
+    public function showRegisterForm(Request $request)
+    {
+        $email = $request->get('email');
         if(auth()->guard('customer')->check()) {
             return redirect('customer/products');
         }
-        return view('customer.register');
+        return view('customer.register', [
+            'preloadEmail' => $email
+        ]);
     }
 
     public function register(Request $request)
@@ -106,8 +129,10 @@ class GuestController extends Controller
     {
         $this->validateGuestUpdateRegister($request);
 
-        $newCustomer = $request->all();
-        if($request->has('password')) {
+        $newCustomer = [];
+        if($request->password != '') {
+            Log::info("not empty");
+            Log::info($request->password);
             $newCustomer['password'] = Hash::make($request->password);
         }
 
@@ -181,6 +206,8 @@ class GuestController extends Controller
     {
         $email = $request->get('email');
         $password = $request->get('password');
+        Log::info($email);
+        Log::info($password);
 
         if (Auth::guard('customer')->attempt(['email' => $email, 'password' => $password])) {
             return redirect('customer/products');

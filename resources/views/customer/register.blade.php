@@ -42,7 +42,11 @@
                     <hr class="my-4">
                     <div class="form-group">
                         <label>อีเมล์ <span class="required">*</span></label>
-                        <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="อีเมล์" value="@if(Request::is('customer/pending/*/edit')){{ $customer->email }}@else{{ old('email') }}@endif">
+                        @if(isset($preloadEmail))
+                            <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="อีเมล์" value="{{ $preloadEmail }}">
+                        @else
+                            <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="อีเมล์" value="@if(Request::is('customer/pending/*/edit')){{ $customer->email }}@else{{ old('email') }}@endif">
+                        @endif
                         @error('email')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -87,80 +91,42 @@
                     @endif
                 </div>
                 <div class="col-md-4">
-                    <label class="mb-0 pb-2">รูปเลขที่บัตรประชาชน <span class="required">*</span></label>
-                    <div class="border mb-4 p-1 rounded @error('citizen_card_image') border-danger @enderror">
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input accept="image/x-png,image/gif,image/jpeg" name="citizen_card_image" type="file"
-                                    onchange="document.getElementById('citizen_card_image').src = window.URL.createObjectURL(this.files[0])">
-                            </div>
-                        </div>
-                        <div class="rounded-lg text-center image-preview">
-                            <img src="@if(Request::is('customer/pending/*/edit')) {{ url('image/thumbnail/'.$customer->citizenCardImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif" id="citizen_card_image"/>
-                        </div>
-                    </div>
-                    <label class="mb-0 pb-2">รูปเลขที่ใบอนุญาติร้านยา <span class="required">*</span></label>
-                    <div class="border mb-4 p-1 rounded @error('drug_store_approve_image') border-danger @enderror">
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input accept="image/x-png,image/gif,image/jpeg" name="drug_store_approve_image" type="file"
-                                    onchange="document.getElementById('drug_store_approve_image').src = window.URL.createObjectURL(this.files[0])">
-                            </div>
-                        </div>
-                        <div class="rounded-lg text-center image-preview">
-                            <img src="@if(Request::is('customer/pending/*/edit')) {{ url('image/thumbnail/'.$customer->drugStoreApproveImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif" id="drug_store_approve_image" />
-                        </div>
-                    </div>
-                    <label class="mb-0 pb-2">รูปใบประกอบโรคศิลปะ <span class="required">*</span></label>
-                    <div class="border mb-4 p-1 rounded @error('medical_license_image') border-danger @enderror">
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input accept="image/x-png,image/gif,image/jpeg" name="medical_license_image" type="file"
-                                    onchange="document.getElementById('medical_license_image').src = window.URL.createObjectURL(this.files[0])">
-                            </div>
-                        </div>
-                        <div class="rounded-lg text-center image-preview">
-                            <img src="@if(Request::is('customer/pending/*/edit')) {{ url('image/thumbnail/'.$customer->medicalLicenseImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif" id="medical_license_image" />
-                        </div>
-                    </div>
+                    @include('customer._inputPreview', [
+                        'label' => 'รูปเลขที่บัตรประชาชน',
+                        'name' => 'citizen_card_image',
+                        'key' => 'citizenCardImage',
+                    ])
+
+                    @include('customer._inputPreview', [
+                        'label' => 'รูปเลขที่ใบอนุญาติร้านยา',
+                        'name' => 'drug_store_approve_image',
+                        'key' => 'drugStoreApproveImage',
+                    ])
+
+                    @include('customer._inputPreview', [
+                        'label' => 'รูปใบประกอบโรคศิลปะ',
+                        'name' => 'medical_license_image',
+                        'key' => 'medicalLicenseImage',
+                    ])
                 </div>
                 <div class="col-md-4">
-                    <label class="mb-0 pb-2">รูปทะเบียนพาณิชย์</label>
-                    <div class="border mb-4 p-1 rounded @error('commercial_register_image') border-danger @enderror">
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input accept="image/x-png,image/gif,image/jpeg" name="commercial_register_image" type="file"
-                                    onchange="document.getElementById('commercial_register_image').src = window.URL.createObjectURL(this.files[0])">
-                            </div>
-                        </div>
-                        <div class="rounded-lg text-center image-preview">
-                            <img src="@if(Request::is('customer/pending/*/edit') && $customer->commercialRegisterImage != null) {{ url('image/thumbnail/'.$customer->commercialRegisterImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif" id="commercial_register_image" />
-                        </div>
-                    </div>
-                    <label class="mb-0 pb-2">รูปใบรับรองนิติบุคคล</label>
-                    <div class="border mb-4 p-1 rounded @error('juristic_person_image') border-danger @enderror">
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input accept="image/x-png,image/gif,image/jpeg" name="juristic_person_image" type="file"
-                                    onchange="document.getElementById('juristic_person_image').src = window.URL.createObjectURL(this.files[0])">
-                            </div>
-                        </div>
-                        <div class="rounded-lg text-center image-preview">
-                            <img src="@if(Request::is('customer/pending/*/edit') && $customer->juristicPersonImage != null) {{ url('image/thumbnail/'.$customer->juristicPersonImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif" id="juristic_person_image" />
-                        </div>
-                    </div>
-                    <label class="mb-0 pb-2">รูปใบทะเบียนภาษีมูลค่าเพิ่ม</label>
-                    <div class="border mb-4 p-1 rounded @error('vat_register_cert_image') border-danger @enderror">
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input accept="image/x-png,image/gif,image/jpeg" name="vat_register_cert_image" type="file"
-                                    onchange="document.getElementById('vat_register_cert_image').src = window.URL.createObjectURL(this.files[0])">
-                            </div>
-                        </div>
-                        <div class="rounded-lg text-center image-preview">
-                            <img src="@if(Request::is('customer/pending/*/edit') && $customer->vatRegisterCertImage != null) {{ url('image/thumbnail/'.$customer->vatRegisterCertImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif" id="vat_register_cert_image" />
-                        </div>
-                    </div>
+                    @include('customer._inputPreview', [
+                        'label' => 'รูปทะเบียนพาณิชย์',
+                        'name' => 'commercial_register_image',
+                        'key' => 'commercialRegisterImage',
+                    ])
+
+                    @include('customer._inputPreview', [
+                        'label' => 'รูปใบรับรองนิติบุคคล',
+                        'name' => 'juristic_person_image',
+                        'key' => 'juristicPersonImage',
+                    ])
+
+                    @include('customer._inputPreview', [
+                        'label' => 'รูปใบทะเบียนภาษีมูลค่าเพิ่ม',
+                        'name' => 'vat_register_cert_image',
+                        'key' => 'vatRegisterCertImage',
+                    ])
                 </div>
                 <div class="col-md-12">
                     <hr class="my-4">
@@ -173,3 +139,11 @@
     </div>
 </section>
 @endsection
+
+{{-- @section('script')
+    <script>
+        $('#aniimated-thumbnials').lightGallery({
+            thumbnail:true
+        });
+    </script>
+@endsection --}}

@@ -33,6 +33,11 @@ Route::post('register', [GuestController::class, 'register']);
 Route::get('login', [GuestController::class, 'showLoginForm']);
 Route::post('login', [GuestController::class, 'login']);
 
+Route::get('about', [GuestController::class, 'about']);
+Route::get('contact', [GuestController::class, 'contact']);
+Route::get('term_of_use', [GuestController::class, 'termOfUse']);
+Route::get('privacy_policy', [GuestController::class, 'privacyPolicy']);
+
 Route::get('image/show/{image:slug}', [ImageController::class, 'show']);
 Route::get('image/thumbnail/{image:slug}', [ImageController::class, 'showThumbnail']);
 

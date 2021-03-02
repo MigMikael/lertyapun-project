@@ -159,13 +159,13 @@
                 <h2 class="mb-4">พร้อมจะร่วมเป็นพาร์ทเนอร์กับเราแล้วหรือยัง สมัครเลย !</h2>
             </div>
             <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-                <form>
+                <form method="GET" action="{{ url('register') }}">
                     <div class="form-row">
                         <div class="col-md-8">
-                            <input type="email" class="form-control form-control-lg form-group" placeholder="Enter your email...">
+                            <input type="email" name="email" class="form-control form-control-lg form-group" placeholder="Enter your email...">
                         </div>
                         <div class="col-md-4">
-                            <a href="{{ url('register') }}" class="btn btn-block btn-lg btn-primary form-group">สมัครสมาชิก</a>
+                            <button type="submit" class="btn btn-block btn-lg btn-primary form-group">สมัครสมาชิก</button>
                         </div>
                     </div>
                 </form>
@@ -181,19 +181,19 @@
             <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
                 <ul class="list-inline mb-2">
                     <li class="list-inline-item">
-                        <a href="#">About</a>
+                        <a href="{{ url('about') }}">About</a>
                     </li>
                     <li class="list-inline-item">&sdot;</li>
                     <li class="list-inline-item">
-                        <a href="#">Contact</a>
+                        <a href="{{ url('contact') }}">Contact</a>
                     </li>
                     <li class="list-inline-item">&sdot;</li>
                     <li class="list-inline-item">
-                        <a href="#">Terms of Use</a>
+                        <a href="{{ url('term_of_use') }}">Terms of Use</a>
                     </li>
                     <li class="list-inline-item">&sdot;</li>
                     <li class="list-inline-item">
-                        <a href="#">Privacy Policy</a>
+                        <a href="{{ url('privacy_policy') }}">Privacy Policy</a>
                     </li>
                 </ul>
                 <p class="text-muted small mb-4 mb-lg-0">&copy; LERTYAPHAN 2020. All Rights Reserved.</p>

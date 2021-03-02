@@ -34,11 +34,13 @@
                                 <div class="input-group">
                                     <div class="custom-file">
                                         <input accept="image/x-png,image/gif,image/jpeg" name="citizen_card_image" type="file"
-                                            onchange="document.getElementById('citizen_card_image').src = window.URL.createObjectURL(this.files[0])">
+                                            onchange="document.getElementById('citizen_card_image').src = window.URL.createObjectURL(this.files[0]); document.getElementById('citizen_card_image_pre').href = window.URL.createObjectURL(this.files[0])">
                                     </div>
                                 </div>
                                 <div class="rounded-lg text-center image-preview">
-                                    <img src="@if($customer->citizenCardImage !== null) {{ url('image/thumbnail/'.$customer->citizenCardImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif" id="citizen_card_image"/>
+                                    <a id="citizen_card_image_pre" href="@if($customer->citizenCardImage !== null) {{ url('image/thumbnail/'.$customer->citizenCardImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif">
+                                        <img src="@if($customer->citizenCardImage !== null) {{ url('image/thumbnail/'.$customer->citizenCardImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif" id="citizen_card_image"/>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -48,11 +50,13 @@
                                 <div class="input-group">
                                     <div class="custom-file">
                                         <input accept="image/x-png,image/gif,image/jpeg" name="drug_store_approve_image" type="file"
-                                            onchange="document.getElementById('drug_store_approve_image').src = window.URL.createObjectURL(this.files[0])">
+                                            onchange="document.getElementById('drug_store_approve_image').src = window.URL.createObjectURL(this.files[0]); document.getElementById('drug_store_approve_image_pre').href = window.URL.createObjectURL(this.files[0])">
                                     </div>
                                 </div>
                                 <div class="rounded-lg text-center image-preview">
-                                    <img src="@if($customer->drugStoreApproveImage !== null) {{ url('image/thumbnail/'.$customer->drugStoreApproveImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif" id="drug_store_approve_image" />
+                                    <a id="drug_store_approve_image_pre" href="@if($customer->drugStoreApproveImage !== null) {{ url('image/thumbnail/'.$customer->drugStoreApproveImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif">
+                                        <img src="@if($customer->drugStoreApproveImage !== null) {{ url('image/thumbnail/'.$customer->drugStoreApproveImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif" id="drug_store_approve_image" />
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -62,11 +66,13 @@
                                 <div class="input-group">
                                     <div class="custom-file">
                                         <input accept="image/x-png,image/gif,image/jpeg" name="medical_license_image" type="file"
-                                            onchange="document.getElementById('medical_license_image').src = window.URL.createObjectURL(this.files[0])">
+                                            onchange="document.getElementById('medical_license_image').src = window.URL.createObjectURL(this.files[0]); document.getElementById('medical_license_image_pre').href = window.URL.createObjectURL(this.files[0])">
                                     </div>
                                 </div>
                                 <div class="rounded-lg text-center image-preview">
-                                    <img src="@if($customer->medicalLicenseImage !== null) {{ url('image/thumbnail/'.$customer->medicalLicenseImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif" id="medical_license_image" />
+                                    <a id="medical_license_image_pre" href="@if($customer->medicalLicenseImage !== null) {{ url('image/thumbnail/'.$customer->medicalLicenseImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif">
+                                        <img src="@if($customer->medicalLicenseImage !== null) {{ url('image/thumbnail/'.$customer->medicalLicenseImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif" id="medical_license_image" />
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -80,11 +86,13 @@
                                 <div class="input-group">
                                     <div class="custom-file">
                                         <input accept="image/x-png,image/gif,image/jpeg" name="commercial_register_image" type="file"
-                                            onchange="document.getElementById('commercial_register_image').src = window.URL.createObjectURL(this.files[0])">
+                                            onchange="document.getElementById('commercial_register_image').src = window.URL.createObjectURL(this.files[0]); document.getElementById('commercial_register_image_pre').href = window.URL.createObjectURL(this.files[0])">
                                     </div>
                                 </div>
                                 <div class="rounded-lg text-center image-preview">
-                                    <img src="@if($customer->commercialRegisterImage !== null) {{ url('image/thumbnail/'.$customer->commercialRegisterImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif" id="commercial_register_image" />
+                                    <a id="commercial_register_image_pre" href="@if($customer->commercialRegisterImage !== null) {{ url('image/thumbnail/'.$customer->commercialRegisterImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif">
+                                        <img src="@if($customer->commercialRegisterImage !== null) {{ url('image/thumbnail/'.$customer->commercialRegisterImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif" id="commercial_register_image" />
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -94,11 +102,13 @@
                                 <div class="input-group">
                                     <div class="custom-file">
                                         <input accept="image/x-png,image/gif,image/jpeg" name="juristic_person_image" type="file"
-                                            onchange="document.getElementById('juristic_person_image').src = window.URL.createObjectURL(this.files[0])">
+                                            onchange="document.getElementById('juristic_person_image').src = window.URL.createObjectURL(this.files[0]); document.getElementById('juristic_person_image_pre').href = window.URL.createObjectURL(this.files[0])">
                                     </div>
                                 </div>
                                 <div class="rounded-lg text-center image-preview">
-                                    <img src="@if($customer->juristicPersonImage !== null) {{ url('image/thumbnail/'.$customer->juristicPersonImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif" id="juristic_person_image" />
+                                    <a id="juristic_person_image_pre" href="@if($customer->juristicPersonImage !== null) {{ url('image/thumbnail/'.$customer->juristicPersonImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif">
+                                        <img src="@if($customer->juristicPersonImage !== null) {{ url('image/thumbnail/'.$customer->juristicPersonImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif" id="juristic_person_image" />
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -108,11 +118,13 @@
                                 <div class="input-group">
                                     <div class="custom-file">
                                         <input accept="image/x-png,image/gif,image/jpeg" name="vat_register_cert_image" type="file"
-                                            onchange="document.getElementById('vat_register_cert_image').src = window.URL.createObjectURL(this.files[0])">
+                                        onchange="document.getElementById('vat_register_cert_image').src = window.URL.createObjectURL(this.files[0]); document.getElementById('vat_register_cert_image_pre').href = window.URL.createObjectURL(this.files[0])">
                                     </div>
                                 </div>
                                 <div class="rounded-lg text-center image-preview">
-                                    <img src="@if($customer->vatRegisterCertImage !== null) {{ url('image/thumbnail/'.$customer->vatRegisterCertImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif" id="vat_register_cert_image" />
+                                    <a id="vat_register_cert_image_pre" href="@if($customer->vatRegisterCertImage !== null) {{ url('image/thumbnail/'.$customer->vatRegisterCertImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif">
+                                        <img src="@if($customer->vatRegisterCertImage !== null) {{ url('image/thumbnail/'.$customer->vatRegisterCertImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif" id="vat_register_cert_image" />
+                                    </a>
                                 </div>
                             </div>
                         </div>

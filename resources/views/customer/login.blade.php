@@ -25,11 +25,11 @@
                     @endif
                     <div class="form-group">
                         <label>อีเมล์</label>
-                        <input name="email" type="email" class="form-control" placeholder="อีเมล์" required>
+                        <input name="email" type="email" class="form-control" placeholder="อีเมล์">
                     </div>
                     <div class="form-group">
                         <label>รหัสผ่าน</label>
-                        <input name="password" type="password" class="form-control" placeholder="รหัสผ่าน" required>
+                        <input name="password" type="password" class="form-control" placeholder="รหัสผ่าน">
                     </div>
                     {{-- <div class="form-group">
                         <input type="checkbox" value="lsRememberMe" id="rememberMe"> <label for="rememberMe">Remember me</label>

@@ -25,6 +25,7 @@ class CreateProductsTable extends Migration
             $table->string('unit')->nullable();
             $table->unsignedBigInteger('image_id');
             $table->string('status')->default('active');
+            // Todo add weight base on unit in Kg
 
             $table->foreign('image_id')
                 ->references('id')
