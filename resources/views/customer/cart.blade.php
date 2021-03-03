@@ -217,7 +217,7 @@
                 },
                 success: function(result) {
                     // console.log('success', result);
-                    window.location.replace("{{ url('customer/order') }}");
+                    window.location.href("{{ url('customer/order') }}");
                 },
                 error: function(result) {
                     // console.log('error', result);
