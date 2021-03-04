@@ -221,8 +221,15 @@
                 },
                 error: function(result) {
                     // console.log('error', result);
-                    // alert(result.responseJSON.errors)
-                    $("#errorModal .modal-dialog .modal-content #title").html("เกิดข้อผิดพลาด...");
+                    if (result.responseJSON.redirect) {
+                        $("#errorModal .modal-dialog .modal-content #title").html("ต้องการข้อมูลเพิ่มเติม...");
+                        $("#errorModal .modal-dialog .modal-content .modal-footer #closeButton").text("กรอกที่อยู่")
+                        $("#errorModal .modal-dialog .modal-content .modal-footer #closeButton").click(function(){
+                            window.location.href = result.responseJSON.redirect;
+                        });
+                    } else {
+                        $("#errorModal .modal-dialog .modal-content #title").html("เกิดข้อผิดพลาด...");
+                    }
                     $("#errorModal .modal-dialog .modal-content #message").html(result.responseJSON.errors);
                     $('#errorModal').modal('show');
 

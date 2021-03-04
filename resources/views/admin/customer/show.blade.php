@@ -42,17 +42,23 @@
     </div>
     <hr>
     <div id="aniimated-thumbnials" class="row">
+        @if ($customer->citizenCardImage != null)
         <a class="col-md-2" href="{{ url('image/show/'.$customer->citizenCardImage->slug) }}">
             <img src="{{ url('image/thumbnail/'.$customer->citizenCardImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $customer->first_name }}">
         </a>
+        @endif
 
+        @if ($customer->drugStoreApproveImage != null)
         <a class="col-md-2" href="{{ url('image/show/'.$customer->drugStoreApproveImage->slug) }}">
             <img src="{{ url('image/thumbnail/'.$customer->drugStoreApproveImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $customer->first_name }}">
         </a>
+        @endif
 
+        @if ($customer->medicalLicenseImage != null)
         <a class="col-md-2" href="{{ url('image/show/'.$customer->medicalLicenseImage->slug) }}">
             <img src="{{ url('image/thumbnail/'.$customer->medicalLicenseImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $customer->first_name }}">
         </a>
+        @endif
 
         @if ($customer->commercialRegisterImage != null)
         <a class="col-md-2" href="{{ url('image/show/'.$customer->commercialRegisterImage->slug) }}">

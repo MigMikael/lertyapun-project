@@ -131,8 +131,6 @@ class GuestController extends Controller
 
         $newCustomer = [];
         if($request->password != '') {
-            Log::info("not empty");
-            Log::info($request->password);
             $newCustomer['password'] = Hash::make($request->password);
         }
 
@@ -177,6 +175,8 @@ class GuestController extends Controller
             $image_record = $this->storeImage($file, "");
             $newCustomer['vat_register_cert_image'] = $image_record->id;
         }
+        $newRemark = "\n(แก้ไขแล้วเมื่อ " . (\Carbon\Carbon::parse(\Carbon\Carbon::now())->format('d/m/Y h:m:s')) . ")";
+        $newCustomer['remark'] = $customer->remark . $newRemark;
 
         $customer->update($newCustomer);
         return redirect('customer/pending/'.$customer->slug)
@@ -206,8 +206,6 @@ class GuestController extends Controller
     {
         $email = $request->get('email');
         $password = $request->get('password');
-        Log::info($email);
-        Log::info($password);
 
         if (Auth::guard('customer')->attempt(['email' => $email, 'password' => $password])) {
             return redirect('customer/products');

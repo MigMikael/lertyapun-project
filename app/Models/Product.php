@@ -20,7 +20,8 @@ class Product extends Model
         'quantity',
         'unit',
         'image_id',
-        'status'
+        'status',
+        'weight',
     ];
 
     public function promotions()
@@ -52,5 +53,10 @@ class Product extends Model
     public function products()
     {
         return $this->belongsToMany('App\Models\Order', 'order_details', 'product_id', 'order_id');
+    }
+
+    public function detailImages()
+    {
+        return $this->belongsToMany('App\Models\Image', 'image_products', 'product_id', 'image_id');
     }
 }

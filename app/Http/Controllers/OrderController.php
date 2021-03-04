@@ -197,6 +197,10 @@ class OrderController extends Controller
             return response()->json(['errors' => 'กรุณาลองใหม่อีกครั้ง'], 422);
         }
 
+        if ($customer->addresses->first() == null) {
+            return response()->json(['errors' => 'กรุณากรอกที่อยู่ก่อนทำการสั่งซื้อ', 'redirect' => url('customer/address')], 422);
+        }
+
         $product_slug = $request->get('product_slug');
         $product_quantity = $request->get('product_quantity');
 

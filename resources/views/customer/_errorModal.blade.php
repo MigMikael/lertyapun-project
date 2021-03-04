@@ -12,7 +12,7 @@
             </div>
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button id="closeButton" type="button" class="btn btn-danger" data-dismiss="modal" onclick="">Close</button>
             </div>
         </div>
     </div>
