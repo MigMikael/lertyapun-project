@@ -98,7 +98,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.product.create', ['status' => $this->productStatus]);
+        return view('admin.product.create', [
+            'status' => $this->productStatus,
+        ]);
     }
 
     /**

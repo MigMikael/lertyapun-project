@@ -9,6 +9,7 @@ class TestController extends Controller
 {
     public function index(Request $request)
     {
-        Log::info($request->all());
+        // Log::info($request->all());
+        return config('constants.unit');
     }
 }

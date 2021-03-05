@@ -41,6 +41,7 @@ Route::get('privacy_policy', [GuestController::class, 'privacyPolicy']);
 Route::get('image/show/{image:slug}', [ImageController::class, 'show']);
 Route::get('image/thumbnail/{image:slug}', [ImageController::class, 'showThumbnail']);
 
+Route::get('test', [TestController::class, 'index']);
 
 Route::group(['prefix' => 'customer', 'middleware' => 'customerAuth'], function () {
     Route::group(['middleware' => 'customerActiveAuth'], function () {
@@ -152,4 +153,3 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminAuth'], function () {
     Route::get('logout', [GuestController::class, 'adminLogout']);
 });
 
-Route::post('test', [TestController::class, 'index']);
