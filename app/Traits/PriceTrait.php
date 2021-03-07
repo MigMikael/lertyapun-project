@@ -8,22 +8,24 @@ trait PriceTrait
 {
     public function getDiscountPrice(Product $product)
     {
-        $discount_price = $product->price;
+        $basePrice = $product->units['0']['pricePerUnit'];
+        $discount_price = $basePrice;
+        // Log::info($discount_price);
         foreach($product->promotions as $promotion) {
             if ($promotion->name == 'ลด 5%') {
-                $discount_price = floatval($product->price) * 0.95;
+                $discount_price = floatval($basePrice) * 0.95;
             }
 
             if ($promotion->name == 'ลด 10%') {
-                $discount_price = floatval($product->price) * 0.9;
+                $discount_price = floatval($basePrice) * 0.9;
             }
 
             if ($promotion->name == 'ลด 20%') {
-                $discount_price = floatval($product->price) * 0.8;
+                $discount_price = floatval($basePrice) * 0.8;
             }
 
             if ($promotion->name == 'ลด 30%') {
-                $discount_price = floatval($product->price) * 0.7;
+                $discount_price = floatval($basePrice) * 0.7;
             }
             // Log::info($discount_price);
         }

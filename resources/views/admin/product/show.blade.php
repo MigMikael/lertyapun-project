@@ -14,8 +14,21 @@
         <div class="col-md-8 col-xs-6" style="border: 0px solid black;">
             <h1 class="mb-4">{{ $product->name }}</h1>
             <p>Description: {{ $product->description }}</p>
-            <p>Quantity: {{ $product->quantity }} {{ $product->unit }}</p>
-            <h4>฿{{ $product->price }}</h4>
+            <p>Quantity: {{ $product->quantity }} {{ $product->units['0']['unitName'] }}</p>
+
+            <h1 class="mb-4">Unit</h1>
+            @foreach($product->units as $productUnit)
+            <p>
+                {{ $productUnit->unitName }} |
+                {{ $productUnit->unitName }}ละ {{ $productUnit->pricePerUnit }} บาท |
+                หนึ่ง{{ $productUnit->unitName }}มี {{ $productUnit->quantityPerUnit }}
+                @if ($loop->first)
+                {{ $productUnit->unitName }}
+                @else
+                {{ $product->units['0']['unitName'] }}
+                @endif
+            </p>
+            @endforeach
         </div>
     </div>
     <br>

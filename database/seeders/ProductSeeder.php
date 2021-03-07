@@ -23,6 +23,31 @@ class ProductSeeder extends Seeder
             'mime' => 'image/png',
             'original_name' => 'img_4754.png',
         ]);
+        DB::table('products')->insert([
+            'slug' => (new StringGenerator())->generateSlug(),
+            'name' => 'SOLMAX KID 60ML(องุ่น)',
+            'description' => 'SOLMAX KID 60ML(องุ่น)',
+            'price' => 0,
+            'point' => 0,
+            'quantity' => 500,
+            'unit' => 'ขวด',
+            'image_id' => 4,
+            'status' => 'active',
+        ]);
+        DB::table('product_units')->insert([
+            'product_id' => 1,
+            'unitName' => 'ขวด',
+            'pricePerUnit' => 47,
+            'quantityPerUnit' => 1,
+        ]);
+        DB::table('product_units')->insert([
+            'product_id' => 1,
+            'unitName' => 'กล่อง',
+            'pricePerUnit' => 450,
+            'quantityPerUnit' => 10,
+        ]);
+
+
 
         DB::table('images')->insert([
             'slug' => (new StringGenerator())->generateSlug(),
@@ -30,29 +55,34 @@ class ProductSeeder extends Seeder
             'mime' => 'image/png',
             'original_name' => 'img_5338.png',
         ]);
-
-        DB::table('products')->insert([
-            'slug' => (new StringGenerator())->generateSlug(),
-            'name' => 'SOLMAX KID 60ML(องุ่น)',
-            'description' => 'SOLMAX KID 60ML(องุ่น)',
-            'price' => 47,
-            'point' => 0,
-            'quantity' => 500,
-            'unit' => 'ขวด',
-            'image_id' => 4,
-            'status' => 'active',
-        ]);
-
         DB::table('products')->insert([
             'slug' => (new StringGenerator())->generateSlug(),
             'name' => 'KRESSLOG ORALPASTE 5G.',
             'description' => 'KRESSLOG ORALPASTE 5G.',
-            'price' => 16.75,
+            'price' => 0,
             'point' => 0,
-            'quantity' => 69,
+            'quantity' => 480,
             'unit' => 'หลอด',
             'image_id' => 5,
             'status' => 'active',
+        ]);
+        DB::table('product_units')->insert([
+            'product_id' => 2,
+            'unitName' => 'หลอด',
+            'pricePerUnit' => 16.75,
+            'quantityPerUnit' => 1,
+        ]);
+        DB::table('product_units')->insert([
+            'product_id' => 2,
+            'unitName' => 'โหล',
+            'pricePerUnit' => 192,
+            'quantityPerUnit' => 12,
+        ]);
+        DB::table('product_units')->insert([
+            'product_id' => 2,
+            'unitName' => 'แพ็ค',
+            'pricePerUnit' => 760,
+            'quantityPerUnit' => 48,
         ]);
     }
 }

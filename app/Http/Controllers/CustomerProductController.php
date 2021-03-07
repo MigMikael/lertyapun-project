@@ -30,18 +30,20 @@ class CustomerProductController extends Controller
         $sumFinalPrice = 0;
         foreach($customer->cart as $product) {
             $discountPrice = $this->getDiscountPrice($product);
-            if ($discountPrice < $product->price) {
+            Log::info($discountPrice);
+            $basePrice = $product->units['0']['pricePerUnit'];
+            if ($discountPrice < $basePrice) {
                 $product['has_discount'] = true;
             } else {
                 $product['has_discount'] = false;
             }
             $product['discount_price'] = $discountPrice;
 
-            $totalPrice = $product->price * $product->pivot->quantity;
+            $totalPrice = $basePrice * $product->pivot->quantity;
             $product['total_price'] = $totalPrice;
             $sumTotalPrice += $totalPrice;
 
-            $discount = ($product->price - $discountPrice) * $product->pivot->quantity;
+            $discount = ($basePrice - $discountPrice) * $product->pivot->quantity;
             $sumTotalDiscount += $discount;
 
             $finalPrice = $totalPrice - $discount;

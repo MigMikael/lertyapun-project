@@ -24,10 +24,10 @@
                                                 <th>
                                                     สินค้า
                                                 </th>
-                                                <th width="160">
+                                                <th width="250">
                                                     ราคา
                                                 </th>
-                                                <th width="120">
+                                                <th width="100">
                                                     จำนวน
                                                 </th>
                                                 <th class="text-right">
@@ -57,7 +57,7 @@
                                                     </figure>
                                                 </td>
                                                 <td id="price" class="align-middle">
-                                                    @if($product->has_discount)<del>@endif
+                                                    {{-- @if($product->has_discount)<del>@endif
                                                     <h6>฿<span id="base_price">{{ number_format($product->price) }}</span> ต่อ{{ $product->unit }}</h6>
                                                     @if($product->has_discount)</del>@endif
 
@@ -65,7 +65,19 @@
                                                     <h6 style="color: red">฿<span id="discount_price" >{{ number_format($product->discount_price, 2) }}</span></h6>
                                                     @else
                                                     <h6 style="display: none">฿<span id="discount_price" >{{ number_format($product->discount_price, 2) }}</span></h6>
-                                                    @endif
+                                                    @endif --}}
+                                                    <select id="unit" name="unit" id="unit" class="form-control">
+                                                        @foreach($product->units as $productUnit)
+                                                        <option value="{{ $productUnit->unitName }};{{ $productUnit->pricePerUnit }}">
+                                                            {{ $productUnit->unitName }}
+                                                            @if(!$loop->first)
+                                                            - {{ $productUnit->quantityPerUnit }} {{ $product->units['0']['unitName'] }}
+                                                            @endif
+                                                            - <strong>{{ $productUnit->pricePerUnit }}฿</strong>
+                                                        </option>
+                                                        @endforeach
+                                                    </select>
+                                                    <h6 style="display: none">฿<span id="discount_price" >0</span></h6>
                                                 </td>
                                                 <td id="quantity" class="align-middle">
                                                     <input id="input_quantity"
@@ -73,9 +85,9 @@
                                                         value="{{ $product->pivot->quantity }}"
                                                         min="1"
                                                         max="{{ $product->quantity }}"
-                                                        style="width: 90px;">
+                                                        >
                                                     <input id="product_slug" type="hidden" value="{{ $product->slug }}">
-                                                    <p style="font-size: 12px">เหลือ {{ number_format($product->quantity) }} ชิ้น</p>
+                                                    {{-- <p style="font-size: 12px">เหลือ {{ number_format($product->quantity) }} ชิ้น</p> --}}
                                                 </td>
                                                 <td class="text-right align-middle">
                                                     {!! Form::model($product, [
@@ -149,14 +161,17 @@
             var discountPrices = [];
             var quantities = [];
 
-            $("#product-table #price #base_price").each(function() {
-                var value = $(this).text();
-                prices.push(value.replace(',', ''));
+            $("#product-table #price #unit").each(function() {
+                var value = $(this).val();
+                price = value.split(';')[1];
+                console.log("value", price)
+                prices.push(price.replace(',', ''));
             });
 
             $("#product-table #price #discount_price").each(function() {
                 var value = $(this).text();
-                discountPrices.push(value.replace(',', ''));
+                // discountPrices.push(value.replace(',', ''));
+                discountPrices.push("0");
             });
 
             $("#product-table #quantity #input_quantity").each(function() {
@@ -178,7 +193,8 @@
                 var productPrice = price * quantity;
                 totalPrice += productPrice;
 
-                var discount = (price - discountPrice) * quantity;
+                // var discount = (price - discountPrice) * quantity;
+                var discount = 0;
                 totalDiscount += discount;
             }
             var finalPrice = totalPrice - totalDiscount;
@@ -196,6 +212,7 @@
 
             var productSlug = [];
             var productQuantity = [];
+            var units = [];
 
             $("#product-table #quantity #input_quantity").each(function() {
                 var value = $(this).val();
@@ -207,17 +224,24 @@
                 productSlug.push(value.replace(',', ''));
             });
 
+            $("#product-table #price #unit").each(function() {
+                var value = $(this).val();
+                unit = value.split(';')[0];
+                units.push(unit);
+            });
+
             $.ajax({
                 type: "post",
                 url: "{{ url('customer/order') }}",
                 data: {
                     "_token": "{{ csrf_token() }}",
                     "product_slug": productSlug,
-                    "product_quantity": productQuantity
+                    "product_quantity": productQuantity,
+                    "unit": units,
                 },
                 success: function(result) {
                     // console.log('success', result);
-                    window.location.href("{{ url('customer/order') }}");
+                    window.location.href = "{{ url('customer/order') }}";
                 },
                 error: function(result) {
                     // console.log('error', result);

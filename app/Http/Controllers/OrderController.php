@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\Customer;
 use App\Models\CustomerProduct;
 use App\Models\OrderDetail;
+use App\Models\ProductUnit;
 use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
@@ -203,6 +204,7 @@ class OrderController extends Controller
 
         $product_slug = $request->get('product_slug');
         $product_quantity = $request->get('product_quantity');
+        $units = $request->get('unit');
 
         $sumTotalPrice = 0;
         $sumTotalDiscount = 0;
@@ -211,16 +213,21 @@ class OrderController extends Controller
         for ($i=0; $i < count($product_slug); $i++) {
             $slug = $product_slug[$i];
             $quantity = $product_quantity[$i];
+            $unit = $units[$i];
 
             $product = Product::where('slug', $slug)->first();
+            $productUnit = ProductUnit::where('product_id', $product->id)
+                ->where('unitName', $unit)->first();
+
             if($quantity > $product->quantity) {
                 return response()->json(['errors' => 'จำนวนสินค้าเกินกว่าในสต็อก กรุณารีเฟรชหน้าใหม่อีกครั้ง'], 422);
             }
-            $totalPrice = $product->price * $quantity;
+            $totalPrice = $productUnit->pricePerUnit * $quantity;
             $sumTotalPrice += $totalPrice;
 
-            $discountPrice = $this->getDiscountPrice($product);
-            $discount = ($product->price - $discountPrice) * $quantity;
+            // $discountPrice = $this->getDiscountPrice($product);
+            // $discount = ($product->price - $discountPrice) * $quantity;
+            $discount = 0;
             $sumTotalDiscount += $discount;
 
             $finalPrice = $totalPrice - $discount;

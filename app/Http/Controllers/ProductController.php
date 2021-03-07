@@ -10,6 +10,7 @@ use App\Models\Tag;
 use App\Models\CategoryProduct;
 use App\Models\ProductPromotion;
 use App\Models\ProductTag;
+use App\Models\ProductUnit;
 use App\Models\Promotion;
 use App\Traits\ImageTrait;
 use Illuminate\Support\Facades\Log;
@@ -111,8 +112,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $newProduct = $request->all();
-        $newProduct['slug'] = (new StringGenerator())->generateSlug();
+        $data = $request->all();
+
+        $newProduct = [
+            'slug' => (new StringGenerator())->generateSlug(),
+            'name' => $data['name'],
+            'description' => $data['description'],
+            'weight' => $data['weight'],
+            'status' => $data['status'],
+        ];
 
         if($request->hasFile('product_image')) {
             $file = $request->file('product_image');
@@ -120,7 +128,33 @@ class ProductController extends Controller
             $newProduct['image_id'] = $product_image->id;
         }
 
-        $newProduct = Product::create($newProduct);
+        $product = Product::create($newProduct);
+
+        if (count($data['unitName']) != count($data['pricePerUnit']) ||
+        count($data['unitName']) != count($data['quantity']) ||
+        count($data['unitName']) != count($data['quantityPerUnit'])) {
+            return redirect()
+                ->action([ProductController::class, 'index'])
+                ->with('fail', 'Create Fail');
+        }
+
+        $sumQuantity = 0;
+        for ($i=0; $i < count($data['unitName']); $i++) {
+            $newProductUnit = [
+                'product_id' => $product->id,
+                'unitName' => $data['unitName'][$i],
+                'pricePerUnit' => $data['pricePerUnit'][$i],
+                'quantityPerUnit' => $data['quantityPerUnit'][$i],
+            ];
+            ProductUnit::create($newProductUnit);
+
+            $quantity = $data['quantityPerUnit'][$i] * $data['quantity'][$i];
+            $sumQuantity += $quantity;
+        }
+        $sumQuantity -= 1;
+        $product->quantity = $sumQuantity;
+        $product->save();
+
         return redirect()
             ->action([ProductController::class, 'index'])
             ->with('success', 'Create Success');

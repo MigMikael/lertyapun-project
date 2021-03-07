@@ -59,4 +59,9 @@ class Product extends Model
     {
         return $this->belongsToMany('App\Models\Image', 'image_products', 'product_id', 'image_id');
     }
+
+    public function units()
+    {
+        return $this->hasMany(ProductUnit::class);
+    }
 }

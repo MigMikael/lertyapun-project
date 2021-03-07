@@ -27,7 +27,18 @@
                     </div>
                     <div class="product-price mt-3">
                         <label>ราคา</label>
-                        <h5 class="price">฿{{ $product->price }} {{ $product->unit }}</h5>
+                        {{-- <h5 class="price">฿{{ $product->price }} {{ $product->unit }}</h5> --}}
+                        <select id="unit" name="unit" id="unit" class="form-control" style="width: 300px;">
+                            @foreach($product->units as $productUnit)
+                            <option value="{{ $productUnit->unitName }}">
+                                {{ $productUnit->unitName }}
+                                @if(!$loop->first)
+                                - {{ $productUnit->quantityPerUnit }} {{ $product->units['0']['unitName'] }}
+                                @endif
+                                - <strong>{{ $productUnit->pricePerUnit }}฿</strong>
+                            </option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="mt-3">
                         @foreach ($product->promotions as $promotion)
@@ -37,7 +48,7 @@
                     <div class="product-amount mt-3">
                         <label>จำนวน</label>
                         <input id="quantity" type="number" class="form-control" value="1" style="width: 100px;">
-                        <p>เหลือสินค้า {{ $product->quantity }} ชิ้น</p>
+                        <p>เหลือสินค้า {{ $product->quantity }} {{ $product->units['0']['unitName'] }}</p>
                     </div>
                     <div class="buy mt-4">
                         <button class="btn btn-secondary mr-3" id="addToCart">
@@ -68,6 +79,7 @@
                 "product_id": "{{ $product->slug }}",
                 "customer_id": "{{ auth()->guard('customer')->user()->slug }}",
                 "quantity": $("#quantity").val(),
+                "unit": $("#unit").val(),
             },
             success: function(result) {
                 $('#productCount').text(result.productCount);
@@ -96,6 +108,7 @@
                 "product_id": "{{ $product->slug }}",
                 "customer_id": "{{ auth()->guard('customer')->user()->slug }}",
                 "quantity": $("#quantity").val(),
+                "unit": $("#unit").val(),
             },
             success: function(result) {
                 $('#productCount').text(result.productCount);

@@ -19,14 +19,14 @@ class CreateProductsTable extends Migration
             $table->string('slug')->unique();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->float('weight')->default(0);
+            $table->unsignedBigInteger('image_id');
+            $table->string('status')->default('active');
+
             $table->float('price')->default(0);
             $table->integer('point')->default(0);
             $table->integer('quantity')->default(0);
             $table->string('unit')->nullable();
-            $table->unsignedBigInteger('image_id');
-            $table->string('status')->default('active');
-            $table->float('weight')->default(0);
-
 
             $table->foreign('image_id')
                 ->references('id')

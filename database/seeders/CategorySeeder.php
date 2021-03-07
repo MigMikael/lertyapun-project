@@ -17,11 +17,6 @@ class CategorySeeder extends Seeder
     {
         DB::table('categories')->insert([
             'slug' => (new StringGenerator())->generateSlug(),
-            'name' => '',
-        ]);
-
-        DB::table('categories')->insert([
-            'slug' => (new StringGenerator())->generateSlug(),
             'name' => 'เวชภัณฑ์',
         ]);
 
