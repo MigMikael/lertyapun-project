@@ -68,7 +68,7 @@
                                                     @endif --}}
                                                     <select id="unit" name="unit" id="unit" class="form-control">
                                                         @foreach($product->units as $productUnit)
-                                                        <option value="{{ $productUnit->unitName }};{{ $productUnit->pricePerUnit }}">
+                                                        <option value="{{ $productUnit->unitName }};{{ $productUnit->pricePerUnit }}" @if($productUnit->unitName == $product->pivot->unitName)selected="selected"@endif>
                                                             {{ $productUnit->unitName }}
                                                             @if(!$loop->first)
                                                             - {{ $productUnit->quantityPerUnit }} {{ $product->units['0']['unitName'] }}

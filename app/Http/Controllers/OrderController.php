@@ -225,9 +225,8 @@ class OrderController extends Controller
             $totalPrice = $productUnit->pricePerUnit * $quantity;
             $sumTotalPrice += $totalPrice;
 
-            // $discountPrice = $this->getDiscountPrice($product);
-            // $discount = ($product->price - $discountPrice) * $quantity;
-            $discount = 0;
+            $discountPrice = $this->getDiscountPriceByUnit($product, $productUnit->pricePerUnit);
+            $discount = ($productUnit->pricePerUnit - $discountPrice) * $quantity;
             $sumTotalDiscount += $discount;
 
             $finalPrice = $totalPrice - $discount;

@@ -88,6 +88,13 @@ class CustomerProductController extends Controller
         if($quantity > $product->quantity) {
             return response()->json(['errors' => 'จำนวนสินค้าเกินกว่าในสต็อก กรุณารีเฟรชหน้าใหม่อีกครั้ง'], 422);
         }
+        $unitName = "";
+        if ($request->has('unit')) {
+            $unitName = $data['unit'];
+        } else {
+            $unitName = $product->units['0']['unitName'];
+        }
+
         $customerProductCheck = [
             'customer_id' => $customer->id,
             'product_id' => $product->id,
@@ -96,6 +103,7 @@ class CustomerProductController extends Controller
             'customer_id' => $customer->id,
             'product_id' => $product->id,
             'quantity' => $quantity,
+            'unitName' => $unitName
         ];
         CustomerProduct::firstOrCreate($customerProductCheck, $customerProduct);
 

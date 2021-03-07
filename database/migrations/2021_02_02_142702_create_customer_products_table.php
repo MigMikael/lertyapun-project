@@ -18,6 +18,7 @@ class CreateCustomerProductsTable extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('product_id');
+            $table->string('unitName');
             $table->integer('quantity');
 
             $table->foreign('customer_id')

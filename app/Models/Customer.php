@@ -71,7 +71,7 @@ class Customer extends Authenticatable
     public function cart()
     {
         return $this->belongsToMany('App\Models\Product', 'customer_products', 'customer_id', 'product_id')
-            ->withPivot('quantity');
+            ->withPivot('quantity', 'unitName');
     }
 
     public function orders()
