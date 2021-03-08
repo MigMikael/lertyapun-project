@@ -77,7 +77,7 @@
                                                         </option>
                                                         @endforeach
                                                     </select>
-                                                    <h6 style="display: none">฿<span id="discount_price" >0</span></h6>
+                                                    <h6 style="display: none">฿<span id="discount_price"></span></h6>
                                                 </td>
                                                 <td id="quantity" class="align-middle">
                                                     <input id="input_quantity"
@@ -156,53 +156,67 @@
 
 @section('script')
     <script>
-        $(document).on('input', '#quantity', function() {
+        function calculatePrice() {
             var prices = [];
             var discountPrices = [];
             var quantities = [];
 
+            // var matches = str.match(/(\d+)/);
+
             $("#product-table #price #unit").each(function() {
-                var value = $(this).val();
-                price = value.split(';')[1];
+                var value = $(this).val()
+                price = value.split(';')[1]
                 console.log("value", price)
-                prices.push(price.replace(',', ''));
-            });
+                prices.push(price.replace(',', ''))
+            })
 
             $("#product-table #price #discount_price").each(function() {
-                var value = $(this).text();
-                // discountPrices.push(value.replace(',', ''));
-                discountPrices.push("0");
-            });
+                var value = $(this).text()
+                // discountPrices.push(value.replace(',', ''))
+                discountPrices.push("0")
+            })
 
             $("#product-table #quantity #input_quantity").each(function() {
-                var value = $(this).val();
+                var value = $(this).val()
                 if (!value) {
-                    quantities.push("0");
+                    quantities.push("0")
                 } else {
-                    quantities.push(value.replace(',', ''));
+                    quantities.push(value.replace(',', ''))
                 }
             })
 
-            var totalPrice = 0;
-            var totalDiscount = 0;
+            var totalPrice = 0
+            var totalDiscount = 0
             for (let i = 0; i < prices.length; i++) {
-                var price = parseFloat(prices[i]);
-                var quantity = parseFloat(quantities[i]);
-                var discountPrice = parseFloat(discountPrices[i]);
+                var price = parseFloat(prices[i])
+                var quantity = parseFloat(quantities[i])
+                var discountPrice = parseFloat(discountPrices[i])
 
-                var productPrice = price * quantity;
-                totalPrice += productPrice;
+                var productPrice = price * quantity
+                totalPrice += productPrice
 
-                // var discount = (price - discountPrice) * quantity;
-                var discount = 0;
-                totalDiscount += discount;
+                // var discount = (price - discountPrice) * quantity
+                var discount = 0
+                totalDiscount += discount
             }
-            var finalPrice = totalPrice - totalDiscount;
+            var finalPrice = totalPrice - totalDiscount
 
-            $("#total_price").text(totalPrice.toLocaleString());
-            $("#total_discount").text(totalDiscount.toLocaleString());
-            $("#final_price").text(finalPrice.toLocaleString());
-        });
+            $("#total_price").text(totalPrice.toLocaleString())
+            $("#total_discount").text(totalDiscount.toLocaleString())
+            $("#final_price").text(finalPrice.toLocaleString())
+        }
+
+        $(document).ready(function(){
+            calculatePrice()
+        })
+
+        $(document).on('input', '#quantity', function() {
+            calculatePrice()
+        })
+
+        $(document).on('change', '#unit', function() {
+            calculatePrice()
+        })
     </script>
     <script>
         $("#order_submit").click(function(e) {
