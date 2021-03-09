@@ -54,6 +54,7 @@ class CustomerProductController extends Controller
         $customer['finalPrice'] = $sumFinalPrice;
 
         // return $customer;
+
         return view('customer.cart', [
             'customer' => $customer
         ]);

@@ -24,10 +24,10 @@
                                                 <th>
                                                     สินค้า
                                                 </th>
-                                                <th width="250">
+                                                <th width="240">
                                                     ราคา
                                                 </th>
-                                                <th width="100">
+                                                <th width="120">
                                                     จำนวน
                                                 </th>
                                                 <th class="text-right">
@@ -38,7 +38,7 @@
                                         <tbody>
                                             @foreach($customer->cart as $product)
                                             <tr id="product-table">
-                                                <td class="align-middle">
+                                                <td id="name" class="align-middle">
                                                     <figure class="itemside">
                                                         <div class="aside">
                                                             <img class="img-sm" src="{{ url('image/thumbnail/'.$product->image->slug) }}">
@@ -46,12 +46,16 @@
                                                         <figcaption class="info">
                                                             <a href="{{ url('customer/products/'.$product->slug) }}" class="title text-dark">
                                                                 <p>{{ $product->name }}</p>
-                                                                @foreach ($product->promotions->reverse() as $promotion)
-                                                                    <span class="badge badge-danger" style="font-weight: normal">{{ $promotion->name }}</span>
-                                                                    @if($loop->iteration == 1)
-                                                                        @break
-                                                                    @endif
-                                                                @endforeach
+                                                                @if(count($product->promotions) > 0)
+                                                                    @foreach ($product->promotions->reverse() as $promotion)
+                                                                        <span class="badge badge-danger" style="font-weight: normal" id="promotion_name">{{ $promotion->name }}</span>
+                                                                        @if($loop->iteration == 1)
+                                                                            @break
+                                                                        @endif
+                                                                    @endforeach
+                                                                @else
+                                                                    <span class="badge badge-danger" style="font-weight: normal; display: none" id="promotion_name">0</span>
+                                                                @endif
                                                             </a>
                                                         </figcaption>
                                                     </figure>
@@ -77,7 +81,7 @@
                                                         </option>
                                                         @endforeach
                                                     </select>
-                                                    <h6 style="display: none">฿<span id="discount_price"></span></h6>
+                                                    <p id="discount_price_container" style="color: red;font-size: 12px">ลดราคาเหลือ <span id="discount_price">0</span>฿</p>
                                                 </td>
                                                 <td id="quantity" class="align-middle">
                                                     <input id="input_quantity"
@@ -87,7 +91,7 @@
                                                         max="{{ $product->quantity }}"
                                                         >
                                                     <input id="product_slug" type="hidden" value="{{ $product->slug }}">
-                                                    {{-- <p style="font-size: 12px">เหลือ {{ number_format($product->quantity) }} ชิ้น</p> --}}
+                                                    <p style="font-size: 12px">เหลือ {{ number_format($product->quantity) }} {{ $product->units['0']['unitName'] }}</p>
                                                 </td>
                                                 <td class="text-right align-middle">
                                                     {!! Form::model($product, [
@@ -96,6 +100,7 @@
                                                     <button class="btn btn-danger" type="submit">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
+                                                    <p style="font-size: 12px; color: white">x</p>
                                                     {!! Form::close() !!}
                                                 </td>
                                             </tr>
@@ -156,24 +161,59 @@
 
 @section('script')
     <script>
-        function calculatePrice() {
-            var prices = [];
-            var discountPrices = [];
-            var quantities = [];
-
-            // var matches = str.match(/(\d+)/);
+        function calculateDiscount() {
+            var prices = []
+            var discounts = []
 
             $("#product-table #price #unit").each(function() {
                 var value = $(this).val()
                 price = value.split(';')[1]
-                console.log("value", price)
+                // console.log("value", price)
+                prices.push(price.replace(',', ''))
+            })
+
+            $("#product-table #name .itemside .info .title #promotion_name").each(function() {
+                var value = $(this).text()
+                var matches = value.match(/(\d+)/)[0]
+                // console.log("matches", matches)
+                discounts.push(matches)
+            })
+
+            // console.log(prices)
+            // console.log(discounts)
+
+            var count = 0
+            $("#product-table #price #discount_price").each(function() {
+                var price = parseFloat(prices[count])
+                var discountPercent = parseFloat(discounts[count])
+
+                var discountMultiply = 1 - (discountPercent / 100)
+                var discountPrice = price * discountMultiply
+                // console.log(discountPrice)
+
+                if (price == discountPrice) {
+                    $(this).parent().css('color', 'white')
+                }
+
+                $(this).text(discountPrice.toString())
+                count += 1
+            })
+        }
+
+        function calculatePrice() {
+            var prices = []
+            var discountPrices = []
+            var quantities = []
+
+            $("#product-table #price #unit").each(function() {
+                var value = $(this).val()
+                price = value.split(';')[1]
                 prices.push(price.replace(',', ''))
             })
 
             $("#product-table #price #discount_price").each(function() {
                 var value = $(this).text()
-                // discountPrices.push(value.replace(',', ''))
-                discountPrices.push("0")
+                discountPrices.push(value.replace(',', ''))
             })
 
             $("#product-table #quantity #input_quantity").each(function() {
@@ -195,8 +235,7 @@
                 var productPrice = price * quantity
                 totalPrice += productPrice
 
-                // var discount = (price - discountPrice) * quantity
-                var discount = 0
+                var discount = (price - discountPrice) * quantity
                 totalDiscount += discount
             }
             var finalPrice = totalPrice - totalDiscount
@@ -207,14 +246,17 @@
         }
 
         $(document).ready(function(){
+            calculateDiscount()
             calculatePrice()
         })
 
         $(document).on('input', '#quantity', function() {
+            calculateDiscount()
             calculatePrice()
         })
 
         $(document).on('change', '#unit', function() {
+            calculateDiscount()
             calculatePrice()
         })
     </script>
