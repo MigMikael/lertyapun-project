@@ -195,7 +195,7 @@
                     $(this).parent().css('color', 'white')
                 }
 
-                $(this).text(discountPrice.toString())
+                $(this).text(discountPrice.toFixed(2).toString())
                 count += 1
             })
         }
