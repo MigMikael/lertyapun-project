@@ -1,6 +1,7 @@
 @extends('template.admin')
 
 @section('content')
+<div style="margin: 30px">
     <div class="d-flex justify-content-between align-items-center">
         <h1 class="mt-4 mb-1">Category</h1>
         <div class="d-flex mt-4 mb-1" style="flex-direction: row">
@@ -30,7 +31,7 @@
     </div>
 
     <div class="table-responsive">
-        <table class="table table-bordered table-striped table-hover">
+        <table class="table table-hover">
             <thead>
             <tr>
                 <th scope="col">#</th>
@@ -67,5 +68,8 @@
             </tbody>
         </table>
     </div>
-    {{ $categories->render("pagination::bootstrap-4") }}
+    <div class="d-flex justify-content-center">
+        {{ $categories->render("pagination::bootstrap-4") }}
+    </div>
+</div>
 @endsection

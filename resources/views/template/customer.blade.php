@@ -6,7 +6,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>LERTYAPHAN</title>
+        <title>@yield('title', 'Lertyapun')</title>
 
         <link href="{{ URL::asset('css/bootstrap.min.css') }}" rel="stylesheet">
 

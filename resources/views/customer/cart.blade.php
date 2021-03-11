@@ -283,8 +283,12 @@
             $("#product-table #price #unit").each(function() {
                 var value = $(this).val();
                 unit = value.split(';')[0];
-                units.push(unit);
+                units.push(unit)
             });
+
+            // console.log("product_slug", productSlug)
+            // console.log("product_quantity", productQuantity)
+            // console.log("unit", units)
 
             $.ajax({
                 type: "post",

@@ -1,9 +1,10 @@
 @extends('template.admin')
 
 @section('content')
+<div style="margin: 30px">
     <div class="d-flex justify-content-between align-items-center">
         <h1 class="mt-4 mb-1">Customer</h1>
-        <div class="d-flex mt-4 mb-1" style="flex-direction: row">
+        <div class="d-flex mt-4 mb-1">
             @include('admin.customer._sort')
             <div>
                 <a class="btn btn-primary" href="{{ url("admin/customers/create") }}">
@@ -30,7 +31,7 @@
     </div>
 
     <div class="table-responsive">
-        <table class="table table-bordered table-striped table-hover">
+        <table class="table table-hover">
             <thead>
             <tr>
                 <th scope="col">#</th>
@@ -82,4 +83,5 @@
         </table>
     </div>
     {{ $customers->render("pagination::bootstrap-4") }}
+</div>
 @endsection

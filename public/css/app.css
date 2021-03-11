@@ -1,3 +1,11 @@
+body {
+    font-family: 'Prompt', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: #f8f9fa;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
 .section-heading {
     margin-bottom: 20px;
 }
@@ -109,6 +117,8 @@ figcaption {
     -moz-transition: margin .25s ease-out;
     -o-transition: margin .25s ease-out;
     transition: margin .25s ease-out;
+    background-color: #2e6bd3;
+    color: white;
 }
 
 #sidebar-wrapper .sidebar-heading {

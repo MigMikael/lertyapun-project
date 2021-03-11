@@ -11,22 +11,33 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
         <script src="{{ URL::asset('js/jquery/jquery.min.js') }}"></script>
         <script src="{{ URL::asset('js/bootstrap.bundle.min.js') }}"></script>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
         @yield('head')
     </head>
     <body>
-        <div class="d-flex" id="wrapper">
-            <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="d-flex" id="wrapper" style="background-color: #e5e5e5">
+            <div class="border-right" id="sidebar-wrapper">
                 <div class="sidebar-heading">
-                    <a href="{{ url('/') }}">Lertyapun</a>
+                    <a href="{{ url('/') }}" style="color: white;">
+                        <img src="{{ URL::asset('img/logo.jpg') }}" style="width: 35px; height: 35px;margin-right: 5px">เลิศยาภัณฑ์
+                    </a>
                 </div>
                 <div class="list-group list-group-flush">
-                    <a href="{{ url('admin/dashboard') }}" class="list-group-item list-group-item-action bg-light">Dashboard</a>
-                    <a href="{{ url('admin/products') }}" class="list-group-item list-group-item-action bg-light">Product</a>
-                    <a href="{{ url('admin/promotions') }}" class="list-group-item list-group-item-action bg-light">Promotion</a>
-                    <a href="{{ url('admin/categories') }}" class="list-group-item list-group-item-action bg-light">Category</a>
-                    {{-- <a href="{{ url('admin/tags') }}" class="list-group-item list-group-item-action bg-light">Tag</a> --}}
-                    <a href="{{ url('admin/customers') }}" class="list-group-item list-group-item-action bg-light">Customer</a>
-                    <a href="{{ url('admin/orders') }}" class="list-group-item list-group-item-action bg-light">Order</a>
+                    {{-- <a href="{{ url('admin/dashboard') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">Dashboard</a>
+                    <a href="{{ url('admin/products') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">Product</a>
+                    <a href="{{ url('admin/promotions') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">Promotion</a>
+                    <a href="{{ url('admin/categories') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">Category</a>
+                    <a href="{{ url('admin/customers') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">Customer</a>
+                    <a href="{{ url('admin/orders') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">Order</a> --}}
+
+                    <a href="{{ url('admin/dashboard') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">หน้าแรก</a>
+                    <a href="{{ url('admin/customers') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">จัดการบัญชีผู้ใช้งาน</a>
+                    <a href="{{ url('admin/categories') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">จัดการประเภทสินค้า</a>
+                    <a href="{{ url('admin/products') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">จัดการสินค้า</a>
+                    <a href="{{ url('admin/orders') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">จัดการคำสั่งซื้อที่รอการอนุมัติ</a>
+                    <a href="{{ url('admin/orders') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">จัดการประวัติคำสั่งซื้อ</a>
+                    <a href="{{ url('admin/promotions') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">จัดการโปรโมชัน</a>
                 </div>
             </div>
 
@@ -42,28 +53,28 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ url('admin/logout') }}">Logout</a>
-                            </div>
-                        </li>
+                            {{-- <li class="nav-item active">
+                                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Link</a>
+                            </li> --}}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle icon icon-sm rounded-circle border" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-user"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ url('admin/logout') }}">Logout</a>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </nav>
 
-                <div class="container-fluid">
+                <div class="container" style="background-color: white;">
                     @yield('content')
                 </div>
             </div>
