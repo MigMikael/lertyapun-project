@@ -28,10 +28,12 @@
                             <a class="nav-link" id="pills-waiting-payment-tab" data-toggle="pill" href="#waiting-payment" role="tab"
                                 aria-controls="pills-waiting-payment" aria-selected="false">รอการชำระเงิน</a>
                         </li>
+                        <!--
                         <li class="nav-item">
                             <a class="nav-link" id="pills-waiting-confirm-tab" data-toggle="pill" href="#waiting-confirm" role="tab"
                                 aria-controls="pills-waiting-confirm" aria-selected="false">รอการอนุมัติ</a>
                         </li>
+                        -->
                         <li class="nav-item">
                             <a class="nav-link" id="pills-success-tab" data-toggle="pill" href="#success" role="tab"
                                 aria-controls="pills-success" aria-selected="false">สำเร็จ</a>

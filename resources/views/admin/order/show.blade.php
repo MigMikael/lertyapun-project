@@ -1,20 +1,23 @@
 @extends('template.admin')
 
 @section('content')
-    <div class="d-flex justify-content-between align-items-center">
-        <h1 class="mt-4">Order Id {{ $order->id }}</h1>
+<div class="admin-container">
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="title">รหัสคำสั่งซื้อ {{ $order->id }}</h4>
+            <span>ชื่อลูกค้า {{ $order->customer->first_name }} {{ $order->customer->last_name }}</span>
+            <hr>
+        </div>
     </div>
-    <p>Customer {{ $order->customer->first_name }} {{ $order->customer->last_name }}</p>
-
     <div class="table-responsive">
         <table class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Price(฿)</th>
-                    <th scope="col">Quantity</th>
+                    <th scope="col">รูปสินค้า</th>
+                    <th scope="col">ชื่อสินค้า</th>
+                    <th scope="col">ราคา (บาท)</th>
+                    <th scope="col">จำนวน</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,23 +35,19 @@
             </tbody>
         </table>
     </div>
-    <br>
     <hr>
-    <br>
     <div class="row">
         <div class="col-md-12">
             {!! Form::open(['url' => 'admin/orders/'. $order->slug .'/status', 'method' => 'put']) !!}
                 <div class="form-group">
-                    {!! Form::label('Order Status') !!}
+                    {!! Form::label('สถานะคำสั่งซื้อ') !!}
                     {!! Form::select('status', $status, $order->status, ['class' => 'form-control']) !!}
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary btn-block" style="margin-top: 25px;">ยืนยัน</button>
             {!! Form::close() !!}
         </div>
     </div>
-    <br>
     <hr>
-    <br>
     <div class="row">
         <div class="col-md-12">
             @if($order->slip_image_id != null)
@@ -56,4 +55,5 @@
             @endif
         </div>
     </div>
+</div>
 @endsection

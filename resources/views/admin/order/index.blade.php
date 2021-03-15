@@ -4,7 +4,7 @@
 <div class="admin-container">
     <div class="row">
         <div class="col-md-6">
-            <h4 class="title">การจัดการประวัติคำสั่งซื้อ</h4>
+            <h4 class="title">การจัดการคำสั่งซื้อ</h4>
             <span>รายการคำสั่งซื้อทั้งหมด</span>
         </div>
         <div class="col-md-6">
