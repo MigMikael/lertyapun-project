@@ -36,9 +36,8 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
+                <th scope="col">Email</th>
                 <th scope="col">Phone</th>
-                <th scope="col">Status</th>
-                <th scope="col">Action</th>
                 <th scope="col">View</th>
             </tr>
             </thead>
@@ -47,8 +46,9 @@
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $customer->first_name }} {{ $customer->last_name }}</td>
+                        <td>{{ $customer->email }}</td>
                         <td>{{ $customer->phone }}</td>
-                        <td>
+                        {{-- <td>
                             @if($customer->status == 'active')
                             <span class="badge badge-success" style="width: 60px">Active</span>
                             @elseif($customer->status == 'pending')
@@ -58,24 +58,30 @@
                             @elseif($customer->status == 'inactive')
                             <span class="badge badge-danger" style="width: 60px">Inactive</span>
                             @endif
-                        </td>
+                        </td> --}}
                         <td>
-                            {!! Form::model($customer, [
-                                'method' => 'delete',
-                                'url' => 'admin/customers/'.$customer->slug,
-                                'class' => 'form-inline']) !!}
-                            <a class="btn btn-warning btn-sm" href="{{ url('admin/customers/'.$customer->slug.'/edit') }}">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <button class="btn btn-danger btn-sm" type="submit" style="margin-left: 5px">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                            {!! Form::close() !!}
-                        </td>
-                        <td>
-                            <a class="btn btn-primary btn-sm" href="{{ url('admin/customers/'.$customer->slug) }}">
-                                <i class="fas fa-external-link-square-alt"></i>
-                            </a>
+                            <div class="dropdown">
+                                <a data-toggle="dropdown">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <div class="dropdown-menu">
+                                    <a class="btn btn-primary btn-sm" href="{{ url('admin/customers/'.$customer->slug) }}">
+                                        View <i class="fas fa-external-link-square-alt"></i>
+                                    </a>
+                                    {!! Form::model($customer, [
+                                        'method' => 'delete',
+                                        'url' => 'admin/customers/'.$customer->slug,
+                                        'class' => 'form']) !!}
+                                    <a class="btn btn-warning btn-sm" href="{{ url('admin/customers/'.$customer->slug.'/edit') }}">
+                                        Edit <i class="fas fa-edit"></i>
+                                    </a>
+                                    <button class="btn btn-danger btn-sm" type="submit" style="margin-left: 5px">
+                                        Del <i class="fas fa-trash"></i>
+                                    </button>
+                                    {!! Form::close() !!}
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 @endforeach

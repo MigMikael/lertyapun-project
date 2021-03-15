@@ -78,7 +78,6 @@ Route::group(['prefix' => 'customer', 'middleware' => 'customerAuth'], function 
 
 
 Route::group(['prefix' => 'admin', 'middleware' => 'adminAuth'], function () {
-
     Route::get('', [AdminController::class, 'dashboard']);
     Route::get('dashboard',  [AdminController::class, 'dashboard']);
 
@@ -94,7 +93,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminAuth'], function () {
     Route::post('product/category', [ProductController::class, 'addCategory']);
     Route::post('product/tag', [ProductController::class, 'addTag']);
 
-
     Route::get('categories', [CategoryController::class, 'index']);
     Route::post('categories', [CategoryController::class, 'store']);
     Route::get('categories/create', [CategoryController::class, 'create']);
@@ -105,7 +103,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminAuth'], function () {
 
     Route::post('categories/{category_slug}/products', [CategoryProductController::class, 'store']);
     Route::delete('categories/{category_slug}/products/{product_slug}', [CategoryProductController::class, 'destroy']);
-
 
     Route::get('promotions', [PromotionController::class, 'index']);
     Route::post('promotions', [PromotionController::class, 'store']);
@@ -118,7 +115,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminAuth'], function () {
     Route::post('promotions/{promotion_slug}/products', [ProductPromotionController::class, 'store']);
     Route::delete('promotions/{promotion_slug}/products/{product_slug}', [ProductPromotionController::class, 'destroy']);
 
-
     Route::get('tags', [TagController::class, 'index']);
     Route::post('tags', [TagController::class, 'store']);
     Route::get('tags/create', [TagController::class, 'create']);
@@ -130,7 +126,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminAuth'], function () {
     Route::post('tags/{tag_slug}/products', [ProductTagController::class, 'store']);
     Route::delete('tags/{tag_slug}/products/{product_slug}', [ProductTagController::class, 'destroy']);
 
-
     Route::get('customers', [CustomerController::class, 'index']);
     Route::post('customers', [CustomerController::class, 'store']);
     Route::get('customers/create', [CustomerController::class, 'create']);
@@ -139,7 +134,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminAuth'], function () {
     Route::get('customers/{customer:slug}', [CustomerController::class, 'show']);
     Route::delete('customers/{customer:slug}', [CustomerController::class, 'destroy']);
     Route::put('customers/{customer:slug}/status', [CustomerController::class, 'updateStatus']);
-
 
     Route::get('orders', [OrderController::class, 'index']);
     Route::post('orders', [OrderController::class, 'store']);
