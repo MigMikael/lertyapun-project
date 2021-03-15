@@ -1,32 +1,39 @@
 @extends('template.admin')
 
 @section('content')
-<div style="margin: 30px">
-    <div class="d-flex justify-content-between align-items-center">
-        <h1 class="mt-4 mb-1">Product</h1>
-        <div class="d-flex mt-4 mb-1" style="flex-direction: row">
+<div class="admin-container">
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="title">การจัดการสินค้า</h4>
+            <span>รายการสินค้าทั้งหมด</span>
+        </div>
+        <div class="col-md-6">
+            <div class="pull-right">
+            @include('admin.product._sort')
+                <a class="btn btn-primary" href="{{ url("admin/products/create") }}">
+                    <i class="fas fa-plus"></i>
+                    เพิ่มสินค้า
+                </a>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <hr>
+        </div>
+        <div class="col-md-12">
             {!! Form::open(['method' => 'post', 'url' => 'admin/products/search']) !!}
-            <div class="input-group" style="height: 30px">
+            <div class="input-group">
                 @if ($search != '')
-                <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="Search">
+                <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหาตามชื่อสินค้า">
                 @else
-                <input name="query" type="text" class="form-control" placeholder="Search">
+                <input name="query" type="text" class="form-control" placeholder="ค้นหาตามชื่อสินค้า">
                 @endif
                 <div class="input-group-append">
-                    <button class="btn btn-info" type="submit">
+                    <button class="btn btn-light" type="submit">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
             </div>
             {!! Form::close() !!}
-            @include('admin.product._sort')
-            <div>
-                <a class="btn btn-primary" href="{{ url("admin/products/create") }}" style="height: 38px; width:80px">
-                    <i class="fas fa-plus"></i>
-                    Add
-                </a>
-            </div>
-        </div>
     </div>
 
     <div class="mb-2" style="width: 100%; height: 40px">
@@ -49,12 +56,12 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Image</th>
-                <th scope="col">Name</th>
-                <th scope="col">Price(฿)</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Action</th>
-                <th scope="col">View</th>
+                <th scope="col">รูปสินค้า</th>
+                <th scope="col">ชื่อสินค้า</th>
+                <th scope="col" class="text-right">ราคา (บาท)</th>
+                <th scope="col" class="text-right">จำนวน</th>
+                <th scope="col" class="text-center">การจัดการ</th>
+                <th scope="col" class="text-center">ดูข้อมูล</th>
             </tr>
             </thead>
             <tbody>
@@ -62,16 +69,16 @@
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>
-                            <img src="{{ url('image/thumbnail/'.$product->image->slug) }}" style="height: 30px; width: 30px" class="img-fluid" alt="{{ $product->name }}">
+                            <img src="{{ url('image/thumbnail/'.$product->image->slug) }}" style="height: 150px; width: 150px" class="img-fluid" alt="{{ $product->name }}">
                         </td>
                         <td>{{ $product->name }}</td>
-                        <td>{{ $product->price }}</td>
-                        <td>{{ $product->quantity }}</td>
-                        <td>
+                        <td class="text-right">{{ $product->price }}</td>
+                        <td class="text-right">{{ $product->quantity }}</td>
+                        <td class="text-center">
                             {!! Form::model($product, [
                                 'method' => 'delete',
                                 'url' => 'admin/products/'.$product->slug,
-                                'class' => 'form-inline']) !!}
+                                'class' => '']) !!}
                             <a class="btn btn-warning btn-sm" href="{{ url('admin/products/'.$product->slug.'/edit') }}">
                                 <i class="fas fa-edit"></i>
                             </a>
@@ -80,7 +87,7 @@
                             </button>
                             {!! Form::close() !!}
                         </td>
-                        <td>
+                        <td class="text-center">
                             <a class="btn btn-primary btn-sm" href="{{ url('admin/products/'.$product->slug) }}">
                                 <i class="fas fa-external-link-square-alt"></i>
                             </a>

@@ -31,7 +31,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>รหัสผ่านปัจจุบัน</label>
-                                {!! Form::password('current_password', ['placeholder' => 'Current Passowrd', 'class' => 'form-control'. ($errors->has('current_password') ? ' is-invalid' : null)]) !!}
+                                {!! Form::password('current_password', ['placeholder' => 'รหัสผ่านปัจจุบัน', 'class' => 'form-control'. ($errors->has('current_password') ? ' is-invalid' : null)]) !!}
                                 @error('current_password')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -40,7 +40,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>รหัสผ่านใหม่</label>
-                                {!! Form::password('new_password', ['placeholder' => 'New Passowrd', 'class' => 'form-control'. ($errors->has('new_password') ? ' is-invalid' : null)]) !!}
+                                {!! Form::password('new_password', ['placeholder' => 'รหัสผ่านใหม่', 'class' => 'form-control'. ($errors->has('new_password') ? ' is-invalid' : null)]) !!}
                                 @error('new_password')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -49,7 +49,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>ยืนยันรหัสผ่านใหม่</label>
-                                {!! Form::password('confirm_new_password', ['placeholder' => 'Confirm New Passowrd', 'class' => 'form-control'. ($errors->has('confirm_new_password') ? ' is-invalid' : null)]) !!}
+                                {!! Form::password('confirm_new_password', ['placeholder' => 'ยืนยันรหัสผ่านใหม่', 'class' => 'form-control'. ($errors->has('confirm_new_password') ? ' is-invalid' : null)]) !!}
                                 @error('confirm_new_password')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror

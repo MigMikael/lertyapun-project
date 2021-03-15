@@ -1,16 +1,19 @@
 @extends('template.admin')
 
 @section('content')
-<div style="margin: 30px">
-    <div class="d-flex justify-content-between align-items-center">
-        <h1 class="mt-4 mb-1">Order</h1>
-        <div class="d-flex mt-4 mb-1" style="flex-direction: row">
-            @include('admin.order._sort')
-            <div>
-                <a class="btn btn-primary" href="{{ url("admin/orders/create") }}">
-                    <i class="fas fa-plus"></i>
-                    Add
-                </a>
+<div class="admin-container">
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="title">การจัดการประวัติคำสั่งซื้อ</h4>
+            <span>รายการคำสั่งซื้อทั้งหมด</span>
+        </div>
+        <div class="col-md-6">
+            <div class="pull-right">
+                @include('admin.tag._sort')
+            <a class="btn btn-primary" href="{{ url("admin/orders/create") }}">
+                <i class="fas fa-plus"></i>
+                เพิ่มคำสั่งซื้อ
+            </a>
             </div>
         </div>
     </div>
@@ -35,11 +38,11 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Total (฿)</th>
-                <th scope="col">Status</th>
-                <th scope="col">Action</th>
-                <th scope="col">View</th>
+                <th scope="col">ชื่อลูกค้า</th>
+                <th scope="col" class="text-right">ยอดรวมทั้งหมด (บาท)</th>
+                <th scope="col" class="text-center">สถานะการชำระเงิน</th>
+                <th scope="col" class="text-center">การจัดการ</th>
+                <th scope="col" class="text-center">ดูข้อมูล</th>
             </tr>
             </thead>
             <tbody>
@@ -47,13 +50,13 @@
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $order->customer->first_name }}</td>
-                        <td>{{ $order->total_amount }}</td>
-                        <td>{{ $order->status }}</td>
-                        <td>
+                        <td class="text-right">{{ $order->total_amount }}</td>
+                        <td class="text-center">{{ $order->status }}</td>
+                        <td class="text-center">
                             {!! Form::model($order, [
                                 'method' => 'delete',
                                 'url' => 'admin/orders/'.$order->slug,
-                                'class' => 'form-inline']) !!}
+                                'class' => '']) !!}
                             <a class="btn btn-warning btn-sm" href="{{ url('admin/orders/'.$order->slug.'/edit') }}">
                                 <i class="fas fa-edit"></i>
                             </a>
@@ -62,7 +65,7 @@
                             </button>
                             {!! Form::close() !!}
                         </td>
-                        <td>
+                        <td class="text-center">
                             <a class="btn btn-primary btn-sm" href="{{ url('admin/orders/'.$order->slug) }}">
                                 <i class="fas fa-external-link-square-alt"></i>
                             </a>

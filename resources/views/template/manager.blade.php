@@ -4,8 +4,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>@yield('title', 'Lertyapun')</title>
+        <title>@yield('title', 'LERTYAPHAN')</title>
 
+        <link rel="shortcut icon" href="{{ URL::asset('favicon.ico') }}" type="image/x-icon">
+        <link rel="icon" href="{{ URL::asset('favicon.ico') }}" type="image/x-icon">
         <link href="{{ URL::asset('css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ URL::asset('css/app.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">

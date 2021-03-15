@@ -3,9 +3,9 @@
         <div class="row">
             <div class="col-md-6">
                 <h5 class="title">หมายเลขคำสั่งซื้อ {{ Str::limit($order->slug, 10, "") }}</h5>
-                <label>ยอดชำระเงินทั้งหมด</label>
-                <h5>฿{{ number_format($order->total_amount, 2) }}</h5>
-                <label> {{ \Carbon\Carbon::parse($order->order_date)->format('d/m/Y') }}</label>
+                <label>ยอดเงินที่ต้องชำระทั้งหมด</label>
+                <h5>฿ {{ number_format($order->total_amount, 2) }}</h5>
+                <label>คำสั่งซื้อวันที่ {{ \Carbon\Carbon::parse($order->order_date)->format('d/m/Y') }}</label>
             </div>
             <div class="col-md-6">
                 <div class="form-group">

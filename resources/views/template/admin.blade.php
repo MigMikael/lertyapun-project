@@ -4,8 +4,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>@yield('title', 'Lertyapun')</title>
+        <title>@yield('title', 'LERTYAPHAN')</title>
 
+        <link rel="shortcut icon" href="{{ URL::asset('favicon.ico') }}" type="image/x-icon">
+        <link rel="icon" href="{{ URL::asset('favicon.ico') }}" type="image/x-icon">
         <link href="{{ URL::asset('css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ URL::asset('css/app.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
@@ -35,46 +37,48 @@
                     <a href="{{ url('admin/customers') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">จัดการบัญชีผู้ใช้งาน</a>
                     <a href="{{ url('admin/categories') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">จัดการประเภทสินค้า</a>
                     <a href="{{ url('admin/products') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">จัดการสินค้า</a>
-                    <a href="{{ url('admin/orders') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">จัดการคำสั่งซื้อที่รอการอนุมัติ</a>
+                    {{-- <a href="{{ url('admin/orders') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">จัดการคำสั่งซื้อที่รอการอนุมัติ</a> --}}
                     <a href="{{ url('admin/orders') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">จัดการประวัติคำสั่งซื้อ</a>
                     <a href="{{ url('admin/promotions') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">จัดการโปรโมชัน</a>
                 </div>
             </div>
 
             <div id="page-content-wrapper">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                    <button class="btn btn-primary" id="menu-toggle">
-                        <i class="fa fa-indent"></i>
-                    </button>
-
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                            {{-- <li class="nav-item active">
-                                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Link</a>
-                            </li> --}}
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle icon icon-sm rounded-circle border" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-user"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ url('admin/logout') }}">Logout</a>
-                                </div>
-                            </li>
-                        </ul>
+                <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+                    <div class="container">
+                        <button class="btn btn-primary" id="menu-toggle">
+                            <i class="fa fa-indent"></i>
+                        </button>
+    
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+    
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                                {{-- <li class="nav-item active">
+                                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Link</a>
+                                </li> --}}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle icon icon-sm" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-user"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{{ url('admin/logout') }}">Logout</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </nav>
 
-                <div class="container" style="background-color: white;">
+                <div class="container">
                     @yield('content')
                 </div>
             </div>

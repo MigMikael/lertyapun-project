@@ -48,7 +48,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>อีเมล์</label>
+                                <label>อีเมล</label>
                                 {!! Form::text('email', null, ['placeholder' => 'อีเมล์', 'class' => 'form-control'. ($errors->has('email') ? ' is-invalid' : null)]) !!}
                                 @error('email')
                                     <div class="text-danger">{{ $message }}</div>
@@ -76,12 +76,12 @@
                                         <div class="profile-img" style="background-image: url('{{ url('image/thumbnail/'.$customer->avatarImage->slug) }}');"></div>
                                     </div>
                                     <div class="profile-btn">
-                                        {!! Form::label('avatar_image', 'รูปประจำตัว') !!} (ขั้นต่ำ 500 x 500px)
+                                        {!! Form::label('avatar_image', 'รูปประจำตัว') !!}
                                         {!! Form::file('avatar_image', ['accept'=>'image/*', 'class' => 'form-control', 'value' => 'เลือกรูป']) !!}
                                         {{-- <button class="btn btn-secondary btn-block">เลือกรูป</button> --}}
                                     </div>
                                     @else
-                                    {!! Form::label('avatar_image', 'รูปประจำตัว') !!} (ขั้นต่ำ 500 x 500px)
+                                    {!! Form::label('avatar_image', 'รูปประจำตัว') !!}
                                     {!! Form::file('avatar_image', ['accept'=>'image/*', 'class' => 'form-control', 'value' => 'เลือก']) !!}
                                     @endif
                                 </div>

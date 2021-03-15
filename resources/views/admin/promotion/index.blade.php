@@ -1,16 +1,19 @@
 @extends('template.admin')
 
 @section('content')
-<div style="margin: 30px">
-    <div class="d-flex justify-content-between align-items-center">
-        <h1 class="mt-4 mb-1">Promotion</h1>
-        <div class="d-flex mt-4 mb-1" style="flex-direction: row">
-            @include('admin.tag._sort')
-            <div>
-                <a class="btn btn-primary" href="{{ url("admin/promotions/create") }}">
-                    <i class="fas fa-plus"></i>
-                    Add
-                </a>
+<div class="admin-container">
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="title">การจัดการโปรโมชัน</h4>
+            <span>รายการโปรโมชันทั้งหมด</span>
+        </div>
+        <div class="col-md-6">
+            <div class="pull-right">
+                @include('admin.tag._sort')
+            <a class="btn btn-primary" href="{{ url("admin/promotions/create") }}">
+                <i class="fas fa-plus"></i>
+                เพิ่มโปรโมชัน
+            </a>
             </div>
         </div>
     </div>
@@ -35,9 +38,9 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Action</th>
-                <th scope="col">View</th>
+                <th scope="col">โปรโมชัน</th>
+                <th scope="col" class="text-center">การจัดการ</th>
+                <th scope="col" class="text-center">ดูข้อมูล</th>
               </tr>
             </thead>
             <tbody>
@@ -45,11 +48,11 @@
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $promotion->name }}</td>
-                        <td>
+                        <td class="text-center">
                             {!! Form::model($promotion, [
                                 'method' => 'delete',
                                 'url' => 'admin/promotions/'.$promotion->slug,
-                                'class' => 'form-inline']) !!}
+                                'class' => '']) !!}
                             <a class="btn btn-warning btn-sm" href="{{ url('admin/promotions/'.$promotion->slug.'/edit') }}">
                                 <i class="fas fa-edit"></i>
                             </a>
@@ -58,7 +61,7 @@
                             </button>
                             {!! Form::close() !!}
                         </td>
-                        <td>
+                        <td class="text-center">
                             <a class="btn btn-primary btn-sm" href="{{ url('admin/promotions/'.$promotion->slug) }}">
                                 <i class="fas fa-external-link-square-alt"></i>
                             </a>

@@ -1,15 +1,18 @@
 @extends('template.admin')
 
 @section('content')
-<div style="margin: 30px">
-    <div class="d-flex justify-content-between align-items-center">
-        <h1 class="mt-4 mb-1">Customer</h1>
-        <div class="d-flex mt-4 mb-1">
-            @include('admin.customer._sort')
-            <div>
+<div class="admin-container">
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="title">การจัดการบัญชีผู้ใช้งาน</h4>
+            <span>บัญชีผู้ใช้งานทั้งหมดในระบบ</span>
+        </div>
+        <div class="col-md-6">
+            <div class="pull-right">
+                @include('admin.customer._sort')
                 <a class="btn btn-primary" href="{{ url("admin/customers/create") }}">
                     <i class="fas fa-plus"></i>
-                    Add
+                    เพิ่มผู้ใช้งาน
                 </a>
             </div>
         </div>
@@ -35,11 +38,12 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Status</th>
-                <th scope="col">Action</th>
-                <th scope="col">View</th>
+                <th scope="col">ชื่อ-นามสกุล</th>
+                <th scope="col">อีเมล</th>
+                <th scope="col">เบอร์โทรศัพท์</th>
+                <th scope="col" class="text-center">สถานะ</th>
+                <th scope="col" class="text-center">การจัดการ</th>
+                <th scope="col" class="text-center">ดูข้อมูล</th>
             </tr>
             </thead>
             <tbody>
@@ -47,23 +51,24 @@
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $customer->first_name }} {{ $customer->last_name }}</td>
+                        <td>{{ $customer->email }}</td>
                         <td>{{ $customer->phone }}</td>
-                        <td>
+                        <td class="text-center">
                             @if($customer->status == 'active')
-                            <span class="badge badge-success" style="width: 60px">Active</span>
+                            <span class="badge badge-success">กำลังใช้งาน</span>
                             @elseif($customer->status == 'pending')
-                            <span class="badge badge-warning" style="width: 60px">Pending</span>
+                            <span class="badge badge-warning">รอดำเนินการ</span>
                             @elseif($customer->status == 'suspend')
-                            <span class="badge badge-secondary" style="width: 60px">Suspend</span>
+                            <span class="badge badge-secondary">ระงับการใช้งาน</span>
                             @elseif($customer->status == 'inactive')
-                            <span class="badge badge-danger" style="width: 60px">Inactive</span>
+                            <span class="badge badge-danger">ไม่ได้ใช้งานอยู่</span>
                             @endif
                         </td>
-                        <td>
+                        <td class="text-center">
                             {!! Form::model($customer, [
                                 'method' => 'delete',
                                 'url' => 'admin/customers/'.$customer->slug,
-                                'class' => 'form-inline']) !!}
+                                'class' => '']) !!}
                             <a class="btn btn-warning btn-sm" href="{{ url('admin/customers/'.$customer->slug.'/edit') }}">
                                 <i class="fas fa-edit"></i>
                             </a>
@@ -72,7 +77,7 @@
                             </button>
                             {!! Form::close() !!}
                         </td>
-                        <td>
+                        <td class="text-center">
                             <a class="btn btn-primary btn-sm" href="{{ url('admin/customers/'.$customer->slug) }}">
                                 <i class="fas fa-external-link-square-alt"></i>
                             </a>

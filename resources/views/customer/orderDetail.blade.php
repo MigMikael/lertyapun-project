@@ -62,7 +62,7 @@
                 <div class="col-md-6">
                     {!! Form::open(['url' => 'customer/order/'. $order->slug .'/slip', 'method' => 'put', 'files' => 'true']) !!}
                         <div class="form-group">
-                            {!! Form::label('slip_image', 'Slip Image') !!} (ขั้นต่ำ 500 x 500px)
+                            {!! Form::label('slip_image', 'Slip Image') !!}
                             {!! Form::file('slip_image', ['accept'=>'image/*', 'class' => 'form-control', 'value' => 'Choose a slip image']) !!}
                         </div>
                         <button type="submit" class="btn btn-primary">แนบสลิป</button>

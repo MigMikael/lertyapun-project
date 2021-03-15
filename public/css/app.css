@@ -130,8 +130,13 @@ figcaption {
     width: 15rem;
 }
 
+#sidebar-wrapper .list-group-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5) !important;
+}
+
 #page-content-wrapper {
     min-width: 100vw;
+    background: #f8f9fa !important;
 }
 
 #wrapper.toggled #sidebar-wrapper {
@@ -157,10 +162,80 @@ body.loading .overlay{
     display: block;
 }
 
-
 .register-wrapper {
     padding: 25px;
     background: #FFF;
+}
+
+.admin-container {
+    background: #FFF;
+    margin: 25px 15px;
+    padding: 25px
+}
+
+.btn-primary {
+    background: #2e6bd3;
+    border-color: #2e6bd3;
+}
+
+.btn-secoundary {
+    background: #FFF;
+    border-color: #2e6bd3;
+    color: #2e6bd3;
+}
+
+.btn-light {
+    background-color: #fff;
+    border-color: #e4e4e4;
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
+.title {
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.badge {
+    padding: 5px;
+}
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #2e6bd3;
+    border-color: #2e6bd3;
+  }
+  
+  .page-link {
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #2e6bd3;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+  }
+
+  .category-tag .tagify {
+      width: 300px;
+      height: 100%;
+      overflow: hidden;
+      margin-right: 15px;
+  }
+
+  .promotion-tag .tagify {
+    width: 300px;
+    height: 100%;
+    overflow: hidden;
+    margin-right: 15px;
 }
 
 @media (max-width: 767.98px) {
