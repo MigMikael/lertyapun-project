@@ -1,4 +1,4 @@
-<div class="dropdown" style="margin-right: 5px; margin-left: 5px">
+<div class="dropdown" style="display: inline">
     <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
         <i class="fas fa-sort-amount-down"></i>
         @if(request()->get('sort') == '')

@@ -49,13 +49,12 @@ a {
 header.masthead {
   position: relative;
   background-color: #007bff;
-  /*background: url("../img/bg-masthead.jpg") no-repeat center center;*/
   background-size: cover;
   padding-top: 8rem;
   padding-bottom: 8rem;
 }
 
-header.masthead .overlay {
+.masthead-overlay {
   position: absolute;
   background-color: #212529;
   height: 100%;
@@ -480,7 +479,7 @@ figure {
   padding-bottom: 7rem;
 }
 
-.call-to-action .overlay {
+.call-to-action-overlay {
   position: absolute;
   background-color: #212529;
   height: 100%;

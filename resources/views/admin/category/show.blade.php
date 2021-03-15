@@ -7,38 +7,52 @@
 @endsection
 
 @section('content')
-    <div class="d-flex justify-content-between align-items-center" tyle="margin-top: 15px">
-        <h1 class="mt-4">Category > {{ $category->name }}</h1>
-        <div>
-            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#editPanel">
-                <i class="fas fa-plus"></i>
-            </button>
+<div class="admin-container">
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="title">รายการสินค้าในประเภทสินค้า</h4>
+            <span>เจ้าหน้าที่สามารถดูข้อมูลสินค้าที่อยู่ในประเภทสินค้า</span>
+            <hr>
         </div>
     </div>
-    <div id="editPanel" class="collapse" style="padding-left: 15px">
-        <br>
-        <div class="row">
-            {!! Form::open(['url' => 'admin/categories/'. $category->slug .'/products', 'method' => 'post', 'class' => 'form-inline']) !!}
-                <input
-                    name="categoryProducts"
-                    placeholder="click..."
-                    class="form-control"
-                    style="!important width: 100%"
-                />
-                <button type="submit" class="btn btn-primary">Add To Category</button>
-            {!! Form::close() !!}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="pull-left form-group">
+                <h5 class="title">ประเภทสินค้า > {{ $category->name }}</h5>
+            </div>
         </div>
-        <br>
+        <div class="col-md-6">
+            <div class="pull-right form-group">
+                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#editPanel">
+                    <i class="fas fa-plus"></i> เพิ่มสินค้าในประเภทสินค้า
+                </button>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div id="editPanel" class="category-tag collapse form-group" style="padding-left: 15px;">
+                <div class="row">
+                    {!! Form::open(['url' => 'admin/categories/'. $category->slug .'/products', 'method' => 'post', 'class' => 'form-inline']) !!}
+                        <input
+                            name="categoryProducts"
+                            placeholder="คลิกเพื่อเลือกสินค้า..."
+                            class="form-control"
+                        />
+                        <button type="submit" class="btn btn-primary">เพิ่มสินค้า</button>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
     </div>
     <div class="table-responsive">
         <table class="table table-bordered table-hover">
             <thead>
               <tr>
                 <th>#</th>
-                <th>Name</th>
-                <th>Quantity</th>
-                <th>Actions</th>
-                <th>View</th>
+                <th>ชื่อสินค้า</th>
+                <th class="text-right">ราคา</th>
+                <th class="text-right">จำนวน</th>
+                <th class="text-center">การจัดการ</th>
+                <th class="text-center">ดูข้อมูล</th>
               </tr>
             </thead>
             <tbody>
@@ -46,19 +60,20 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $product->name }}</td>
-                    <td>{{ $product->quantity }} {{ $product->unit }}</td>
-                    <td>
+                    <td class="text-right">{{ $product->price }}</td>
+                    <td class="text-right">{{ $product->quantity }} {{ $product->unit }}</td>
+                    <td class="text-center">
                         {!! Form::model($product, [
                             'method' => 'delete',
                             'url' => 'admin/categories/' . $category->slug . '/' . 'products/' . $product->slug,
-                            'class' => 'form-inline']) !!}
+                            'class' => '']) !!}
                             <button class="btn btn-danger btn-sm" type="submit">
                                 <i class="fas fa-trash"></i>
                                 นำสินค้าออก
                             </button>
                         {!! Form::close() !!}
                     </td>
-                    <td>
+                    <td class="text-center">
                         <a class="btn btn-primary btn-sm" href="{{ url('admin/products/'.$product->slug) }}">
                             <i class="fas fa-external-link-square-alt"></i>
                         </a>
@@ -68,8 +83,7 @@
             </tbody>
         </table>
     </div>
-    <br>
-    <br>
+</div>
 @endsection
 
 @section('script')

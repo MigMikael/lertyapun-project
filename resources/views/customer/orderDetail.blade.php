@@ -19,12 +19,14 @@
                                     <th>
                                         สินค้า
                                     </th>
-                                    <th width="160">
-                                        ราคา
+                                    <th width="160" class="text-right">
+                                        ราคา (บาท)
                                     </th>
-                                    <th width="110">
+                                     <!--
+                                    <th width="110" class="text-right">
                                         จำนวน
                                     </th>
+                                    -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,12 +44,16 @@
                                             </figcaption>
                                         </figure>
                                     </td>
-                                    <td id="price" class="align-middle">
-                                        <h6>฿<span id="base_price">{{ number_format($product->pivot->order_price) }}</span> ต่อ{{ $product->unit }}</h6>
+                                    <td id="price" class="text-right">
+                                        <span id="base_price">{{ number_format($product->pivot->order_price) }}</span> 
+                                        <!--/ {{ $product->unit }}-->
                                     </td>
-                                    <td id="quantity" class="align-middle">
-                                        <h6>฿<span id="base_price">{{ number_format($product->pivot->sale_quantity) }}</span> {{ $product->unit }}</h6>
+                                    <!--
+                                    <td id="quantity" class="text-right">
+                                        <span id="base_price">{{ number_format($product->pivot->sale_quantity) }}</span> 
+                                        {{ $product->unit }}
                                     </td>
+                                    -->
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -62,7 +68,7 @@
                 <div class="col-md-6">
                     {!! Form::open(['url' => 'customer/order/'. $order->slug .'/slip', 'method' => 'put', 'files' => 'true']) !!}
                         <div class="form-group">
-                            {!! Form::label('slip_image', 'Slip Image') !!} (ขั้นต่ำ 500 x 500px)
+                            {!! Form::label('slip_image', 'Slip Image') !!}
                             {!! Form::file('slip_image', ['accept'=>'image/*', 'class' => 'form-control', 'value' => 'Choose a slip image']) !!}
                         </div>
                         <button type="submit" class="btn btn-primary">แนบสลิป</button>

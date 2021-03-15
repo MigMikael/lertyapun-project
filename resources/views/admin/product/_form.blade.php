@@ -1,11 +1,11 @@
 <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('name', 'Name') !!}
-    {!! Form::text('name', null, ['placeholder' => 'Name', 'class' => 'form-control']) !!}
+    {!! Form::label('name', 'ชื่อสินค้า') !!}
+    {!! Form::text('name', null, ['placeholder' => 'ชื่อสินค้า', 'class' => 'form-control']) !!}
 </div>
 
 <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('description', 'Description') !!}
-    <textarea name="description" class="form-control" placeholder="Product description">{{ $product->description ?? '' }}</textarea>
+    {!! Form::label('description', 'คำอธิบายสินค้า') !!}
+    <textarea name="description" class="form-control" placeholder="คำอธิบายสินค้า" rows="6">{{ $product->description ?? '' }}</textarea>
 </div>
 {{-- <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('price', 'Price') !!}
@@ -23,7 +23,7 @@
     {!! Form::label('unit', 'Unit') !!}
     {!! Form::text('unit', null, ['placeholder' => 'Unit', 'class' => 'form-control']) !!}
 </div> --}}
-{!! Form::label('unit', 'Unit (เล็กสุด)') !!}
+{!! Form::label('unit', 'หน่วย (เล็กที่สุด)') !!}
 <div class="input-group" style="margin-bottom: 3%">
     {!! Form::select('unitName[]', config('constants.productUnit'), null, ['class' => 'form-control base-unit-name']) !!}
 
@@ -36,7 +36,7 @@
     </div>
 
     <input type="hidden" class="form-control" placeholder="" name="quantityPerUnit[]" value="1">
-
+    
     <div class="input-group-prepend">
         <span class="input-group-text">มีสินค้า</span>
     </div>
@@ -57,12 +57,12 @@
 @include('admin.product._unitInput')
 
 <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('Status') !!}
+    {!! Form::label('Status', 'สถานะ') !!}
     {!! Form::select('status', $status, null, ['class' => 'form-control']) !!}
 </div>
 
 <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('product_image', 'Product Image') !!} (ขั้นต่ำ 500 x 500px)
+    {!! Form::label('product_image', 'ภาพสินค้า') !!} (ขั้นต่ำ 500 x 500px)
     {!! Form::file('product_image', ['accept'=>'image/*', 'class' => 'form-control', 'value' => 'Choose a product image']) !!}
 </div>
 

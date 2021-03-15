@@ -1,35 +1,34 @@
 <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('first_name', 'FirstName') !!}
-    {!! Form::text('first_name', null, ['placeholder' => 'First Name', 'class' => 'form-control']) !!}
+    {!! Form::label('first_name', 'ชื่อ') !!}
+    {!! Form::text('first_name', null, ['placeholder' => 'ชื่อ', 'class' => 'form-control']) !!}
 </div>
 <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('last_name', 'LastName') !!}
-    {!! Form::text('last_name', null, ['placeholder' => 'Last Name', 'class' => 'form-control']) !!}
+    {!! Form::label('last_name', 'นามสกุล') !!}
+    {!! Form::text('last_name', null, ['placeholder' => 'นามสกุล', 'class' => 'form-control']) !!}
 </div>
 <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('phone', 'Phone') !!}
-    {!! Form::text('phone', null, ['placeholder' => 'Phone Number', 'class' => 'form-control']) !!}
+    {!! Form::label('phone', 'เบอร์โทรศัพท์') !!}
+    {!! Form::text('phone', null, ['placeholder' => 'เบอร์โทรศัพท์', 'class' => 'form-control']) !!}
 </div>
 {{-- <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('point', 'Point') !!}
     {!! Form::text('point', null, ['placeholder' => 'Point', 'class' => 'form-control']) !!}
 </div> --}}
 <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('Status') !!}
+    {!! Form::label('Status', 'สถานะ') !!}
     {!! Form::select('status', $status, $customer->remark ?? null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('remark', 'Remark') !!}
-    <textarea name="remark" class="form-control" placeholder="Admin Remark">{{ $customer->remark ?? '' }}</textarea>
-</div>
-<hr>
-<div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('email', 'Email') !!}
-    {!! Form::text('email', null, ['placeholder' => 'Email', 'class' => 'form-control']) !!}
+    {!! Form::label('remark', 'หมายเหตุ') !!}
+    <textarea name="remark" class="form-control" placeholder="เหตุผลที่เจ้าหน้าที่ไม่อนุมัติการสมัครของผู้ใช้งาน">{{ $customer->remark ?? '' }}</textarea>
 </div>
 <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('password', 'Password') !!}
-    {!! Form::password('password', ['placeholder' => 'Passowrd', 'class' => 'form-control']) !!}
+    {!! Form::label('email', 'อีเมล') !!}
+    {!! Form::text('email', null, ['placeholder' => 'อีเมล', 'class' => 'form-control']) !!}
+</div>
+<div class="form-group" style="margin-bottom: 3%">
+    {!! Form::label('password', 'รหัสผ่าน') !!}
+    {!! Form::password('password', ['placeholder' => 'รหัสผ่าน', 'class' => 'form-control']) !!}
 </div>
 <div class="form-group">
     {!! Form::label('avatar_image', 'รูปประจำตัว') !!} (ขั้นต่ำ 500 x 500px)

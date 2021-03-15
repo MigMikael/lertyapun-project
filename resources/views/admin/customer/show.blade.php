@@ -6,38 +6,38 @@
 @endsection
 
 @section('content')
-    <div class="row" style="margin-top: 15px">
-        <div class="col-md-8 col-xs-6" style="border: 0px solid black;">
-            <h1 class="mt-4">
-                {{ $customer->first_name }} {{ $customer->last_name }}
-                @if($customer->status == 'active')
-                <span class="badge badge-success">Active</span>
-                @elseif($customer->status == 'pending')
-                <span class="badge badge-warning">Pending</span>
-                @elseif($customer->status == 'suspend')
-                <span class="badge badge-secondary">Suspend</span>
-                @elseif($customer->status == 'inactive')
-                <span class="badge badge-danger">Inactive</span>
-                @endif
-            </h1>
-            <p>Email: {{ $customer->email }}</p>
-            <p>Phone: {{ $customer->phone }}</p>
-        </div>
-    </div>
-    <hr>
+<div class="admin-container">
     <div class="row">
         <div class="col-md-12">
-            {!! Form::model($customer, ['url' => 'admin/customers/'.$customer->slug.'/status', 'method' => 'put', 'files' => 'true']) !!}
+            <h4 class="title">ข้อมูลบัญชีผู้ใช้งาน</h4>
+            <span>เจ้าหน้าที่สามารถดูข้อมูลผู้ใช้งานและสามารถอนุมัติผู้ใช้งานได้</span>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-xs-6" style="border: 0px solid black;">
             <div class="form-group">
-                {!! Form::label('Status') !!}
-                {!! Form::select('status', $status, $customer->status, ['class' => 'form-control']) !!}
+                <p>
+                    ชื่อ: {{ $customer->first_name }} {{ $customer->last_name }}
+                </p>
             </div>
             <div class="form-group">
-                {!! Form::label('remark', 'Admin Remark') !!}
-                <textarea name="remark" class="form-control" placeholder="Admin Remark">{{ $customer->remark ?? '' }}</textarea>
+                <p>อีเมล: {{ $customer->email }}</p>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-            {!! Form::close() !!}
+            <div class="form-group">
+                <p>เบอร์โทรศัพท์: {{ $customer->phone }}</p>
+            </div>
+            <div class="form-group">
+                <p>สถานะ: @if($customer->status == 'active')
+                    <span class="badge badge-success">กำลังใช้งาน</span>
+                @elseif($customer->status == 'pending')
+                    <span class="badge badge-warning">รอดำเนินการ</span>
+                @elseif($customer->status == 'suspend')
+                    <span class="badge badge-secondary">ระงับการใช้งาน</span>
+                @elseif($customer->status == 'inactive')
+                    <span class="badge badge-danger">ไม่ได้ใช้งานอยู่</span>
+                @endif</p>
+            </div>
         </div>
     </div>
     <hr>
@@ -78,6 +78,23 @@
         </a>
         @endif
     </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            {!! Form::model($customer, ['url' => 'admin/customers/'.$customer->slug.'/status', 'method' => 'put', 'files' => 'true']) !!}
+            <div class="form-group">
+                {!! Form::label('Status', 'สถานะ') !!}
+                {!! Form::select('status', $status, $customer->status, ['class' => 'form-control']) !!}
+            </div>
+            <div class="form-group">
+                {!! Form::label('remark', 'หมายเหตุ') !!}
+                <textarea name="remark" class="form-control" placeholder="เหตุผลที่เจ้าหน้าที่ไม่อนุมัติการสมัครของผู้ใช้งาน">{{ $customer->remark ?? '' }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">ยืนยัน</button>
+            {!! Form::close() !!}
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('script')

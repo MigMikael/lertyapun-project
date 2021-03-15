@@ -7,21 +7,28 @@
 @endsection
 
 @section('content')
-    <div class="row" style="margin-top: 15px">
+<div class="admin-container">
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="title">ข้อมูลสินค้า</h4>
+            <span>เจ้าหน้าที่สามารถดูข้อมูลสินค้า</span>
+            <hr>
+        </div>
+    </div>
+    <div class="row form-group">
         <div class="col-md-4 col-xs-6" style="border: 0px solid black;">
             <img src="{{ url('image/show/'.$product->image->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $product->name }}">
         </div>
         <div class="col-md-8 col-xs-6" style="border: 0px solid black;">
             <h1 class="mb-4">{{ $product->name }}</h1>
-            <p>Description: {{ $product->description }}</p>
-            <p>Quantity: {{ $product->quantity }} {{ $product->units['0']['unitName'] }}</p>
+            <p><h5>คำอธิบาย</h5> {{ $product->description }}</p>
+            <p><h5>จำนวน</h5> {{ $product->quantity }} {{ $product->units['0']['unitName'] }}</p>
 
-            <h1 class="mb-4">Unit</h1>
+            <h5>หน่วยสินค้า</h5>
             @foreach($product->units as $productUnit)
             <p>
-                {{ $productUnit->unitName }} |
-                {{ $productUnit->unitName }}ละ {{ $productUnit->pricePerUnit }} บาท |
-                หนึ่ง{{ $productUnit->unitName }}มี {{ $productUnit->quantityPerUnit }}
+                {{ $productUnit->unitName }} : {{ $productUnit->pricePerUnit }} บาท /
+                1 {{ $productUnit->unitName }} : {{ $productUnit->quantityPerUnit }}
                 @if ($loop->first)
                 {{ $productUnit->unitName }}
                 @else
@@ -31,31 +38,29 @@
             @endforeach
         </div>
     </div>
-    <br>
-    <br>
     <div class="row">
         <div class="col-md-6">
-            <h1>Promotion</h1>
+            <h4 class="title">โปรโมชัน</h4>
             {!! Form::open(['url' => 'admin/product/promotion', 'method' => 'post']) !!}
                 <input
                     name="promotionTag"
-                    placeholder="click..."
+                    placeholder="เลือกโปรโมชัน..."
                     value="@foreach($productPromotions as $productPro){!! $productPro !!},@endforeach"
                 />
                 <input name="product_id" type="hidden" value="{{ $product->slug }}" />
-                <button type="submit" class="btn btn-primary">Add Promotion</button>
+                <button type="submit" class="btn btn-primary" style="margin-top: 15px;">เพิ่มโปรโมชัน</button>
             {!! Form::close() !!}
         </div>
         <div class="col-md-6">
-            <h1>Category</h1>
+            <h4 class="title">ประเภทสินค้า</h4>
             {!! Form::open(['url' => 'admin/product/category', 'method' => 'post']) !!}
                 <input
                     name="categoryTag"
-                    placeholder="click..."
+                    placeholder="เลือกประเภทสินค้า..."
                     value="@foreach($productCategories as $productCat){!! $productCat !!},@endforeach"
                 />
                 <input name="product_id" type="hidden" value="{{ $product->slug }}" />
-                <button type="submit" class="btn btn-primary">Add Category</button>
+                <button type="submit" class="btn btn-primary" style="margin-top: 15px;">เพิ่มประเภทสินค้า</button>
             {!! Form::close() !!}
         </div>
         {{-- <div class="col-md-4">
@@ -71,8 +76,7 @@
             {!! Form::close() !!}
         </div> --}}
     </div>
-    <br>
-    <br>
+</div>
 @endsection
 
 @section('script')
