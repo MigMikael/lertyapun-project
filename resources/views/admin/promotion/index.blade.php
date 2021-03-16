@@ -40,31 +40,37 @@
                 <th scope="col">#</th>
                 <th scope="col">โปรโมชัน</th>
                 <th scope="col" class="text-center">การจัดการ</th>
-                <th scope="col" class="text-center">ดูข้อมูล</th>
               </tr>
             </thead>
             <tbody>
                 @foreach($promotions as $promotion)
                     <tr>
-                        <th scope="row">{{ $loop->iteration }}</th>
-                        <td>{{ $promotion->name }}</td>
-                        <td class="text-center">
-                            {!! Form::model($promotion, [
-                                'method' => 'delete',
-                                'url' => 'admin/promotions/'.$promotion->slug,
-                                'class' => '']) !!}
-                            <a class="btn btn-warning btn-sm" href="{{ url('admin/promotions/'.$promotion->slug.'/edit') }}">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <button class="btn btn-danger btn-sm" type="submit" style="margin-left: 5px">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                            {!! Form::close() !!}
+                        <th onclick="window.location='{{ url('admin/promotions/'.$promotion->slug) }}'">
+                            {{ $loop->iteration }}
+                        </th>
+                        <td onclick="window.location='{{ url('admin/promotions/'.$promotion->slug) }}'">
+                            {{ $promotion->name }}
                         </td>
                         <td class="text-center">
-                            <a class="btn btn-primary btn-sm" href="{{ url('admin/promotions/'.$promotion->slug) }}">
-                                <i class="fas fa-external-link-square-alt"></i>
-                            </a>
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-default btn-sm" data-toggle="dropdown" onclick="event.preventDefault()'">
+                                    <i class="fa fa-ellipsis-v"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="{{ url('admin/promotions/'.$promotion->slug.'/edit') }}">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+
+                                    {!! Form::model($promotion, [
+                                        'method' => 'delete',
+                                        'url' => 'admin/promotions/'.$promotion->slug,
+                                        'class' => '']) !!}
+                                    <button class="dropdown-item text-danger" type="submit">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </button>
+                                    {!! Form::close() !!}
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 @endforeach

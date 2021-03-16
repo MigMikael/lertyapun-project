@@ -12,7 +12,7 @@
                 @include('admin.category._sort')
                 <a class="btn btn-primary" href="{{ url("admin/categories/create") }}">
                     <i class="fas fa-plus"></i>
-                    เพิ่มประเภทสินค้า
+                    เพิ่มประเภท
                 </a>
             </div>
         </div>
@@ -40,31 +40,36 @@
                 <th scope="col">#</th>
                 <th scope="col">ชื่อประเภทสินค้า</th>
                 <th scope="col" class="text-center">การจัดการ</th>
-                <th scope="col" class="text-center">ดูข้อมูล</th>
             </tr>
             </thead>
             <tbody>
                 @foreach($categories as $category)
                     <tr>
-                        <th scope="row">{{ $loop->iteration }}</th>
-                        <td>{{ $category->name }}</td>
-                        <td class="text-center">
-                            {!! Form::model($category, [
-                                'method' => 'delete',
-                                'url' => 'admin/categories/'.$category->slug,
-                                'class' => '']) !!}
-                            <a class="btn btn-warning btn-sm" href="{{ url('admin/categories/'.$category->slug.'/edit') }}">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <button class="btn btn-danger btn-sm" type="submit" style="margin-left: 5px">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                            {!! Form::close() !!}
+                        <th onclick="window.location='{{ url('admin/categories/'.$category->slug) }}'">
+                            {{ $loop->iteration }}
+                        </th>
+                        <td onclick="window.location='{{ url('admin/categories/'.$category->slug) }}'">
+                            {{ $category->name }}
                         </td>
                         <td class="text-center">
-                            <a class="btn btn-primary btn-sm" href="{{ url('admin/categories/'.$category->slug) }}">
-                                <i class="fas fa-external-link-square-alt"></i>
-                            </a>
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-default btn-sm" data-toggle="dropdown" onclick="event.preventDefault()'">
+                                    <i class="fa fa-ellipsis-v"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="{{ url('admin/categories/'.$category->slug.'/edit') }}">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+                                    {!! Form::model($category, [
+                                        'method' => 'delete',
+                                        'url' => 'admin/categories/'.$category->slug,
+                                        'class' => '']) !!}
+                                    <button class="dropdown-item text-danger" type="submit">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </button>
+                                    {!! Form::close() !!}
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 @endforeach

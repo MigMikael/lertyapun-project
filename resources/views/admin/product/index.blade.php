@@ -61,36 +61,45 @@
                 <th scope="col" class="text-right">ราคา (บาท)</th>
                 <th scope="col" class="text-right">จำนวน</th>
                 <th scope="col" class="text-center">การจัดการ</th>
-                <th scope="col" class="text-center">ดูข้อมูล</th>
             </tr>
             </thead>
             <tbody>
                 @foreach($products as $product)
                     <tr>
-                        <th scope="row">{{ $loop->iteration }}</th>
-                        <td>
+                        <th onclick="window.location='{{ url('admin/products/'.$product->slug) }}'">
+                            {{ $loop->iteration }}
+                        </th>
+                        <td onclick="window.location='{{ url('admin/products/'.$product->slug) }}'">
                             <img src="{{ url('image/thumbnail/'.$product->image->slug) }}" style="height: 150px; width: 150px" class="img-fluid" alt="{{ $product->name }}">
                         </td>
-                        <td>{{ $product->name }}</td>
-                        <td class="text-right">{{ $product->price }}</td>
-                        <td class="text-right">{{ $product->quantity }}</td>
-                        <td class="text-center">
-                            {!! Form::model($product, [
-                                'method' => 'delete',
-                                'url' => 'admin/products/'.$product->slug,
-                                'class' => '']) !!}
-                            <a class="btn btn-warning btn-sm" href="{{ url('admin/products/'.$product->slug.'/edit') }}">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <button class="btn btn-danger btn-sm" type="submit" style="margin-left: 5px">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                            {!! Form::close() !!}
+                        <td onclick="window.location='{{ url('admin/products/'.$product->slug) }}'">
+                            {{ $product->name }}
+                        </td>
+                        <td class="text-right" onclick="window.location='{{ url('admin/products/'.$product->slug) }}'">
+                            {{ $product->price }}
+                        </td>
+                        <td class="text-right" onclick="window.location='{{ url('admin/products/'.$product->slug) }}'">
+                            {{ $product->quantity }}
                         </td>
                         <td class="text-center">
-                            <a class="btn btn-primary btn-sm" href="{{ url('admin/products/'.$product->slug) }}">
-                                <i class="fas fa-external-link-square-alt"></i>
-                            </a>
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-default btn-sm" data-toggle="dropdown" onclick="event.preventDefault()'">
+                                    <i class="fa fa-ellipsis-v"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="{{ url('admin/products/'.$product->slug.'/edit') }}">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+                                    {!! Form::model($product, [
+                                        'method' => 'delete',
+                                        'url' => 'admin/products/'.$product->slug,
+                                        'class' => '']) !!}
+                                    <button class="dropdown-item text-danger" type="submit">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </button>
+                                    {!! Form::close() !!}
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
