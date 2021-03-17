@@ -24,14 +24,40 @@ class PromotionController extends Controller
     {
         $page = 10;
         $sort = $request->query('sort');
+        $query = $request->query('query');
+
         if($sort == 'name_asc') {
-            $promotions = Promotion::orderBy('name', 'ASC')->paginate($page);
+            $promotions = Promotion::where("name", "like", "%".$query."%")
+                ->orderBy('name', 'ASC')
+                ->paginate($page);
         } else if($sort == 'name_desc') {
-            $promotions = Promotion::orderBy('name', 'DESC')->paginate($page);
+            $promotions = Promotion::where("name", "like", "%".$query."%")
+                ->orderBy('name', 'DESC')
+                ->paginate($page);
         } else {
-            $promotions = Promotion::orderBy('updated_at', 'DESC')->paginate($page);
+            $promotions = Promotion::where("name", "like", "%".$query."%")
+                ->orderBy('updated_at', 'DESC')
+                ->paginate($page);
         }
-        return view('admin.promotion.index', ['promotions' => $promotions]);
+        $promotions->appends(['query' => $query]);
+        $promotions->appends(['sort' => $sort]);
+        return view('admin.promotion.index', [
+            'promotions' => $promotions,
+            'search' => $query,
+        ]);
+    }
+
+    /**
+     * Search a listing of the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $request = $request->all();
+        $query = $request['query'];
+        return redirect("admin/promotions?query=".$query);
     }
 
     /**

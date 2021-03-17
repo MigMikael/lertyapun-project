@@ -19,14 +19,40 @@ class TagController extends Controller
     {
         $page = 10;
         $sort = $request->query('sort');
+        $query = $request->query('query');
+
         if($sort == 'name_asc') {
-            $tags = Tag::orderBy('name', 'ASC')->paginate($page);
+            $tags = Tag::where("name", "like", "%".$query."%")
+                ->orderBy('name', 'ASC')
+                ->paginate($page);
         } else if($sort == 'name_desc') {
-            $tags = Tag::orderBy('name', 'DESC')->paginate($page);
+            $tags = Tag::where("name", "like", "%".$query."%")
+                ->orderBy('name', 'DESC')
+                ->paginate($page);
         } else {
-            $tags = Tag::orderBy('updated_at', 'DESC')->paginate($page);
+            $tags = Tag::where("name", "like", "%".$query."%")
+                ->orderBy('updated_at', 'DESC')
+                ->paginate($page);
         }
-        return view('admin.tag.index', ['tags' => $tags]);
+        $tags->appends(['query' => $query]);
+        $tags->appends(['sort' => $sort]);
+        return view('admin.tag.index', [
+            'tags' => $tags,
+            'search' => $query,
+        ]);
+    }
+
+    /**
+     * Search a listing of the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $request = $request->all();
+        $query = $request['query'];
+        return redirect("admin/tags?query=".$query);
     }
 
     /**

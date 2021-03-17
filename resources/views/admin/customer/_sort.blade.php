@@ -4,14 +4,14 @@
         @if(request()->get('sort') == '')
         ล่าสุด
         @elseif(request()->get('sort') == 'name_asc')
-        ชื่อ A-Z
+        ชื่อ ก-ฮ
         @elseif(request()->get('sort') == 'name_desc')
-        ชื่อ Z-A
+        ชื่อ ฮ-ก
         @endif
     </button>
     <div class="dropdown-menu">
         <a class="dropdown-item" href="{{ url()->current() }}">ล่าสุด</a>
-        <a class="dropdown-item" href="{{ url()->current() . "?sort=name_asc" }}">ชื่อ A-Z</a>
-        <a class="dropdown-item" href="{{ url()->current() . "?sort=name_desc" }}">ชื่อ Z-A</a>
+        <a class="dropdown-item" href="{{ url()->current() . "?sort=name_asc" }}">ชื่อ ก-ฮ</a>
+        <a class="dropdown-item" href="{{ url()->current() . "?sort=name_desc" }}">ชื่อ ฮ-ก</a>
     </div>
 </div>

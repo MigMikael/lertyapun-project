@@ -33,17 +33,43 @@ class CustomerController extends Controller
     {
         $page = 10;
         $sort = $request->query('sort');
+        $query = $request->query('query');
+
         if($sort == 'name_asc') {
-            $customers = Customer::orderBy('first_name', 'ASC')
+            $customers = Customer::where("first_name", "like", "%".$query."%")
+                ->orWhere("last_name", "like", "%".$query."%")
+                ->orderBy("first_name", 'ASC')
                 ->paginate($page);
         } else if($sort == 'name_desc') {
-            $customers = Customer::orderBy('first_name', 'DESC')
+            $customers = Customer::where("first_name", "like", "%".$query."%")
+                ->orWhere("last_name", "like", "%".$query."%")
+                ->orderBy("first_name", 'DESC')
                 ->paginate($page);
         } else {
-            $customers = Customer::orderBy('updated_at', 'DESC')
+            $customers = Customer::where("first_name", "like", "%".$query."%")
+                ->orWhere("last_name", "like", "%".$query."%")
+                ->orderBy("updated_at", 'DESC')
                 ->paginate($page);
         }
-        return view('admin.customer.index', ['customers' => $customers]);
+        $customers->appends(['query' => $query]);
+        $customers->appends(['sort' => $sort]);
+        return view('admin.customer.index', [
+            'customers' => $customers,
+            'search' => $query,
+        ]);
+    }
+
+    /**
+     * Search a listing of the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $request = $request->all();
+        $query = $request['query'];
+        return redirect("admin/customers?query=".$query);
     }
 
     /**

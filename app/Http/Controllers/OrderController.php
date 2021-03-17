@@ -38,21 +38,46 @@ class OrderController extends Controller
     {
         $page = 10;
         $sort = $request->query('sort');
+        $query = $request->query('query');
+
         if($sort == 'name_asc') {
             $orders = Order::join('customers', 'orders.customer_id', '=', 'customers.id')
+                ->where("first_name", "like", "%".$query."%")
+                ->orWhere("last_name", "like", "%".$query."%")
                 ->orderBy('first_name', 'ASC')
                 ->paginate($page);
         } else if($sort == 'name_desc') {
             $orders = Order::join('customers', 'orders.customer_id', '=', 'customers.id')
+                ->where("first_name", "like", "%".$query."%")
+                ->orWhere("last_name", "like", "%".$query."%")
                 ->orderBy('first_name', 'DESC')
                 ->paginate($page);
         } else {
-            $orders = Order::orderBy('updated_at', 'DESC')
-                ->with('customer')
+            $orders = Order::join('customers', 'orders.customer_id', '=', 'customers.id')
+                ->where("first_name", "like", "%".$query."%")
+                ->orWhere("last_name", "like", "%".$query."%")
+                ->orderBy('updated_at', 'DESC')
                 ->paginate($page);
         }
-        // return $orders;
-        return view('admin.order.index', ['orders' => $orders]);
+        $orders->appends(['query' => $query]);
+        $orders->appends(['sort' => $sort]);
+        return view('admin.order.index', [
+            'orders' => $orders,
+            'search' => $query,
+        ]);
+    }
+
+    /**
+     * Search a listing of the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $request = $request->all();
+        $query = $request['query'];
+        return redirect("admin/orders?query=".$query);
     }
 
     /**

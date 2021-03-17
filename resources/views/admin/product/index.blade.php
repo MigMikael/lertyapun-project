@@ -34,6 +34,7 @@
                 </div>
             </div>
             {!! Form::close() !!}
+        </div>
     </div>
 
     <div class="mb-2" style="width: 100%; height: 40px">

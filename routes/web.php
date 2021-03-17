@@ -96,6 +96,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminAuth'], function () {
     Route::get('categories', [CategoryController::class, 'index']);
     Route::post('categories', [CategoryController::class, 'store']);
     Route::get('categories/create', [CategoryController::class, 'create']);
+    Route::post('categories/search', [CategoryController::class, 'search']);
     Route::get('categories/{category:slug}/edit', [CategoryController::class, 'edit']);
     Route::put('categories/{category:slug}', [CategoryController::class, 'update']);
     Route::get('categories/{category:slug}', [CategoryController::class, 'show']);
@@ -107,6 +108,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminAuth'], function () {
     Route::get('promotions', [PromotionController::class, 'index']);
     Route::post('promotions', [PromotionController::class, 'store']);
     Route::get('promotions/create', [PromotionController::class, 'create']);
+    Route::post('promotions/search', [PromotionController::class, 'search']);
     Route::get('promotions/{promotion:slug}/edit', [PromotionController::class, 'edit']);
     Route::put('promotions/{promotion:slug}', [PromotionController::class, 'update']);
     Route::get('promotions/{promotion:slug}', [PromotionController::class, 'show']);
@@ -118,6 +120,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminAuth'], function () {
     Route::get('tags', [TagController::class, 'index']);
     Route::post('tags', [TagController::class, 'store']);
     Route::get('tags/create', [TagController::class, 'create']);
+    Route::post('tags/search', [TagController::class, 'search']);
     Route::get('tags/{tag:slug}/edit', [TagController::class, 'edit']);
     Route::put('tags/{tag:slug}', [TagController::class, 'update']);
     Route::get('tags/{tag:slug}', [TagController::class, 'show']);
@@ -129,6 +132,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminAuth'], function () {
     Route::get('customers', [CustomerController::class, 'index']);
     Route::post('customers', [CustomerController::class, 'store']);
     Route::get('customers/create', [CustomerController::class, 'create']);
+    Route::post('customers/search', [CustomerController::class, 'search']);
     Route::get('customers/{customer:slug}/edit', [CustomerController::class, 'edit']);
     Route::put('customers/{customer:slug}', [CustomerController::class, 'update']);
     Route::get('customers/{customer:slug}', [CustomerController::class, 'show']);
@@ -138,6 +142,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminAuth'], function () {
     Route::get('orders', [OrderController::class, 'index']);
     Route::post('orders', [OrderController::class, 'store']);
     Route::get('orders/create', [OrderController::class, 'create']);
+    Route::post('orders/search', [OrderController::class, 'search']);
     Route::get('orders/{order:slug}/edit', [OrderController::class, 'edit']);
     Route::put('orders/{order:slug}', [OrderController::class, 'update']);
     Route::get('orders/{order:slug}', [OrderController::class, 'show']);

@@ -19,14 +19,40 @@ class CategoryController extends Controller
     {
         $page = 10;
         $sort = $request->query('sort');
+        $query = $request->query('query');
+
         if($sort == 'name_asc') {
-            $categories = Category::orderBy('name', 'ASC')->paginate($page);
+            $categories = Category::where("name", "like", "%".$query."%")
+                ->orderBy('name', 'ASC')
+                ->paginate($page);
         } else if($sort == 'name_desc') {
-            $categories = Category::orderBy('name', 'DESC')->paginate($page);
+            $categories = Category::where("name", "like", "%".$query."%")
+                ->orderBy('name', 'DESC')
+                ->paginate($page);
         } else {
-            $categories = Category::orderBy('updated_at', 'DESC')->paginate($page);
+            $categories = Category::where("name", "like", "%".$query."%")
+                ->orderBy('updated_at', 'DESC')
+                ->paginate($page);
         }
-        return view('admin.category.index', ['categories' => $categories]);
+        $categories->appends(['query' => $query]);
+        $categories->appends(['sort' => $sort]);
+        return view('admin.category.index', [
+            'categories' => $categories,
+            'search' => $query,
+        ]);
+    }
+
+    /**
+     * Search a listing of the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $request = $request->all();
+        $query = $request['query'];
+        return redirect("admin/categories?query=".$query);
     }
 
     /**

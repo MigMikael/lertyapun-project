@@ -16,6 +16,25 @@
                 </a>
             </div>
         </div>
+        <div class="col-md-12">
+            <hr>
+        </div>
+        <div class="col-md-12">
+            {!! Form::open(['method' => 'post', 'url' => 'admin/customers/search']) !!}
+            <div class="input-group">
+                @if ($search != '')
+                <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหาตามชื่อผู้ใช้งาน">
+                @else
+                <input name="query" type="text" class="form-control" placeholder="ค้นหาตามชื่อผู้ใช้งาน">
+                @endif
+                <div class="input-group-append">
+                    <button class="btn btn-light" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            {!! Form::close() !!}
+        </div>
     </div>
 
     <div class="mb-2" style="width: 100%; height: 40px">
