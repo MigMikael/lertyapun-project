@@ -34,6 +34,7 @@ trait PriceTrait
 
     public function getDiscountPriceByUnit(Product $product, $pricePerUnit)
     {
+        $discount_price = $pricePerUnit;
         foreach($product->promotions as $promotion) {
             if ($promotion->name == 'ลด 5%') {
                 $discount_price = floatval($pricePerUnit) * 0.95;

@@ -4,7 +4,7 @@
 <div class="admin-container">
     <div class="row">
         <div class="col-md-12">
-            <h4 class="title">รหัสคำสั่งซื้อ {{ $order->id }}</h4>
+            <h4 class="title">รหัสคำสั่งซื้อ {{ $order->slug }}</h4>
             <span>ชื่อลูกค้า {{ $order->customer->first_name }} {{ $order->customer->last_name }}</span>
             <hr>
         </div>

@@ -19,15 +19,12 @@ class OrderController extends Controller
     use PriceTrait;
     use ImageTrait;
     public $orderStatus = [
-        'pending' => 'Pending',
-        'success' => 'Success',
-        'cancle' => 'Cancle',
+        'pending' => 'Pending', // รอแอดมินอนุมัติ
+        'payment' => 'Wait Payment', // รอลูกค้ายืนยันการจ่ายเงิน
+        'success' => 'Success', // สำเร็จ
+        'cancle' => 'Cancle', // ยกเลิก
     ];
 
-    public $paymentStatus = [
-        'pending' => 'Pending',
-        'success' => 'Success',
-    ];
     /**
      * Display a listing of the resource.
      *
@@ -42,21 +39,27 @@ class OrderController extends Controller
 
         if($sort == 'name_asc') {
             $orders = Order::join('customers', 'orders.customer_id', '=', 'customers.id')
+                ->select('orders.*','orders.slug as order_slug','customers.slug as customer_slug', 'orders.status as order_status', 'customers.*')
                 ->where("first_name", "like", "%".$query."%")
                 ->orWhere("last_name", "like", "%".$query."%")
+                ->orWhere("orders.slug", "like", "%".$query."%")
                 ->orderBy('first_name', 'ASC')
                 ->paginate($page);
         } else if($sort == 'name_desc') {
             $orders = Order::join('customers', 'orders.customer_id', '=', 'customers.id')
+                ->select('orders.*','orders.slug as order_slug','customers.slug as customer_slug', 'orders.status as order_status', 'customers.*')
                 ->where("first_name", "like", "%".$query."%")
                 ->orWhere("last_name", "like", "%".$query."%")
+                ->orWhere("orders.slug", "like", "%".$query."%")
                 ->orderBy('first_name', 'DESC')
                 ->paginate($page);
         } else {
             $orders = Order::join('customers', 'orders.customer_id', '=', 'customers.id')
+                ->select('orders.*','orders.slug as order_slug','customers.slug as customer_slug', 'orders.status as order_status', 'customers.*')
                 ->where("first_name", "like", "%".$query."%")
                 ->orWhere("last_name", "like", "%".$query."%")
-                ->orderBy('updated_at', 'DESC')
+                ->orWhere("orders.slug", "like", "%".$query."%")
+                ->orderBy('orders.updated_at', 'DESC')
                 ->paginate($page);
         }
         $orders->appends(['query' => $query]);
@@ -65,6 +68,7 @@ class OrderController extends Controller
             'orders' => $orders,
             'search' => $query,
         ]);
+        // return $orders;
     }
 
     /**
@@ -88,7 +92,6 @@ class OrderController extends Controller
     public function create()
     {
         return view('admin.order.create', [
-            'paymentStatus' => $this->paymentStatus,
             'orderStatus' => $this->orderStatus,
         ]);
     }
@@ -102,7 +105,9 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $newOrder = $request->all();
-        $newOrder['slug'] = (new StringGenerator())->generateSlug();
+
+        $stringGenerator = new StringGenerator('0123456789');
+        $newOrder['slug'] = $stringGenerator->generate(12);
         $newOrder['payment_method'] = 'direct transfer';
 
         if($request->hasFile('slip_image')) {
@@ -144,7 +149,6 @@ class OrderController extends Controller
     {
         return view('admin.order.edit', [
             'order' => $order,
-            'paymentStatus' => $this->paymentStatus,
             'orderStatus' => $this->orderStatus,
         ]);
     }
@@ -266,13 +270,13 @@ class OrderController extends Controller
             array_push($newOrderDetails, $newOrderDetail);
         }
 
+        $stringGenerator = new StringGenerator('0123456789');
         $newOrder = [
-            'slug' => (new StringGenerator())->generateSlug(),
+            'slug' => $stringGenerator->generate(12),
             'total_amount' => $sumFinalPrice,
             'status' => 'pending',
             'order_date' => \Carbon\Carbon::now(),
             'payment_method' => 'direct transfer',
-            'payment_status' => 'pending',
             'customer_id' => $customer->id,
         ];
 
@@ -320,7 +324,6 @@ class OrderController extends Controller
             $file = $request->file('slip_image');
             $image_record = $this->storeImage($file, "");
             $order['slip_image_id'] = $image_record->id;
-            $order['payment_status'] = 'success';
             $order['payment_date'] = \Carbon\Carbon::now();
             $order->save();
         }
@@ -329,7 +332,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Update resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response

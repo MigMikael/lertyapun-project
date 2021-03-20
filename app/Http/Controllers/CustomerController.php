@@ -18,10 +18,17 @@ class CustomerController extends Controller
     use ValidateTrait;
     use ImageTrait;
     public $customerStatus = [
-        'active' => 'Active',
-        'pending' => 'Pending',
-        'suspend' => 'Suspend',
-        'inactive' => 'Inactive',
+        'active' => 'Active',           // normal user
+        'pending' => 'Pending',         // unapprove user
+        'suspend' => 'Suspend',         // banded user
+        'inactive' => 'Inactive',       // reset password user
+    ];
+
+    public $customerStatusTH = [
+        'active' => 'กำลังใช้งาน',           // normal user
+        'pending' => 'รอดำเนินการ',         // unapprove user
+        'suspend' => 'ระงับการใช้งาน',         // banded user
+        'inactive' => 'รีเซ็ตรหัสผ่าน',       // reset password user
     ];
     /**
      * Display a listing of the resource.
@@ -38,16 +45,31 @@ class CustomerController extends Controller
         if($sort == 'name_asc') {
             $customers = Customer::where("first_name", "like", "%".$query."%")
                 ->orWhere("last_name", "like", "%".$query."%")
+                ->orWhere("email", "like", "%".$query."%")
                 ->orderBy("first_name", 'ASC')
                 ->paginate($page);
         } else if($sort == 'name_desc') {
             $customers = Customer::where("first_name", "like", "%".$query."%")
                 ->orWhere("last_name", "like", "%".$query."%")
+                ->orWhere("email", "like", "%".$query."%")
                 ->orderBy("first_name", 'DESC')
+                ->paginate($page);
+        } else if($sort == 'email_asc') {
+            $customers = Customer::where("first_name", "like", "%".$query."%")
+                ->orWhere("last_name", "like", "%".$query."%")
+                ->orWhere("email", "like", "%".$query."%")
+                ->orderBy("email", 'ASC')
+                ->paginate($page);
+        } else if($sort == 'email_desc') {
+            $customers = Customer::where("first_name", "like", "%".$query."%")
+                ->orWhere("last_name", "like", "%".$query."%")
+                ->orWhere("email", "like", "%".$query."%")
+                ->orderBy("email", 'DESC')
                 ->paginate($page);
         } else {
             $customers = Customer::where("first_name", "like", "%".$query."%")
                 ->orWhere("last_name", "like", "%".$query."%")
+                ->orWhere("email", "like", "%".$query."%")
                 ->orderBy("updated_at", 'DESC')
                 ->paginate($page);
         }
@@ -79,7 +101,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view('admin.customer.create', ['status' => $this->customerStatus]);
+        return view('admin.customer.create', ['status' => $this->customerStatusTH]);
     }
 
     /**
@@ -153,7 +175,7 @@ class CustomerController extends Controller
         // $customer = Customer::where('slug', $customer->slug)->first();
         return view('admin.customer.show', [
             'customer' => $customer,
-            'status' => $this->customerStatus,
+            'status' => $this->customerStatusTH,
         ]);
     }
 
@@ -165,7 +187,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        return view('admin.customer.edit', ['customer' => $customer, 'status' => $this->customerStatus]);
+        return view('admin.customer.edit', ['customer' => $customer, 'status' => $this->customerStatusTH]);
     }
 
     /**

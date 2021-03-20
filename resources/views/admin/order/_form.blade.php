@@ -10,10 +10,10 @@
     {!! Form::label('วันที่คำสั่งซื้อ') !!}
     {!! Form::date('order_date', null, ['class' => 'form-control']) !!}
 </div>
-<div class="form-group" style="margin-bottom: 3%">
+{{-- <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('สถานะการชำระเงิน') !!}
     {!! Form::select('payment_status', $paymentStatus, null, ['class' => 'form-control']) !!}
-</div>
+</div> --}}
 <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('วันที่ชำระเงิน') !!}
     {!! Form::date('payment_date', null, ['class' => 'form-control']) !!}

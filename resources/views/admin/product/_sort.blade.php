@@ -4,9 +4,9 @@
         @if(request()->get('sort') == '')
         ล่าสุด
         @elseif(request()->get('sort') == 'name_asc')
-        ชื่อ ก-ฮ
+        ชื่อ A-Z
         @elseif(request()->get('sort') == 'name_desc')
-        ชื่อ ฮ-ก
+        ชื่อ Z-A
         @elseif(request()->get('sort') == 'price_asc')
         ราคาต่ำสุด
         @elseif(request()->get('sort') == 'price_desc')

@@ -17,7 +17,6 @@ class Order extends Model
         'status',
         'order_date',
         'payment_method',
-        'payment_status',
         'payment_date',
         'customer_id',
         'slip_image_id',

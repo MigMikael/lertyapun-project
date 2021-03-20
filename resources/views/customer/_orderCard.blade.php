@@ -11,11 +11,11 @@
                 <div class="form-group">
                     <strong>
                         สถานะคำสั่งซื้อ:
-                        @if($order->status == 'pending' && $order->payment_status == 'pending')
-                        <span class="order-waiting-payment">รอการชำระเงิน</span>
-                        @elseif($order->status == 'pending' && $order->payment_status == 'success')
+                        @if($order->status == 'pending')
                         <span class="order-waiting-confirm">รอการอนุมัติ</span>
-                        @elseif($order->status == 'success' && $order->payment_status == 'success')
+                        @elseif($order->status == 'payment')
+                        <span class="order-waiting-payment">รอการชำระเงิน</span>
+                        @elseif($order->status == 'success')
                         <span class="order-success">สำเร็จ</span>
                         @elseif($order->status == 'cancle')
                         <span class="order-cancel">ยกเลิก</span>

@@ -191,10 +191,45 @@ class GuestController extends Controller
      */
     public function registerEdit(Customer $customer)
     {
-        if ($customer->status == 'active') {
+        if ($customer->status != 'pending') {
             return redirect('customer/products');
         }
         return view('customer.register', [ 'customer' => $customer ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Customer  $customer
+     * @return \Illuminate\Http\Response
+     */
+    public function passwordEdit(Customer $customer)
+    {
+        if ($customer->status != 'inactive') {
+            return redirect('customer/products');
+        }
+        return view('customer.resetPassword', [ 'customer' => $customer ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Customer  $customer
+     * @return \Illuminate\Http\Response
+     */
+    public function passwordUpdate(Request $request, Customer $customer)
+    {
+        $this->validateCustomerResetPassword($request);
+
+        $newCustomer = [];
+        if($request->password != '') {
+            $newCustomer['password'] = Hash::make($request->password);
+            $newCustomer['status'] = 'active';
+        }
+
+        $customer->update($newCustomer);
+        return redirect('login')->with('success', 'รีเซ็ตรหัสผ่านสำเร็จ กรุณาล็อกอินอีกครั้งด้วยรหัสผ่านใหม่');
     }
 
     public function showLoginForm()

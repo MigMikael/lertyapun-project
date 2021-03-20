@@ -91,4 +91,12 @@ trait ValidateTrait
             'vat_register_cert_image' => 'nullable|image',
         ]);
     }
+
+    public function validateCustomerResetPassword(Request $request)
+    {
+        $request->validate([
+            'password' => 'min:8|max:255',
+            'confirm_password' => 'same:password|min:8|max:255',
+        ]);
+    }
 }

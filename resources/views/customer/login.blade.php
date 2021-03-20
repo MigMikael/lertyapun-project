@@ -17,6 +17,12 @@
                 {!! Form::open(['url' => 'login', 'method' => 'post', 'files' => 'true', 'class' => 'form-signin']) !!}
                     <h5>ลงชื่อเข้าใช้งาน</h5>
                     <hr class="my-4">
+                    @if (session('success'))
+                        <div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            {{ session('success', 'Success !') }}
+                        </div>
+                    @endif
                     @if (session('fail'))
                         <div class="alert alert-danger alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>

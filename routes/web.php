@@ -73,6 +73,8 @@ Route::group(['prefix' => 'customer', 'middleware' => 'customerAuth'], function 
     Route::get('pending/{customer:slug}/edit', [GuestController::class, 'registerEdit']);
     Route::put('pending/{customer:slug}', [GuestController::class, 'registerUpdate']);
     Route::get('pending/{customer:slug}', [GuestController::class, 'registerPending']);
+    Route::get('password/{customer:slug}/reset', [GuestController::class, 'passwordEdit']);
+    Route::put('password/{customer:slug}/reset', [GuestController::class, 'passwordUpdate']);
     Route::get('logout', [GuestController::class, 'customerLogout']);
 });
 

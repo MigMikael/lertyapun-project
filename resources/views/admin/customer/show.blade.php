@@ -35,7 +35,7 @@
                 @elseif($customer->status == 'suspend')
                     <span class="badge badge-secondary">ระงับการใช้งาน</span>
                 @elseif($customer->status == 'inactive')
-                    <span class="badge badge-danger">ไม่ได้ใช้งานอยู่</span>
+                    <span class="badge badge-danger">รีเซ็ตรหัสผ่าน</span>
                 @endif</p>
             </div>
         </div>

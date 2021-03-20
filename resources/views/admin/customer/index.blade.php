@@ -23,9 +23,9 @@
             {!! Form::open(['method' => 'post', 'url' => 'admin/customers/search']) !!}
             <div class="input-group">
                 @if ($search != '')
-                <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหาตามชื่อผู้ใช้งาน">
+                <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหาตามชื่อหรือนามสกุลผู้ใช้งานและอีเมล">
                 @else
-                <input name="query" type="text" class="form-control" placeholder="ค้นหาตามชื่อผู้ใช้งาน">
+                <input name="query" type="text" class="form-control" placeholder="ค้นหาตามชื่อหรือนามสกุลผู้ใช้งานและอีเมล">
                 @endif
                 <div class="input-group-append">
                     <button class="btn btn-light" type="submit">
@@ -87,7 +87,7 @@
                             @elseif($customer->status == 'suspend')
                             <span class="badge badge-secondary">ระงับการใช้งาน</span>
                             @elseif($customer->status == 'inactive')
-                            <span class="badge badge-danger">ไม่ได้ใช้งานอยู่</span>
+                            <span class="badge badge-danger">รีเซ็ตรหัสผ่าน</span>
                             @endif
                         </td>
                         <td class="text-center">

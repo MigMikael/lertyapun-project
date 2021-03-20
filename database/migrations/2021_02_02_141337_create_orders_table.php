@@ -21,7 +21,6 @@ class CreateOrdersTable extends Migration
             $table->string('status')->default('pending');
             $table->dateTime('order_date');
             $table->string('payment_method');
-            $table->string('payment_status')->default('pending');;
             $table->dateTime('payment_date')->nullable();
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('slip_image_id')->nullable();;
