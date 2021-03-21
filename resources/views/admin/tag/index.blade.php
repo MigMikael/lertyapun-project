@@ -52,7 +52,7 @@
                             <a class="btn btn-warning btn-sm" href="{{ url('admin/tags/'.$tag->slug.'/edit') }}">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <button class="btn btn-danger btn-sm" type="submit" style="margin-left: 5px">
+                            <button class="btn btn-danger btn-sm delete-action" style="margin-left: 5px">
                                 <i class="fas fa-trash"></i>
                             </button>
                             {!! Form::close() !!}
@@ -68,4 +68,15 @@
         </table>
     </div>
     {{ $tags->render("pagination::bootstrap-4") }}
+@endsection
+
+@section('script')
+<script>
+    $('.delete-action').click(function(e){
+        e.preventDefault()
+        if (confirm('Are you sure?')) {
+            $(e.target).closest('form').submit()
+        }
+    });
+</script>
 @endsection

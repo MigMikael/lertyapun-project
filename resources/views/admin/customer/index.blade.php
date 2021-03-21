@@ -104,7 +104,7 @@
                                         'method' => 'delete',
                                         'url' => 'admin/customers/'.$customer->slug,
                                         'class' => '']) !!}
-                                    <button class="dropdown-item text-danger" type="submit">
+                                    <button class="dropdown-item text-danger delete-action">
                                         <i class="fas fa-trash"></i> Delete
                                     </button>
                                     {!! Form::close() !!}
@@ -118,4 +118,15 @@
     </div>
     {{ $customers->render("pagination::bootstrap-4") }}
 </div>
+@endsection
+
+@section('script')
+<script>
+    $('.delete-action').click(function(e){
+        e.preventDefault()
+        if (confirm('Are you sure?')) {
+            $(e.target).closest('form').submit()
+        }
+    });
+</script>
 @endsection

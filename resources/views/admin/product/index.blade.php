@@ -77,7 +77,7 @@
                             {{ $product->name }}
                         </td>
                         <td class="text-right" onclick="window.location='{{ url('admin/products/'.$product->slug) }}'">
-                            {{ $product->price }}
+                            {{ $product->units['0']->pricePerUnit }}
                         </td>
                         <td class="text-right" onclick="window.location='{{ url('admin/products/'.$product->slug) }}'">
                             {{ $product->quantity }}
@@ -95,7 +95,7 @@
                                         'method' => 'delete',
                                         'url' => 'admin/products/'.$product->slug,
                                         'class' => '']) !!}
-                                    <button class="dropdown-item text-danger" type="submit">
+                                    <button class="dropdown-item text-danger delete-action">
                                         <i class="fas fa-trash"></i> Delete
                                     </button>
                                     {!! Form::close() !!}
@@ -111,4 +111,15 @@
         {{ $products->render("pagination::bootstrap-4") }}
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+    $('.delete-action').click(function(e){
+        e.preventDefault()
+        if (confirm('Are you sure?')) {
+            $(e.target).closest('form').submit()
+        }
+    });
+</script>
 @endsection

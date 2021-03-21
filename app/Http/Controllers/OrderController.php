@@ -33,7 +33,7 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        $page = 10;
+        $page = 15;
         $sort = $request->query('sort');
         $query = $request->query('query');
 

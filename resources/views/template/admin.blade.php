@@ -37,7 +37,6 @@
                     <a href="{{ url('admin/customers') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">จัดการบัญชีผู้ใช้งาน</a>
                     <a href="{{ url('admin/categories') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">จัดการประเภทสินค้า</a>
                     <a href="{{ url('admin/products') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">จัดการสินค้า</a>
-                    {{-- <a href="{{ url('admin/orders') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">จัดการคำสั่งซื้อที่รอการอนุมัติ</a> --}}
                     <a href="{{ url('admin/orders') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">จัดการคำสั่งซื้อ</a>
                     <a href="{{ url('admin/promotions') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">จัดการโปรโมชัน</a>
                 </div>

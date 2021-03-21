@@ -10,10 +10,10 @@
         <div class="col-md-6">
             <div class="pull-right">
                 @include('admin.order._sort')
-                <a class="btn btn-primary" href="{{ url("admin/orders/create") }}">
+                {{-- <a class="btn btn-primary" href="{{ url("admin/orders/create") }}" disabled>
                     <i class="fas fa-plus"></i>
                     เพิ่มคำสั่งซื้อ
-                </a>
+                </a> --}}
             </div>
         </div>
         <div class="col-md-12">
@@ -61,7 +61,7 @@
                 <th scope="col">ชื่อลูกค้า</th>
                 <th scope="col" class="text-right">ยอดรวมทั้งหมด (บาท)</th>
                 <th scope="col" class="text-center">สถานะคำสั่งซื้อ</th>
-                <th scope="col" class="text-center">การจัดการ</th>
+                {{-- <th scope="col" class="text-center">การจัดการ</th> --}}
             </tr>
             </thead>
             <tbody>
@@ -80,9 +80,19 @@
                             {{ number_format($order->total_amount) }}
                         </td>
                         <td class="text-center" onclick="window.location='{{ url('admin/orders/'.$order->order_slug) }}'">
-                            {{ $order->order_status }}
+                            @if($order->order_status == 'pending')
+                            <span class="badge badge-light">รอแอดมินอนุมัติ</span>
+                            @elseif($order->order_status == 'payment' && $order->payment_date == null)
+                            <span class="badge badge-secondary">รอลูกค้าจ่ายเงิน</span>
+                            @elseif($order->order_status == 'payment' && $order->payment_date != null)
+                            <span class="badge badge-warning">รอยืนยันเงินเข้า</span>
+                            @elseif($order->order_status == 'success')
+                            <span class="badge badge-secondary">สำเร็จ</span>
+                            @elseif($order->order_status == 'cancle')
+                            <span class="badge badge-danger">ยกเลิก</span>
+                            @endif
                         </td>
-                        <td class="text-center">
+                        {{-- <td class="text-center">
                             <div class="dropdown">
                                 <button type="button" class="btn btn-default btn-sm" data-toggle="dropdown" onclick="event.preventDefault()'">
                                     <i class="fa fa-ellipsis-v"></i>
@@ -95,13 +105,13 @@
                                         'method' => 'delete',
                                         'url' => 'admin/orders/'.$order->order_slug,
                                         'class' => '']) !!}
-                                    <button class="dropdown-item text-danger" type="submit" disabled>
+                                    <button class="dropdown-item text-danger delete-action">
                                         <i class="fas fa-trash"></i> Delete
                                     </button>
                                     {!! Form::close() !!}
                                 </div>
                             </div>
-                        </td>
+                        </td> --}}
                     </tr>
                 @endforeach
             </tbody>
@@ -111,4 +121,15 @@
         {{ $orders->render("pagination::bootstrap-4") }}
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+    $('.delete-action').click(function(e){
+        e.preventDefault()
+        if (confirm('Are you sure?')) {
+            $(e.target).closest('form').submit()
+        }
+    });
+</script>
 @endsection

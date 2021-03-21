@@ -278,6 +278,7 @@ figure {
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
   transition: all 0.3s;
+  min-height: 100vh;
 }
 
 #sidebar .logo {

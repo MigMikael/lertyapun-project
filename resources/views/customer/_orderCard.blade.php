@@ -5,7 +5,7 @@
                 <h5 class="title">หมายเลขคำสั่งซื้อ {{ Str::limit($order->slug, 10, "") }}</h5>
                 <label>ยอดเงินที่ต้องชำระทั้งหมด</label>
                 <h5>฿ {{ number_format($order->total_amount, 2) }}</h5>
-                <label>คำสั่งซื้อวันที่ {{ \Carbon\Carbon::parse($order->order_date)->format('d/m/Y') }}</label>
+                <label>คำสั่งซื้อวันที่ {{ \Carbon\Carbon::parse($order->order_date)->format('d/m/Y - h:m') }} น.</label>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
@@ -25,7 +25,7 @@
                 @if ($order->payment_date != null)
                 <label>
                     <strong>ชำระเงินเมื่อ</strong>
-                    {{ \Carbon\Carbon::parse($order->payment_date)->format('d/m/Y h:m:s') }}
+                    {{ \Carbon\Carbon::parse($order->payment_date)->format('d/m/Y - h:m') }} น.
                 </label>
                 @endif
                 <a class="btn btn-secondary btn-block" href="{{ url('customer/order/'.$order->slug) }}">ดูรายละเอียด</a>

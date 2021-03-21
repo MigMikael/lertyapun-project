@@ -77,6 +77,7 @@ class ProductController extends Controller
             'products' => $products,
             'search' => $query,
         ]);
+        // return $products;
     }
 
     /**
