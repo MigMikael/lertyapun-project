@@ -88,6 +88,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminAuth'], function () {
     Route::get('products/create', [ProductController::class, 'create']);
     Route::post('products/search', [ProductController::class, 'search']);
     Route::get('products/{product:slug}/edit', [ProductController::class, 'edit']);
+    Route::post('products/{product:slug}/status', [ProductController::class, 'changeStatus']);
     Route::put('products/{product:slug}', [ProductController::class, 'update']);
     Route::get('products/{product:slug}', [ProductController::class, 'show']);
     Route::delete('products/{product:slug}', [ProductController::class, 'destroy']);

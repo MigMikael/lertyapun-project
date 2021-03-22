@@ -16,14 +16,10 @@
     {!! Form::text('point', null, ['placeholder' => 'Point', 'class' => 'form-control']) !!}
 </div> --}}
 {{-- <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('quantity', 'Quantity (ตามหน่วยที่เล็กที่สุด)') !!}
-    {!! Form::text('quantity', null, ['placeholder' => 'Quantity', 'class' => 'form-control']) !!}
-</div> --}}
-{{-- <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('unit', 'Unit') !!}
     {!! Form::text('unit', null, ['placeholder' => 'Unit', 'class' => 'form-control']) !!}
 </div> --}}
-{!! Form::label('unit', 'หน่วย (เล็กที่สุด)') !!}
+{!! Form::label('unit', 'หน่วย (พิ้นฐาน)') !!}
 <div class="input-group" style="margin-bottom: 3%">
     {!! Form::select('unitName[]', config('constants.productUnit'), null, ['class' => 'form-control base-unit-name']) !!}
 
@@ -36,14 +32,14 @@
     </div>
 
     <input type="hidden" class="form-control" placeholder="" name="quantityPerUnit[]" value="1">
-    
-    <div class="input-group-prepend">
+
+    {{-- <div class="input-group-prepend">
         <span class="input-group-text">มีสินค้า</span>
     </div>
     <input type="number" class="form-control" placeholder="" name="quantity[]" required>
     <div class="input-group-prepend">
         <span class="input-group-text base-unit-quantity-label">ชิ้น</span>
-    </div>
+    </div> --}}
 
     <div class="input-group-prepend">
         <span class="input-group-text base-unit-weight-label">แต่ละชิ้นหนัก</span>
@@ -54,7 +50,12 @@
     </div>
 </div>
 
-@include('admin.product._unitInput')
+@include('admin.product._unit_create')
+
+<div class="form-group" style="margin-bottom: 3%">
+    {!! Form::label('quantity', 'จำนวนสินค้า (ตามหน่วยพิ้นฐาน)') !!}
+    {!! Form::text('quantity', null, ['placeholder' => 'Quantity', 'class' => 'form-control']) !!}
+</div>
 
 <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('Status', 'สถานะ') !!}

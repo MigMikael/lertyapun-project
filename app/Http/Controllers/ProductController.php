@@ -23,6 +23,12 @@ class ProductController extends Controller
         'suspend' => 'Suspend',
         'inactive' => 'Inactive',
     ];
+
+    public $productStatusTH = [
+        'active' => 'กำลังใช้งาน',
+        'suspend' => 'ระงับการใช้งาน',
+        'inactive' => 'ไม่ได้ใช้งาน',
+    ];
     /**
      * Display a listing of the resource.
      *
@@ -101,7 +107,7 @@ class ProductController extends Controller
     public function create()
     {
         return view('admin.product.create', [
-            'status' => $this->productStatus,
+            'status' => $this->productStatusTH,
         ]);
     }
 
@@ -121,6 +127,7 @@ class ProductController extends Controller
             'description' => $data['description'],
             'weight' => $data['weight'],
             'status' => $data['status'],
+            'quantity' => $data['quantity'],
         ];
 
         if($request->hasFile('product_image')) {
@@ -132,14 +139,12 @@ class ProductController extends Controller
         $product = Product::create($newProduct);
 
         if (count($data['unitName']) != count($data['pricePerUnit']) ||
-        count($data['unitName']) != count($data['quantity']) ||
         count($data['unitName']) != count($data['quantityPerUnit'])) {
             return redirect()
                 ->action([ProductController::class, 'index'])
                 ->with('fail', 'Create Fail');
         }
 
-        $sumQuantity = 0;
         for ($i=0; $i < count($data['unitName']); $i++) {
             $newProductUnit = [
                 'product_id' => $product->id,
@@ -148,13 +153,7 @@ class ProductController extends Controller
                 'quantityPerUnit' => $data['quantityPerUnit'][$i],
             ];
             ProductUnit::create($newProductUnit);
-
-            $quantity = $data['quantityPerUnit'][$i] * $data['quantity'][$i];
-            $sumQuantity += $quantity;
         }
-        $sumQuantity -= 1;
-        $product->quantity = $sumQuantity;
-        $product->save();
 
         return redirect()
             ->action([ProductController::class, 'index'])
@@ -187,6 +186,7 @@ class ProductController extends Controller
             'productPromotions' => $productPromotions,
             'tags' => $tags,
             'productTags' => $productTags,
+            'status' => $this->productStatusTH,
         ]);
     }
 
@@ -198,7 +198,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('admin.product.edit', ['product' => $product, 'status' => $this->productStatus]);
+        return view('admin.product.edit', ['product' => $product, 'status' => $this->productStatusTH]);
     }
 
     /**
@@ -210,7 +210,16 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $newProduct = $request->all();
+        $data = $request->all();
+
+        $newProduct = [
+            'name' => $data['name'],
+            'description' => $data['description'],
+            'weight' => $data['weight'],
+            'status' => $data['status'],
+            'quantity' => $data['quantity'],
+        ];
+
         if($request->hasFile('product_image')) {
             $file = $request->file('product_image');
             $product_image = $this->storeImage($file, "");
@@ -218,9 +227,44 @@ class ProductController extends Controller
         }
 
         $product->update($newProduct);
+
+        if (count($data['unitName']) != count($data['pricePerUnit']) ||
+        count($data['unitName']) != count($data['quantityPerUnit'])) {
+            return redirect()
+                ->action([ProductController::class, 'index'])
+                ->with('fail', 'Create Fail');
+        }
+
+        for ($i=0; $i < count($data['unitName']); $i++) {
+            $newProductUnit = [
+                'product_id' => $product->id,
+                'unitName' => $data['unitName'][$i],
+            ];
+            $productUnit = ProductUnit::firstOrCreate($newProductUnit);
+            $productUnit->pricePerUnit = $data['pricePerUnit'][$i];
+            $productUnit->quantityPerUnit = $data['quantityPerUnit'][$i];
+            $productUnit->save();
+        }
+
         return redirect()
             ->action([ProductController::class, 'index'])
             ->with('success', 'Edit Success');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function changeStatus(Request $request, Product $product)
+    {
+        $newStatus = $request->get('status');
+        $product->status = $newStatus;
+        $product->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -337,13 +381,18 @@ class ProductController extends Controller
 
         if ($category_slug != "") {
             $category = Category::where('slug', $category_slug)->first();
-            $products = $category->products()->orderBy('updated_at', 'DESC')->paginate($page);
+            $products = $category->products()
+                ->where('status', 'active')
+                ->orderBy('updated_at', 'DESC')
+                ->paginate($page);
         } else if ($query != "") {
             $products = Product::where('name', 'like', '%'.$query.'%')
+                ->where('status', 'active')
                 ->paginate($page)
                 ->appends(['search' => $query]);
         } else {
-            $products = Product::orderBy('updated_at', 'DESC')
+            $products = Product::where('status', 'active')
+                ->orderBy('updated_at', 'DESC')
                 ->with('image')
                 ->paginate($page);
         }
@@ -372,7 +421,10 @@ class ProductController extends Controller
      */
     public function showCustomerProduct(Product $product)
     {
-        $product = Product::where('slug', $product->slug)->with('tags')->first();
+        $product = Product::where('slug', $product->slug)
+            ->where('status', 'active')
+            ->with('tags')
+            ->first();
         return view('customer.show', [
             'product' => $product
         ]);
@@ -386,7 +438,10 @@ class ProductController extends Controller
      */
     public function indexCustomerPromotion(Request $request)
     {
-        $products = Product::has('promotions')->with('promotions')->paginate(6);
+        $products = Product::has('promotions')
+            ->where('status', 'active')
+            ->with('promotions')
+            ->paginate(6);
         return view('customer.promotion', [
             'products' => $products
         ]);

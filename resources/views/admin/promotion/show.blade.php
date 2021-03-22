@@ -44,12 +44,12 @@
         </div>
     </div>
     <div class="table-responsive">
-        <table class="table table-bordered table-hover">
+        <table class="table table-hover">
             <thead>
               <tr>
                 <th>#</th>
                 <th>ชื่อสินค้า</th>
-                <th class="text-right">ราคา</th>
+                <th class="text-right">ราคา(฿)</th>
                 <th class="text-right">จำนวน</th>
                 <th class="text-center">การจัดการ</th>
                 <th class="text-center">ดูข้อมูล</th>
@@ -60,7 +60,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $product->name }}</td>
-                    <td class="text-right">{{ $product->price }}</td>
+                    <td class="text-right">{{ $product->units['0']->pricePerUnit }}</td>
                     <td class="text-right">{{ $product->quantity }} {{ $product->unit }}</td>
                     <td class="text-center">
                         {!! Form::model($product, [

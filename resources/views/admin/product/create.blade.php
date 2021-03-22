@@ -10,7 +10,7 @@
     </div>
     <hr>
     {!! Form::open(['url' => 'admin/products', 'method' => 'post', 'files' => 'true']) !!}
-        @include('admin.product._form')
+        @include('admin.product._form_create')
         <button type="submit" class="btn btn-primary btn-block">เพิ่มสินค้า</button>
     {!! Form::close() !!}
 </div>

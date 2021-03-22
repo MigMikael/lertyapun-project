@@ -25,6 +25,13 @@ class OrderController extends Controller
         'cancle' => 'Cancle', // ยกเลิก
     ];
 
+    public $orderStatusTH = [
+        'pending' => 'รอแอดมินอนุมัติ', // รอแอดมินอนุมัติ
+        'payment' => 'รอลูกค้ายืนยันการจ่ายเงิน', // รอลูกค้ายืนยันการจ่ายเงิน
+        'success' => 'สำเร็จ', // สำเร็จ
+        'cancle' => 'ยกเลิก', // ยกเลิก
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -92,7 +99,7 @@ class OrderController extends Controller
     public function create()
     {
         return view('admin.order.create', [
-            'orderStatus' => $this->orderStatus,
+            'orderStatus' => $this->orderStatusTH,
         ]);
     }
 
@@ -135,7 +142,7 @@ class OrderController extends Controller
         // return $order;
         return view('admin.order.show', [
             'order' => $order,
-            'status' => $this->orderStatus,
+            'status' => $this->orderStatusTH,
         ]);
     }
 
@@ -149,7 +156,7 @@ class OrderController extends Controller
     {
         return view('admin.order.edit', [
             'order' => $order,
-            'orderStatus' => $this->orderStatus,
+            'orderStatus' => $this->orderStatusTH,
         ]);
     }
 

@@ -53,12 +53,13 @@
     </div>
 
     <div class="table-responsive">
-        <table class="table dtable-hover">
+        <table class="table table-hover">
             <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">รูปสินค้า</th>
                 <th scope="col">ชื่อสินค้า</th>
+                <th scope="col">สถานะสินค้า</th>
                 <th scope="col" class="text-right">ราคา (บาท)</th>
                 <th scope="col" class="text-right">จำนวน</th>
                 <th scope="col" class="text-center">การจัดการ</th>
@@ -71,10 +72,19 @@
                             {{ $loop->iteration }}
                         </th>
                         <td onclick="window.location='{{ url('admin/products/'.$product->slug) }}'">
-                            <img src="{{ url('image/thumbnail/'.$product->image->slug) }}" style="height: 150px; width: 150px" class="img-fluid" alt="{{ $product->name }}">
+                            <img src="{{ url('image/thumbnail/'.$product->image->slug) }}" style="height: 120px; width: 120px" class="img-fluid" alt="{{ $product->name }}">
                         </td>
                         <td onclick="window.location='{{ url('admin/products/'.$product->slug) }}'">
                             {{ $product->name }}
+                        </td>
+                        <td onclick="window.location='{{ url('admin/products/'.$product->slug) }}'">
+                            @if($product->status == 'active')
+                            <span class="badge badge-success">กำลังใช้งาน</span>
+                            @elseif($product->status == 'suspend')
+                            <span class="badge badge-secondary">ระงับการใช้งาน</span>
+                            @elseif($product->status == 'inactive')
+                            <span class="badge badge-danger">ไม่ได้ใช้งาน</span>
+                            @endif
                         </td>
                         <td class="text-right" onclick="window.location='{{ url('admin/products/'.$product->slug) }}'">
                             {{ $product->units['0']->pricePerUnit }}
@@ -88,15 +98,15 @@
                                     <i class="fa fa-ellipsis-v"></i>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="{{ url('admin/products/'.$product->slug.'/edit') }}">
-                                        <i class="fas fa-edit"></i> Edit
+                                    <a class="dropdown-item text-warning" href="{{ url('admin/products/'.$product->slug.'/edit') }}">
+                                        <i class="fas fa-edit"></i> แก้ไข
                                     </a>
                                     {!! Form::model($product, [
                                         'method' => 'delete',
                                         'url' => 'admin/products/'.$product->slug,
                                         'class' => '']) !!}
                                     <button class="dropdown-item text-danger delete-action">
-                                        <i class="fas fa-trash"></i> Delete
+                                        <i class="fas fa-trash"></i> ลบ
                                     </button>
                                     {!! Form::close() !!}
                                 </div>
@@ -120,6 +130,6 @@
         if (confirm('Are you sure?')) {
             $(e.target).closest('form').submit()
         }
-    });
+    })
 </script>
 @endsection

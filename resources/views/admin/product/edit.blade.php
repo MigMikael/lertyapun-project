@@ -10,7 +10,7 @@
 </div>
     <hr>
     {!! Form::model($product, ['url' => 'admin/products/'.$product->slug, 'method' => 'put', 'files' => 'true']) !!}
-        @include('admin.product._form')
+        @include('admin.product._form_edit')
         <button type="submit" class="btn btn-primary btn-block" style="margin-top: 25px;">แก้ไขสินค้า</button>
     {!! Form::close() !!}
 </div>

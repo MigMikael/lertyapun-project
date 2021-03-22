@@ -9,10 +9,25 @@
 @section('content')
 <div class="admin-container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <h4 class="title">ข้อมูลสินค้า</h4>
             <span>เจ้าหน้าที่สามารถดูข้อมูลสินค้า</span>
             <hr>
+        </div>
+        <div class="col-md-6">
+            <div class="pull-right">
+                {!! Form::model($product, [
+                    'method' => 'delete',
+                    'url' => 'admin/products/'.$product->slug,
+                    'class' => 'form-inline']) !!}
+                    <a class="btn btn-warning" href="{{ url('admin/products/'.$product->slug.'/edit') }}">
+                        <i class="fas fa-edit"></i> แก้ไข
+                    </a>
+                <button class="btn btn-danger delete-action">
+                    <i class="fas fa-trash"></i> ลบ
+                </button>
+                {!! Form::close() !!}
+            </div>
         </div>
     </div>
     <div class="row form-group">
@@ -20,15 +35,24 @@
             <img src="{{ url('image/show/'.$product->image->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $product->name }}">
         </div>
         <div class="col-md-8 col-xs-6" style="border: 0px solid black;">
-            <h1 class="mb-4">{{ $product->name }}</h1>
+            <h1 class="mb-4">
+                {{ $product->name }}
+                @if($product->status == 'active')
+                <span class="badge badge-success">กำลังใช้งาน</span>
+                @elseif($product->status == 'suspend')
+                <span class="badge badge-secondary">ระงับการใช้งาน</span>
+                @elseif($product->status == 'inactive')
+                <span class="badge badge-danger">ไม่ได้ใช้งาน</span>
+                @endif
+            </h1>
             <p><h5>คำอธิบาย</h5> {{ $product->description }}</p>
             <p><h5>จำนวน</h5> {{ $product->quantity }} {{ $product->units['0']['unitName'] }}</p>
 
             <h5>หน่วยสินค้า</h5>
             @foreach($product->units as $productUnit)
             <p>
-                {{ $productUnit->unitName }} : {{ $productUnit->pricePerUnit }} บาท /
-                1 {{ $productUnit->unitName }} : {{ $productUnit->quantityPerUnit }}
+                {{ $productUnit->unitName }} : {{ number_format($productUnit->pricePerUnit) }} บาท /
+                1 {{ $productUnit->unitName }} : {{ number_format($productUnit->quantityPerUnit) }}
                 @if ($loop->first)
                 {{ $productUnit->unitName }}
                 @else
@@ -48,7 +72,7 @@
                     value="@foreach($productPromotions as $productPro){!! $productPro !!},@endforeach"
                 />
                 <input name="product_id" type="hidden" value="{{ $product->slug }}" />
-                <button type="submit" class="btn btn-primary" style="margin-top: 15px;">เพิ่มโปรโมชัน</button>
+                <button type="submit" class="btn btn-primary" style="margin-top: 5px;">เพิ่มโปรโมชัน</button>
             {!! Form::close() !!}
         </div>
         <div class="col-md-6">
@@ -60,7 +84,7 @@
                     value="@foreach($productCategories as $productCat){!! $productCat !!},@endforeach"
                 />
                 <input name="product_id" type="hidden" value="{{ $product->slug }}" />
-                <button type="submit" class="btn btn-primary" style="margin-top: 15px;">เพิ่มประเภทสินค้า</button>
+                <button type="submit" class="btn btn-primary" style="margin-top: 5px;">เพิ่มประเภทสินค้า</button>
             {!! Form::close() !!}
         </div>
         {{-- <div class="col-md-4">
@@ -76,10 +100,32 @@
             {!! Form::close() !!}
         </div> --}}
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="title">สถานะสินค้า</h4>
+            {!! Form::model($product, ['url' => 'admin/products/'.$product->slug.'/status', 'method' => 'post']) !!}
+                {!! Form::select('status', $status, $product->status, ['class' => 'form-control']) !!}
+                <button type="submit" class="btn btn-primary" style="margin-top: 5px;">แก้ไขสถานะ</button>
+            {!! Form::close() !!}
+        </div>
+    </div>
 </div>
 @endsection
 
 @section('script')
+    <script>
+        $('.delete-action').click(function(e){
+            e.preventDefault()
+            if (confirm('Are you sure?')) {
+                $(e.target).closest('form').submit()
+            }
+        })
+    </script>
     <script>
         var inputElm = document.querySelector('input[name=categoryTag]');
 
