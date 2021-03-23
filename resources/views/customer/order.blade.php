@@ -15,8 +15,8 @@
                     <div class="mr-auto" style="margin-top: 10px; margin-bottom: 25px;">
                         {!! Form::open(['method' => 'post', 'url' => 'customer/order/search']) !!}
                         <div class="input-group">
-                            @if (isSet($search) && $search != '')
-                            <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหาตามหมายเลขคำสั่งซื้อ">
+                            @if (isSet($orderSearch) && $orderSearch != '')
+                            <input name="query" value="{{ $orderSearch }}" type="text" class="form-control" placeholder="ค้นหาตามหมายเลขคำสั่งซื้อ">
                             @else
                             <input name="query" type="text" class="form-control" placeholder="ค้นหาตามหมายเลขคำสั่งซื้อ">
                             @endif

@@ -229,7 +229,7 @@ class OrderController extends Controller
         return view('customer.order', [
             'orders' => $orders,
             'customer' => $customer,
-            'search' => $query,
+            'orderSearch' => $query,
         ]);
     }
 
