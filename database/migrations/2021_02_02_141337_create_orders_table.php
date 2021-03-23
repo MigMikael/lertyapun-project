@@ -23,7 +23,8 @@ class CreateOrdersTable extends Migration
             $table->string('payment_method');
             $table->dateTime('payment_date')->nullable();
             $table->unsignedBigInteger('customer_id');
-            $table->unsignedBigInteger('slip_image_id')->nullable();;
+            $table->unsignedBigInteger('slip_image_id')->nullable();
+            $table->text('remark')->nullable();
 
             $table->foreign('customer_id')
                 ->references('id')

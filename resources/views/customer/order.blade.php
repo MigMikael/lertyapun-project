@@ -12,12 +12,21 @@
                     <hr>
                 </div>
                 <div class="col-md-12">
-                    <div class="input-group mr-auto" style="margin-top: 10px; margin-bottom: 25px;">
-                        <input type="text" class="form-control"
-                            placeholder="ค้นหาตามหมายเลขคำสั่งซื้อ">
-                        <div class="input-group-append">
-                            <button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button>
+                    <div class="mr-auto" style="margin-top: 10px; margin-bottom: 25px;">
+                        {!! Form::open(['method' => 'post', 'url' => 'customer/order/search']) !!}
+                        <div class="input-group">
+                            @if (isSet($search) && $search != '')
+                            <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหาตามหมายเลขคำสั่งซื้อ">
+                            @else
+                            <input name="query" type="text" class="form-control" placeholder="ค้นหาตามหมายเลขคำสั่งซื้อ">
+                            @endif
+                            <div class="input-group-append">
+                                <button class="btn btn-light" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
                         </div>
+                        {!! Form::close() !!}
                     </div>
                     <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
                         <li class="nav-item">

@@ -27,8 +27,18 @@ class OrderController extends Controller
 
     public $orderStatusTH = [
         'pending' => 'รอแอดมินอนุมัติ', // รอแอดมินอนุมัติ
-        'payment' => 'รอลูกค้ายืนยันการจ่ายเงิน', // รอลูกค้ายืนยันการจ่ายเงิน
+        'payment' => 'รอยืนยันเงินเข้า', // รอลูกค้ายืนยันการจ่ายเงิน
         'success' => 'สำเร็จ', // สำเร็จ
+        'cancle' => 'ยกเลิก', // ยกเลิก
+    ];
+
+    public $orderApproveOption = [
+        'payment' => 'อนุมัติคำสั่งซื้อ', // รอลูกค้ายืนยันการจ่ายเงิน
+        'cancle' => 'ยกเลิก', // ยกเลิก
+    ];
+
+    public $paymentApproveOption = [
+        'success' => 'ยืนยันเงินเข้า', // สำเร็จ
         'cancle' => 'ยกเลิก', // ยกเลิก
     ];
 
@@ -143,6 +153,8 @@ class OrderController extends Controller
         return view('admin.order.show', [
             'order' => $order,
             'status' => $this->orderStatusTH,
+            'orderApproveOption' => $this->orderApproveOption,
+            'paymentApproveOption' => $this->paymentApproveOption,
         ]);
     }
 
@@ -205,14 +217,19 @@ class OrderController extends Controller
      */
     public function indexOrder(Request $request)
     {
+        $query = $request->query('query');
+
         $authCustomer = auth()->guard('customer')->user();
         $customer = Customer::where('slug', $authCustomer->slug)->first();
 
-        $orders = Order::where('customer_id', $customer->id)->get();
+        $orders = Order::where('customer_id', $customer->id)
+            ->where("slug", "like", "%".$query."%")
+            ->get();
         // return $orders;
         return view('customer.order', [
             'orders' => $orders,
             'customer' => $customer,
+            'search' => $query,
         ]);
     }
 
@@ -255,7 +272,9 @@ class OrderController extends Controller
             $productUnit = ProductUnit::where('product_id', $product->id)
                 ->where('unitName', $unit)->first();
 
-            if($quantity > $product->quantity) {
+            $baseQuantity = $quantity * $productUnit->quantityPerUnit;
+
+            if($baseQuantity > $product->quantity) {
                 return response()->json(['errors' => 'จำนวนสินค้าเกินกว่าในสต็อก กรุณารีเฟรชหน้าใหม่อีกครั้ง'], 422);
             }
             $totalPrice = $productUnit->pricePerUnit * $quantity;
@@ -272,6 +291,8 @@ class OrderController extends Controller
                 'order_id' => 0,
                 'product_id' => $product->id,
                 'sale_quantity' => $quantity,
+                'sale_unit' => $productUnit->unitName,
+                'quantityPerUnit' => $productUnit->quantityPerUnit,
                 'order_price' => $finalPrice,
             ];
             array_push($newOrderDetails, $newOrderDetail);
@@ -294,7 +315,7 @@ class OrderController extends Controller
 
             // update quantity
             $product = Product::where('id', $newOrderDetail['product_id'])->first();
-            $product->quantity = $product->quantity - $newOrderDetail['sale_quantity'];
+            $product->quantity = $product->quantity - ($newOrderDetail['sale_quantity'] * $newOrderDetail['quantityPerUnit']);
             $product->save();
         }
         CustomerProduct::where('customer_id', $customer->id)->delete();
@@ -317,6 +338,19 @@ class OrderController extends Controller
             'order' => $order,
             'customer' => $order->customer,
         ]);
+    }
+
+    /**
+     * Search a listing of the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function searchOrder(Request $request)
+    {
+        $request = $request->all();
+        $query = $request['query'];
+        return redirect("customer/order?query=".$query);
     }
 
     /**

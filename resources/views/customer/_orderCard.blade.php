@@ -4,7 +4,7 @@
             <div class="col-md-6">
                 <h5 class="title">หมายเลขคำสั่งซื้อ {{ Str::limit($order->slug, 10, "") }}</h5>
                 <label>ยอดเงินที่ต้องชำระทั้งหมด</label>
-                <h5>฿ {{ number_format($order->total_amount, 2) }}</h5>
+                <h5>฿{{ number_format($order->total_amount, 2) }}</h5>
                 <label>คำสั่งซื้อวันที่ {{ \Carbon\Carbon::parse($order->order_date)->format('d/m/Y - h:m') }} น.</label>
             </div>
             <div class="col-md-6">

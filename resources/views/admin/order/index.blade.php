@@ -22,7 +22,7 @@
         <div class="col-md-12">
             {!! Form::open(['method' => 'post', 'url' => 'admin/orders/search']) !!}
             <div class="input-group">
-                @if ($search != '')
+                @if (isSet($search) && $search != '')
                 <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหาตามชื่อนามสกุลลูกค้าและหมายเลขคำสั่งซื้อ">
                 @else
                 <input name="query" type="text" class="form-control" placeholder="ค้นหาตามชื่อนามสกุลลูกค้าและหมายเลขคำสั่งซื้อ">
@@ -81,13 +81,13 @@
                         </td>
                         <td class="text-center" onclick="window.location='{{ url('admin/orders/'.$order->order_slug) }}'">
                             @if($order->order_status == 'pending')
-                            <span class="badge badge-light">รอแอดมินอนุมัติ</span>
-                            @elseif($order->order_status == 'payment' && $order->payment_date == null)
-                            <span class="badge badge-secondary">รอลูกค้าจ่ายเงิน</span>
-                            @elseif($order->order_status == 'payment' && $order->payment_date != null)
-                            <span class="badge badge-warning">รอยืนยันเงินเข้า</span>
+                            <span class="badge badge-light">รอการอนุมัติ</span>
+                            @elseif($order->order_status == 'payment' && $order->slip_image_id == null)
+                            <span class="badge badge-secondary">รอการชำระเงิน</span>
+                            @elseif($order->order_status == 'payment' && $order->slip_image_id != null)
+                            <span class="badge badge-warning">รอยืนยันการชำระเงิน</span>
                             @elseif($order->order_status == 'success')
-                            <span class="badge badge-secondary">สำเร็จ</span>
+                            <span class="badge badge-success">สำเร็จ</span>
                             @elseif($order->order_status == 'cancle')
                             <span class="badge badge-danger">ยกเลิก</span>
                             @endif

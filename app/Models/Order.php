@@ -20,6 +20,7 @@ class Order extends Model
         'payment_date',
         'customer_id',
         'slip_image_id',
+        'remark',
     ];
 
     public function customer()
@@ -35,7 +36,7 @@ class Order extends Model
     public function products()
     {
         return $this->belongsToMany('App\Models\Product', 'order_details', 'order_id', 'product_id')
-            ->withPivot('sale_quantity', 'order_price');
+            ->withPivot('sale_quantity', 'order_price', 'sale_unit', 'quantityPerUnit');
     }
 
     public function slipImage()

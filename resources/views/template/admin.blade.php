@@ -21,7 +21,7 @@
         <div class="d-flex" id="wrapper" style="background-color: #e5e5e5">
             <div class="border-right" id="sidebar-wrapper">
                 <div class="sidebar-heading">
-                    <a href="{{ url('/') }}" style="color: white;">
+                    <a href="{{ url('admin') }}" style="color: white;">
                         <img src="{{ URL::asset('img/logo.jpg') }}" style="width: 35px; height: 35px;margin-right: 5px">เลิศยาภัณฑ์
                     </a>
                 </div>

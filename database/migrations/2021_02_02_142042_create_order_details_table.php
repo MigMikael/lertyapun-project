@@ -18,9 +18,12 @@ class CreateOrderDetailsTable extends Migration
             $table->timestamps();
 
             $table->integer('sale_quantity')->default(0);
+            $table->string('sale_unit')->nullable();
+            $table->integer('quantityPerUnit')->default(0);
             $table->float('order_price')->default(0);
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('product_id');
+
 
             $table->foreign('order_id')
                 ->references('id')

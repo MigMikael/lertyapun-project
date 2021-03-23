@@ -7,7 +7,20 @@
         <div style="padding: 50px;">
             <div class="row">
                 <div class="col-md-12">
-                    <h5 class="title">การซื้อของฉัน ({{ $order->status }})</h5>
+                    <h5 class="title">
+                        การซื้อของฉัน
+                        @if($order->status == 'pending')
+                        (<span class="badge badge-light">รอการอนุมัติ</span>)
+                        @elseif($order->status == 'payment' && $order->slip_image_id == null)
+                        (<span class="badge badge-secondary">รอการชำระเงิน</span>)
+                        @elseif($order->status == 'payment' && $order->slip_image_id != null)
+                        (<span class="badge badge-warning">รอยืนยันการชำระเงิน</span>)
+                        @elseif($order->status == 'success')
+                        (<span class="badge badge-success">สำเร็จ</span>)
+                        @elseif($order->status == 'cancle')
+                        (<span class="badge badge-danger">ยกเลิก</span>)
+                        @endif
+                    </h5>
                     <span>รายระเอียดการสั่งซื้อ หมายเลข {{ Str::limit($order->slug, 10, "") }}</span>
                     <hr>
                 </div>
@@ -22,11 +35,9 @@
                                     <th width="160" class="text-right">
                                         ราคา (บาท)
                                     </th>
-                                     <!--
                                     <th width="110" class="text-right">
                                         จำนวน
                                     </th>
-                                    -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -45,15 +56,12 @@
                                         </figure>
                                     </td>
                                     <td id="price" class="text-right">
-                                        <span id="base_price">{{ number_format($product->pivot->order_price) }}</span> 
-                                        <!--/ {{ $product->unit }}-->
+                                        <span id="base_price">{{ number_format($product->pivot->order_price) }}</span>
                                     </td>
-                                    <!--
                                     <td id="quantity" class="text-right">
-                                        <span id="base_price">{{ number_format($product->pivot->sale_quantity) }}</span> 
-                                        {{ $product->unit }}
+                                        <span id="base_price">{{ number_format($product->pivot->sale_quantity) }}</span>
+                                        {{ $product->pivot->sale_unit }}
                                     </td>
-                                    -->
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -65,13 +73,15 @@
             <hr>
             <br>
             <div class="row">
+                <div class="col-md-12">
+                    <h5>แนบหลักฐานการชำระเงิน</h5>
+                </div>
                 <div class="col-md-6">
                     {!! Form::open(['url' => 'customer/order/'. $order->slug .'/slip', 'method' => 'put', 'files' => 'true']) !!}
                         <div class="form-group">
-                            {!! Form::label('slip_image', 'Slip Image') !!}
                             {!! Form::file('slip_image', ['accept'=>'image/*', 'class' => 'form-control', 'value' => 'Choose a slip image']) !!}
                         </div>
-                        <button type="submit" class="btn btn-primary">แนบสลิป</button>
+                        <button type="submit" class="btn btn-primary" @if($order->status == 'pending')disabled @endif>แนบสลิป</button>
                     {!! Form::close() !!}
                 </div>
                 <div class="col-md-6">

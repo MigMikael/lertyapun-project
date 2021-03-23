@@ -62,6 +62,7 @@ Route::group(['prefix' => 'customer', 'middleware' => 'customerAuth'], function 
         Route::put('password', [CustomerController::class, 'updatePassword']);
         Route::get('order', [OrderController::class, 'indexOrder']);
         Route::post('order', [OrderController::class, 'storeOrder']);
+        Route::post('order/search', [OrderController::class, 'searchOrder']);
         Route::get('order/{order:slug}', [OrderController::class, 'showOrder']);
         Route::put('order/{order:slug}/slip', [OrderController::class, 'addSlipToOrder']);
 
