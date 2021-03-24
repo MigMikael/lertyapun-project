@@ -61,6 +61,7 @@
                 <th scope="col">ชื่อลูกค้า</th>
                 <th scope="col" class="text-right">ยอดรวมทั้งหมด (บาท)</th>
                 <th scope="col" class="text-center">สถานะคำสั่งซื้อ</th>
+                <th scope="col" class="text-center">สั่งซื้อเมื่อ</th>
                 {{-- <th scope="col" class="text-center">การจัดการ</th> --}}
             </tr>
             </thead>
@@ -92,6 +93,7 @@
                             <span class="badge badge-danger">ยกเลิก</span>
                             @endif
                         </td>
+                        <td>{{ \Carbon\Carbon::parse($order->order_date)->format('d/m/y - h:m') }}</td>
                         {{-- <td class="text-center">
                             <div class="dropdown">
                                 <button type="button" class="btn btn-default btn-sm" data-toggle="dropdown" onclick="event.preventDefault()'">

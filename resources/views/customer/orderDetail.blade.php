@@ -7,8 +7,8 @@
         <div style="padding: 50px;">
             <div class="row">
                 <div class="col-md-12">
-                    <h5 class="title">
-                        การซื้อของฉัน
+                    <h4 class="title">
+                        รายระเอียดการสั่งซื้อหมายเลข {{ $order->slug }}
                         @if($order->status == 'pending')
                         (<span class="badge badge-light">รอการอนุมัติ</span>)
                         @elseif($order->status == 'payment' && $order->slip_image_id == null)
@@ -20,9 +20,12 @@
                         @elseif($order->status == 'cancle')
                         (<span class="badge badge-danger">ยกเลิก</span>)
                         @endif
-                    </h5>
-                    <span>รายระเอียดการสั่งซื้อ หมายเลข {{ Str::limit($order->slug, 10, "") }}</span>
-                    <hr>
+                    </h4>
+                    <span>นำหนักสินค้าโดยประมาณ {{ number_format($order->weight) }} กรัม</span>
+                </div>
+
+                <div class="col-md-12">
+                    <br>
                 </div>
                 <div class="col-md-12">
                     <div class="table-responsive">
@@ -75,6 +78,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <h5>แนบหลักฐานการชำระเงิน</h5>
+                    @if($order->status == 'pending')
+                    <p>(กรุณารออนุมัติคำสั่งซื้อ ก่อนแนบหลักฐานการโอนเงิน)</p>
+                    @endif
                 </div>
                 <div class="col-md-6">
                     {!! Form::open(['url' => 'customer/order/'. $order->slug .'/slip', 'method' => 'put', 'files' => 'true']) !!}
@@ -84,9 +90,11 @@
                         <button type="submit" class="btn btn-primary" @if($order->status == 'pending')disabled @endif>แนบสลิป</button>
                     {!! Form::close() !!}
                 </div>
-                <div class="col-md-6">
+                <div id="aniimated-thumbnials" class="col-md-6">
                     @if($order->slip_image_id != null)
-                    <img class="img-md" src="{{ url('image/thumbnail/'.$order->slipImage->slug) }}">
+                    <a class="col-md-2" href="{{ url('image/show/'.$order->slipImage->slug) }}">
+                        <img src="{{ url('image/thumbnail/'.$order->slipImage->slug) }}" style="width: 100%" class="img-fluid" alt="Slip from order id {{ $order->slug }}">
+                    </a>
                     @endif
                 </div>
             </div>

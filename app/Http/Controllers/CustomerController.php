@@ -363,7 +363,7 @@ class CustomerController extends Controller
             Address::where('customer_id', $customer->id)->delete();
             Address::create($newAddress);
 
-            return redirect('customer/address')->with('success', 'Edit Success');
+            return redirect('customer/address')->with('success', 'บันทึกข้อมูลสำเร็จ');
         } else {
             return redirect('login');
         }

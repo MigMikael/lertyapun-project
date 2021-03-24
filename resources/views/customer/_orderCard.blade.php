@@ -22,12 +22,16 @@
                         @endif
                     </strong>
                 </div>
-                @if ($order->payment_date != null)
+
                 <label>
-                    <strong>ชำระเงินเมื่อ</strong>
+                    <strong>ชำระเงินเมื่อ </strong>
+                    @if ($order->payment_date != null)
                     {{ \Carbon\Carbon::parse($order->payment_date)->format('d/m/Y - h:m') }} น.
+                    @else
+                     -
+                    @endif
                 </label>
-                @endif
+
                 <a class="btn btn-secondary btn-block" href="{{ url('customer/order/'.$order->slug) }}">ดูรายละเอียด</a>
             </div>
         </div>

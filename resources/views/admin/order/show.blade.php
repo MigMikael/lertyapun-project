@@ -1,5 +1,10 @@
 @extends('template.admin')
 
+@section('head')
+<link href="{{ URL::asset('css/lightgallery.min.css') }}" rel="stylesheet">
+<script src="{{ URL::asset('js/lightgallery-all.min.js') }}"></script>
+@endsection
+
 @section('content')
 <div class="admin-container">
     <div class="row">
@@ -32,7 +37,6 @@
                     <th scope="col">ชื่อสินค้า</th>
                     <th scope="col">ราคา (บาท)</th>
                     <th scope="col">จำนวน</th>
-                    <th scope="col">หน่วย</th>
                 </tr>
             </thead>
             <tbody>
@@ -44,12 +48,19 @@
                         </td>
                         <td>{{ $product->name }}</td>
                         <td>{{ number_format($product->pivot->order_price) }}</td>
-                        <td>{{ number_format($product->pivot->sale_quantity) }}</td>
-                        <td>{{ $product->pivot->sale_unit }}</td>
+                        <td>
+                            {{ number_format($product->pivot->sale_quantity) }} {{ $product->pivot->sale_unit }} ({{ $product->pivot->quantityPerUnit * $product->pivot->sale_quantity }} ชิ้น)
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <h5>นำหนักสินค้าโดยประมาณ {{ number_format($order->weight) }} กรัม</h5>
+        </div>
     </div>
     <hr>
     <div class="row">
@@ -64,12 +75,20 @@
         </div>
     </div>
     <hr>
-    <div class="row">
-        <div class="col-md-12">
-            @if($order->slip_image_id != null)
-                <img class="img-md" src="{{ url('image/thumbnail/'.$order->slipImage->slug) }}">
-            @endif
-        </div>
+    <div id="aniimated-thumbnials" class="row">
+        @if($order->slip_image_id != null)
+        <a class="col-md-2" href="{{ url('image/show/'.$order->slipImage->slug) }}">
+            <img src="{{ url('image/thumbnail/'.$order->slipImage->slug) }}" style="width: 100%" class="img-fluid" alt="Slip from order id {{ $order->slug }}">
+        </a>
+        @endif
     </div>
 </div>
+@endsection
+
+@section('script')
+    <script>
+        $('#aniimated-thumbnials').lightGallery({
+            thumbnail:true
+        });
+    </script>
 @endsection

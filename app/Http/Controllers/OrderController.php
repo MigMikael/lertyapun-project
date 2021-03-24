@@ -13,6 +13,7 @@ use App\Models\CustomerProduct;
 use App\Models\OrderDetail;
 use App\Models\ProductUnit;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 class OrderController extends Controller
 {
@@ -224,6 +225,7 @@ class OrderController extends Controller
 
         $orders = Order::where('customer_id', $customer->id)
             ->where("slug", "like", "%".$query."%")
+            ->orderBy('orders.updated_at', 'DESC')
             ->get();
         // return $orders;
         return view('customer.order', [
@@ -259,6 +261,7 @@ class OrderController extends Controller
         $product_quantity = $request->get('product_quantity');
         $units = $request->get('unit');
 
+        $sumWeight = 0;
         $sumTotalPrice = 0;
         $sumTotalDiscount = 0;
         $sumFinalPrice = 0;
@@ -277,6 +280,8 @@ class OrderController extends Controller
             if($baseQuantity > $product->quantity) {
                 return response()->json(['errors' => 'จำนวนสินค้าเกินกว่าในสต็อก กรุณารีเฟรชหน้าใหม่อีกครั้ง'], 422);
             }
+            $sumWeight += $this->calculateOrderWeight($product, $baseQuantity);
+
             $totalPrice = $productUnit->pricePerUnit * $quantity;
             $sumTotalPrice += $totalPrice;
 
@@ -303,9 +308,10 @@ class OrderController extends Controller
             'slug' => $stringGenerator->generate(12),
             'total_amount' => $sumFinalPrice,
             'status' => 'pending',
-            'order_date' => \Carbon\Carbon::now(),
+            'order_date' => Carbon::now(),
             'payment_method' => 'direct transfer',
             'customer_id' => $customer->id,
+            'weight' => $sumWeight,
         ];
 
         $order = Order::create($newOrder);
@@ -385,5 +391,10 @@ class OrderController extends Controller
         $order->save();
 
         return redirect()->back();
+    }
+
+    private function calculateOrderWeight(Product $product, $quantity)
+    {
+        return $product->weight * $quantity;
     }
 }

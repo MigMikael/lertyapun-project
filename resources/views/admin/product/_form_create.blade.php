@@ -46,7 +46,7 @@
     </div>
     <input type="text" class="form-control" placeholder="" name="weight" required>
     <div class="input-group-prepend">
-        <span class="input-group-text">Kg</span>
+        <span class="input-group-text">กรัม</span>
     </div>
 </div>
 

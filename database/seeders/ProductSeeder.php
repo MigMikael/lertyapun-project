@@ -33,6 +33,7 @@ class ProductSeeder extends Seeder
             'unit' => 'ขวด',
             'image_id' => 4,
             'status' => 'active',
+            'weight' => 50
         ]);
         DB::table('product_units')->insert([
             'product_id' => 1,
@@ -65,6 +66,7 @@ class ProductSeeder extends Seeder
             'unit' => 'หลอด',
             'image_id' => 5,
             'status' => 'active',
+            'weight' => 7
         ]);
         DB::table('product_units')->insert([
             'product_id' => 2,
