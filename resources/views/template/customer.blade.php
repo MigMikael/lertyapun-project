@@ -17,6 +17,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
         <link href="{{ URL::asset('css/landing-page.css') }}" rel="stylesheet">
         <link href="{{ URL::asset('css/app.css') }}" rel="stylesheet">
+        <script src="{{ URL::asset('vendor/jquery/jquery.min.js') }}"></script>
+
         @yield('head')
     </head>
     <body>
@@ -36,7 +38,6 @@
         @include('customer._errorModal')
         @yield('content')
 
-        <script src="{{ URL::asset('vendor/jquery/jquery.min.js') }}"></script>
         <script src="{{ URL::asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script>
             $( document ).ready(function(){
@@ -48,7 +49,7 @@
                         $('#productCount').text(result.productCount);
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
-                        var errorMsg = 'Ajax request failed: ' + xhr.responseText;
+                        var errorMsg = 'request failed: ' + xhr.responseText;
                         $('#content').html(errorMsg);
                     }
                 });

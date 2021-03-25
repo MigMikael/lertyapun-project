@@ -1,5 +1,10 @@
 @extends('template.customer')
 
+@section('head')
+    <link href="{{ URL::asset('css/lightgallery.min.css') }}" rel="stylesheet">
+    <script src="{{ URL::asset('js/lightgallery-all.min.js') }}"></script>
+@endsection
+
 @section('content')
 <section class="section-page-top">
     <div class="container">
@@ -61,11 +66,28 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+            </div>
+        </div>
+        <div id="aniimated-thumbnials" class="row">
+            @foreach($productImages as $productImage)
+            <a class="col-md-1" href="{{ url('image/show/'.$productImage->slug) }}">
+                <img src="{{ url('image/thumbnail/'.$productImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $product->name }}">
+            </a>
+            @endforeach
+        </div>
     </div>
 </section>
 @endsection
 
 @section('script')
+<script>
+    $('#aniimated-thumbnials').lightGallery({
+        thumbnail:true
+    })
+</script>
 <script>
     $("#buyProduct").click(function(e) {
         e.preventDefault();

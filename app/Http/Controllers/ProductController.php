@@ -10,6 +10,7 @@ use App\Models\Tag;
 use App\Models\CategoryProduct;
 use App\Models\ProductPromotion;
 use App\Models\ProductTag;
+use App\Models\ProductImage;
 use App\Models\ProductUnit;
 use App\Models\Promotion;
 use App\Traits\ImageTrait;
@@ -155,6 +156,23 @@ class ProductController extends Controller
             ProductUnit::create($newProductUnit);
         }
 
+
+        if ($request->hasFile('additional_image')) {
+            $limit = 5;
+            $files = $request->file('additional_image');
+            foreach ($files as $index => $file) {
+                if ($index == $limit) {
+                    break;
+                }
+                $image = $this->storeImage($file, "");
+                $product_image = [
+                    'product_id' => $product->id,
+                    'image_id' => $image->id
+                ];
+               ProductImage::create($product_image);
+           }
+        }
+
         return redirect()
             ->action([ProductController::class, 'index'])
             ->with('success', 'Create Success');
@@ -177,7 +195,9 @@ class ProductController extends Controller
         $promotions = Promotion::all()->pluck('name', 'slug');
         $productPromotions = $product->promotions()->pluck('name');
 
-        // return $categories->toJson();
+        $productImages = $product->detailImages()->get();
+
+        // return $productImages;
         return view('admin.product.show', [
             'product' => $product,
             'categories' => $categories,
@@ -187,6 +207,7 @@ class ProductController extends Controller
             'tags' => $tags,
             'productTags' => $productTags,
             'status' => $this->productStatusTH,
+            'productImages' => $productImages,
         ]);
     }
 
@@ -198,7 +219,13 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('admin.product.edit', ['product' => $product, 'status' => $this->productStatusTH]);
+        $productImages = $product->detailImages()->get();
+
+        return view('admin.product.edit', [
+            'product' => $product,
+            'status' => $this->productStatusTH,
+            'productImages' => $productImages,
+        ]);
     }
 
     /**
@@ -245,6 +272,24 @@ class ProductController extends Controller
             $productUnit->quantityPerUnit = $data['quantityPerUnit'][$i];
             $productUnit->save();
         }
+
+        if ($request->hasFile('additional_image')) {
+            ProductImage::where('product_id', '=', $product->id)->delete();
+
+            $limit = 5;
+            $files = $request->file('additional_image');
+            foreach ($files as $index => $file) {
+                if ($index == $limit) {
+                    break;
+                }
+                $image = $this->storeImage($file, "");
+                $product_image = [
+                    'product_id' => $product->id,
+                    'image_id' => $image->id
+                ];
+                ProductImage::create($product_image);
+            }
+         }
 
         return redirect()
             ->action([ProductController::class, 'index'])
@@ -425,8 +470,12 @@ class ProductController extends Controller
             ->where('status', 'active')
             ->with('tags')
             ->first();
+
+        $productImages = $product->detailImages()->get();
+
         return view('customer.show', [
-            'product' => $product
+            'product' => $product,
+            'productImages' => $productImages,
         ]);
     }
 

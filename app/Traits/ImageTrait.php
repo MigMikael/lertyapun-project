@@ -91,13 +91,13 @@ trait ImageTrait
             $width = '1920';
         }else{
             // default value
-            if ($width > 400) {
+            if ($width > 600) {
                 if ($width == $height) {
-                    $height = '400';
-                    $width = '400';
+                    $height = '600';
+                    $width = '600';
                 } else {
-                    $height = strval(($height / $width) * 400);
-                    $width = '400';
+                    $height = strval(($height / $width) * 600);
+                    $width = '600';
                 }
             }
             // Log::info($width);

@@ -212,7 +212,7 @@ body.loading .overlay{
     background-color: #2e6bd3;
     border-color: #2e6bd3;
   }
-  
+
   .page-link {
     position: relative;
     display: block;
@@ -238,13 +238,17 @@ body.loading .overlay{
     margin-right: 15px;
 }
 
+.table-hover > tbody > tr {
+    cursor: pointer;
+}
+
 @media (max-width: 767.98px) {
     .register-wrapper {
-    margin: 15px;
+        margin: 15px;
     }
 
     section {
-    padding: 25px 0;
+        padding: 25px 0;
     }
 }
 

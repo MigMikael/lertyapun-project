@@ -19,7 +19,7 @@
     {!! Form::label('unit', 'Unit') !!}
     {!! Form::text('unit', null, ['placeholder' => 'Unit', 'class' => 'form-control']) !!}
 </div> --}}
-{!! Form::label('unit', 'หน่วย (เล็กที่สุด)') !!}
+{!! Form::label('unit', 'หน่วยพิ้นฐาน') !!}
 <div class="input-group" style="margin-bottom: 3%">
     {!! Form::select('unitName[]', config('constants.productUnit'), $product->units['0']->unitName, ['class' => 'form-control base-unit-name']) !!}
 
@@ -62,10 +62,22 @@
     {!! Form::select('status', $status, null, ['class' => 'form-control']) !!}
 </div>
 
-<div class="form-group" style="margin-bottom: 3%">
+{{-- <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('product_image', 'ภาพสินค้า') !!} (ขั้นต่ำ 500 x 500px)
     {!! Form::file('product_image', ['accept'=>'image/*', 'class' => 'form-control', 'value' => 'Choose a product image']) !!}
-</div>
+</div> --}}
+
+@include('template._inputPreview', [
+    'label' => 'ภาพสินค้า',
+    'name' => 'product_image',
+    'key' => 'productImage',
+])
+
+@include('template._inputPreviewMulti', [
+    'label' => 'ภาพสินค้าเพิ่มเติม',
+    'name' => 'additional_image',
+    'key' => 'additionalImage',
+])
 
 <script>
     $('.base-unit-name').on('change', function (e) {

@@ -4,6 +4,9 @@
     <script src="{{ URL::asset('tagify/jQuery.tagify.min.js') }}"></script>
     <link href="{{ URL::asset('tagify/tagify.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css/tag.css') }}" rel="stylesheet">
+
+    <link href="{{ URL::asset('css/lightgallery.min.css') }}" rel="stylesheet">
+    <script src="{{ URL::asset('js/lightgallery-all.min.js') }}"></script>
 @endsection
 
 @section('content')
@@ -37,6 +40,8 @@
         <div class="col-md-8 col-xs-6" style="border: 0px solid black;">
             <h1 class="mb-4">
                 {{ $product->name }}
+            </h1>
+            <p>
                 @if($product->status == 'active')
                 <span class="badge badge-success">กำลังใช้งาน</span>
                 @elseif($product->status == 'suspend')
@@ -44,7 +49,7 @@
                 @elseif($product->status == 'inactive')
                 <span class="badge badge-danger">ไม่ได้ใช้งาน</span>
                 @endif
-            </h1>
+            </p>
             <p><h5>คำอธิบาย</h5> {{ $product->description }}</p>
             <p><h5>จำนวน</h5> {{ $product->quantity }} {{ $product->units['0']['unitName'] }}</p>
 
@@ -61,6 +66,18 @@
             @endforeach
         </div>
     </div>
+    <div id="aniimated-thumbnials" class="row">
+        @foreach($productImages as $productImage)
+        <a class="col-md-1" href="{{ url('image/show/'.$productImage->slug) }}">
+            <img src="{{ url('image/thumbnail/'.$productImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $product->name }}">
+        </a>
+        @endforeach
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <hr>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-6">
             <h4 class="title">โปรโมชัน</h4>
@@ -71,7 +88,7 @@
                     value="@foreach($productPromotions as $productPro){!! $productPro !!},@endforeach"
                 />
                 <input name="product_id" type="hidden" value="{{ $product->slug }}" />
-                <button type="submit" class="btn btn-primary" style="margin-top: 5px;">เพิ่มโปรโมชัน</button>
+                <button type="submit" class="btn btn-outline-primary" style="margin-top: 5px;">เพิ่มโปรโมชัน</button>
             {!! Form::close() !!}
         </div>
         <div class="col-md-6">
@@ -83,7 +100,7 @@
                     value="@foreach($productCategories as $productCat){!! $productCat !!},@endforeach"
                 />
                 <input name="product_id" type="hidden" value="{{ $product->slug }}" />
-                <button type="submit" class="btn btn-primary" style="margin-top: 5px;">เพิ่มประเภทสินค้า</button>
+                <button type="submit" class="btn btn-outline-primary" style="margin-top: 5px;">เพิ่มประเภทสินค้า</button>
             {!! Form::close() !!}
         </div>
         {{-- <div class="col-md-4">
@@ -101,7 +118,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <hr>
+            <br>
         </div>
     </div>
     <div class="row">
@@ -109,7 +126,7 @@
             <h4 class="title">สถานะสินค้า</h4>
             {!! Form::model($product, ['url' => 'admin/products/'.$product->slug.'/status', 'method' => 'post']) !!}
                 {!! Form::select('status', $status, $product->status, ['class' => 'form-control']) !!}
-                <button type="submit" class="btn btn-primary" style="margin-top: 5px;">แก้ไขสถานะ</button>
+                <button type="submit" class="btn btn-outline-primary" style="margin-top: 5px;">แก้ไขสถานะ</button>
             {!! Form::close() !!}
         </div>
     </div>
@@ -117,6 +134,11 @@
 @endsection
 
 @section('script')
+    <script>
+        $('#aniimated-thumbnials').lightGallery({
+            thumbnail:true
+        });
+    </script>
     <script>
         $('.delete-action').click(function(e){
             e.preventDefault()

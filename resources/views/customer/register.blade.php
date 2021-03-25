@@ -91,38 +91,38 @@
                     @endif
                 </div>
                 <div class="col-md-4">
-                    @include('customer._inputPreview', [
+                    @include('template._inputPreview', [
                         'label' => 'รูปเลขที่บัตรประชาชน',
                         'name' => 'citizen_card_image',
                         'key' => 'citizenCardImage',
                     ])
 
-                    @include('customer._inputPreview', [
+                    @include('template._inputPreview', [
                         'label' => 'รูปเลขที่ใบอนุญาติร้านยา',
                         'name' => 'drug_store_approve_image',
                         'key' => 'drugStoreApproveImage',
                     ])
 
-                    @include('customer._inputPreview', [
+                    @include('template._inputPreview', [
                         'label' => 'รูปใบประกอบโรคศิลปะ',
                         'name' => 'medical_license_image',
                         'key' => 'medicalLicenseImage',
                     ])
                 </div>
                 <div class="col-md-4">
-                    @include('customer._inputPreview', [
+                    @include('template._inputPreview', [
                         'label' => 'รูปทะเบียนพาณิชย์',
                         'name' => 'commercial_register_image',
                         'key' => 'commercialRegisterImage',
                     ])
 
-                    @include('customer._inputPreview', [
+                    @include('template._inputPreview', [
                         'label' => 'รูปใบรับรองนิติบุคคล',
                         'name' => 'juristic_person_image',
                         'key' => 'juristicPersonImage',
                     ])
 
-                    @include('customer._inputPreview', [
+                    @include('template._inputPreview', [
                         'label' => 'รูปใบทะเบียนภาษีมูลค่าเพิ่ม',
                         'name' => 'vat_register_cert_image',
                         'key' => 'vatRegisterCertImage',

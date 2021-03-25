@@ -19,7 +19,7 @@
     {!! Form::label('unit', 'Unit') !!}
     {!! Form::text('unit', null, ['placeholder' => 'Unit', 'class' => 'form-control']) !!}
 </div> --}}
-{!! Form::label('unit', 'หน่วย (พิ้นฐาน)') !!}
+{!! Form::label('unit', 'หน่วยพิ้นฐาน') !!}
 <div class="input-group" style="margin-bottom: 3%">
     {!! Form::select('unitName[]', config('constants.productUnit'), null, ['class' => 'form-control base-unit-name']) !!}
 
@@ -62,10 +62,27 @@
     {!! Form::select('status', $status, null, ['class' => 'form-control']) !!}
 </div>
 
-<div class="form-group" style="margin-bottom: 3%">
+{{-- <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('product_image', 'ภาพสินค้า') !!} (ขั้นต่ำ 500 x 500px)
     {!! Form::file('product_image', ['accept'=>'image/*', 'class' => 'form-control', 'value' => 'Choose a product image']) !!}
-</div>
+</div> --}}
+
+@include('template._inputPreview', [
+    'label' => 'ภาพสินค้า',
+    'name' => 'product_image',
+    'key' => 'productImage',
+])
+
+@include('template._inputPreviewMulti', [
+    'label' => 'ภาพสินค้าเพิ่มเติม',
+    'name' => 'additional_image',
+    'key' => 'additionalImage',
+])
+
+{{-- <div class="form-group" style="margin-bottom: 3%">
+    {!! Form::label('additional_image', 'ภาพสินค้าเพิ่มเติม') !!} (ขั้นต่ำ 500 x 500px)
+    {!! Form::file('additional_image', ['accept'=>'image/*', 'class' => 'form-control', 'value' => 'Choose a product image']) !!}
+</div> --}}
 
 <script>
     $('.base-unit-name').on('change', function (e) {
