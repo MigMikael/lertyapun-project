@@ -262,15 +262,15 @@ class ProductController extends Controller
                 ->with('fail', 'Create Fail');
         }
 
+        ProductUnit::where('product_id', $product->id)->delete();
         for ($i=0; $i < count($data['unitName']); $i++) {
             $newProductUnit = [
                 'product_id' => $product->id,
                 'unitName' => $data['unitName'][$i],
+                'pricePerUnit' => $data['pricePerUnit'][$i],
+                'quantityPerUnit' => $data['quantityPerUnit'][$i]
             ];
-            $productUnit = ProductUnit::firstOrCreate($newProductUnit);
-            $productUnit->pricePerUnit = $data['pricePerUnit'][$i];
-            $productUnit->quantityPerUnit = $data['quantityPerUnit'][$i];
-            $productUnit->save();
+            ProductUnit::create($newProductUnit);
         }
 
         if ($request->hasFile('additional_image')) {

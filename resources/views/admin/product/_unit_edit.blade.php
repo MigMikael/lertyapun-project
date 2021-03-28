@@ -1,4 +1,4 @@
-{!! Form::label('unit', 'Additional Unit (จากเล็กไปใหญ่)') !!}
+{!! Form::label('unit', 'หน่วยเพิ่มเติม (กรุณากรอกเรียงจากเล็กไปใหญ่)') !!}
 <div class="p-2 border rounded @error('pricePerUnit') border-danger @enderror" style="margin-bottom: 3%">
     <div class="mb-2" id="inputGroup">
         @foreach($product->units as $productUnit)

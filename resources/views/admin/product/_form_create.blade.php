@@ -8,16 +8,8 @@
     <textarea name="description" class="form-control" placeholder="คำอธิบายสินค้า" rows="6">{{ $product->description ?? '' }}</textarea>
 </div>
 {{-- <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('price', 'Price') !!}
-    {!! Form::text('price', null, ['placeholder' => 'Price', 'class' => 'form-control']) !!}
-</div> --}}
-{{-- <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('point', 'Point') !!}
     {!! Form::text('point', null, ['placeholder' => 'Point', 'class' => 'form-control']) !!}
-</div> --}}
-{{-- <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('unit', 'Unit') !!}
-    {!! Form::text('unit', null, ['placeholder' => 'Unit', 'class' => 'form-control']) !!}
 </div> --}}
 {!! Form::label('unit', 'หน่วยพิ้นฐาน') !!}
 <div class="input-group" style="margin-bottom: 3%">
@@ -62,11 +54,6 @@
     {!! Form::select('status', $status, null, ['class' => 'form-control']) !!}
 </div>
 
-{{-- <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('product_image', 'ภาพสินค้า') !!} (ขั้นต่ำ 500 x 500px)
-    {!! Form::file('product_image', ['accept'=>'image/*', 'class' => 'form-control', 'value' => 'Choose a product image']) !!}
-</div> --}}
-
 @include('template._inputPreview', [
     'label' => 'ภาพสินค้า',
     'name' => 'product_image',
@@ -74,15 +61,10 @@
 ])
 
 @include('template._inputPreviewMulti', [
-    'label' => 'ภาพสินค้าเพิ่มเติม',
+    'label' => 'ภาพสินค้าเพิ่มเติม (สูงสุด 5 ภาพ)',
     'name' => 'additional_image',
     'key' => 'additionalImage',
 ])
-
-{{-- <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('additional_image', 'ภาพสินค้าเพิ่มเติม') !!} (ขั้นต่ำ 500 x 500px)
-    {!! Form::file('additional_image', ['accept'=>'image/*', 'class' => 'form-control', 'value' => 'Choose a product image']) !!}
-</div> --}}
 
 <script>
     $('.base-unit-name').on('change', function (e) {
