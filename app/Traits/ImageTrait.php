@@ -9,12 +9,16 @@ use Illuminate\Support\Facades\Log;
 
 trait ImageTrait
 {
+    public $thumb = 150;
+    public $small = 300;
+    public $medium = 500;
+    public $large = 1024;
+    public $origin = null;
+
     public function storeImage($file, $type)
     {
         $ex = $file->getClientOriginalExtension();
         [$width, $height] = getimagesize($file);
-        // Log::info($width);
-        // Log::info($height);
 
         Storage::disk('local')->put($file->getFilename() . '.' . $ex, File::get($file));
 
@@ -37,29 +41,18 @@ trait ImageTrait
     {
         $size = Storage::disk('local')->size($file->name);
 
-        // if (App::environment('local')) {
-        //     //windows path
-        //     $img_path = storage_path().'\\app\\'.$file->name;
-        //     $des_path = storage_path().'\\app\\cp_'.$file->name;
-        // }else{
-        //     //linux path
-        //     $img_path = storage_path().'/app/'.$file->name;
-        //     $des_path = storage_path().'/app/cp_'.$file->name;
-        // }
         $img_path = storage_path().'/app/'.$file->name;
         $des_path = storage_path().'/app/cp_'.$file->name;
 
-        if ($file->mime == 'image/jpeg')
-            //$image = imagecreatefrompng($img_path);
+        if ($file->mime == 'image/jpeg'){
             $image = imagecreatefromjpeg($img_path);
-
-        elseif ($file->mime == 'image/gif')
-            //$image = imagecreatefrompng($img_path);
+        }
+        elseif ($file->mime == 'image/gif'){
             $image = imagecreatefromgif($img_path);
-
-        elseif ($file->mime == 'image/png')
+        }
+        elseif ($file->mime == 'image/png'){
             $image = imagecreatefrompng($img_path);
-
+        }
         else return abort(500);
 
         if($size > 10000000){//         5 MB
@@ -91,28 +84,19 @@ trait ImageTrait
             $width = '1920';
         }else{
             // default value
-            if ($width > 600) {
+            if ($width > 500) {
                 if ($width == $height) {
-                    $height = '600';
-                    $width = '600';
+                    $height = '500';
+                    $width = '500';
                 } else {
-                    $height = strval(($height / $width) * 600);
-                    $width = '600';
+                    $height = strval(($height / $width) * 500);
+                    $width = '500';
                 }
             }
-            // Log::info($width);
-            // Log::info($height);
         }
 
         $img = Image::make($image)->resize($width, $height);
 
-        // if (App::environment('local')) {
-        //     //windows path
-        //     $img->save(storage_path().'\\app\\re_'.$file->name);
-        // }else{
-        //     //linux path
-        //     $img->save(storage_path().'/app/re_'.$file->name);
-        // }
         $img->save(storage_path().'/app/re_'.$file->name);
 
         $file->name = 're_'.$file->name;
@@ -123,13 +107,6 @@ trait ImageTrait
             $constraint->aspectRatio();
         });
 
-        // if (App::environment('local')) {
-        //     //windows path
-        //     $img->save(storage_path().'\\app\\thumb_'.$file->name);
-        // }else{
-        //     //linux path
-        //     $img->save(storage_path().'/app/thumb_'.$file->name);
-        // }
         $img->save(storage_path().'/app/thumb_'.$file->name);
 
         Storage::delete($old_filename);

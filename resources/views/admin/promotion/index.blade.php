@@ -58,7 +58,7 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">โปรโมชัน</th>
-                <th scope="col" class="text-center">การจัดการ</th>
+                <th scope="col" class="text-center">จัดการ</th>
               </tr>
             </thead>
             <tbody>
@@ -76,8 +76,8 @@
                                     <i class="fa fa-ellipsis-v"></i>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="{{ url('admin/promotions/'.$promotion->slug.'/edit') }}">
-                                        <i class="fas fa-edit"></i> Edit
+                                    <a class="dropdown-item text-warning" href="{{ url('admin/promotions/'.$promotion->slug.'/edit') }}">
+                                        <i class="fas fa-edit"></i> แก้ไข
                                     </a>
 
                                     {!! Form::model($promotion, [
@@ -85,7 +85,7 @@
                                         'url' => 'admin/promotions/'.$promotion->slug,
                                         'class' => '']) !!}
                                     <button class="dropdown-item text-danger delete-action">
-                                        <i class="fas fa-trash"></i> Delete
+                                        <i class="fas fa-trash"></i> ลบ
                                     </button>
                                     {!! Form::close() !!}
                                 </div>

@@ -62,7 +62,7 @@
                 <th scope="col">สถานะสินค้า</th>
                 <th scope="col" class="text-right">ราคา (บาท)</th>
                 <th scope="col" class="text-right">จำนวน</th>
-                <th scope="col" class="text-center">การจัดการ</th>
+                <th scope="col" class="text-center">จัดการ</th>
             </tr>
             </thead>
             <tbody>
@@ -87,10 +87,10 @@
                             @endif
                         </td>
                         <td class="text-right" onclick="window.location='{{ url('admin/products/'.$product->slug) }}'">
-                            {{ $product->units['0']->pricePerUnit }}
+                            {{ number_format($product->units['0']->pricePerUnit) }}
                         </td>
                         <td class="text-right" onclick="window.location='{{ url('admin/products/'.$product->slug) }}'">
-                            {{ $product->quantity }}
+                            {{ number_format($product->quantity) }} {{ $product->units['0']->unitName }}
                         </td>
                         <td class="text-center">
                             <div class="dropdown">

@@ -92,6 +92,9 @@ class CategoryController extends Controller
     {
         $products = $category->products()->get();
         $productIds = $products->pluck('id');
+
+        $page = 20;
+        $products = $category->products()->paginate($page);
         $allProducts = Product::whereNotIn('id', $productIds)->pluck('name', 'slug');
         return view('admin.category.show', [
             'category' => $category,
