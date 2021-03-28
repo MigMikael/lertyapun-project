@@ -44,12 +44,12 @@
         </div>
     </div>
     <div class="table-responsive">
-        <table class="table table-hover">
+        <table class="table">
             <thead>
               <tr>
                 <th>#</th>
                 <th>ชื่อสินค้า</th>
-                <th class="text-right">ราคา</th>
+                <th class="text-right">ราคา (บาท)</th>
                 <th class="text-right">จำนวน</th>
                 <th class="text-center">การจัดการ</th>
                 <th class="text-center">ดูข้อมูล</th>
@@ -60,8 +60,8 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $product->name }}</td>
-                    <td class="text-right">{{ $product->price }}</td>
-                    <td class="text-right">{{ $product->quantity }} {{ $product->unit }}</td>
+                    <td class="text-right">{{ $product->units['0']->pricePerUnit }}</td>
+                    <td class="text-right">{{ $product->quantity }} {{ $product->units['0']->unitName }}</td>
                     <td class="text-center">
                         {!! Form::model($product, [
                             'method' => 'delete',
@@ -69,7 +69,7 @@
                             'class' => '']) !!}
                             <button class="btn btn-danger btn-sm" type="submit">
                                 <i class="fas fa-trash"></i>
-                                นำสินค้าออก
+                                นำออก
                             </button>
                         {!! Form::close() !!}
                     </td>
@@ -82,6 +82,9 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
+    <div class="d-flex justify-content-center">
+        {{ $products->render("pagination::bootstrap-4") }}
     </div>
 </div>
 @endsection

@@ -61,7 +61,7 @@
                 <th scope="col">อีเมล</th>
                 <th scope="col">เบอร์โทรศัพท์</th>
                 <th scope="col" class="text-center">สถานะ</th>
-                <th scope="col" class="text-center">การจัดการ</th>
+                {{-- <th scope="col" class="text-center">จัดการ</th> --}}
             </tr>
             </thead>
             <tbody>
@@ -90,14 +90,14 @@
                             <span class="badge badge-danger">รีเซ็ตรหัสผ่าน</span>
                             @endif
                         </td>
-                        <td class="text-center">
+                        {{-- <td class="text-center">
                             <div class="dropdown">
                                 <button type="button" class="btn btn-default btn-sm" data-toggle="dropdown" onclick="event.preventDefault()'">
                                     <i class="fa fa-ellipsis-v"></i>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="{{ url('admin/customers/'.$customer->slug.'/edit') }}">
-                                        <i class="fas fa-edit"></i> Edit
+                                    <a class="dropdown-item text-warning" href="{{ url('admin/customers/'.$customer->slug.'/edit') }}">
+                                        <i class="fas fa-edit"></i> แก้ไข
                                     </a>
                                     <div class="dropdown-divider"></div>
                                     {!! Form::model($customer, [
@@ -105,12 +105,12 @@
                                         'url' => 'admin/customers/'.$customer->slug,
                                         'class' => '']) !!}
                                     <button class="dropdown-item text-danger delete-action">
-                                        <i class="fas fa-trash"></i> Delete
+                                        <i class="fas fa-trash"></i> ลบ
                                     </button>
                                     {!! Form::close() !!}
                                 </div>
                             </div>
-                        </td>
+                        </td> --}}
                     </tr>
                 @endforeach
             </tbody>
