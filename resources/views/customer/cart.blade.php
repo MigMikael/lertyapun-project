@@ -41,7 +41,7 @@
                                                 <td id="name" class="align-middle">
                                                     <figure class="itemside">
                                                         <div class="aside">
-                                                            <img class="img-sm" src="{{ url('image/thumbnail/'.$product->image->slug) }}">
+                                                            <img class="img-sm" src="{{ url('image/show/'.$product->image->slug) }}">
                                                         </div>
                                                         <figcaption class="info">
                                                             <a href="{{ url('customer/products/'.$product->slug) }}" class="title text-dark">

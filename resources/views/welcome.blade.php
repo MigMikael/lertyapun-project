@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- Masthead -->
-<header class="masthead text-white text-center">
+<header class="masthead text-white text-center bg-landing-page">
     <div class="masthead-overlay"></div>
     <div class="container">
         <div class="row">
@@ -133,7 +133,7 @@
                 <form method="GET" action="{{ url('register') }}">
                     <div class="form-row">
                         <div class="col-md-8">
-                            <input type="email" name="email" class="form-control form-control-lg form-group" placeholder="Enter your email...">
+                            <input type="email" name="email" class="form-control form-control-lg form-group" placeholder="กรอกอีเมล์ของท่าน...">
                         </div>
                         <div class="col-md-4">
                             <button type="submit" class="btn btn-block btn-lg btn-primary form-group">สมัครสมาชิก</button>
@@ -145,48 +145,61 @@
     </div>
 </section>
 
+<section class="testimonials text-center bg-white">
+    <div class="container">
+        <h2 class="mb-5">ติดต่อเรา</h2>
+        <div class="row">
+            <div class="col-md-6 col-lg-3">
+                <div class="contact-box">
+                    <h5><i class="fas fa-map-marker-alt text-primary"></i> เลิศยาภัณฑ์</h5>
+                   <p>384-386 ตำบลท่าเรือ<br>
+                    อำเภอท่ามะกา จังหวัดกาญจนบุรี 71130</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="contact-box">
+                    <h5><i class="fas fa-phone-alt text-primary"></i> เบอร์โทรศัพท์</h5>
+                    <p>034 561 128</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="contact-box">
+                    <h5><i class="fas fa-envelope text-primary"></i> อีเมล์</h5>
+                   <p>lertyaphan.official@gmail.com</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="contact-box">
+                    <h5><i class="fas fa-clock text-primary"></i> เวลาเปิดทำการ</h5>
+                    <p class="mb-0">จันทร์ - ศุกร์ : 7.30 - 19.00 น</p>
+                    <p class="mb-0">เสาร์ : 7.30 - 12.00 น.</p>
+                    <p>อาทิตย์ : 7.30 - 19.00 น.</p>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <div style="width: 100%"><iframe width="100%" height="450" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=384-386%20%E0%B8%97%E0%B9%88%E0%B8%B2%E0%B9%80%E0%B8%A3%E0%B8%B7%E0%B8%AD%20Tha%20Maka%20District,%20Kanchanaburi%2071130+(%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%82%E0%B8%B2%E0%B8%A2%E0%B8%A2%E0%B8%B2%E0%B9%80%E0%B8%A5%E0%B8%B4%E0%B8%A8%E0%B8%A2%E0%B8%B2%E0%B8%A0%E0%B8%B1%E0%B8%93%E0%B8%91%E0%B9%8C%20%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%A2%E0%B8%B2%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2%E0%B8%96%E0%B8%B9%E0%B8%81%20%E0%B8%9B%E0%B8%A5%E0%B8%B5%E0%B8%81-%E0%B8%AA%E0%B9%88%E0%B8%87)&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Footer -->
-<footer class="footer bg-light">
+<footer class="footer">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
-                <ul class="list-inline mb-2">
-                    <li class="list-inline-item">
-                        <a href="{{ url('about') }}">About</a>
-                    </li>
-                    <li class="list-inline-item">&sdot;</li>
-                    <li class="list-inline-item">
-                        <a href="{{ url('contact') }}">Contact</a>
-                    </li>
-                    <li class="list-inline-item">&sdot;</li>
-                    <li class="list-inline-item">
-                        <a href="{{ url('term_of_use') }}">Terms of Use</a>
-                    </li>
-                    <li class="list-inline-item">&sdot;</li>
-                    <li class="list-inline-item">
-                        <a href="{{ url('privacy_policy') }}">Privacy Policy</a>
-                    </li>
-                </ul>
-                <p class="text-muted small mb-4 mb-lg-0">&copy; LERTYAPHAN 2020. All Rights Reserved.</p>
+            <div class="col-md-6">
+                <div class="pull-left">
+                    <p class="text-muted text-center">&copy; LERTYAPHAN 2021. All Rights Reserved.</p>
+                </div>
             </div>
-            <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
-                <ul class="list-inline mb-0">
-                    <li class="list-inline-item mr-3">
-                        <a href="#">
-                        <i class="fab fa-facebook fa-2x fa-fw"></i>
-                        </a>
-                    </li>
-                    <li class="list-inline-item mr-3">
-                        <a href="#">
-                        <i class="fab fa-twitter-square fa-2x fa-fw"></i>
-                        </a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="#">
-                        <i class="fab fa-instagram fa-2x fa-fw"></i>
-                        </a>
-                    </li>
-                </ul>
+            <div class="col-md-6">
+                <div class="pull-right">
+                    <a href="https://web.facebook.com/Lertyaphan">
+                        <i class="fab fa-facebook fa-2x fa-fw text-primary"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

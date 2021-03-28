@@ -30,7 +30,7 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ URL::asset('img/logo.jpg') }}" style="width: 60px; height: 60px;">เลิศยาภัณฑ์
                 </a>
-                <a class="btn btn-login" href="{{ url('login') }}">เข้าสู่ระบบ</a>
+                <a class="btn btn-lg btn-secondary" href="{{ url('login') }}">เข้าสู่ระบบ</a>
             </div>
         </nav>
         @endif

@@ -73,7 +73,7 @@
                                 <div class="profile-img-upload">
                                     @if($customer->avatarImage != null)
                                     <div class="profile-img-wrapper">
-                                        <div class="profile-img" style="background-image: url('{{ url('image/thumbnail/'.$customer->avatarImage->slug) }}');"></div>
+                                        <div class="profile-img" style="background-image: url('{{ url('image/show/'.$customer->avatarImage->slug) }}');"></div>
                                     </div>
                                     <div class="profile-btn">
                                         {!! Form::label('avatar_image', 'รูปประจำตัว') !!}

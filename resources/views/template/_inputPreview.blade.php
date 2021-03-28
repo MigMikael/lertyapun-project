@@ -6,19 +6,27 @@
                 onchange="document.getElementById('{{ $name }}').src = window.URL.createObjectURL(this.files[0]); document.getElementById('{{ $name.'_pre' }}').href = window.URL.createObjectURL(this.files[0])">
         </div>
     </div>
-    <div class="rounded-lg text-center image-preview">
-        @if(Request::is('customer/pending/*/edit') && $customer->$key != null)
-        <a id="{{ $name."_pre" }}" href="{{ url('image/show/'.$customer->$key->slug) }}">
-            <img id="{{ $name }}" src="{{ url('image/thumbnail/'.$customer->$key->slug) }}" style="height: 150px" />
-        </a>
+    <div class="rounded-lg image-preview">
+        <div class="row">
+            @if(Request::is('customer/pending/*/edit') && $customer->$key != null)
+            <div class="col-md-4 form-group">
+                <a id="{{ $name."_pre" }}" href="{{ url('image/show/'.$customer->$key->slug) }}">
+                    <img id="{{ $name }}" src="{{ url('image/show/'.$customer->$key->slug) }}" style="width: 100%;" />
+                </a>
+            </div>
         @elseif(Request::is('admin/products/*/edit'))
-        <a id="{{ $name."_pre" }}" href="{{ url('image/show/'.$product->image->slug) }}">
-            <img id="{{ $name }}" src="{{ url('image/thumbnail/'.$product->image->slug) }}" style="height: 150px" />
-        </a>
+        <div class="col-md-4 form-group">
+            <a id="{{ $name."_pre" }}" href="{{ url('image/show/'.$product->image->slug) }}">
+                <img id="{{ $name }}" src="{{ url('image/show/'.$product->image->slug) }}" style="width: 100%;" />
+            </a>
+        </div>
         @else
-        <a id="{{ $name."_pre" }}" href="{{ $placeholderImage }}">
-            <img id="{{ $name }}" src="{{ $placeholderImage }}" class="img-fluid" style="height: 150px" />
-        </a>
+        <div class="col-md-4 form-group">
+            <a id="{{ $name."_pre" }}" href="{{ $placeholderImage }}">
+                <img id="{{ $name }}" src="{{ $placeholderImage }}" class="img-fluid" style="width: 100%;" />
+            </a>
+        </div>
         @endif
+        </div>
     </div>
 </div>

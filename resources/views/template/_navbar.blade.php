@@ -28,7 +28,7 @@
                 <input name="query" type="text" class="form-control" placeholder="ค้นหา...">
                 @endif
                 <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+                    <button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button>
                 </div>
             {!! Form::close() !!}
 

@@ -44,37 +44,37 @@
     <div id="aniimated-thumbnials" class="row">
         @if ($customer->citizenCardImage != null)
         <a class="col-md-2" href="{{ url('image/show/'.$customer->citizenCardImage->slug) }}">
-            <img src="{{ url('image/thumbnail/'.$customer->citizenCardImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $customer->first_name }}">
+            <img src="{{ url('image/show/'.$customer->citizenCardImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $customer->first_name }}">
         </a>
         @endif
 
         @if ($customer->drugStoreApproveImage != null)
         <a class="col-md-2" href="{{ url('image/show/'.$customer->drugStoreApproveImage->slug) }}">
-            <img src="{{ url('image/thumbnail/'.$customer->drugStoreApproveImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $customer->first_name }}">
+            <img src="{{ url('image/show/'.$customer->drugStoreApproveImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $customer->first_name }}">
         </a>
         @endif
 
         @if ($customer->medicalLicenseImage != null)
         <a class="col-md-2" href="{{ url('image/show/'.$customer->medicalLicenseImage->slug) }}">
-            <img src="{{ url('image/thumbnail/'.$customer->medicalLicenseImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $customer->first_name }}">
+            <img src="{{ url('image/show/'.$customer->medicalLicenseImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $customer->first_name }}">
         </a>
         @endif
 
         @if ($customer->commercialRegisterImage != null)
         <a class="col-md-2" href="{{ url('image/show/'.$customer->commercialRegisterImage->slug) }}">
-            <img src="{{ url('image/thumbnail/'.$customer->commercialRegisterImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $customer->first_name }}">
+            <img src="{{ url('image/show/'.$customer->commercialRegisterImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $customer->first_name }}">
         </a>
         @endif
 
         @if ($customer->juristicPersonImage != null)
         <a class="col-md-2" href="{{ url('image/show/'.$customer->juristicPersonImage->slug) }}">
-            <img src="{{ url('image/thumbnail/'.$customer->juristicPersonImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $customer->first_name }}">
+            <img src="{{ url('image/show/'.$customer->juristicPersonImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $customer->first_name }}">
         </a>
         @endif
 
         @if ($customer->vatRegisterCertImage != null)
         <a class="col-md-2" href="{{ url('image/show/'.$customer->vatRegisterCertImage->slug) }}">
-            <img src="{{ url('image/thumbnail/'.$customer->vatRegisterCertImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $customer->first_name }}">
+            <img src="{{ url('image/show/'.$customer->vatRegisterCertImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $customer->first_name }}">
         </a>
         @endif
     </div>
@@ -88,7 +88,7 @@
             </div>
             <div class="form-group">
                 {!! Form::label('remark', 'หมายเหตุ') !!}
-                <textarea name="remark" class="form-control" placeholder="เหตุผลที่เจ้าหน้าที่ไม่อนุมัติการสมัครของผู้ใช้งาน">{{ $customer->remark ?? '' }}</textarea>
+                <textarea name="remark" class="form-control" placeholder="โปรดระบุเหตุผลหากไม่อนุมัติผู้ใช้งาน">{{ $customer->remark ?? '' }}</textarea>
             </div>
             <button type="submit" class="btn btn-primary btn-block">ยืนยัน</button>
             {!! Form::close() !!}

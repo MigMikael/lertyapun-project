@@ -1,7 +1,7 @@
 <nav id="sidebar">
     <div class="p-4 pt-5">
         @if($customer->avatarImage != null)
-        <img src="{{ url('image/thumbnail/'.$customer->avatarImage->slug) }}" class="img logo rounded-circle mb-5">
+        <img src="{{ url('image/show/'.$customer->avatarImage->slug) }}" class="img logo rounded-circle mb-5">
         @else
         <img src="{{ URL::asset('img/avatar.png') }}" class="img logo rounded-circle mb-5">
         @endif

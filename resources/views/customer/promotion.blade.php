@@ -2,12 +2,12 @@
 
 @section('content')
 <!-- Masthead -->
-<header class="masthead text-white text-center">
-    <div class="overlay"></div>
+<header class="masthead text-white text-center bg-promotion">
+    <div class="masthead-overlay"></div>
     <div class="container">
         <div class="row">
             <div class="col-xl-9 mx-auto">
-                <h1>BANNER</h1>
+                <h1>โปรโมชันทั้งหมด</h1>
             </div>
         </div>
     </div>

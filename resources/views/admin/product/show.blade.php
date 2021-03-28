@@ -15,7 +15,6 @@
         <div class="col-md-6">
             <h4 class="title">ข้อมูลสินค้า</h4>
             <span>เจ้าหน้าที่สามารถดูข้อมูลสินค้า</span>
-            <hr>
         </div>
         <div class="col-md-6">
             <div class="pull-right">
@@ -26,41 +25,41 @@
                     <a class="btn btn-warning" href="{{ url('admin/products/'.$product->slug.'/edit') }}">
                         <i class="fas fa-edit"></i> แก้ไข
                     </a>
-                <button class="btn btn-danger delete-action">
+                <button class="btn btn-danger delete-action" style="margin-left: 15px;">
                     <i class="fas fa-trash"></i> ลบ
                 </button>
                 {!! Form::close() !!}
             </div>
         </div>
+        <div class="col-md-12">
+            <hr>
+        </div>
     </div>
     <div class="row form-group">
         <div class="col-md-4 col-xs-6" style="border: 0px solid black;">
-            <img src="{{ url('image/show/'.$product->image->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $product->name }}">
+            <img class="form-group" src="{{ url('image/show/'.$product->image->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $product->name }}">
         </div>
         <div class="col-md-8 col-xs-6" style="border: 0px solid black;">
-            <h1 class="mb-4">
-                {{ $product->name }}
-            </h1>
-            <p>
-                @if($product->status == 'active')
-                <span class="badge badge-success">กำลังใช้งาน</span>
+            <h1>
+                {{ $product->name }}  @if($product->status == 'active')
+                <span class="badge badge-success" style="font-size: 16px;">กำลังใช้งาน</span>
                 @elseif($product->status == 'suspend')
-                <span class="badge badge-secondary">ระงับการใช้งาน</span>
+                <span class="badge badge-secondary" style="font-size: 16px;">ระงับการใช้งาน</span>
                 @elseif($product->status == 'inactive')
-                <span class="badge badge-danger">ไม่ได้ใช้งาน</span>
+                <span class="badge badge-danger" style="font-size: 16px;">ไม่ได้ใช้งาน</span>
                 @endif
-            </p>
+            </h1>
             <p><h5>คำอธิบาย</h5> {{ $product->description }}</p>
             <p><h5>จำนวน</h5> {{ $product->quantity }} {{ $product->units['0']['unitName'] }}</p>
 
             <h5>หน่วยสินค้า</h5>
             @foreach($product->units as $productUnit)
             <p>
-                <kbd>{{ $productUnit->unitName }}: {{ number_format($productUnit->pricePerUnit) }} บาท</kbd> |
+                <span>{{ $productUnit->unitName }}: {{ number_format($productUnit->pricePerUnit) }} บาท</span> /
                 @if ($loop->first)
-                <mark>หนัก {{ $product->weight }} กรัม</mark>
+                <span>น้ำหนัก {{ $product->weight }} กรัม</span>
                 @else
-                <kbd>1 {{ $productUnit->unitName }}: {{ number_format($productUnit->quantityPerUnit) }} {{ $product->units['0']['unitName'] }}</kbd>
+                <span>1 {{ $productUnit->unitName }}: {{ number_format($productUnit->quantityPerUnit) }} {{ $product->units['0']['unitName'] }}</span>
                 @endif
             </p>
             @endforeach
@@ -68,8 +67,8 @@
     </div>
     <div id="aniimated-thumbnials" class="row">
         @foreach($productImages as $productImage)
-        <a class="col-md-1" href="{{ url('image/show/'.$productImage->slug) }}">
-            <img src="{{ url('image/thumbnail/'.$productImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $product->name }}">
+        <a class="col-md-2 form-group" href="{{ url('image/show/'.$productImage->slug) }}">
+            <img src="{{ url('image/show/'.$productImage->slug) }}" style="width: 100%;" alt="{{ $product->name }}">
         </a>
         @endforeach
     </div>
@@ -82,25 +81,37 @@
         <div class="col-md-6">
             <h4 class="title">โปรโมชัน</h4>
             {!! Form::open(['url' => 'admin/product/promotion', 'method' => 'post']) !!}
-                <input
+            <div class="row">
+                <div class="col-md-8 form-group">
+                    <input
                     name="promotionTag"
                     placeholder="เลือกโปรโมชัน..."
                     value="@foreach($productPromotions as $productPro){!! $productPro !!},@endforeach"
                 />
                 <input name="product_id" type="hidden" value="{{ $product->slug }}" />
-                <button type="submit" class="btn btn-outline-primary" style="margin-top: 5px;">เพิ่มโปรโมชัน</button>
+                </div>
+                <div class="col-md-4 form-group">
+                    <button type="submit" class="btn btn-primary btn-block">เพิ่มโปรโมชัน</button>
+                </div>
+            </div>
             {!! Form::close() !!}
         </div>
         <div class="col-md-6">
             <h4 class="title">ประเภทสินค้า</h4>
             {!! Form::open(['url' => 'admin/product/category', 'method' => 'post']) !!}
-                <input
+            <div class="row">
+                <div class="col-md-8 form-group">
+                    <input
                     name="categoryTag"
                     placeholder="เลือกประเภทสินค้า..."
                     value="@foreach($productCategories as $productCat){!! $productCat !!},@endforeach"
                 />
                 <input name="product_id" type="hidden" value="{{ $product->slug }}" />
-                <button type="submit" class="btn btn-outline-primary" style="margin-top: 5px;">เพิ่มประเภทสินค้า</button>
+                </div>
+                <div class="col-md-4 form-group">
+                    <button type="submit" class="btn btn-primary btn-block">เพิ่มประเภทสินค้า</button>
+                </div>
+            </div>
             {!! Form::close() !!}
         </div>
         {{-- <div class="col-md-4">
@@ -117,16 +128,17 @@
         </div> --}}
     </div>
     <div class="row">
-        <div class="col-md-12">
-            <br>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-md-6">
             <h4 class="title">สถานะสินค้า</h4>
             {!! Form::model($product, ['url' => 'admin/products/'.$product->slug.'/status', 'method' => 'post']) !!}
-                {!! Form::select('status', $status, $product->status, ['class' => 'form-control']) !!}
-                <button type="submit" class="btn btn-outline-primary" style="margin-top: 5px;">แก้ไขสถานะ</button>
+            <div class="row">
+                <div class="col-md-8 form-group">
+                    {!! Form::select('status', $status, $product->status, ['class' => 'form-control']) !!}
+                </div>
+                <div class="col-md-4 form-group">
+                    <button type="submit" class="btn btn-primary btn-block">แก้ไขสถานะ</button>
+                </div>
+            </div>
             {!! Form::close() !!}
         </div>
     </div>

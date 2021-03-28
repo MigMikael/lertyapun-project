@@ -72,7 +72,7 @@
                             {{ $loop->iteration }}
                         </th>
                         <td onclick="window.location='{{ url('admin/products/'.$product->slug) }}'">
-                            <img src="{{ url('image/thumbnail/'.$product->image->slug) }}" style="height: 120px; width: 120px" class="img-fluid" alt="{{ $product->name }}">
+                            <img src="{{ url('image/show/'.$product->image->slug) }}" style="height: 120px; width: 120px" class="img-fluid" alt="{{ $product->name }}">
                         </td>
                         <td onclick="window.location='{{ url('admin/products/'.$product->slug) }}'">
                             {{ $product->name }}
@@ -98,7 +98,7 @@
                                     <i class="fa fa-ellipsis-v"></i>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item text-warning" href="{{ url('admin/products/'.$product->slug.'/edit') }}">
+                                    <a class="dropdown-item" href="{{ url('admin/products/'.$product->slug.'/edit') }}">
                                         <i class="fas fa-edit"></i> แก้ไข
                                     </a>
                                     {!! Form::model($product, [

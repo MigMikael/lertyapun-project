@@ -1,12 +1,16 @@
 @extends('template.customer')
 
 @section('content')
-<header class="masthead text-white text-center">
-    <div class="overlay"></div>
+<header class="masthead text-white text-center bg-product">
+    <div class="masthead-overlay"></div>
     <div class="container">
         <div class="row">
             <div class="col-xl-9 mx-auto">
-                <h1>BANNER</h1>
+                @if($currentCategory != [])
+                <h1>{{ $currentCategory->name }}</h1>
+                @else
+                <h1>สินค้าทั้งหมด</h1>
+                @endif
             </div>
         </div>
     </div>

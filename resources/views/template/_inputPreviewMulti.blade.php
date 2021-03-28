@@ -27,17 +27,23 @@ function preview_image()
             <input accept="image/x-png,image/gif,image/jpeg" name="{{ $name }}[]" id="multiple_upload_file" type="file" onchange="preview_image()" multiple>
         </div>
     </div>
-    <div class="rounded-lg text-center multiple-image-preview">
-        @if(Request::is('admin/products/*/edit'))
+    <div class="rounded-lg multiple-image-preview">
+        <div class="row">
+            @if(Request::is('admin/products/*/edit'))
             @foreach ($productImages as $productImage)
-            <a id="{{ $name."_pre" }}" href="{{ url('image/show/'.$productImage->slug) }}">
-                <img id="{{ $name }}" src="{{ url('image/thumbnail/'.$productImage->slug) }}" style="height: 150px" />
-            </a>
+            <div class="col-md-4 form-group">
+                <a id="{{ $name."_pre" }}" href="{{ url('image/show/'.$productImage->slug) }}">
+                    <img id="{{ $name }}" src="{{ url('image/show/'.$productImage->slug) }}" style="width: 100%;" />
+                </a>
+            </div>
             @endforeach
-        @else
-        <a id="{{ $name."_pre" }}" href="{{ $placeholderImage }}">
-            <img id="{{ $name }}" src="{{ $placeholderImage }}" class="img-fluid" style="height: 150px" />
-        </a>
-        @endif
+            @else
+            <div class="col-md-4 form-group">
+                <a id="{{ $name."_pre" }}" href="{{ $placeholderImage }}">
+                    <img id="{{ $name }}" src="{{ $placeholderImage }}" class="img-fluid" style="width: 100%;" />
+                </a>
+            </div>
+            @endif
+        </div>
     </div>
 </div>

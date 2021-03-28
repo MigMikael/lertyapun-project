@@ -1,7 +1,7 @@
-<div class="col-md-4">
+<div class="col-sm-6 col-md-6 col-lg-4">
     <div class="card card-product-grid">
         <a href="{{ url('customer/products/'.$product->slug) }}" class="img-wrap">
-            <img src="{{ url('image/thumbnail/'.$product->image->slug) }}">
+            <img src="{{ url('image/show/'.$product->image->slug) }}">
         </a>
         <figcaption class="info-wrap">
             <div class="fix-height">

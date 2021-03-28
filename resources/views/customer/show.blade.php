@@ -59,22 +59,17 @@
                         <button class="btn btn-secondary mr-3" id="addToCart">
                             <i class="fa fa-shopping-cart">เพิ่มใส่ตระกร้า</i>
                         </button>
-                        <button class="btn btn-primary" id="buyProduct">
+                        <!--<button class="btn btn-primary" id="buyProduct">
                             ซื้อสินค้า
-                        </button>
+                        </button>-->
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <hr>
             </div>
         </div>
         <div id="aniimated-thumbnials" class="row">
             @foreach($productImages as $productImage)
             <a class="col-md-1" href="{{ url('image/show/'.$productImage->slug) }}">
-                <img src="{{ url('image/thumbnail/'.$productImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $product->name }}">
+                <img src="{{ url('image/show/'.$productImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $product->name }}">
             </a>
             @endforeach
         </div>
