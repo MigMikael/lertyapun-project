@@ -58,33 +58,34 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">หมายเลขคำสั่งซื้อ</th>
+                <th scope="col">วันที่คำสั่งซื้อ</th>
                 <th scope="col">ชื่อลูกค้า</th>
                 <th scope="col" class="text-right">ยอดรวมทั้งหมด (บาท)</th>
                 <th scope="col" class="text-center">สถานะคำสั่งซื้อ</th>
-                <th scope="col" class="text-center">สั่งซื้อเมื่อ</th>
                 {{-- <th scope="col" class="text-center">การจัดการ</th> --}}
             </tr>
             </thead>
             <tbody>
                 @foreach($orders as $order)
-                    <tr>
-                        <th onclick="window.location='{{ url('admin/orders/'.$order->order_slug) }}'">
+                    <tr onclick="window.location='{{ url('admin/orders/'.$order->order_slug) }}'">
+                        <th>
                             {{ $loop->iteration }}
                         </th>
-                        <th onclick="window.location='{{ url('admin/orders/'.$order->order_slug) }}'">
+                        <td>
                             {{ $order->order_slug }}
-                        </th>
-                        <td onclick="window.location='{{ url('admin/orders/'.$order->order_slug) }}'">
+                        </td>
+                        <td>{{ \Carbon\Carbon::parse($order->order_date)->format('d/m/y - h:m') }} น.</td>
+                        <td>
                             {{ $order->customer->first_name }} {{ $order->customer->last_name }}
                         </td>
-                        <td class="text-right" onclick="window.location='{{ url('admin/orders/'.$order->order_slug) }}'">
+                        <td class="text-right">
                             {{ number_format($order->total_amount) }}
                         </td>
-                        <td class="text-center" onclick="window.location='{{ url('admin/orders/'.$order->order_slug) }}'">
+                        <td class="text-center">
                             @if($order->order_status == 'pending')
-                            <span class="badge badge-light">รอการอนุมัติ</span>
+                            <span class="badge badge-secondary">รอการอนุมัติ</span>
                             @elseif($order->order_status == 'payment' && $order->slip_image_id == null)
-                            <span class="badge badge-secondary">รอการชำระเงิน</span>
+                            <span class="badge badge-warning">รอการชำระเงิน</span>
                             @elseif($order->order_status == 'payment' && $order->slip_image_id != null)
                             <span class="badge badge-warning">รอยืนยันการชำระเงิน</span>
                             @elseif($order->order_status == 'success')
@@ -93,7 +94,6 @@
                             <span class="badge badge-danger">ยกเลิก</span>
                             @endif
                         </td>
-                        <td>{{ \Carbon\Carbon::parse($order->order_date)->format('d/m/y - h:m') }}</td>
                         {{-- <td class="text-center">
                             <div class="dropdown">
                                 <button type="button" class="btn btn-default btn-sm" data-toggle="dropdown" onclick="event.preventDefault()'">

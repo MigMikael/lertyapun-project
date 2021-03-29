@@ -13,15 +13,15 @@
                 รหัสคำสั่งซื้อ
                 {{ $order->slug }}
                 @if($order->status == 'pending')
-                (<span class="badge badge-light">รอการอนุมัติ</span>)
+                <span class="badge badge-secondary">รอการอนุมัติ</span>
                 @elseif($order->status == 'payment' && $order->slip_image_id == null)
-                (<span class="badge badge-secondary">รอการชำระเงิน</span>)
+                <span class="badge badge-warning">รอการชำระเงิน</span>
                 @elseif($order->status == 'payment' && $order->slip_image_id != null)
-                (<span class="badge badge-warning">รอยืนยันการชำระเงิน</span>)
+                <span class="badge badge-warning">รอยืนยันการชำระเงิน</span>
                 @elseif($order->status == 'success')
-                (<span class="badge badge-success">สำเร็จ</span>)
+                <span class="badge badge-success">สำเร็จ</span>
                 @elseif($order->status == 'cancle')
-                (<span class="badge badge-danger">ยกเลิก</span>)
+                <span class="badge badge-danger">ยกเลิก</span>
                 @endif
             </h4>
             <span>ชื่อลูกค้า {{ $order->customer->first_name }} {{ $order->customer->last_name }}</span>
@@ -41,10 +41,10 @@
             </thead>
             <tbody>
                 @foreach($order->products as $product)
-                    <tr>
+                    <tr onclick="window.location='{{ url('admin/products/'.$product->slug) }}'">
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>
-                            <img src="{{ url('image/thumbnail/'.$product->image->slug) }}" style="height: 30px; width: 30px" class="img-fluid" alt="{{ $product->name }}">
+                            <img src="{{ url('image/show/'.$product->image->slug) }}" style="height: 100px; width: 100px" class="img-fluid" alt="{{ $product->name }}">
                         </td>
                         <td>{{ $product->name }}</td>
                         <td>{{ number_format($product->pivot->order_price) }}</td>
@@ -78,7 +78,7 @@
     <div id="aniimated-thumbnials" class="row">
         @if($order->slip_image_id != null)
         <a class="col-md-2" href="{{ url('image/show/'.$order->slipImage->slug) }}">
-            <img src="{{ url('image/thumbnail/'.$order->slipImage->slug) }}" style="width: 100%" class="img-fluid" alt="Slip from order id {{ $order->slug }}">
+            <img src="{{ url('image/show/'.$order->slipImage->slug) }}" style="width: 100%" class="img-fluid" alt="Slip from order id {{ $order->slug }}">
         </a>
         @endif
     </div>

@@ -99,7 +99,7 @@
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="{{ url('admin/products/'.$product->slug.'/edit') }}">
-                                        <i class="fas fa-edit"></i> แก้ไข
+                                        <i class="fas fa-edit text-warning"></i> แก้ไข
                                     </a>
                                     {!! Form::model($product, [
                                         'method' => 'delete',

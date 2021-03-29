@@ -20,11 +20,18 @@
                         <img src="{{ url('image/show/'.$product->image->slug) }}" style="width: 100%;">
                     </div>
                 </div>
+                <div id="aniimated-thumbnials" class="row" style="margin-top: 30px;">
+                    @foreach($productImages as $productImage)
+                    <a class="col-xs-4 col-md-4 col-lg-2 form-group" href="{{ url('image/show/'.$productImage->slug) }}">
+                        <img src="{{ url('image/show/'.$productImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $product->name }}">
+                    </a>
+                    @endforeach
+                </div>
             </div>
             <div class="col-md-7">
                 <div class="product-card">
                     <div class="product-name">
-                        <h1>{{ $product->name }}</h1>
+                        <h2>{{ $product->name }}</h2>
                     </div>
                     <div class="product-info mt-3">
                         <label>รายละเอียดสินค้า</label>
@@ -53,7 +60,7 @@
                     <div class="product-amount mt-3">
                         <label>จำนวน</label>
                         <input id="quantity" type="number" class="form-control" value="1" style="width: 100px;">
-                        <p>เหลือสินค้า {{ $product->quantity }} {{ $product->units['0']['unitName'] }}</p>
+                        <label style="margin-top: 15px;">เหลือสินค้า {{ $product->quantity }} {{ $product->units['0']['unitName'] }}</label>
                     </div>
                     <div class="buy mt-4">
                         <button class="btn btn-secondary mr-3" id="addToCart">
@@ -65,13 +72,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div id="aniimated-thumbnials" class="row">
-            @foreach($productImages as $productImage)
-            <a class="col-md-1" href="{{ url('image/show/'.$productImage->slug) }}">
-                <img src="{{ url('image/show/'.$productImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $product->name }}">
-            </a>
-            @endforeach
         </div>
     </div>
 </section>
