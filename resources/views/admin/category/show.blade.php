@@ -51,7 +51,7 @@
                 <th>ชื่อสินค้า</th>
                 <th class="text-right">ราคา (บาท)</th>
                 <th class="text-right">จำนวน</th>
-                <th class="text-center">การจัดการ</th>
+                <th class="text-center">จัดการ</th>
                 <th class="text-center">ดูข้อมูล</th>
               </tr>
             </thead>

@@ -162,8 +162,13 @@ body.loading .overlay{
     display: block;
 }
 
+.login-wrapper {
+    padding: 50px; 
+    background: #FFF;
+}
+
 .register-wrapper {
-    padding: 25px;
+    padding: 50px;
     background: #FFF;
 }
 

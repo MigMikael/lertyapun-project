@@ -39,7 +39,6 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <hr class="my-4">
                     <div class="form-group">
                         <label>อีเมล์ <span class="required">*</span></label>
                         @if(isset($preloadEmail))

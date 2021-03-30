@@ -56,9 +56,10 @@
         <table class="table table-hover">
             <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">โปรโมชัน</th>
-                <th scope="col" class="text-center">จัดการ</th>
+                <th scope="col" width="5%">#</th>
+                <th scope="col" width="65%">โปรโมชัน</th>
+                <th class="text-center">จัดการ</th>
+                <th class="text-center">ดูข้อมูล</th>
               </tr>
             </thead>
             <tbody>
@@ -71,25 +72,25 @@
                             {{ $promotion->name }}
                         </td>
                         <td class="text-center">
-                            <div class="dropdown">
-                                <button type="button" class="btn btn-default btn-sm" data-toggle="dropdown" onclick="event.preventDefault()'">
-                                    <i class="fa fa-ellipsis-v"></i>
+                            <div class="btn-group">
+                                <a href="{{ url('admin/promotions/'.$promotion->slug.'/edit') }}" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                    แก้ไข
+                                </a>
+                                {!! Form::model($promotion, [
+                                    'method' => 'delete',
+                                    'url' => 'admin/promotions/'.$promotion->slug,
+                                    'class' => '']) !!}
+                                <button class="btn btn-danger btn-sm delete-action ml-2">
+                                    <i class="fas fa-trash"></i> ลบ
                                 </button>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item text-warning" href="{{ url('admin/promotions/'.$promotion->slug.'/edit') }}">
-                                        <i class="fas fa-edit"></i> แก้ไข
-                                    </a>
-
-                                    {!! Form::model($promotion, [
-                                        'method' => 'delete',
-                                        'url' => 'admin/promotions/'.$promotion->slug,
-                                        'class' => '']) !!}
-                                    <button class="dropdown-item text-danger delete-action">
-                                        <i class="fas fa-trash"></i> ลบ
-                                    </button>
-                                    {!! Form::close() !!}
-                                </div>
+                                {!! Form::close() !!}
                             </div>
+                        </td>
+                        <td class="text-center">
+                            <a class="btn btn-primary btn-sm" href="{{ url('admin/promotions/'.$promotion->slug) }}">
+                                <i class="fas fa-external-link-square-alt"></i>
+                            </a>
                         </td>
                     </tr>
                 @endforeach

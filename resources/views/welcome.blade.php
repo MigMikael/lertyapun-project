@@ -191,7 +191,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="pull-left">
-                    <p class="text-muted text-center">&copy; LERTYAPHAN 2021. All Rights Reserved.</p>
+                    <p class="text-muted text-center" style="margin-top: 5px; margin-bottom: 0px !important;">&copy; LERTYAPHAN 2021. All Rights Reserved.</p>
                 </div>
             </div>
             <div class="col-md-6">
