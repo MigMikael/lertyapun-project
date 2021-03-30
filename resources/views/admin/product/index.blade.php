@@ -60,9 +60,8 @@
                 <th scope="col">รูปสินค้า</th>
                 <th scope="col">ชื่อสินค้า</th>
                 <th scope="col">สถานะสินค้า</th>
-                <th scope="col" class="text-right">ราคา (บาท)</th>
-                <th scope="col" class="text-right">จำนวน</th>
-                <th scope="col" class="text-center">จัดการ</th>
+                <th class="text-center">จัดการ</th>
+                <th class="text-center">ดูข้อมูล</th>
             </tr>
             </thead>
             <tbody>
@@ -86,31 +85,34 @@
                             <span class="badge badge-danger">ไม่ได้ใช้งาน</span>
                             @endif
                         </td>
+                        <!--
                         <td class="text-right" onclick="window.location='{{ url('admin/products/'.$product->slug) }}'">
                             {{ number_format($product->units['0']->pricePerUnit) }}
                         </td>
                         <td class="text-right" onclick="window.location='{{ url('admin/products/'.$product->slug) }}'">
                             {{ number_format($product->quantity) }} {{ $product->units['0']->unitName }}
                         </td>
+                        -->
                         <td class="text-center">
-                            <div class="dropdown">
-                                <button type="button" class="btn btn-default btn-sm" data-toggle="dropdown" onclick="event.preventDefault()'">
-                                    <i class="fa fa-ellipsis-v"></i>
+                            <div class="btn-group">
+                                <a href="{{ url('admin/products/'.$product->slug.'/edit') }}" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                    แก้ไข
+                                </a>
+                                {!! Form::model($product, [
+                                    'method' => 'delete',
+                                    'url' => 'admin/products/'.$product->slug,
+                                    'class' => '']) !!}
+                                <button class="btn btn-danger btn-sm delete-action ml-2">
+                                    <i class="fas fa-trash"></i> ลบ
                                 </button>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="{{ url('admin/products/'.$product->slug.'/edit') }}">
-                                        <i class="fas fa-edit text-warning"></i> แก้ไข
-                                    </a>
-                                    {!! Form::model($product, [
-                                        'method' => 'delete',
-                                        'url' => 'admin/products/'.$product->slug,
-                                        'class' => '']) !!}
-                                    <button class="dropdown-item text-danger delete-action">
-                                        <i class="fas fa-trash"></i> ลบ
-                                    </button>
-                                    {!! Form::close() !!}
-                                </div>
+                                {!! Form::close() !!}
                             </div>
+                        </td>
+                        <td class="text-center">
+                            <a class="btn btn-primary btn-sm" href="{{ url('admin/products/'.$product->slug) }}">
+                                <i class="fas fa-external-link-square-alt"></i>
+                            </a>
                         </td>
                     </tr>
                 @endforeach

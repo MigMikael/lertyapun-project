@@ -61,7 +61,7 @@
                 <th scope="col">อีเมล</th>
                 <th scope="col">เบอร์โทรศัพท์</th>
                 <th scope="col" class="text-center">สถานะ</th>
-                {{-- <th scope="col" class="text-center">จัดการ</th> --}}
+                <th scope="col" class="text-center">ดูข้อมูล</th>
             </tr>
             </thead>
             <tbody>
@@ -89,6 +89,11 @@
                             @elseif($customer->status == 'inactive')
                             <span class="badge badge-danger">รีเซ็ตรหัสผ่าน</span>
                             @endif
+                        </td>
+                        <td class="text-center">
+                            <a class="btn btn-primary btn-sm" href="{{ url('admin/customers/'.$customer->slug) }}">
+                                <i class="fas fa-external-link-square-alt"></i>
+                            </a>
                         </td>
                         {{-- <td class="text-center">
                             <div class="dropdown">

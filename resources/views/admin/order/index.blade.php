@@ -62,6 +62,7 @@
                 <th scope="col">ชื่อลูกค้า</th>
                 <th scope="col" class="text-right">ยอดรวมทั้งหมด (บาท)</th>
                 <th scope="col" class="text-center">สถานะคำสั่งซื้อ</th>
+                <th scope="col" class="text-center">ดูข้อมูล</th>
                 {{-- <th scope="col" class="text-center">การจัดการ</th> --}}
             </tr>
             </thead>
@@ -93,6 +94,11 @@
                             @elseif($order->order_status == 'cancle')
                             <span class="badge badge-danger">ยกเลิก</span>
                             @endif
+                        </td>
+                        <td class="text-center">
+                            <a class="btn btn-primary btn-sm" href="{{ url('admin/orders/'.$order->order_slug) }}">
+                                <i class="fas fa-external-link-square-alt"></i>
+                            </a>
                         </td>
                         {{-- <td class="text-center">
                             <div class="dropdown">
