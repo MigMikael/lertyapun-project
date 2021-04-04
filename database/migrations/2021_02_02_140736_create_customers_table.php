@@ -25,6 +25,8 @@ class CreateCustomersTable extends Migration
             $table->string('status')->default('pending');
             $table->integer('point')->default(0);
             $table->text('remark')->nullable();
+            $table->string('citizen_card_id')->nullable();
+            $table->string('drug_store_id')->nullable();
             $table->unsignedBigInteger('avatar_image')->nullable();
             $table->unsignedBigInteger('citizen_card_image')->nullable();
             $table->unsignedBigInteger('drug_store_approve_image')->nullable();

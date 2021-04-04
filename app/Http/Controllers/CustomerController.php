@@ -265,7 +265,7 @@ class CustomerController extends Controller
         $remark = $request->get('remark');
 
         $customer['status'] = $status;
-        $customer['remark'] = $remark;
+        $customer['remark'] = $remark . "\n";
         $customer->save();
 
         return redirect()->back();

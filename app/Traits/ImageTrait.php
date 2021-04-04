@@ -32,7 +32,7 @@ trait ImageTrait
         $file = \App\Models\Image::create($fileRecord);
 
         self::compress($file);
-        self::resizeImage($file, $type, $width, $height);
+        self::resizeImage($file, $width, $height);
 
         return $file;
     }
@@ -71,43 +71,54 @@ trait ImageTrait
         $file->save();
     }
 
-    public function resizeImage($file, $type, $width, $height)
+    public function resizeImage($file, $width, $height)
     {
         $image = Storage::disk('local')->get($file->name);
         $old_filename = $file->name;
 
-        if($type == 'profile'){
-            $height = strval(($height / $width) * 900);
-            $width = '900';
-        }elseif ($type == 'cover'){
-            $height = strval(($height / $width) * 1920);
-            $width = '1920';
-        }else{
-            // default value
-            if ($width > 500) {
-                if ($width == $height) {
-                    $height = '500';
-                    $width = '500';
-                } else {
-                    $height = strval(($height / $width) * 500);
-                    $width = '500';
-                }
+        if ($width > 2000) {
+            if ($width == $height) {
+                $height = '1200';
+                $width = '1200';
+            } else {
+                $height = strval(($height / $width) * 1200);
+                $width = '1200';
             }
         }
 
         $img = Image::make($image)->resize($width, $height);
-
         $img->save(storage_path().'/app/re_'.$file->name);
-
         $file->name = 're_'.$file->name;
         $file->save();
 
+
         // make image thumbnail
-        $img = Image::make($image)->resize(100, null, function ($constraint) {
+        $img = Image::make($image)->resize($this->thumb, null, function ($constraint) {
             $constraint->aspectRatio();
         });
-
         $img->save(storage_path().'/app/thumb_'.$file->name);
+
+
+        // make image small
+        $img = Image::make($image)->resize($this->small, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+        $img->save(storage_path().'/app/small_'.$file->name);
+
+
+        // make image medium
+        $img = Image::make($image)->resize($this->medium, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+        $img->save(storage_path().'/app/medium_'.$file->name);
+
+
+        // make image large
+        $img = Image::make($image)->resize($this->large, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+        $img->save(storage_path().'/app/large_'.$file->name);
+
 
         Storage::delete($old_filename);
     }

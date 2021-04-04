@@ -148,7 +148,8 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <button id="order_submit" type="submit" class="btn btn-primary btn-block">ยืนยันการสั่งซื้อ</button>
+                                <button id="order_submit" disabled type="submit" class="btn btn-primary btn-block">ยืนยันการสั่งซื้อ</button>
+                                <p id="remark"></p>
                             </div>
                         </div>
                     </div>
@@ -239,6 +240,13 @@
                 totalDiscount += discount
             }
             var finalPrice = totalPrice - totalDiscount
+            if(finalPrice < 5000){
+                $("#order_submit").prop('disabled', true)
+                $("#remark").text("*ยอดสั่งสินค้าขั้นต่ำ 5,000 บาท")
+            } else {
+                $("#order_submit").prop('disabled', false)
+                $("#remark").text("")
+            }
 
             $("#total_price").text(totalPrice.toLocaleString())
             $("#total_discount").text(totalDiscount.toLocaleString())

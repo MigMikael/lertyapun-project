@@ -60,9 +60,11 @@ trait ValidateTrait
             'phone' => 'required|string|min:10|max:12|regex:/[0-9]{9}/',
             'password' => 'required|min:8|max:255',
             'confirm_password' => 'required|same:password|min:8|max:255',
+            'citizen_card_id' => 'required|max:255',
+            'drug_store_id' => 'required|max:255',
 
-            'citizen_card_image' => 'required|image',
-            'drug_store_approve_image' => 'required|image',
+            'citizen_card_image' => 'image',
+            'drug_store_approve_image' => 'image',
             'medical_license_image' => 'required|image',
 
             'commercial_register_image' => 'nullable|image',
@@ -81,6 +83,8 @@ trait ValidateTrait
             'old_password' => 'required|min:8|max:255',
             'password' => 'nullable|different:old_password|min:8|max:255',
             'confirm_password' => 'nullable|same:password|min:8|max:255',
+            'citizen_card_id' => 'required|max:255',
+            'drug_store_id' => 'required|max:255',
 
             'citizen_card_image' => 'nullable|image',
             'drug_store_approve_image' => 'nullable|image',
@@ -97,6 +101,13 @@ trait ValidateTrait
         $request->validate([
             'password' => 'min:8|max:255',
             'confirm_password' => 'same:password|min:8|max:255',
+        ]);
+    }
+
+    public function validateCreatePromotion(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|max:255',
         ]);
     }
 }

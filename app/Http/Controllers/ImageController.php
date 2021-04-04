@@ -57,9 +57,45 @@ class ImageController extends Controller
      * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function showThumbnail(Image $image)
+    public function showThumb(Image $image)
     {
         $file = Storage::disk('local')->get('thumb_'.$image->name);
+        return response($file, 200)->header('Content-type', $image->mime);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Image  $image
+     * @return \Illuminate\Http\Response
+     */
+    public function showSmall(Image $image)
+    {
+        $file = Storage::disk('local')->get('small_'.$image->name);
+        return response($file, 200)->header('Content-type', $image->mime);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Image  $image
+     * @return \Illuminate\Http\Response
+     */
+    public function showMedium(Image $image)
+    {
+        $file = Storage::disk('local')->get('medium_'.$image->name);
+        return response($file, 200)->header('Content-type', $image->mime);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Image  $image
+     * @return \Illuminate\Http\Response
+     */
+    public function showLarge(Image $image)
+    {
+        $file = Storage::disk('local')->get('large_'.$image->name);
         return response($file, 200)->header('Content-type', $image->mime);
     }
 

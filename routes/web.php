@@ -39,7 +39,10 @@ Route::get('term_of_use', [GuestController::class, 'termOfUse']);
 Route::get('privacy_policy', [GuestController::class, 'privacyPolicy']);
 
 Route::get('image/show/{image:slug}', [ImageController::class, 'show']);
-Route::get('image/thumbnail/{image:slug}', [ImageController::class, 'showThumbnail']);
+Route::get('image/thumb/{image:slug}', [ImageController::class, 'showThumb']);
+Route::get('image/small/{image:slug}', [ImageController::class, 'showSmall']);
+Route::get('image/medium/{image:slug}', [ImageController::class, 'showMedium']);
+Route::get('image/large/{image:slug}', [ImageController::class, 'showLarge']);
 
 Route::get('test', [TestController::class, 'index']);
 

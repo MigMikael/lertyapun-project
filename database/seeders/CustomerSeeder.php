@@ -52,6 +52,8 @@ class CustomerSeeder extends Seeder
             'citizen_card_image' => 3,
             'drug_store_approve_image' => 3,
             'medical_license_image' => 3,
+            'citizen_card_id' => '1809800578766',
+            'drug_store_id' => '012345678',
         ]);
 
         DB::table('customers')->insert([
@@ -68,6 +70,8 @@ class CustomerSeeder extends Seeder
             'citizen_card_image' => 3,
             'drug_store_approve_image' => 3,
             'medical_license_image' => 3,
+            'citizen_card_id' => '1809800578766',
+            'drug_store_id' => '012345678',
         ]);
     }
 }

@@ -30,7 +30,9 @@ class Customer extends Authenticatable
         'medical_license_image',
         'commercial_register_image',
         'juristic_person_image',
-        'vat_register_cert_image'
+        'vat_register_cert_image',
+        'citizen_card_id',
+        'drug_store_id'
     ];
 
     public function avatarImage()

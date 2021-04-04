@@ -88,6 +88,22 @@
                             @enderror
                         </div>
                     @endif
+
+                    <div class="form-group">
+                        <label>หมายเลขบัตรประชาชน <span class="required">*</span></label>
+                        <input name="citizen_card_id" type="text" class="form-control @error('citizen_card_id') is-invalid @enderror" placeholder="หมายเลขบัตรประชาชน" value="@if(Request::is('customer/pending/*/edit')){{ $customer->citizen_card_id }}@else{{ old('citizen_card_id') }}@endif">
+                        @error('citizen_card_id')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label>หมายเลขใบอนุญาติร้านยา <span class="required">*</span></label>
+                        <input name="drug_store_id" type="text" class="form-control @error('drug_store_id') is-invalid @enderror" placeholder="หมายเลขใบอนุญาติร้านยา" value="@if(Request::is('customer/pending/*/edit')){{ $customer->drug_store_id }}@else{{ old('drug_store_id') }}@endif">
+                        @error('drug_store_id')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
                 <div class="col-md-4">
                     @include('template._inputPreview', [
@@ -106,6 +122,7 @@
                         'label' => 'รูปใบประกอบโรคศิลปะ',
                         'name' => 'medical_license_image',
                         'key' => 'medicalLicenseImage',
+                        'required' => 'true',
                     ])
                 </div>
                 <div class="col-md-4">

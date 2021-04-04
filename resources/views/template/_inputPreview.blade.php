@@ -1,4 +1,6 @@
-<label class="mb-0 pb-2">{{ $label }}</label>
+<label class="mb-0 pb-2">{{ $label }} @isset($required)
+    <span class="required">*</span>
+@endisset</label>
 <div class="border mb-4 p-1 rounded @error($name) border-danger @enderror">
     <div class="input-group">
         <div class="custom-file">

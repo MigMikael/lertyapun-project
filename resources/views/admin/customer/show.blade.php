@@ -88,7 +88,7 @@
             </div>
             <div class="form-group">
                 {!! Form::label('remark', 'หมายเหตุ') !!}
-                <textarea name="remark" class="form-control" placeholder="โปรดระบุเหตุผลหากไม่อนุมัติผู้ใช้งาน">{{ $customer->remark ?? '' }}</textarea>
+                <textarea name="remark" rows="5" class="form-control" placeholder="โปรดระบุเหตุผลหากไม่อนุมัติผู้ใช้งาน">{{ $customer->remark ?? '' }}</textarea>
             </div>
             <button type="submit" class="btn btn-primary btn-block">ยืนยัน</button>
             {!! Form::close() !!}

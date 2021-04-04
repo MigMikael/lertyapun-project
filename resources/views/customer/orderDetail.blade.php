@@ -49,7 +49,7 @@
                                     <td class="align-middle">
                                         <figure class="itemside">
                                             <div class="aside">
-                                                <img class="img-sm" src="{{ url('image/thumbnail/'.$product->image->slug) }}">
+                                                <img class="img-sm" src="{{ url('image/thumb/'.$product->image->slug) }}">
                                             </div>
                                             <figcaption class="info">
                                                 <a href="{{ url('customer/products/'.$product->slug) }}" class="title text-dark">
@@ -93,7 +93,7 @@
                 <div id="aniimated-thumbnials" class="col-md-6">
                     @if($order->slip_image_id != null)
                     <a class="col-md-2" href="{{ url('image/show/'.$order->slipImage->slug) }}">
-                        <img src="{{ url('image/thumbnail/'.$order->slipImage->slug) }}" style="width: 100%" class="img-fluid" alt="Slip from order id {{ $order->slug }}">
+                        <img src="{{ url('image/thumb/'.$order->slipImage->slug) }}" style="width: 100%" class="img-fluid" alt="Slip from order id {{ $order->slug }}">
                     </a>
                     @endif
                 </div>

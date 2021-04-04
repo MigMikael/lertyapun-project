@@ -175,7 +175,7 @@ class GuestController extends Controller
             $image_record = $this->storeImage($file, "");
             $newCustomer['vat_register_cert_image'] = $image_record->id;
         }
-        $newRemark = "\n(แก้ไขแล้วเมื่อ " . (\Carbon\Carbon::parse(\Carbon\Carbon::now())->format('d/m/Y h:m:s')) . ")";
+        $newRemark = "\n(แก้ไขแล้วเมื่อ " . (\Carbon\Carbon::parse(\Carbon\Carbon::now())->format('d/m/Y h:m:s')) . ")\n";
         $newCustomer['remark'] = $customer->remark . $newRemark;
 
         $customer->update($newCustomer);

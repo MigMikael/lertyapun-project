@@ -303,6 +303,10 @@ class OrderController extends Controller
             array_push($newOrderDetails, $newOrderDetail);
         }
 
+        if ($sumFinalPrice < 5000) {
+            return response()->json(['errors' => 'ยอดสั่งสินค้าขั้นต่ำต้องมากกว่า 5,000 บาท'], 422);
+        }
+
         $stringGenerator = new StringGenerator('0123456789');
         $newOrder = [
             'slug' => $stringGenerator->generate(12),
@@ -320,9 +324,9 @@ class OrderController extends Controller
             OrderDetail::create($newOrderDetail);
 
             // update quantity
-            $product = Product::where('id', $newOrderDetail['product_id'])->first();
-            $product->quantity = $product->quantity - ($newOrderDetail['sale_quantity'] * $newOrderDetail['quantityPerUnit']);
-            $product->save();
+            // $product = Product::where('id', $newOrderDetail['product_id'])->first();
+            // $product->quantity = $product->quantity - ($newOrderDetail['sale_quantity'] * $newOrderDetail['quantityPerUnit']);
+            // $product->save();
         }
         CustomerProduct::where('customer_id', $customer->id)->delete();
 
@@ -389,6 +393,15 @@ class OrderController extends Controller
         $status = $request->get('status');
         $order['status'] = $status;
         $order->save();
+
+        if ($order->status == 'success') {
+            // update quantity
+            foreach($order->orderDetails as $orderDetail) {
+                $product = Product::where('id', $orderDetail->product_id)->first();
+                $product->quantity = $product->quantity - ($orderDetail->sale_quantity * $orderDetail->quantityPerUnit);
+                $product->save();
+            }
+        }
 
         return redirect()->back();
     }

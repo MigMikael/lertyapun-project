@@ -7,10 +7,12 @@ use Illuminate\Http\Request;
 use App\Helpers\StringGenerator;
 use App\Models\Product;
 use Illuminate\Support\Facades\Log;
+use App\Traits\ValidateTrait;
 
 
 class PromotionController extends Controller
 {
+    use ValidateTrait;
     public $promotionType = [
         'discount' => 'Discount',
     ];
@@ -80,6 +82,8 @@ class PromotionController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validateCreatePromotion($request);
+
         $newPromotion = $request->all();
         $newPromotion['slug'] = (new StringGenerator())->generateSlug();
 
