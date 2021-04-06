@@ -307,6 +307,8 @@ class OrderController extends Controller
             return response()->json(['errors' => 'ยอดสั่งสินค้าขั้นต่ำต้องมากกว่า 5,000 บาท'], 422);
         }
 
+        $shipmentPrice = $this->calculateShipmentPrice($sumWeight);
+
         $stringGenerator = new StringGenerator('0123456789');
         $newOrder = [
             'slug' => $stringGenerator->generate(12),
@@ -316,6 +318,7 @@ class OrderController extends Controller
             'payment_method' => 'direct transfer',
             'customer_id' => $customer->id,
             'weight' => $sumWeight,
+            'shipment_price' => $shipmentPrice,
         ];
 
         $order = Order::create($newOrder);
@@ -406,8 +409,47 @@ class OrderController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * Update resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateShipmentPrice(Request $request, Order $order, $price)
+    {
+        if ($price == 'price') {
+            $order->shipment_price = $this->calculateShipmentPrice($order->weight);
+        } else if ($price == 'free') {
+            $order->shipment_price = 0;
+        }
+        $order->save();
+
+        return redirect()->back();
+    }
+
     private function calculateOrderWeight(Product $product, $quantity)
     {
         return $product->weight * $quantity;
+    }
+
+    private function calculateShipmentPrice($weight)
+    {
+        $shipmentRate = config('constants.shipmentRate');
+
+        $weightKg = $weight / 1000;
+        $weightFloor = floor($weightKg);
+
+        $shipmentPrice = 0;
+        if ($weightFloor < 0) {
+            $shipmentPrice = 0;
+        }
+        else if($weightFloor <= 100 && $weightFloor >= 0) {
+            $shipmentPrice = $shipmentRate[$weightFloor];
+        }
+        else {
+            $shipmentPrice = end($shipmentRate);
+        }
+
+        return $shipmentPrice;
     }
 }

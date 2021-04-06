@@ -26,6 +26,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('slip_image_id')->nullable();
             $table->text('remark')->nullable();
             $table->float('weight')->default(0);
+            $table->float('shipment_price')->default(0);
 
             $table->foreign('customer_id')
                 ->references('id')

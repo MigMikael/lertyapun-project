@@ -22,6 +22,7 @@ class Order extends Model
         'slip_image_id',
         'remark',
         'weight',
+        'shipment_price',
     ];
 
     public function customer()

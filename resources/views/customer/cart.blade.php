@@ -140,6 +140,14 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
+                                <label>ค่าจัดส่ง</label>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                ฿<span id="shipment_price">{{ number_format(0) }}</span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
                                 <label>ยอดชำระเงินทั้งหมด</label>
                             </div>
                             <div class="col-md-6 text-right">
@@ -251,6 +259,10 @@
             $("#total_price").text(totalPrice.toLocaleString())
             $("#total_discount").text(totalDiscount.toLocaleString())
             $("#final_price").text(finalPrice.toLocaleString())
+        }
+
+        function calculateShipmentPrice() {
+
         }
 
         $(document).ready(function(){

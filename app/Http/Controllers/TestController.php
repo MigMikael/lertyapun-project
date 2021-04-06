@@ -14,6 +14,15 @@ class TestController extends Controller
         // $newSlug = $stringGenerator->generate(12);
         // // Log::info($request->all());
         // return $newSlug;
-        dd(Carbon::now());
+        // dd(Carbon::now());
+        $shipmentRate = config('constants.shipmentRate');
+        // $weight = 4180;
+        $weight = 599;
+        $weightKg = $weight / 1000;
+        $weightFloor = floor($weightKg);
+        $shipmentPrice = $shipmentRate[$weightFloor];
+
+        $last = end($shipmentRate);
+        return [$weight, $weightKg, $weightFloor, $shipmentPrice, $last];
     }
 }

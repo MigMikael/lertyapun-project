@@ -58,9 +58,25 @@
     </div>
     <hr>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <h5>นำหนักสินค้าโดยประมาณ {{ number_format($order->weight) }} กรัม</h5>
+
         </div>
+        @if($order->shipment_price != 0)
+        <div class="col-md-6">
+            {!! Form::open(['url' => 'admin/orders/'. $order->slug .'/shipment_price/free', 'method' => 'put']) !!}
+            <h6>ค่าจัดส่งสินค้า {{ number_format($order->shipment_price) }} บาท</h6>
+            <button type="submit" class="btn btn-outline-primary btn-sm">ฟรีค่าจัดส่ง</button>
+            {!! Form::close() !!}
+        </div>
+        @else
+        <div class="col-md-6">
+            {!! Form::open(['url' => 'admin/orders/'. $order->slug .'/shipment_price/price', 'method' => 'put']) !!}
+            <h6>ค่าจัดส่งสินค้า {{ number_format($order->shipment_price) }} บาท</h6>
+            <button type="submit" class="btn btn-outline-primary btn-sm">คิดค่าจัดส่ง</button>
+            {!! Form::close() !!}
+        </div>
+        @endif
     </div>
     <hr>
     <div class="row">

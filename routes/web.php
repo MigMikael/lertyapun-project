@@ -155,6 +155,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminAuth'], function () {
     Route::get('orders/{order:slug}', [OrderController::class, 'show']);
     Route::delete('orders/{order:slug}', [OrderController::class, 'destroy']);
     Route::put('orders/{order:slug}/status', [OrderController::class, 'updateStatus']);
+    Route::put('orders/{order:slug}/shipment_price/{price}', [OrderController::class, 'updateShipmentPrice']);
 
     Route::get('logout', [GuestController::class, 'adminLogout']);
 });
