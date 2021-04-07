@@ -58,22 +58,24 @@
     </div>
     <hr>
     <div class="row">
-        <div class="col-md-6">
-            <h5>นำหนักสินค้าโดยประมาณ {{ number_format($order->weight) }} กรัม</h5>
-
+        <div class="col-md-4">
+            <h6>นำหนักสินค้าโดยประมาณ {{ number_format($order->weight) }} กรัม</h6>
+        </div>
+        <div class="col-md-4">
+            <h6>ยอดสั่งซื้อรวม {{ number_format($order->total_amount) }} บาท</h6>
         </div>
         @if($order->shipment_price != 0)
-        <div class="col-md-6">
-            {!! Form::open(['url' => 'admin/orders/'. $order->slug .'/shipment_price/free', 'method' => 'put']) !!}
+        <div class="col-md-4">
+            {!! Form::open(['url' => 'admin/orders/'. $order->slug .'/shipment_price/free', 'method' => 'put', 'class' => 'form-inline']) !!}
             <h6>ค่าจัดส่งสินค้า {{ number_format($order->shipment_price) }} บาท</h6>
-            <button type="submit" class="btn btn-outline-primary btn-sm">ฟรีค่าจัดส่ง</button>
+            <button type="submit" class="btn btn-outline-primary btn-sm" style="margin-left: 5px;">ฟรีค่าจัดส่ง</button>
             {!! Form::close() !!}
         </div>
         @else
-        <div class="col-md-6">
-            {!! Form::open(['url' => 'admin/orders/'. $order->slug .'/shipment_price/price', 'method' => 'put']) !!}
+        <div class="col-md-4">
+            {!! Form::open(['url' => 'admin/orders/'. $order->slug .'/shipment_price/price', 'method' => 'put', 'class' => 'form-inline']) !!}
             <h6>ค่าจัดส่งสินค้า {{ number_format($order->shipment_price) }} บาท</h6>
-            <button type="submit" class="btn btn-outline-primary btn-sm">คิดค่าจัดส่ง</button>
+            <button type="submit" class="btn btn-outline-primary btn-sm" style="margin-left: 5px;">คิดค่าจัดส่ง</button>
             {!! Form::close() !!}
         </div>
         @endif

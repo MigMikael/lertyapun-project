@@ -1,5 +1,9 @@
 @extends('template.customer')
 
+@section('head')
+
+@endsection
+
 @section('content')
 <section class="section-page-top">
     <div class="container">
@@ -61,18 +65,9 @@
                                                     </figure>
                                                 </td>
                                                 <td id="price" class="align-middle">
-                                                    {{-- @if($product->has_discount)<del>@endif
-                                                    <h6>฿<span id="base_price">{{ number_format($product->price) }}</span> ต่อ{{ $product->unit }}</h6>
-                                                    @if($product->has_discount)</del>@endif
-
-                                                    @if($product->has_discount)
-                                                    <h6 style="color: red">฿<span id="discount_price" >{{ number_format($product->discount_price, 2) }}</span></h6>
-                                                    @else
-                                                    <h6 style="display: none">฿<span id="discount_price" >{{ number_format($product->discount_price, 2) }}</span></h6>
-                                                    @endif --}}
                                                     <select id="unit" name="unit" id="unit" class="form-control">
                                                         @foreach($product->units as $productUnit)
-                                                        <option value="{{ $productUnit->unitName }};{{ $productUnit->pricePerUnit }}" @if($productUnit->unitName == $product->pivot->unitName)selected="selected"@endif>
+                                                        <option value="{{ $productUnit->unitName }};{{ $productUnit->pricePerUnit }};{{ $productUnit->quantityPerUnit }}" @if($productUnit->unitName == $product->pivot->unitName)selected="selected"@endif>
                                                             {{ $productUnit->unitName }}
                                                             @if(!$loop->first)
                                                             - {{ $productUnit->quantityPerUnit }} {{ $product->units['0']['unitName'] }}
@@ -93,7 +88,7 @@
                                                     <input id="product_slug" type="hidden" value="{{ $product->slug }}">
                                                     <p style="font-size: 12px">เหลือ {{ number_format($product->quantity) }} {{ $product->units['0']['unitName'] }}</p>
                                                 </td>
-                                                <td class="text-right align-middle">
+                                                <td id="action" class="text-right align-middle">
                                                     {!! Form::model($product, [
                                                         'method' => 'delete',
                                                         'url' => 'customer/cart/'.$product->slug ]) !!}
@@ -102,6 +97,7 @@
                                                     </button>
                                                     <p style="font-size: 12px; color: white">x</p>
                                                     {!! Form::close() !!}
+                                                    <p id="product_weight" style="display: none">{{ $product->weight }}</p>
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -213,11 +209,19 @@
             var prices = []
             var discountPrices = []
             var quantities = []
+            var quantitiesPerUnits = []
+            var weights = []
 
             $("#product-table #price #unit").each(function() {
                 var value = $(this).val()
                 price = value.split(';')[1]
                 prices.push(price.replace(',', ''))
+            })
+
+            $("#product-table #price #unit").each(function() {
+                var value = $(this).val()
+                quantitiesPerUnit = value.split(';')[2]
+                quantitiesPerUnits.push(quantitiesPerUnit.replace(',', ''))
             })
 
             $("#product-table #price #discount_price").each(function() {
@@ -234,20 +238,43 @@
                 }
             })
 
+            $("#product-table #action #product_weight").each(function() {
+                var value = $(this).text()
+                weights.push(value)
+            })
+
             var totalPrice = 0
             var totalDiscount = 0
+            var totalWeight = 0
             for (let i = 0; i < prices.length; i++) {
                 var price = parseFloat(prices[i])
                 var quantity = parseFloat(quantities[i])
                 var discountPrice = parseFloat(discountPrices[i])
+                var quantitiesPerUnit = parseFloat(quantitiesPerUnits[i])
+                var weight = parseFloat(weights[i])
 
                 var productPrice = price * quantity
                 totalPrice += productPrice
 
                 var discount = (price - discountPrice) * quantity
                 totalDiscount += discount
+
+                var productWeight = quantitiesPerUnit * weight * quantity
+                totalWeight += productWeight
             }
-            var finalPrice = totalPrice - totalDiscount
+            var totalWeightKg = Math.floor(totalWeight / 1000)
+            var shipmentRate = [ 15, 25, 35, 45, 55, 60, 77, 89, 101, 113, 125, 137, 149, 161, 173, 185, 205, 225, 245, 265, 270, 270, 280, 290, 300, 310, 320, 330, 340, 350, 360, 370, 380, 390, 400, 410, 420, 430, 440, 450, 460, 470, 480, 490, 500, 510, 520, 530, 540, 550, 560, 575, 590, 605, 620, 635, 650, 665, 680, 695, 710, 725, 740, 755, 770, 785, 800, 815, 830, 845, 860, 875, 890, 905, 920, 935, 950, 965, 980, 995, 1010, 1025, 1040, 1055, 1070, 1085, 1100, 1115, 1130, 1145, 1160, 1175, 1190, 1205, 1220, 1235, 1250, 1265, 1280, 1295, 1310 ]
+
+            var shipmentPrice = 0
+            if (totalWeightKg < 0) {
+                shipmentPrice = 0
+            } else if (totalWeightKg >= 0 && totalWeightKg <= 100) {
+                shipmentPrice = shipmentRate[totalWeightKg]
+            } else {
+                shipmentPrice = shipmentRate.slice(-1)[0]
+            }
+
+            var finalPrice = (totalPrice - totalDiscount) + shipmentPrice
             if(finalPrice < 5000){
                 $("#order_submit").prop('disabled', true)
                 $("#remark").text("*ยอดสั่งสินค้าขั้นต่ำ 5,000 บาท")
@@ -258,11 +285,8 @@
 
             $("#total_price").text(totalPrice.toLocaleString())
             $("#total_discount").text(totalDiscount.toLocaleString())
+            $("#shipment_price").text(shipmentPrice.toLocaleString())
             $("#final_price").text(finalPrice.toLocaleString())
-        }
-
-        function calculateShipmentPrice() {
-
         }
 
         $(document).ready(function(){

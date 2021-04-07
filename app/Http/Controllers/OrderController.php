@@ -312,7 +312,7 @@ class OrderController extends Controller
         $stringGenerator = new StringGenerator('0123456789');
         $newOrder = [
             'slug' => $stringGenerator->generate(12),
-            'total_amount' => $sumFinalPrice,
+            'total_amount' => $sumFinalPrice + $shipmentPrice,
             'status' => 'pending',
             'order_date' => Carbon::now(),
             'payment_method' => 'direct transfer',
@@ -417,10 +417,14 @@ class OrderController extends Controller
      */
     public function updateShipmentPrice(Request $request, Order $order, $price)
     {
+        $shipmentPrice = $this->calculateShipmentPrice($order->weight);
+
         if ($price == 'price') {
-            $order->shipment_price = $this->calculateShipmentPrice($order->weight);
+            $order->shipment_price = $shipmentPrice;
+            $order->total_amount = $order->total_amount + $shipmentPrice;
         } else if ($price == 'free') {
             $order->shipment_price = 0;
+            $order->total_amount = $order->total_amount - $shipmentPrice;
         }
         $order->save();
 
