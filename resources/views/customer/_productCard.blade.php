@@ -20,12 +20,22 @@
                 </div>
                 <!--<p>เหลือสินค้า {{ $product->quantity }} ชิ้น</p>-->
             </div>
-            <button id="{{ $product->slug }}" @if($product->quantity <= 0) class="btn btn-block btn-secondary mt-3" disabled @else class="btn btn-block btn-primary mt-3" @endif>
+            <button id="{{ $product->slug }}"
                 @if($product->quantity <= 0)
-                สินค้าหมด
+                    class="btn btn-block btn-secondary mt-3" disabled
                 @else
-                เพิ่มใส่ตระกร้า
+                    class="btn btn-block btn-primary mt-3"
                 @endif
+
+                @if(auth()->guard('admin')->check())
+                    disabled
+                @endif
+                >
+                    @if($product->quantity <= 0)
+                    สินค้าหมด
+                    @else
+                    เพิ่มใส่ตระกร้า
+                    @endif
             </button>
         </figcaption>
     </div>

@@ -18,7 +18,7 @@ class CustomerAuth
      */
     public function handle(Request $request, Closure $next, $guard = 'customer')
     {
-        if (!Auth::guard($guard)->check()) {
+        if (!Auth::guard($guard)->check() && !Auth::guard('admin')->check()) {
             return redirect('login');
         }
 

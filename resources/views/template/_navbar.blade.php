@@ -32,33 +32,35 @@
                 </div>
             {!! Form::close() !!}
 
-            <div class="widget-header mr-3">
-                <a href="{{ url('customer/cart') }}" class="icon icon-sm rounded-circle border">
-                    <i class="fa fa-shopping-cart"></i>
-                    <span id="productCount" class="badge badge-pill badge-danger notify"></span>
-                </a>
-            </div>
+            @if(auth()->guard('customer')->check())
+                <div class="widget-header mr-3">
+                    <a href="{{ url('customer/cart') }}" class="icon icon-sm rounded-circle border">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span id="productCount" class="badge badge-pill badge-danger notify"></span>
+                    </a>
+                </div>
+            @endif
             <div class="btn-group">
                 <a href="#" class="icon icon-sm rounded-circle border" data-toggle="dropdown">
                     <i class="fas fa-user"></i>
                 </a>
                 <div class="dropdown-menu">
                     @if(auth()->guard('customer')->check())
-                    <a class="dropdown-item" href="{{ url('customer/profile') }}">บัญชีของฉัน</a>
-                    @else
-                    <a class="dropdown-item" href="{{ url('') }}">บัญชีของฉัน</a>
+                        <a class="dropdown-item" href="{{ url('customer/profile') }}">บัญชีของฉัน</a>
+                    @elseif(auth()->guard('admin')->check())
+                        <a class="dropdown-item" href="{{ url('admin') }}">หน้าแอดมิน</a>
                     @endif
 
                     <div class="dropdown-divider"></div>
-
-                    <a class="dropdown-item" href="{{ url('customer/order') }}">การซื้อของฉัน</a>
-
+                    @if(auth()->guard('customer')->check())
+                        <a class="dropdown-item" href="{{ url('customer/order') }}">การซื้อของฉัน</a>
+                    @endif
                     <div class="dropdown-divider"></div>
 
                     @if(auth()->guard('customer')->check())
-                    <a class="dropdown-item" href="{{ url('customer/logout') }}">ออกจากระบบ</a>
-                    @else
-                    <a class="dropdown-item" href="{{ url('') }}">ออกจากระบบ</a>
+                        <a class="dropdown-item" href="{{ url('customer/logout') }}">ออกจากระบบ</a>
+                    @elseif(auth()->guard('admin')->check())
+                        <a class="dropdown-item" href="{{ url('admin/logout') }}">ออกจากระบบ</a>
                     @endif
                 </div>
             </div>

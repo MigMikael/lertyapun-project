@@ -63,7 +63,7 @@
                         <label style="margin-top: 15px;">เหลือสินค้า {{ $product->quantity }} {{ $product->units['0']['unitName'] }}</label>
                     </div>
                     <div class="buy mt-4">
-                        <button class="btn btn-secondary mr-3" id="addToCart">
+                        <button class="btn btn-secondary mr-3" id="addToCart" @if(auth()->guard('admin')->check()) disabled @endif>
                             <i class="fa fa-shopping-cart">เพิ่มใส่ตระกร้า</i>
                         </button>
                         <!--<button class="btn btn-primary" id="buyProduct">
@@ -94,7 +94,7 @@
             data: {
                 "_token": "{{ csrf_token() }}",
                 "product_id": "{{ $product->slug }}",
-                "customer_id": "{{ auth()->guard('customer')->user()->slug }}",
+                "customer_id": "{{ auth()->guard('customer')->user()? auth()->guard('customer')->user()->slug : '' }}",
                 "quantity": $("#quantity").val(),
                 "unit": $("#unit").val(),
             },
@@ -123,7 +123,7 @@
             data: {
                 "_token": "{{ csrf_token() }}",
                 "product_id": "{{ $product->slug }}",
-                "customer_id": "{{ auth()->guard('customer')->user()->slug }}",
+                "customer_id": "{{ auth()->guard('customer')->user()? auth()->guard('customer')->user()->slug : '' }}",
                 "quantity": $("#quantity").val(),
                 "unit": $("#unit").val(),
             },

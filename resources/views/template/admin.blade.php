@@ -66,10 +66,9 @@
                                         <i class="fas fa-user"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="{{ url('customer/products') }}">หน้าสินค้า</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="{{ url('admin/logout') }}">Logout</a>
+                                        <a class="dropdown-item" href="{{ url('admin/logout') }}">ออกจากระบบ</a>
                                     </div>
                                 </li>
                             </ul>

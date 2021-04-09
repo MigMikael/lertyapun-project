@@ -22,7 +22,7 @@
         @yield('head')
     </head>
     <body>
-        @if(auth()->guard('customer')->check())
+        @if(auth()->guard('customer')->check() || auth()->guard('admin')->check())
         @include('template._navbar')
         @else
         <nav class="navbar navbar-light static-top">
