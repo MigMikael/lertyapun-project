@@ -112,6 +112,8 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validateGuestRegister($request);
+
         $newCustomer = $request->all();
         $newCustomer['slug'] = (new StringGenerator())->generateSlug();
         $newCustomer['password'] = Hash::make($request->password);

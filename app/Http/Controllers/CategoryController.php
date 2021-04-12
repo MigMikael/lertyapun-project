@@ -6,9 +6,12 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Helpers\StringGenerator;
 use Illuminate\Http\Request;
+use App\Traits\ValidateTrait;
 
 class CategoryController extends Controller
 {
+    use ValidateTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -73,6 +76,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validateCreateCategory($request);
+
         $newCategory = $request->all();
         $newCategory['slug'] = (new StringGenerator())->generateSlug();
 
@@ -123,6 +128,8 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
+        $this->validateCreateCategory($request);
+
         $newCategory = $request->all();
         $category->update($newCategory);
         return redirect()

@@ -14,11 +14,13 @@ use App\Models\ProductImage;
 use App\Models\ProductUnit;
 use App\Models\Promotion;
 use App\Traits\ImageTrait;
+use App\Traits\ValidateTrait;
 use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
     use ImageTrait;
+    use ValidateTrait;
     public $productStatus = [
         'active' => 'Active',
         'suspend' => 'Suspend',
@@ -120,6 +122,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validateCreateProduct($request);
+
         $data = $request->all();
 
         $newProduct = [
@@ -237,6 +241,8 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        $this->validateCreateProduct($request);
+
         $data = $request->all();
 
         $newProduct = [

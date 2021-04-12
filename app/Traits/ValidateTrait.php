@@ -63,6 +63,9 @@ trait ValidateTrait
             'citizen_card_id' => 'required|max:255',
             'drug_store_id' => 'required|max:255',
 
+            'remark' => 'nullable|max:255',
+            'status' => 'nullable|max:255',
+
             'citizen_card_image' => 'image',
             'drug_store_approve_image' => 'image',
             'medical_license_image' => 'required|image',
@@ -108,6 +111,26 @@ trait ValidateTrait
     {
         $request->validate([
             'name' => 'required|max:255',
+        ]);
+    }
+
+    public function validateCreateCategory(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|max:255',
+        ]);
+    }
+
+    public function validateCreateProduct(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|max:255',
+            'description' => 'nullable|max:255',
+            'weight' => 'required|numeric',
+            'product_image' => 'required|image',
+            'status' => 'required|max:255',
+            'point' => 'nullable|numeric',
+            'quantity' => 'required|numeric'
         ]);
     }
 }
