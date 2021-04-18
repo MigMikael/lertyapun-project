@@ -88,6 +88,16 @@
     <hr>
     <div class="row">
         <div class="col-md-12">
+            <strong>ที่อยู่จัดส่ง</strong>
+            <br>
+            <p>{{ $order->customer->addresses[0]->detail }} ตำบล{{ $order->customer->addresses[0]->subDistrict }}</p>
+            <p>อำเภอ{{ $order->customer->addresses[0]->district }} จังหวัด{{ $order->customer->addresses[0]->province }}</p>
+            <p>รหัสไปรษณีย์ {{ $order->customer->addresses[0]->zipcode }}</p>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
             {!! Form::open(['url' => 'admin/orders/'. $order->slug .'/status', 'method' => 'put']) !!}
             <div class="form-group">
                 {!! Form::label('สถานะคำสั่งซื้อ') !!}

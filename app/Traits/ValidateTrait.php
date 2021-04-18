@@ -133,4 +133,17 @@ trait ValidateTrait
             'quantity' => 'required|numeric'
         ]);
     }
+
+    public function validateUpdateProduct(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|max:255',
+            'description' => 'nullable|max:255',
+            'weight' => 'required|numeric',
+            'product_image' => 'image',
+            'status' => 'required|max:255',
+            'point' => 'nullable|numeric',
+            'quantity' => 'required|numeric'
+        ]);
+    }
 }

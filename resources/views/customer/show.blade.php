@@ -67,7 +67,7 @@
                     </div>
                     <div class="mt-3">
                         @foreach ($product->promotions as $promotion)
-                            <span class="badge badge-danger" style="font-weight: normal">{{ $promotion->name }}</span>
+                            <span class="badge badge-danger" style="font-weight: normal">ลด {{ $promotion->name }}%</span>
                         @endforeach
                     </div>
                     <div class="product-amount mt-3">

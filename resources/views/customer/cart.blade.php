@@ -52,7 +52,7 @@
                                                                 <p>{{ $product->name }}</p>
                                                                 @if(count($product->promotions) > 0)
                                                                     @foreach ($product->promotions->reverse() as $promotion)
-                                                                        <span class="badge badge-danger" style="font-weight: normal" id="promotion_name">{{ $promotion->name }}</span>
+                                                                        <span class="badge badge-danger" style="font-weight: normal" id="promotion_name">ลด {{ $promotion->name }}%</span>
                                                                         @if($loop->iteration == 1)
                                                                             @break
                                                                         @endif

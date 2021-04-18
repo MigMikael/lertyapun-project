@@ -149,7 +149,8 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         $order->products;
-        $order->customer;
+        $order->customer->addresses;
+
         // return $order;
         return view('admin.order.show', [
             'order' => $order,
