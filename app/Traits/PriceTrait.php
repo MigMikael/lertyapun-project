@@ -12,21 +12,25 @@ trait PriceTrait
         $discount_price = $basePrice;
         // Log::info($discount_price);
         foreach($product->promotions as $promotion) {
-            if ($promotion->name == 'ลด 5%') {
-                $discount_price = floatval($basePrice) * 0.95;
-            }
+            // if ($promotion->name == 'ลด 5%') {
+            //     $discount_price = floatval($basePrice) * 0.95;
+            // }
 
-            if ($promotion->name == 'ลด 10%') {
-                $discount_price = floatval($basePrice) * 0.9;
-            }
+            // if ($promotion->name == 'ลด 10%') {
+            //     $discount_price = floatval($basePrice) * 0.9;
+            // }
 
-            if ($promotion->name == 'ลด 20%') {
-                $discount_price = floatval($basePrice) * 0.8;
-            }
+            // if ($promotion->name == 'ลด 20%') {
+            //     $discount_price = floatval($basePrice) * 0.8;
+            // }
 
-            if ($promotion->name == 'ลด 30%') {
-                $discount_price = floatval($basePrice) * 0.7;
-            }
+            // if ($promotion->name == 'ลด 30%') {
+            //     $discount_price = floatval($basePrice) * 0.7;
+            // }
+
+            $discount_percent = floatval($promotion->name) / 100;
+            $discount_rate = 1 - $discount_percent;
+            $discount_price = floatval($basePrice) * $discount_rate;
             // Log::info($discount_price);
         }
         return $discount_price;
@@ -36,21 +40,24 @@ trait PriceTrait
     {
         $discount_price = $pricePerUnit;
         foreach($product->promotions as $promotion) {
-            if ($promotion->name == 'ลด 5%') {
-                $discount_price = floatval($pricePerUnit) * 0.95;
-            }
+            // if ($promotion->name == 'ลด 5%') {
+            //     $discount_price = floatval($pricePerUnit) * 0.95;
+            // }
 
-            if ($promotion->name == 'ลด 10%') {
-                $discount_price = floatval($pricePerUnit) * 0.9;
-            }
+            // if ($promotion->name == 'ลด 10%') {
+            //     $discount_price = floatval($pricePerUnit) * 0.9;
+            // }
 
-            if ($promotion->name == 'ลด 20%') {
-                $discount_price = floatval($pricePerUnit) * 0.8;
-            }
+            // if ($promotion->name == 'ลด 20%') {
+            //     $discount_price = floatval($pricePerUnit) * 0.8;
+            // }
 
-            if ($promotion->name == 'ลด 30%') {
-                $discount_price = floatval($pricePerUnit) * 0.7;
-            }
+            // if ($promotion->name == 'ลด 30%') {
+            //     $discount_price = floatval($pricePerUnit) * 0.7;
+            // }
+            $discount_percent = floatval($promotion->name) / 100;
+            $discount_rate = 1 - $discount_percent;
+            $discount_price = floatval($pricePerUnit) * $discount_rate;
             // Log::info($discount_price);
         }
         return $discount_price;

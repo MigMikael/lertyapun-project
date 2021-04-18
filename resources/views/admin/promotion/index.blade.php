@@ -69,7 +69,7 @@
                             {{ $loop->iteration }}
                         </th>
                         <td onclick="window.location='{{ url('admin/promotions/'.$promotion->slug) }}'">
-                            {{ $promotion->name }}
+                            ลด {{ $promotion->name }}%
                         </td>
                         <td class="text-center">
                             <div class="btn-group">
