@@ -3,6 +3,10 @@
 @section('head')
     <link href="{{ URL::asset('css/lightgallery.min.css') }}" rel="stylesheet">
     <script src="{{ URL::asset('js/lightgallery-all.min.js') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css" integrity="sha512-OTcub78R3msOCtY3Tc6FzeDJ8N9qvQn1Ph49ou13xgA9VsH9+LRxoFU6EqLhW4+PKRfU+/HReXmSZXHEkpYoOA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.green.css" integrity="sha512-riTSV+/RKaiReucjeDW+Id3WlRLVZlTKAJJOHejihLiYHdGaHV7lxWaCfAvUR0ErLYvxTePZpuKZbrTbwpyG9w==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js" integrity="sha512-gY25nC63ddE0LcLPhxUJGFxa2GoIyA5FLym4UJqHDEMHjp8RET6Zn/SHo1sltt3WuVtqfyxECP38/daUc/WVEA==" crossorigin="anonymous"></script>
 @endsection
 
 @section('content')
@@ -20,9 +24,18 @@
                         <img src="{{ url('image/show/'.$product->image->slug) }}" style="width: 100%;">
                     </div>
                 </div>
+                <!--
                 <div id="aniimated-thumbnials" class="row" style="margin-top: 30px;">
                     @foreach($productImages as $productImage)
                     <a class="col-xs-4 col-md-4 col-lg-2 form-group" href="{{ url('image/show/'.$productImage->slug) }}">
+                        <img src="{{ url('image/show/'.$productImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $product->name }}">
+                    </a>
+                    @endforeach
+                </div>
+                -->
+                <div class="owl-carousel owl-theme" id="lightgallery">
+                    @foreach($productImages as $productImage)
+                    <a class="item" data-src="{{ url('image/show/'.$productImage->slug) }}">
                         <img src="{{ url('image/show/'.$productImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $product->name }}">
                     </a>
                     @endforeach
@@ -79,9 +92,17 @@
 
 @section('script')
 <script>
-    $('#aniimated-thumbnials').lightGallery({
-        thumbnail:true
+    $('#lightgallery').lightGallery({
+        selector: '.item',
+        thumbnail: true
     })
+
+    $('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:10,
+    nav:false,
+    items: 3
+})
 </script>
 <script>
     $("#buyProduct").click(function(e) {

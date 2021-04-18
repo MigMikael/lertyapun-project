@@ -8,7 +8,7 @@
         @else
         {!! Form::open(['url' => 'register', 'method' => 'post', 'files' => 'true']) !!}
         @endif
-            <div class="row register-wrapper">
+            <div class="row register-wrapper" style="padding: 25px !important;">
                 <div class="col-md-12">
                     @if(Request::is('customer/pending/*/edit'))
                     <h5>แก้ไขข้อมูลสมัครสมาชิก</h5>

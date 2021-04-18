@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="login-form-wrapper col-md-6">
-                <div class="login-wrapper" style="padding: 50px; 
+                <div class="login-wrapper" style="padding: 25px; 
                 background: #FFF;">
                 {!! Form::open(['url' => 'login', 'method' => 'post', 'files' => 'true', 'class' => 'form-signin']) !!}
                     <h5>ลงชื่อเข้าใช้งาน</h5>

@@ -159,13 +159,13 @@
             <div class="col-md-6 col-lg-3">
                 <div class="contact-box">
                     <h5><i class="fas fa-phone-alt text-primary"></i> เบอร์โทรศัพท์</h5>
-                    <p>034 561 128</p>
+                    <p>034-561-128</p>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="contact-box">
-                    <h5><i class="fas fa-envelope text-primary"></i> อีเมล์</h5>
-                   <p>lertyaphan.official@gmail.com</p>
+                    <h5><i class="fab fa-facebook text-primary"></i> Facebook</h5>
+                    <a href="https://web.facebook.com/Lertyaphan" target="_blank"><strong>fb.com/Lertyaphan</strong></a>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3">
@@ -189,17 +189,8 @@
 <footer class="footer">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
-                <div class="pull-left">
-                    <p class="text-muted text-center" style="margin-top: 5px; margin-bottom: 0px !important;">&copy; LERTYAPHAN 2021. All Rights Reserved.</p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="pull-right">
-                    <a href="https://web.facebook.com/Lertyaphan">
-                        <i class="fab fa-facebook fa-2x fa-fw text-primary"></i>
-                    </a>
-                </div>
+            <div class="col-md-12">
+                <p class="text-muted text-center" style="margin-top: 5px; margin-bottom: 0px !important;">&copy; LERTYAPHAN 2021. All Rights Reserved.</p>
             </div>
         </div>
     </div>
