@@ -68,7 +68,7 @@ trait ValidateTrait
 
             'citizen_card_image' => 'image',
             'drug_store_approve_image' => 'image',
-            'medical_license_image' => 'required|image',
+            'medical_license_image' => 'image',
 
             'commercial_register_image' => 'nullable|image',
             'juristic_person_image' => 'nullable|image',

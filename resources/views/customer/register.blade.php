@@ -122,7 +122,6 @@
                         'label' => 'รูปใบประกอบโรคศิลปะ',
                         'name' => 'medical_license_image',
                         'key' => 'medicalLicenseImage',
-                        'required' => 'true',
                     ])
                 </div>
                 <div class="col-md-4">
