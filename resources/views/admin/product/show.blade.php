@@ -207,7 +207,8 @@
                 closeOnSelect: false,
                 enabled: 0,
                 classname: 'users-list',
-                searchKeys: ['name']  // very important to set by which keys to search for suggesttions when typing
+                searchKeys: ['name'],  // very important to set by which keys to search for suggesttions when typing
+                maxItems: 500,
             },
             templates: {
                 tag: tagTemplate,
@@ -299,7 +300,8 @@
                 closeOnSelect: false,
                 enabled: 0,
                 classname: 'users-list',
-                searchKeys: ['name']  // very important to set by which keys to search for suggesttions when typing
+                searchKeys: ['name'],  // very important to set by which keys to search for suggesttions when typing
+                maxItems: 500,
             },
             templates: {
                 tag: tagTemplate,
