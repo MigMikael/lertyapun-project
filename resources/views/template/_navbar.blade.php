@@ -17,9 +17,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('customer/products/promotions') }}">โปรโมชัน</a>
                 </li>
+                <!--
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('customer/services') }}">บริการลูกค้า</a>
                 </li>
+                -->
             </ul>
             {!! Form::open(['method' => 'post', 'url' => 'customer/products/search', 'class' => 'input-group mr-auto', 'id' => 'search-nav']) !!}
                 @if (isset($search) && $search != "")
