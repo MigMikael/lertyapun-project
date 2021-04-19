@@ -208,7 +208,7 @@
                 enabled: 0,
                 classname: 'users-list',
                 searchKeys: ['name'],  // very important to set by which keys to search for suggesttions when typing
-                maxItems: 500,
+                maxItems: 100,
             },
             templates: {
                 tag: tagTemplate,
@@ -301,7 +301,7 @@
                 enabled: 0,
                 classname: 'users-list',
                 searchKeys: ['name'],  // very important to set by which keys to search for suggesttions when typing
-                maxItems: 500,
+                maxItems: 100,
             },
             templates: {
                 tag: tagTemplate,
