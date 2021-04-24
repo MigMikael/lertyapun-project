@@ -40,15 +40,15 @@
             <img class="form-group" src="{{ url('image/show/'.$product->image->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $product->name }}">
         </div>
         <div class="col-md-8 col-xs-6" style="border: 0px solid black;">
-            <h1>
+            <h4>
                 {{ $product->name }}  @if($product->status == 'active')
                 <span class="badge badge-success" style="font-size: 16px;">กำลังใช้งาน</span>
                 @elseif($product->status == 'suspend')
-                <span class="badge badge-secondary" style="font-size: 16px;">ระงับการใช้งาน</span>
+                <span class="badge badge-danger-secondary" style="font-size: 16px;">ระงับการใช้งาน</span>
                 @elseif($product->status == 'inactive')
                 <span class="badge badge-danger" style="font-size: 16px;">ไม่ได้ใช้งาน</span>
                 @endif
-            </h1>
+            </h4>
             <p><h5>คำอธิบาย</h5> {{ $product->description }}</p>
             <p><h5>จำนวน</h5> {{ $product->quantity }} {{ $product->units['0']['unitName'] }}</p>
 

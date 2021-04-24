@@ -12,7 +12,7 @@
         </div>
     </div>
 </header>
-<section>
+<section class="bg-white">
     <div class="container">
         <header class="section-heading">
             <h3 class="section-title">โปรโมชัน</h3>

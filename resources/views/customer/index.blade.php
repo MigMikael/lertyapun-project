@@ -15,7 +15,7 @@
         </div>
     </div>
 </header>
-<section>
+<section class="bg-white">
     <div class="container">
         <div class="row">
             <aside class="col-md-4 col-lg-3 form-group">

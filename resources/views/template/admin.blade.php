@@ -33,12 +33,12 @@
                     <a href="{{ url('admin/customers') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">Customer</a>
                     <a href="{{ url('admin/orders') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">Order</a> --}}
 
-                    <a href="{{ url('admin/dashboard') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">หน้าแรก</a>
-                    <a href="{{ url('admin/customers') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">จัดการบัญชีผู้ใช้งาน</a>
-                    <a href="{{ url('admin/categories') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">จัดการประเภทสินค้า</a>
-                    <a href="{{ url('admin/products') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">จัดการสินค้า</a>
-                    <a href="{{ url('admin/orders') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">จัดการคำสั่งซื้อ</a>
-                    <a href="{{ url('admin/promotions') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;">จัดการโปรโมชัน</a>
+                    <a href="{{ url('admin/dashboard') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;"><i class="fas fa-tachometer-alt"></i> แดชบอร์ด</a>
+                    <a href="{{ url('admin/customers') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;"><i class="fas fa-users"></i> บัญชีผู้ใช้งาน</a>
+                    <a href="{{ url('admin/categories') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;"><i class="fas fa-th-large"></i> ประเภทสินค้า</a>
+                    <a href="{{ url('admin/products') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;"><i class="fab fa-product-hunt"></i> สินค้า</a>
+                    <a href="{{ url('admin/promotions') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;"><i class="fas fa-percent"></i> โปรโมชัน</a>
+                    <a href="{{ url('admin/orders') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;"><i class="fas fa-clipboard-list"></i> คำสั่งซื้อ</a>
                 </div>
             </div>
 

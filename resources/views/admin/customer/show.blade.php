@@ -33,7 +33,7 @@
                 @elseif($customer->status == 'pending')
                     <span class="badge badge-warning">รอดำเนินการ</span>
                 @elseif($customer->status == 'suspend')
-                    <span class="badge badge-secondary">ระงับการใช้งาน</span>
+                    <span class="badge badge-danger-secondary">ระงับการใช้งาน</span>
                 @elseif($customer->status == 'inactive')
                     <span class="badge badge-danger">รีเซ็ตรหัสผ่าน</span>
                 @endif</p>

@@ -8,7 +8,7 @@
 
 <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('description', 'คำอธิบายสินค้า') !!}
-    <textarea name="description" class="form-control{{ $errors->has('description') ? ' is-invalid' : null }}" placeholder="คำอธิบายสินค้า" rows="6">
+    <textarea name="description" class="form-control{{ $errors->has('description') ? ' is-invalid' : null }}" rows="6">
         {{ $product->description ?? '' }}
     </textarea>
     @error('description')
