@@ -4,7 +4,7 @@
 <div class="admin-container">
     <div class="row">
         <div class="col-md-6">
-            <h4 class="title">การจัดการสินค้า</h4>
+            <h4 class="title">สินค้า</h4>
             <span>รายการสินค้าทั้งหมด</span>
         </div>
         <div class="col-md-6">
@@ -21,11 +21,11 @@
         </div>
         <div class="col-md-12">
             {!! Form::open(['method' => 'post', 'url' => 'admin/products/search']) !!}
-            <div class="input-group">
+            <div class="input-group admin-search-wrapper">
                 @if ($search != '')
-                <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหาตามชื่อสินค้า">
+                <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหาตาม ชื่อสินค้า" autocomplete="off">
                 @else
-                <input name="query" type="text" class="form-control" placeholder="ค้นหาตามชื่อสินค้า">
+                <input name="query" type="text" class="form-control" placeholder="ค้นหาตาม ชื่อสินค้า" autocomplete="off">
                 @endif
                 <div class="input-group-append">
                     <button class="btn btn-light" type="submit">
@@ -37,21 +37,25 @@
         </div>
     </div>
 
-    <div class="mb-2" style="width: 100%; height: 40px">
-        @if (session('success'))
-            <div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                {{ session('success', 'Success !') }}
-            </div>
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ session('success', 'Success !') }}
+        </div>
         @endif
         @if (session('fail'))
-            <div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                {{ session('fail', 'Fail !') }}
-            </div>
-        @endif
-    </div>
+        <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ session('fail', 'Fail !') }}
+        </div>
+    @endif
 
+    @if (count($products) === 0)
+    <div class="text-center">
+        <img class="search-no-result-img" src="{{ url('img/no-result.png') }}">
+        <h5>ไม่พบข้อมูล</h5>
+    </div>
+    @else
     <div class="table-responsive">
         <table class="table table-hover">
             <thead>
@@ -59,7 +63,7 @@
                 <th scope="col">#</th>
                 <th scope="col">รูปสินค้า</th>
                 <th scope="col">ชื่อสินค้า</th>
-                <th scope="col">สถานะสินค้า</th>
+                <th class="text-center">สถานะสินค้า</th>
                 <th class="text-center">จัดการ</th>
                 <th class="text-center">ดูข้อมูล</th>
             </tr>
@@ -67,20 +71,20 @@
             <tbody>
                 @foreach($products as $product)
                     <tr>
-                        <th onclick="window.location='{{ url('admin/products/'.$product->slug) }}'">
+                        <th>
                             {{ $loop->iteration }}
                         </th>
-                        <td onclick="window.location='{{ url('admin/products/'.$product->slug) }}'">
-                            <img src="{{ url('image/show/'.$product->image->slug) }}" style="height: 120px; width: 120px" class="img-fluid" alt="{{ $product->name }}">
+                        <td>
+                            <img src="{{ url('image/show/'.$product->image->slug) }}" class="admin-img-table img-fluid" alt="{{ $product->name }}">
                         </td>
-                        <td onclick="window.location='{{ url('admin/products/'.$product->slug) }}'">
+                        <td>
                             {{ $product->name }}
                         </td>
-                        <td onclick="window.location='{{ url('admin/products/'.$product->slug) }}'">
+                        <td class="text-center">
                             @if($product->status == 'active')
                             <span class="badge badge-success">กำลังใช้งาน</span>
                             @elseif($product->status == 'suspend')
-                            <span class="badge badge-secondary">ระงับการใช้งาน</span>
+                            <span class="badge badge-danger-secondary">ระงับการใช้งาน</span>
                             @elseif($product->status == 'inactive')
                             <span class="badge badge-danger">ไม่ได้ใช้งาน</span>
                             @endif
@@ -97,14 +101,13 @@
                             <div class="btn-group">
                                 <a href="{{ url('admin/products/'.$product->slug.'/edit') }}" class="btn btn-warning btn-sm">
                                     <i class="fas fa-edit"></i>
-                                    แก้ไข
                                 </a>
                                 {!! Form::model($product, [
                                     'method' => 'delete',
                                     'url' => 'admin/products/'.$product->slug,
                                     'class' => '']) !!}
                                 <button class="btn btn-danger btn-sm delete-action ml-2">
-                                    <i class="fas fa-trash"></i> ลบ
+                                    <i class="fas fa-trash"></i>
                                 </button>
                                 {!! Form::close() !!}
                             </div>
@@ -119,6 +122,7 @@
             </tbody>
         </table>
     </div>
+    @endif
     <div class="d-flex justify-content-center">
         {{ $products->render("pagination::bootstrap-4") }}
     </div>
