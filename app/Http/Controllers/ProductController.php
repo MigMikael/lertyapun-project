@@ -127,12 +127,14 @@ class ProductController extends Controller
         $data = $request->all();
 
         $newProduct = [
-            'slug' => (new StringGenerator())->generateSlug(),
+            'slug' => '',
             'name' => $data['name'],
             'description' => $data['description'],
             'weight' => $data['weight'],
             'status' => $data['status'],
             'quantity' => $data['quantity'],
+            'expired_startdate' => $data['expired_startdate'],
+            'expired_enddate' => $data['expired_enddate'],
         ];
 
         if($request->hasFile('product_image')) {
@@ -142,6 +144,10 @@ class ProductController extends Controller
         }
 
         $product = Product::create($newProduct);
+
+        $productSlug = sprintf("%07d", $product->id);
+        $product->slug = 'P-'.$productSlug;
+        $product->save();
 
         if (count($data['unitName']) != count($data['pricePerUnit']) ||
         count($data['unitName']) != count($data['quantityPerUnit'])) {
@@ -251,6 +257,8 @@ class ProductController extends Controller
             'weight' => $data['weight'],
             'status' => $data['status'],
             'quantity' => $data['quantity'],
+            'expired_startdate' => $data['expired_startdate'],
+            'expired_enddate' => $data['expired_enddate'],
         ];
 
         if($request->hasFile('product_image')) {

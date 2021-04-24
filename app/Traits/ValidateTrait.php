@@ -130,7 +130,9 @@ trait ValidateTrait
             'product_image' => 'required|image',
             'status' => 'required|max:255',
             'point' => 'nullable|numeric',
-            'quantity' => 'required|numeric'
+            'quantity' => 'required|numeric',
+            'expired_startdate' => 'nullable|date',
+            'expired_enddate' => 'nullable|date',
         ]);
     }
 
@@ -143,7 +145,9 @@ trait ValidateTrait
             'product_image' => 'image',
             'status' => 'required|max:255',
             'point' => 'nullable|numeric',
-            'quantity' => 'required|numeric'
+            'quantity' => 'required|numeric',
+            'expired_startdate' => 'nullable|date',
+            'expired_enddate' => 'nullable|date',
         ]);
     }
 }

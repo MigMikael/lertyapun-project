@@ -54,6 +54,21 @@
     {!! Form::select('status', $status, null, ['class' => 'form-control']) !!}
 </div>
 
+<div class="form-group" style="margin-bottom: 3%">
+    {!! Form::label('expired_startdate', 'วันที่เริ่มต้นหมดอายุ') !!}
+    {!! Form::date('expired_startdate', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}
+    @error('expired_startdate')
+        <div class="text-danger">{{ $message }}</div>
+    @enderror
+</div>
+<div class="form-group" style="margin-bottom: 3%">
+    {!! Form::label('expired_startdate', 'วันที่สิ้นสุดหมดอายุ') !!}
+    {!! Form::date('expired_enddate', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}
+    @error('expired_enddate')
+        <div class="text-danger">{{ $message }}</div>
+    @enderror
+</div>
+
 @include('template._inputPreview', [
     'label' => 'ภาพสินค้า',
     'name' => 'product_image',

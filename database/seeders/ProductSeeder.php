@@ -24,7 +24,7 @@ class ProductSeeder extends Seeder
             'original_name' => 'img_4754.png',
         ]);
         DB::table('products')->insert([
-            'slug' => (new StringGenerator())->generateSlug(),
+            'slug' => 'P-0000001',
             'name' => 'SOLMAX KID 60ML(องุ่น)',
             'description' => 'SOLMAX KID 60ML(องุ่น)',
             'price' => 0,
@@ -57,7 +57,7 @@ class ProductSeeder extends Seeder
             'original_name' => 'img_5338.png',
         ]);
         DB::table('products')->insert([
-            'slug' => (new StringGenerator())->generateSlug(),
+            'slug' => 'P-0000002',
             'name' => 'KRESSLOG ORALPASTE 5G.',
             'description' => 'KRESSLOG ORALPASTE 5G.',
             'price' => 0,

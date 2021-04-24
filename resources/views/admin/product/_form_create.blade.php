@@ -8,9 +8,7 @@
 
 <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('description', 'คำอธิบายสินค้า') !!}
-    <textarea name="description" class="form-control{{ $errors->has('description') ? ' is-invalid' : null }}" placeholder="คำอธิบายสินค้า" rows="6">
-        {{ $product->description ?? '' }}
-    </textarea>
+    <textarea name="description" class="form-control{{ $errors->has('description') ? ' is-invalid' : null }}" placeholder="คำอธิบายสินค้า" rows="6">{{ $product->description ?? '' }}</textarea>
     @error('description')
         <div class="text-danger">{{ $message }}</div>
     @enderror
@@ -64,6 +62,21 @@
     {!! Form::label('Status', 'สถานะ') !!}
     {!! Form::select('status', $status, null, ['class' => 'form-control' . ($errors->has('status') ? ' is-invalid' : null)]) !!}
     @error('status')
+        <div class="text-danger">{{ $message }}</div>
+    @enderror
+</div>
+
+<div class="form-group" style="margin-bottom: 3%">
+    {!! Form::label('expired_startdate', 'วันที่เริ่มต้นหมดอายุ') !!}
+    {!! Form::date('expired_startdate', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}
+    @error('expired_startdate')
+        <div class="text-danger">{{ $message }}</div>
+    @enderror
+</div>
+<div class="form-group" style="margin-bottom: 3%">
+    {!! Form::label('expired_startdate', 'วันที่สิ้นสุดหมดอายุ') !!}
+    {!! Form::date('expired_enddate', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}
+    @error('expired_enddate')
         <div class="text-danger">{{ $message }}</div>
     @enderror
 </div>

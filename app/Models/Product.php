@@ -22,6 +22,8 @@ class Product extends Model
         'image_id',
         'status',
         'weight',
+        'expired_startdate',
+        'expired_enddate',
     ];
 
     public function promotions()
