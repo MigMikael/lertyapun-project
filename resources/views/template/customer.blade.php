@@ -25,12 +25,12 @@
         @if(auth()->guard('customer')->check() || auth()->guard('admin')->check())
         @include('template._navbar')
         @else
-        <nav class="navbar navbar-light static-top">
+        <nav class="navbar navbar-light static-top" style="border-bottom: 1px solid #DEDEDE !important;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ URL::asset('img/logo.jpg') }}" style="width: 60px; height: 60px;">เลิศยาภัณฑ์
+                    <img src="{{ URL::asset('img/logo.jpg') }}" style="width: 60px; height: 60px;">
                 </a>
-                <a class="btn btn-lg btn-secondary" href="{{ url('login') }}">เข้าสู่ระบบ</a>
+                <a class="btn btn-md btn-secondary" href="{{ url('login') }}">เข้าสู่ระบบ</a>
             </div>
         </nav>
         @endif
@@ -54,6 +54,11 @@
                     }
                 });
             });
+        </script>
+        <script>
+        $("#user-menu-toggle").click(function(){
+            $("#sidebar").toggle(200);
+        });
         </script>
         @yield('script')
     </body>

@@ -1,16 +1,22 @@
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-expand-md static-top">
+<nav class="navbar navbar-expand-lg navbar-expand-md static-top" style="border-bottom: 1px solid #DEDEDE !important;">
     <div class="container">
+        @if (\Request::is('customer/profile') || \Request::is('customer/document') || \Request::is('customer/address') || \Request::is('customer/password') || \Request::is('customer/order')) 
+        <button class="btn btn-primary" id="user-menu-toggle">
+            <i class="fa fa-indent"></i>
+        </button>
+        @endif
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
             aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span><i class="fas fa-bars"></i></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <a class="navbar-brand" href="{{ url('/') }}">
                 <img src="{{ URL::asset('img/logo.jpg') }}" style="width: 60px; height: 60px;">
-                เลิศยาภัณฑ์
             </a>
-            <ul class="navbar-nav mx-auto">
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ url('customer/products') }}">สินค้า</a>
                 </li>
@@ -23,7 +29,7 @@
                 </li>
                 -->
             </ul>
-            {!! Form::open(['method' => 'post', 'url' => 'customer/products/search', 'class' => 'input-group mr-auto', 'id' => 'search-nav']) !!}
+            {!! Form::open(['method' => 'post', 'url' => 'customer/products/search', 'class' => 'input-group ml-auto mr-auto', 'id' => 'search-nav']) !!}
                 @if (isset($search) && $search != "")
                 <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหา...">
                 @else
@@ -49,16 +55,15 @@
                 <div class="dropdown-menu">
                     @if(auth()->guard('customer')->check())
                         <a class="dropdown-item" href="{{ url('customer/profile') }}">บัญชีของฉัน</a>
+                        <div class="dropdown-divider"></div>
                     @elseif(auth()->guard('admin')->check())
                         <a class="dropdown-item" href="{{ url('admin') }}">หน้าแอดมิน</a>
+                        <div class="dropdown-divider"></div>
                     @endif
-
-                    <div class="dropdown-divider"></div>
                     @if(auth()->guard('customer')->check())
                         <a class="dropdown-item" href="{{ url('customer/order') }}">การซื้อของฉัน</a>
+                        <div class="dropdown-divider"></div>
                     @endif
-                    <div class="dropdown-divider"></div>
-
                     @if(auth()->guard('customer')->check())
                         <a class="dropdown-item" href="{{ url('customer/logout') }}">ออกจากระบบ</a>
                     @elseif(auth()->guard('admin')->check())

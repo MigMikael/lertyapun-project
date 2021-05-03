@@ -23,9 +23,10 @@ function preview_image()
 <label class="mb-0 pb-2">{{ $label }}</label>
 <div class="border mb-4 p-1 rounded @error($name) border-danger @enderror">
     <div class="input-group">
-        <div class="custom-file">
-            <input accept="image/x-png,image/gif,image/jpeg" name="{{ $name }}[]" id="multiple_upload_file" type="file" onchange="preview_image()" multiple>
-        </div>
+        <label class="btn btn-primary">
+            <i class="fa fa-image"></i> อัพโหลดรูป
+            <input class="hidden" accept="image/x-png,image/gif,image/jpeg" name="{{ $name }}[]" id="multiple_upload_file" type="file" onchange="preview_image()" multiple>
+        </label>
     </div>
     <div class="rounded-lg multiple-image-preview">
         <div class="row">

@@ -178,11 +178,11 @@ label {
 }
 
 .image-preview {
-  background-color: #f4f4f4;
+  background-color: none;
 }
 
 .image-preview > a > img {
-  height: 100px;
+  height: 150px;
 }
 
 .text-danger {
@@ -287,22 +287,24 @@ figure {
 
 #content {
   width: 100%;
-  padding: 0;
-  min-height: 600px;
+  padding: 50px;
+  min-height: 90vh;
+  margin-bottom: 50px;
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
   transition: all 0.3s;
 }
 
 #sidebar {
-  min-width: 300px;
-  max-width: 300px;
+  min-width: 250px;
+  max-width: 250px;
   background: #2e6bd3;
   color: #FFF;
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
   transition: all 0.3s;
   min-height: 100vh;
+  z-index: 1;
 }
 
 #sidebar .logo {
@@ -320,7 +322,7 @@ figure {
   padding: 10px 0;
   display: block;
   color: #FFF;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 #sidebar ul li > ul {
@@ -343,7 +345,7 @@ figure {
   border-radius: 50%;
   background-size: cover;
   background-repeat: no-repeat;
-  cursor: pointer;
+  transition: .4s all;
 }
 
 #profile-wrapper .profile-img-wrapper .profile-btn {
@@ -441,6 +443,10 @@ figure {
 .contact-box:hover {
   -webkit-transform: translateY(-10px);
   transform: translateY(-10px);
+}
+
+#user-menu-toggle {
+  display: none;
 }
 
 @media (max-width: 991.98px) {
@@ -547,34 +553,48 @@ figure {
 }
 
 footer.footer {
-  padding: 15px 0;
+  padding: 25px 0;
+  border-top: 1px solid #DEDEDE;
 }
 
 .card-header {
   background: #FFF;
 }
 
-@media (max-width: 767.98px) {
-.login-img-wrapper {
-  display: none;
-}
-
 .section-login {
-  padding: 25px 0;
+  min-height: calc(100vh - 95px);
 }
 
-#sidebar {
-  margin-left: -300px;
+.section-register {
+  min-height: calc(100vh - 95px);
 }
 
-#menu-nav {
-  display: block;
-}
+@media (max-width: 767.98px) {
+  .login-img-wrapper {
+    display: none;
+  }
+
+  #sidebar {
+    display: none;
+    z-index: unset !important;
+  }
+
+  #menu-nav {
+    display: block;
+  }
+
+  #user-menu-toggle {
+    display: block;
+  }
 }
 
 @media (max-width: 575.98px) {
   .btn-login {
     padding: 10px 20px !important;
+  }
+
+  #content {
+    padding: 25px;
   }
 }
 
@@ -586,4 +606,13 @@ footer.footer {
   .navbar-brand {
     font-size: 1.25rem !important;
 }
+
+.section-login {
+  min-height: 100vh;
+}
+
+.section-register {
+  min-height: 100vh;
+}
+
 }

@@ -8,7 +8,7 @@
         <ul class="list-unstyled components mb-5">
             <li class="active">
                 <a href="#userAccount" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
-                    บัญชีของฉัน
+                    <i class="fas fa-user"></i> บัญชีของฉัน
                 </a>
                 <ul class="list-unstyled collapse show" id="userAccount">
                     <a href="{{ url('customer/profile') }}">
@@ -27,7 +27,7 @@
             </li>
             <li>
                 <a href="{{ url('customer/order') }}">
-                    การซื้อของฉัน
+                    <i class="fas fa-clipboard-list"></i> การซื้อของฉัน
                 </a>
             </li>
         </ul>

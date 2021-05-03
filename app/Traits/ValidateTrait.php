@@ -66,9 +66,9 @@ trait ValidateTrait
             'remark' => 'nullable|max:255',
             'status' => 'nullable|max:255',
 
-            'citizen_card_image' => 'image',
-            'drug_store_approve_image' => 'image',
-            'medical_license_image' => 'image',
+            'citizen_card_image' => 'required|image',
+            'drug_store_approve_image' => 'required|image',
+            'medical_license_image' => 'nullable|image',
 
             'commercial_register_image' => 'nullable|image',
             'juristic_person_image' => 'nullable|image',
@@ -89,8 +89,8 @@ trait ValidateTrait
             'citizen_card_id' => 'required|max:255',
             'drug_store_id' => 'required|max:255',
 
-            'citizen_card_image' => 'nullable|image',
-            'drug_store_approve_image' => 'nullable|image',
+            'citizen_card_image' => 'required|image',
+            'drug_store_approve_image' => 'required|image',
             'medical_license_image' => 'nullable|image',
 
             'commercial_register_image' => 'nullable|image',

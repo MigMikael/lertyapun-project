@@ -323,7 +323,7 @@ class CustomerController extends Controller
             }
 
             $customer->update($newCustomer);
-            return redirect('customer/profile')->with('success', 'Edit Success');
+            return redirect('customer/profile')->with('success', 'แก้ไขข้อมูลส่วนตัวสำเร็จ !');
         } else {
             return redirect('login');
         }
@@ -365,7 +365,7 @@ class CustomerController extends Controller
             Address::where('customer_id', $customer->id)->delete();
             Address::create($newAddress);
 
-            return redirect('customer/address')->with('success', 'บันทึกข้อมูลสำเร็จ');
+            return redirect('customer/address')->with('success', 'แก้ไขข้อมูลที่อยู่สำเร็จ !');
         } else {
             return redirect('login');
         }
@@ -402,15 +402,15 @@ class CustomerController extends Controller
         if (Hash::check($current_password, $authCustomer->password)) {
             if ($new_password == $confirm_new_password) {
                 $customer = Customer::where('slug', $authCustomer->slug)->first();
-                $updateCustomer = ['password' => $new_password];
+                $updateCustomer = ['password' => Hash::make($new_password)];
                 $customer->update($updateCustomer);
 
-                return redirect('customer/profile')->with('success', 'Edit Success');
+                return redirect('customer/password')->with('success', 'เปลี่ยนรหัสผ่านสำเร็จ !');
             } else {
-                return redirect()->back();
+                return redirect('customer/password')->with('fail', 'รหัสผ่านใหม่กับการยืนยันรหัสผ่านใหม่ไม่ตรงกัน !');
             }
         } else {
-            return redirect()->back();
+            return redirect('customer/password')->with('fail', 'คุณกรอกรหัสผ่านปัจจุบันผิด !');
         }
     }
 
@@ -484,7 +484,7 @@ class CustomerController extends Controller
             }
 
             $customer->save();
-            return redirect('customer/document')->with('success', 'Edit Success');
+            return redirect('customer/document')->with('success', 'แก้ไขข้อมูลเอกสารสำเร็จ !');
         } else {
             return redirect('login');
         }

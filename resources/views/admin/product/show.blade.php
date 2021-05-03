@@ -49,21 +49,28 @@
                 <span class="badge badge-danger" style="font-size: 16px;">ไม่ได้ใช้งาน</span>
                 @endif
             </h4>
-            <p><h5>คำอธิบาย</h5> {{ $product->description }}</p>
-            <p><h5>จำนวน</h5> {{ $product->quantity }} {{ $product->units['0']['unitName'] }}</p>
-            <p><strong>วันที่เริ่มต้นหมดอายุ:</strong> {{ \Carbon\Carbon::parse($product->expired_startdate)->format('d/m/y') }}</p>
-            <p><strong>วันที่สิ้นสุดหมดอายุ:</strong> {{ \Carbon\Carbon::parse($product->expired_enddate)->format('d/m/y') }}</p>
 
-            <h5>หน่วยสินค้า</h5>
+            <strong>คำอธิบาย</strong>
+            <p>{{ $product->description }}</p>
+
+            <strong>จำนวน</strong>
+            <p>{{ $product->quantity }} {{ $product->units['0']['unitName'] }}</p>
+
+            <strong>วันหมดอายุเร็วที่สุด:</strong>
+            <p>{{ \Carbon\Carbon::parse($product->expired_startdate)->format('d/m/Y') }}</p>
+
+            <strong>วันหมดอายุช้าที่สุด:</strong>
+            <p>{{ \Carbon\Carbon::parse($product->expired_enddate)->format('d/m/Y') }}</p>
+
+            <strong>หน่วยสินค้า</strong><br>
             @foreach($product->units as $productUnit)
-            <p>
                 <span>{{ $productUnit->unitName }}: {{ number_format($productUnit->pricePerUnit) }} บาท</span> /
                 @if ($loop->first)
                 <span>น้ำหนัก {{ $product->weight }} กรัม</span>
                 @else
                 <span>1 {{ $productUnit->unitName }}: {{ number_format($productUnit->quantityPerUnit) }} {{ $product->units['0']['unitName'] }}</span>
                 @endif
-            </p>
+                <br>
             @endforeach
         </div>
     </div>

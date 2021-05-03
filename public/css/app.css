@@ -163,13 +163,30 @@ body.loading .overlay{
     display: block;
 }
 
+.pending-form-wrapper {
+    width: 100%;
+    height: auto;
+}
+
+.login-form-wrapper {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    margin-top: 35px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .login-wrapper {
-    padding: 50px; 
+    padding: 25px; 
     background: #FFF;
 }
 
 .register-wrapper {
-    padding: 50px;
+    padding: 25px;
     background: #FFF;
 }
 
@@ -178,6 +195,7 @@ body.loading .overlay{
     margin: 25px 15px;
     padding: 25px;
     border-radius: .25rem;
+    min-height: 85vh;
 }
 
 nav {
@@ -287,14 +305,14 @@ nav {
   }
 
   .category-tag .tagify {
-      width: 300px;
+      width: 80%;
       height: 100%;
       overflow: hidden;
       margin-right: 15px;
   }
 
   .promotion-tag .tagify {
-    width: 300px;
+    width: 80%;
     height: 100%;
     overflow: hidden;
     margin-right: 15px;
@@ -318,6 +336,10 @@ nav {
 
 .search-no-result-img {
     width: 400px;
+}
+
+.no-item-cart-img {
+    width: 250px;
 }
 
 .alert {
@@ -351,11 +373,108 @@ nav {
 }
 */
 
-@media (max-width: 767.98px) {
-    .register-wrapper {
-        margin: 15px;
+input[type="date"]::-webkit-datetime-edit, input[type="date"]::-webkit-inner-spin-button, input[type="date"]::-webkit-clear-button {
+    color: #fff;
+    position: relative;
+    
+}
+
+input[type="date"]::-webkit-datetime-edit-year-field {
+    position: absolute !important;
+    /*border-left:1px solid #000;*/
+    padding: 2px;
+    margin-left: 5px;
+    padding-left: 5px;
+    color:#000;
+    left: 56px;
+    /*transform: skewX(-20deg);*/
+}
+
+input[type="date"]::-webkit-datetime-edit-month-field {
+    position: absolute !important;
+    /*border-left:1px solid #000;*/
+    /*border-left:1px solid #8c8c8c;*/
+    padding: 2px;
+    padding-left: 5px;
+    color:#000;
+    left: 30px;
+    /*transform: skewX(-20deg);*/
+}
+
+
+input[type="date"]::-webkit-datetime-edit-day-field {
+    position: absolute !important;
+    color:#000;
+    padding: 2px;
+    left: 4px;
+    /*transform: skewX(-20deg);*/
+}
+
+.btn-primary.disabled, .btn-primary:disabled {
+    color: #fff;
+    background-color: #2e6bd3;
+    border-color: #2e6bd3;
+}
+
+.footer-submit {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    padding: 5px;
+    border-top: 1px solid #dedede;
+}
+
+.btn-submit-wrapper {
+    margin-left: 300px;
+    text-align: center;
+}
+
+#btn-submit {
+    margin: auto;
+    margin-top: 8pt;
+    margin-bottom: 8pt;
+    width: 200pt;
+    text-transform: uppercase;
+}
+
+.hidden {
+    display: none;
+}
+
+#remark {
+    margin-top: 15px;
+    color: #28a745;
+}
+
+@media (max-width: 991.98px) {
+    .category-tag .tagify {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        margin-right: 0px;
+        margin-bottom: 15px;
     }
 
+    #add-product-category-btn {
+        width: 100%;
+    }
+
+    .promotion-tag .tagify {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        margin-right: 0px;
+        margin-bottom: 15px;
+    }
+
+    #add-product-promotion-btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 767.98px) {
     section {
         padding: 25px 0;
     }
@@ -364,31 +483,33 @@ nav {
         max-width: 100%;
         height: auto;
     }
+
+    .no-item-cart-img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .btn-submit-wrapper {
+        margin-left: 0 !important;
+        text-align: center;
+    }
+
+    #product-table > #price {
+        min-width: 180px;
+    }
+
+    #product-table > #quantity {
+        min-width: 100px;
+    }
 }
 
 .login-img-wrapper {
     padding: 0px;
 }
 
-.login-form-wrapper {
-    padding: 0px;
-}
-
-#content {
-    margin: 50px;
-}
-
 @media (max-width: 767.98px) {
     .login-img-wrapper {
         padding: 15px;
-    }
-
-    .login-form-wrapper {
-        padding: 15px;
-    }
-
-    #content {
-        margin: 0px;
     }
 }
 

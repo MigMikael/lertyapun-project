@@ -61,6 +61,7 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
+                <th scope="col">รหัสสินค้า</th>
                 <th scope="col">รูปสินค้า</th>
                 <th scope="col">ชื่อสินค้า</th>
                 <th class="text-center">สถานะสินค้า</th>
@@ -73,6 +74,9 @@
                     <tr>
                         <th>
                             {{ $loop->iteration }}
+                        </th>
+                        <th>
+                            {{ $product->slug }}
                         </th>
                         <td>
                             <img src="{{ url('image/show/'.$product->image->slug) }}" class="admin-img-table img-fluid" alt="{{ $product->name }}">

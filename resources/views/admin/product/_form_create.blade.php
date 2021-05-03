@@ -67,14 +67,14 @@
 </div>
 
 <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('expired_startdate', 'วันที่เริ่มต้นหมดอายุ') !!}
+    {!! Form::label('expired_startdate', 'วันหมดอายุเร็วที่สุด') !!}
     {!! Form::date('expired_startdate', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}
     @error('expired_startdate')
         <div class="text-danger">{{ $message }}</div>
     @enderror
 </div>
 <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('expired_startdate', 'วันที่สิ้นสุดหมดอายุ') !!}
+    {!! Form::label('expired_startdate', 'วันหมดอายุช้าที่สุด') !!}
     {!! Form::date('expired_enddate', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}
     @error('expired_enddate')
         <div class="text-danger">{{ $message }}</div>

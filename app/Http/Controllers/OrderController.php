@@ -58,25 +58,25 @@ class OrderController extends Controller
         if($sort == 'name_asc') {
             $orders = Order::join('customers', 'orders.customer_id', '=', 'customers.id')
                 ->select('orders.*','orders.slug as order_slug','customers.slug as customer_slug', 'orders.status as order_status', 'customers.*')
-                ->where("first_name", "like", "%".$query."%")
-                ->orWhere("last_name", "like", "%".$query."%")
-                ->orWhere("orders.slug", "like", "%".$query."%")
+                /*->where("first_name", "like", "%".$query."%")
+                ->orWhere("last_name", "like", "%".$query."%")*/
+                ->Where("orders.slug", "like", "%".$query."%")
                 ->orderBy('first_name', 'ASC')
                 ->paginate($page);
         } else if($sort == 'name_desc') {
             $orders = Order::join('customers', 'orders.customer_id', '=', 'customers.id')
-                ->select('orders.*','orders.slug as order_slug','customers.slug as customer_slug', 'orders.status as order_status', 'customers.*')
+                /*->select('orders.*','orders.slug as order_slug','customers.slug as customer_slug', 'orders.status as order_status', 'customers.*')
                 ->where("first_name", "like", "%".$query."%")
-                ->orWhere("last_name", "like", "%".$query."%")
-                ->orWhere("orders.slug", "like", "%".$query."%")
+                ->orWhere("last_name", "like", "%".$query."%")*/
+                ->Where("orders.slug", "like", "%".$query."%")
                 ->orderBy('first_name', 'DESC')
                 ->paginate($page);
         } else {
             $orders = Order::join('customers', 'orders.customer_id', '=', 'customers.id')
                 ->select('orders.*','orders.slug as order_slug','customers.slug as customer_slug', 'orders.status as order_status', 'customers.*')
-                ->where("first_name", "like", "%".$query."%")
-                ->orWhere("last_name", "like", "%".$query."%")
-                ->orWhere("orders.slug", "like", "%".$query."%")
+                /*->where("first_name", "like", "%".$query."%")
+                ->orWhere("last_name", "like", "%".$query."%")*/
+                ->Where("orders.slug", "like", "%".$query."%")
                 ->orderBy('orders.updated_at', 'DESC')
                 ->paginate($page);
         }
@@ -124,8 +124,11 @@ class OrderController extends Controller
     {
         $newOrder = $request->all();
 
+        /*$dt = new DateTime;
+        $newOrderId = 'ORD-'.$dt->format('Ymd').sprintf("%06d", $order->id);*/
         $stringGenerator = new StringGenerator('0123456789');
         $newOrder['slug'] = $stringGenerator->generate(12);
+        $newOrder['slug'] = $newOrderId;
         $newOrder['payment_method'] = 'direct transfer';
 
         if($request->hasFile('slip_image')) {
@@ -310,9 +313,11 @@ class OrderController extends Controller
 
         $shipmentPrice = $this->calculateShipmentPrice($sumWeight);
 
-        $stringGenerator = new StringGenerator('0123456789');
+        /*$stringGenerator = new StringGenerator('0123456789');*/
+        $stringGenerator = new StringGenerator('ABCDEFGHIFKLMNOPQRSTUVWXYZ0123456789');
         $newOrder = [
-            'slug' => $stringGenerator->generate(12),
+            'slug' => '',
+            /*'slug' => $stringGenerator->generate(12),*/
             'total_amount' => $sumFinalPrice + $shipmentPrice,
             'status' => 'pending',
             'order_date' => Carbon::now(),
@@ -323,6 +328,12 @@ class OrderController extends Controller
         ];
 
         $order = Order::create($newOrder);
+
+        $dt = Carbon::now()->format('ymd');
+        $orderSlug = 'ORD-'.$dt.$stringGenerator->generate(5);
+        $order->slug = $orderSlug;
+        $order->save();
+
         foreach($newOrderDetails as $newOrderDetail) {
             $newOrderDetail['order_id'] = $order->id;
             OrderDetail::create($newOrderDetail);

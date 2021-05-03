@@ -10,16 +10,18 @@
 @endsection
 
 @section('content')
+<!--
 <section class="section-page-top">
     <div class="container">
         <h2 class="title-page">สินค้า</h2>
     </div>
 </section>
-<section class="bg-white">
+-->
+<section class="bg-white" style="min-height: calc(100vh - 95px);">
     <div class="container">
         <div class="row">
-            <div class="col-md-5">
-                <div class="product-image-card">
+            <div class="col-md-5 form-group">
+                <div class="product-image-card form-group">
                     <div class="product-image">
                         <img src="{{ url('image/show/'.$product->image->slug) }}" style="width: 100%;">
                     </div>
@@ -41,17 +43,28 @@
                     @endforeach
                 </div>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-7 form-group">
                 <div class="product-card">
                     <div class="product-name">
-                        <h2>{{ $product->name }}</h2>
+                        <h4>{{ $product->name }}</h4>
                     </div>
-                    <div class="product-info mt-3">
+                    <div class="product-info">
                         <label>รายละเอียดสินค้า</label>
                         <p>{{ $product->description }}</p>
                     </div>
-                    <div class="product-price mt-3">
+                    <div class="product-expired">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>วันหมดอายุ:</label>
+                                <p>ช่วงวันที่ {{ \Carbon\Carbon::parse($product->expired_startdate)->format('d/m/Y') }} ถึง {{ \Carbon\Carbon::parse($product->expired_enddate)->format('d/m/Y') }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-price">
                         <label>ราคา</label>
+                        @foreach ($product->promotions as $promotion)
+                            <span class="badge badge-danger" style="font-weight: normal">ลด {{ $promotion->name }}%</span>
+                        @endforeach
                         {{-- <h5 class="price">฿{{ $product->price }} {{ $product->unit }}</h5> --}}
                         <select id="unit" name="unit" id="unit" class="form-control" style="width: 300px;">
                             @foreach($product->units as $productUnit)
@@ -65,11 +78,13 @@
                             @endforeach
                         </select>
                     </div>
+                    <!--
                     <div class="mt-3">
                         @foreach ($product->promotions as $promotion)
                             <span class="badge badge-danger" style="font-weight: normal">ลด {{ $promotion->name }}%</span>
                         @endforeach
                     </div>
+                    -->
                     <div class="product-amount mt-3">
                         <label>จำนวน</label>
                         <input id="quantity" type="number" class="form-control" value="1" style="width: 100px;">

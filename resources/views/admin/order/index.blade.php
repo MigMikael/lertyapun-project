@@ -19,9 +19,9 @@
             {!! Form::open(['method' => 'post', 'url' => 'admin/orders/search']) !!}
             <div class="input-group admin-search-wrapper">
                 @if (isSet($search) && $search != '')
-                <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหาตาม ชื่อ นามสกุล หมายเลขคำสั่งซื้อ" autocomplete="off">
+                <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหาตาม เลขที่คำสั่งซื้อ" autocomplete="off">
                 @else
-                <input name="query" type="text" class="form-control" placeholder="ค้นหาตาม ชื่อ นามสกุล หมายเลขคำสั่งซื้อ" autocomplete="off">
+                <input name="query" type="text" class="form-control" placeholder="ค้นหาตาม เลขที่คำสั่งซื้อ" autocomplete="off">
                 @endif
                 <div class="input-group-append">
                     <button class="btn btn-light" type="submit">
@@ -57,7 +57,7 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">หมายเลขคำสั่งซื้อ</th>
+                <th scope="col">เลขที่คำสั่งซื้อ</th>
                 <th scope="col">วันที่คำสั่งซื้อ</th>
                 <th scope="col">ชื่อลูกค้า</th>
                 <th scope="col" class="text-right">ยอดรวมทั้งหมด (บาท)</th>

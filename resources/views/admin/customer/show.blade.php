@@ -17,6 +17,11 @@
     <div class="row">
         <div class="col-md-8 col-xs-6" style="border: 0px solid black;">
             <div class="form-group">
+                <strong>
+                    ข้อมูลส่วนตัว
+                </strong>
+            </div>
+            <div class="form-group">
                 <p>
                     ชื่อ: {{ $customer->first_name }} {{ $customer->last_name }}
                 </p>
@@ -42,44 +47,65 @@
     </div>
     <hr>
     <div id="aniimated-thumbnials" class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <strong>
+                    ข้อมูลเอกสาร
+                </strong>
+            </div>
+        </div>
+        @if ($customer->citizenCardImage == null && $customer->drugStoreApproveImage == null && $customer->medicalLicenseImage == null &&
+        $customer->commercialRegisterImage == null && $customer->juristicPersonImage == null && $customer->vatRegisterCertImage == null)
+        <div class="col-md-12">
+            <span>ไม่พบข้อมูล</span>
+        </div>
+        @endif
+
         @if ($customer->citizenCardImage != null)
-        <a class="col-md-2" href="{{ url('image/show/'.$customer->citizenCardImage->slug) }}">
-            <img src="{{ url('image/show/'.$customer->citizenCardImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $customer->first_name }}">
+        <a class="col-md-6 col-lg-4 form-group" href="{{ url('image/show/'.$customer->citizenCardImage->slug) }}">
+            <img src="{{ url('image/show/'.$customer->citizenCardImage->slug) }}" style="width: 100%; height: 250px;" class="img-fluid" alt="{{ $customer->first_name }}">
         </a>
         @endif
 
         @if ($customer->drugStoreApproveImage != null)
-        <a class="col-md-2" href="{{ url('image/show/'.$customer->drugStoreApproveImage->slug) }}">
-            <img src="{{ url('image/show/'.$customer->drugStoreApproveImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $customer->first_name }}">
+        <a class="col-md-6 col-lg-4 form-group" href="{{ url('image/show/'.$customer->drugStoreApproveImage->slug) }}">
+            <img src="{{ url('image/show/'.$customer->drugStoreApproveImage->slug) }}" style="width: 100%; height: 250px;" class="img-fluid" alt="{{ $customer->first_name }}">
         </a>
         @endif
 
         @if ($customer->medicalLicenseImage != null)
-        <a class="col-md-2" href="{{ url('image/show/'.$customer->medicalLicenseImage->slug) }}">
-            <img src="{{ url('image/show/'.$customer->medicalLicenseImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $customer->first_name }}">
+        <a class="col-md-6 col-lg-4 form-group" href="{{ url('image/show/'.$customer->medicalLicenseImage->slug) }}">
+            <img src="{{ url('image/show/'.$customer->medicalLicenseImage->slug) }}" style="width: 100%; height: 250px;" class="img-fluid" alt="{{ $customer->first_name }}">
         </a>
         @endif
 
         @if ($customer->commercialRegisterImage != null)
-        <a class="col-md-2" href="{{ url('image/show/'.$customer->commercialRegisterImage->slug) }}">
-            <img src="{{ url('image/show/'.$customer->commercialRegisterImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $customer->first_name }}">
+        <a class="col-md-6 col-lg-4 form-group" href="{{ url('image/show/'.$customer->commercialRegisterImage->slug) }}">
+            <img src="{{ url('image/show/'.$customer->commercialRegisterImage->slug) }}" style="width: 100%; height: 250px;" class="img-fluid" alt="{{ $customer->first_name }}">
         </a>
         @endif
 
         @if ($customer->juristicPersonImage != null)
-        <a class="col-md-2" href="{{ url('image/show/'.$customer->juristicPersonImage->slug) }}">
-            <img src="{{ url('image/show/'.$customer->juristicPersonImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $customer->first_name }}">
+        <a class="col-md-6 col-lg-4 form-group" href="{{ url('image/show/'.$customer->juristicPersonImage->slug) }}">
+            <img src="{{ url('image/show/'.$customer->juristicPersonImage->slug) }}" style="width: 100%; height: 250px;" class="img-fluid" alt="{{ $customer->first_name }}">
         </a>
         @endif
 
         @if ($customer->vatRegisterCertImage != null)
-        <a class="col-md-2" href="{{ url('image/show/'.$customer->vatRegisterCertImage->slug) }}">
-            <img src="{{ url('image/show/'.$customer->vatRegisterCertImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $customer->first_name }}">
+        <a class="col-md-6 col-lg-4 form-group" href="{{ url('image/show/'.$customer->vatRegisterCertImage->slug) }}">
+            <img src="{{ url('image/show/'.$customer->vatRegisterCertImage->slug) }}" style="width: 100%; height: 250px;" class="img-fluid" alt="{{ $customer->first_name }}">
         </a>
         @endif
     </div>
     <hr>
     <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <strong>
+                    จัดการผู้ใช้งาน
+                </strong>
+            </div>
+        </div>
         <div class="col-md-12">
             {!! Form::model($customer, ['url' => 'admin/customers/'.$customer->slug.'/status', 'method' => 'put', 'files' => 'true']) !!}
             <div class="form-group">

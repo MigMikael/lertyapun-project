@@ -66,13 +66,10 @@ crossorigin="anonymous"></script>
             </div>
             <div class="col-md-4">
                     <span style="float: right;">
-                        <strong>วันที่คำสั่งซื้อ:</strong> {{ \Carbon\Carbon::parse($order->order_date)->format('d/m/y') }}
-                    </span><br>
-                    <span style="float: right;">
-                        <strong>เวลาคำสั่งซื้อ:</strong> {{ \Carbon\Carbon::parse($order->order_date)->format('H:i:s') }} น.
-                    </span><br>
-                    <span style="float: right;">
                         <strong>เลขที่คำสั่งซื้อ:</strong> {{ $order->slug }}
+                    </span>
+                    <span style="float: right;">
+                        <strong>วันที่คำสั่งซื้อ:</strong> {{ \Carbon\Carbon::parse($order->order_date)->format('d/m/y') }} {{ \Carbon\Carbon::parse($order->order_date)->format('H:i:s') }}
                     </span>
             </div>
             <div class="col-md-12">
@@ -102,6 +99,7 @@ crossorigin="anonymous"></script>
                         <thead>
                             <tr>
                                 <th class="text-center">#</th>
+                                <th class="text-center">รหัสสินค้า</th>
                                 <th class="text-center">รายการ</th>
                                 <th class="text-center">จำนวน</th>
                                 <th class="text-right">ราคา</th>
@@ -113,6 +111,7 @@ crossorigin="anonymous"></script>
                             <!--onclick="window.location='{{ url('admin/products/'.$product->slug) }}'"-->
                                 <tr>
                                     <th class="text-center">{{ $loop->iteration }}</th>
+                                    <th class="text-center">{{ $product->slug }}</th>
                                     <td><a href="{{ url('admin/products/'.$product->slug) }}" style="text-decoration: none; color: #000;">{{ $product->name }}</a></td>
                                     <td class="text-center">
                                         {{ number_format($product->pivot->sale_quantity) }} {{ $product->pivot->sale_unit }} <!--({{ $product->pivot->quantityPerUnit * $product->pivot->sale_quantity }} ชิ้น)-->
@@ -126,7 +125,7 @@ crossorigin="anonymous"></script>
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="3"></td>
+                                <td colspan="4"></td>
                                 <td class="text-right">
                                     รวมการสั่งซื้อ
                                 </td>
@@ -135,7 +134,7 @@ crossorigin="anonymous"></script>
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="3"></td>
+                                <td colspan="4"></td>
                                 <td class="text-right">
                                     ค่าจัดส่งสินค้า
                                 </td>
@@ -144,7 +143,7 @@ crossorigin="anonymous"></script>
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="3"></td>
+                                <td colspan="4"></td>
                                 <td class="text-right">
                                     รวมสุทธิ
                                 </td>
@@ -162,37 +161,43 @@ crossorigin="anonymous"></script>
         <div class="col-md-12">
             <hr>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="form-group">
                 <strong>น้ำหนักโดยประมาณ</strong>
             </div>
-            <h6>{{ number_format($order->weight) }} กรัม</h6>
+            <h6>{{ number_format($order->weight, 2) }} กรัม</h6>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="form-group">
-                <strong>ราคาสินค้าทั้งหมด (รวมค่าจัดส่ง)</strong>
+                <strong>ยอดรวมการสั่งซื้อ</strong>
             </div>
-            <h6>{{ number_format($order->total_amount) }} บาท</h6>
+            <h6>{{ number_format($order->total_amount - $order->shipment_price, 2) }} บาท</h6>
         </div>
         @if($order->shipment_price != 0)
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="form-group">
                 <strong>ค่าจัดส่งสินค้า</strong>
             </div>
             {!! Form::open(['url' => 'admin/orders/'. $order->slug .'/shipment_price/free', 'method' => 'put', 'class' => 'form-inline']) !!}
-            <h6>{{ number_format($order->shipment_price) }} บาท</h6><button type="submit" class="btn btn-outline-primary btn-sm" style="margin-left: 25px;">ฟรีค่าจัดส่ง</button>
+            <h6>{{ number_format($order->shipment_price, 2) }} บาท</h6><button type="submit" class="btn btn-outline-primary btn-sm" style="margin-left: 25px;">ฟรีค่าจัดส่ง</button>
             {!! Form::close() !!}
         </div>
         @else
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="form-group">
                 <strong>ค่าจัดส่งสินค้า</strong>
             </div>
             {!! Form::open(['url' => 'admin/orders/'. $order->slug .'/shipment_price/price', 'method' => 'put', 'class' => 'form-inline']) !!}
-            <h6>{{ number_format($order->shipment_price) }} บาท</h6><button type="submit" class="btn btn-outline-primary btn-sm" style="margin-left: 25px;">คิดค่าจัดส่ง</button>
+            <h6>{{ number_format($order->shipment_price, 2) }} บาท</h6><button type="submit" class="btn btn-outline-primary btn-sm" style="margin-left: 25px;">คิดค่าจัดส่ง</button>
             {!! Form::close() !!}
         </div>
         @endif
+        <div class="col-md-3">
+            <div class="form-group">
+                <strong>ยอดรวมสุทธิ</strong>
+            </div>
+            <h6>{{ number_format($order->total_amount, 2) }} บาท</h6>
+        </div>
     </div>
     <hr>
     <div class="row">
@@ -207,13 +212,13 @@ crossorigin="anonymous"></script>
     </div>
     <hr>
     @if($order->slip_image_id != null)
-    <div id="aniimated-thumbnials" class="row">
+    <div id="slip-view" class="row">
         <div class="col-md-4">
             <div class="form-group">
                 <strong class="form-group">สลิปการชำระเงิน</strong>
             </div>
-            <a href="{{ url('image/show/'.$order->slipImage->slug) }}">
-                <img src="{{ url('image/show/'.$order->slipImage->slug) }}" style="width: 100%" class="img-fluid" alt="Slip from order id {{ $order->slug }}">
+            <a href="{{ url('image/show/'.$order->slipImage->slug) }}" >
+                <img src="{{ url('image/show/'.$order->slipImage->slug) }}" style="width: 250px;" class="img-fluid" >
             </a>
         </div>
     </div>
@@ -260,11 +265,6 @@ crossorigin="anonymous"></script>
 @endsection
 
 @section('script')
-    <script>
-        $('#aniimated-thumbnials').lightGallery({
-            thumbnail:true
-        });
-    </script>
     <script >
         function printDiv(divName) {
              var printContents = document.getElementById(divName).innerHTML;

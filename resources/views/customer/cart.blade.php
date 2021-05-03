@@ -18,9 +18,18 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <h5 class="title">รายการสินค้า</h5>
+                                <div class="form-group">
+                                    <h5 class="title">รายการสินค้า</h5>
+                                </div>
                             </div>
                             <div class="col-md-12">
+                                @if (count($customer->cart) === 0)
+                                <div class="text-center">
+                                    <img class="no-item-cart-img" src="{{ url('img/no-item-cart.png') }}">
+                                    <h5 style="padding-top: 15px; padding-bottom: 15px;">เลือกสินค้าที่สนใจใส่รถเข็นได้เลย</h5>
+                                    <a href="{{ url('/customer/products') }}" class="btn btn-primary">ช้อปตอนนี้</a>
+                                </div>
+                                @else
                                 <div class="table-responsive">
                                     <table class="table table-border table-shopping-cart">
                                         <thead>
@@ -28,28 +37,28 @@
                                                 <th>
                                                     สินค้า
                                                 </th>
-                                                <th width="240">
+                                                <th>
                                                     ราคา
                                                 </th>
-                                                <th width="120">
+                                                <th>
                                                     จำนวน
                                                 </th>
-                                                <th class="text-right">
-                                                    ลบ
+                                                <th class="text-center">
+                                                
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach($customer->cart as $product)
                                             <tr id="product-table">
-                                                <td id="name" class="align-middle">
+                                                <td id="name" style="padding-left: 0px;">
                                                     <figure class="itemside">
                                                         <div class="aside">
                                                             <img class="img-sm" src="{{ url('image/show/'.$product->image->slug) }}">
                                                         </div>
                                                         <figcaption class="info">
                                                             <a href="{{ url('customer/products/'.$product->slug) }}" class="title text-dark">
-                                                                <p>{{ $product->name }}</p>
+                                                                <strong>{{ $product->name }}</strong>
                                                                 @if(count($product->promotions) > 0)
                                                                     @foreach ($product->promotions->reverse() as $promotion)
                                                                         <span class="badge badge-danger" style="font-weight: normal" id="promotion_name">ลด {{ $promotion->name }}%</span>
@@ -64,7 +73,7 @@
                                                         </figcaption>
                                                     </figure>
                                                 </td>
-                                                <td id="price" class="align-middle">
+                                                <td id="price">
                                                     <select id="unit" name="unit" id="unit" class="form-control">
                                                         @foreach($product->units as $productUnit)
                                                         <option value="{{ $productUnit->unitName }};{{ $productUnit->pricePerUnit }};{{ $productUnit->quantityPerUnit }}" @if($productUnit->unitName == $product->pivot->unitName)selected="selected"@endif>
@@ -72,13 +81,13 @@
                                                             @if(!$loop->first)
                                                             - {{ $productUnit->quantityPerUnit }} {{ $product->units['0']['unitName'] }}
                                                             @endif
-                                                            - <strong>{{ $productUnit->pricePerUnit }}฿</strong>
+                                                            - <strong>{{ $productUnit->pricePerUnit }} บาท</strong>
                                                         </option>
                                                         @endforeach
                                                     </select>
-                                                    <p id="discount_price_container" style="color: red;font-size: 12px">ลดราคาเหลือ <span id="discount_price">0</span>฿</p>
+                                                    <p id="discount_price_container" style="color: red;font-size: 14px; margin-top: 5px;">ลดราคาเหลือ <span id="discount_price">0</span> บาท</p>
                                                 </td>
-                                                <td id="quantity" class="align-middle">
+                                                <td id="quantity">
                                                     <input id="input_quantity"
                                                         type="number" class="form-control"
                                                         value="{{ $product->pivot->quantity }}"
@@ -86,14 +95,14 @@
                                                         max="{{ $product->quantity }}"
                                                         >
                                                     <input id="product_slug" type="hidden" value="{{ $product->slug }}">
-                                                    <p style="font-size: 12px">เหลือ {{ number_format($product->quantity) }} {{ $product->units['0']['unitName'] }}</p>
+                                                    <p style="font-size: 14px; margin-top: 5px; color: #28a745;">เหลือ {{ number_format($product->quantity) }} {{ $product->units['0']['unitName'] }}</p>
                                                 </td>
-                                                <td id="action" class="text-right align-middle">
+                                                <td id="action" class="text-center">
                                                     {!! Form::model($product, [
                                                         'method' => 'delete',
                                                         'url' => 'customer/cart/'.$product->slug ]) !!}
                                                     <button class="btn btn-danger" type="submit">
-                                                        <i class="fas fa-trash"></i>
+                                                        <i class="fa fa-times"></i>
                                                     </button>
                                                     <p style="font-size: 12px; color: white">x</p>
                                                     {!! Form::close() !!}
@@ -104,6 +113,7 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -120,10 +130,10 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label>ยอดรวมสินค้า</label>
+                                <label>รวมการสั่งซื้อ</label>
                             </div>
                             <div class="col-md-6 text-right">
-                                ฿<span id="total_price">{{ number_format($customer->totalPrice) }}</span>
+                                ฿<span id="total_price">฿{{ number_format($customer->totalPrice, 2) }}</span>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -131,23 +141,23 @@
                                 <label>ส่วนลด</label>
                             </div>
                             <div class="col-md-6 text-right">
-                                ฿<span id="total_discount">{{ number_format($customer->totalDiscount) }}</span>
+                                ฿<span id="total_discount">฿{{ number_format($customer->totalDiscount, 2) }}</span>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label>ค่าจัดส่ง</label>
+                                <label>ค่าจัดส่งสินค้า</label>
                             </div>
                             <div class="col-md-6 text-right">
-                                ฿<span id="shipment_price">{{ number_format(0) }}</span>
+                                ฿<span id="shipment_price">{{ number_format(0, 2) }}</span>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label>ยอดชำระเงินทั้งหมด</label>
+                                <label>รวมสุทธิ</label>
                             </div>
                             <div class="col-md-6 text-right">
-                                <h5>฿<span id="final_price">{{ number_format($customer->finalPrice) }}<span></h5>
+                                <h5>฿<span id="final_price">{{ number_format($customer->finalPrice, 2) }}<span></h5>
                             </div>
                         </div>
                         <div class="row">

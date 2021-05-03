@@ -29,20 +29,28 @@
             </div>
         </div>
         <div class="col-md-12">
-            <div id="editPanel" class="category-tag collapse form-group" style="padding-left: 15px;">
+            <div id="editPanel" class="category-tag collapse form-group" style="margin-top: 15px;">
                 <div class="row">
-                    {!! Form::open(['url' => 'admin/categories/'. $category->slug .'/products', 'method' => 'post', 'class' => 'form-inline']) !!}
+                    <div class="col-md-12">
+                        {!! Form::open(['url' => 'admin/categories/'. $category->slug .'/products', 'method' => 'post', 'class' => 'form-inline']) !!}
                         <input
                             name="categoryProducts"
                             placeholder="คลิกเพื่อเลือกสินค้า..."
                             class="form-control"
                         />
-                        <button type="submit" class="btn btn-primary">เพิ่มสินค้า</button>
+                        <button id="add-product-category-btn" type="submit" class="btn btn-primary">เพิ่มสินค้า</button>
                     {!! Form::close() !!}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    @if (count($products) === 0)
+    <div class="text-center">
+        <img class="search-no-result-img" src="{{ url('img/no-result.png') }}">
+        <h5>ไม่พบข้อมูล</h5>
+    </div>
+    @else
     <div class="table-responsive">
         <table class="table">
             <thead>
@@ -86,6 +94,7 @@
     <div class="d-flex justify-content-center">
         {{ $products->render("pagination::bootstrap-4") }}
     </div>
+    @endif
 </div>
 @endsection
 

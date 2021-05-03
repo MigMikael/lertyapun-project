@@ -2,12 +2,13 @@
     <span class="required">*</span>
 @endisset</label>
 <div class="border mb-4 p-1 rounded @error($name) border-danger @enderror">
-    <div class="input-group">
-        <div class="custom-file">
-            <input accept="image/x-png,image/gif,image/jpeg" name="{{ $name }}" type="file"
+    <div class="input-group"><!--class custom-file-->
+        <label class="btn btn-primary">
+            <i class="fa fa-image"></i> อัพโหลดรูป
+            <input accept="image/x-png,image/gif,image/jpeg" name="{{ $name }}" type="file" class="hidden"
                 onchange="document.getElementById('{{ $name }}').src = window.URL.createObjectURL(this.files[0]); document.getElementById('{{ $name.'_pre' }}').href = window.URL.createObjectURL(this.files[0])">
-        </div>
-    </div>
+        </label>
+    </div><!--class custom-file-->
     <div class="rounded-lg image-preview">
         <div class="row">
             @if(Request::is('customer/pending/*/edit') && $customer->$key != null)

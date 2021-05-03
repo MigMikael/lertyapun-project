@@ -40,42 +40,49 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $page = 6;
+        $page = 10;
         $sort = $request->query('sort');
         $query = $request->query('query');
 
         if($sort == 'name_asc') {
             $products = Product::where("name", "like", "%".$query."%")
+            ->orWhere("products.slug", "like", "%".$query."%")
                 ->orderBy('name', 'ASC')
                 ->with('image')
                 ->paginate($page);
         } else if($sort == 'name_desc') {
             $products = Product::where("name", "like", "%".$query."%")
+            ->orWhere("products.slug", "like", "%".$query."%")
                 ->orderBy('name', 'DESC')
                 ->with('image')
                 ->paginate($page);
         } else if($sort == 'price_asc') {
             $products = Product::where("name", "like", "%".$query."%")
+            ->orWhere("products.slug", "like", "%".$query."%")
                 ->orderBy('price', 'ASC')
                 ->with('image')
                 ->paginate($page);
         } else if($sort == 'price_desc') {
             $products = Product::where("name", "like", "%".$query."%")
+            ->orWhere("products.slug", "like", "%".$query."%")
                 ->orderBy('price', 'DESC')
                 ->with('image')
                 ->paginate($page);
         } else if($sort == 'quantity_asc') {
             $products = Product::where("name", "like", "%".$query."%")
+            ->orWhere("products.slug", "like", "%".$query."%")
                 ->orderBy('quantity', 'ASC')
                 ->with('image')
                 ->paginate($page);
         } else if($sort == 'quantity_desc') {
             $products = Product::where("name", "like", "%".$query."%")
+            ->orWhere("products.slug", "like", "%".$query."%")
                 ->orderBy('quantity', 'DESC')
                 ->with('image')
                 ->paginate($page);
         } else {
             $products = Product::where("name", "like", "%".$query."%")
+            ->orWhere("products.slug", "like", "%".$query."%")
                 ->orderBy('updated_at', 'DESC')
                 ->with('image')
                 ->paginate($page);
@@ -145,7 +152,7 @@ class ProductController extends Controller
 
         $product = Product::create($newProduct);
 
-        $productSlug = sprintf("%07d", $product->id);
+        $productSlug = sprintf("%04d", $product->id);
         $product->slug = 'P-'.$productSlug;
         $product->save();
 
