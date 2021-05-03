@@ -448,6 +448,14 @@ input[type="date"]::-webkit-datetime-edit-day-field {
     color: #28a745;
 }
 
+.section-login {
+    min-height: calc(100vh - 95px);
+  }
+  
+  .section-register {
+    min-height: calc(100vh - 95px);
+  }
+
 @media (max-width: 991.98px) {
     .category-tag .tagify {
         width: 100%;

@@ -569,6 +569,10 @@ footer.footer {
   min-height: calc(100vh - 95px);
 }
 
+.hidden {
+  display: none;
+}
+
 @media (max-width: 767.98px) {
   .login-img-wrapper {
     display: none;
