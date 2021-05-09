@@ -15,6 +15,7 @@ class CreateBankAccountsTable extends Migration
     {
         Schema::create('bank_accounts', function (Blueprint $table) {
             $table->id();
+            $table->string('slug')->unique();
             $table->string('account_no')->default('');
             $table->string('account_name')->default('');
             $table->string('bank_name')->default('');

@@ -15,6 +15,7 @@ class CreateDaliveryServicesTable extends Migration
     {
         Schema::create('dalivery_services', function (Blueprint $table) {
             $table->id();
+            $table->string('slug')->unique();
             $table->string('name')->default('');
             $table->string('status')->default('');
             $table->unsignedBigInteger('image_id')->nullable();

@@ -23,6 +23,18 @@
                 <img id="{{ $name }}" src="{{ url('image/show/'.$product->image->slug) }}" style="width: 100%;" />
             </a>
         </div>
+        @elseif(Request::is('admin/deliveries/*/edit'))
+        <div class="col-md-4 form-group">
+            <a id="{{ $name."_pre" }}" href="{{ url('image/show/'.$delivery->image->slug) }}">
+                <img id="{{ $name }}" src="{{ url('image/show/'.$delivery->image->slug) }}" style="width: 100%;" />
+            </a>
+        </div>
+        @elseif(Request::is('admin/banks/*/edit'))
+        <div class="col-md-4 form-group">
+            <a id="{{ $name."_pre" }}" href="{{ url('image/show/'.$bank->image->slug) }}">
+                <img id="{{ $name }}" src="{{ url('image/show/'.$bank->image->slug) }}" style="width: 100%;" />
+            </a>
+        </div>
         @else
         <div class="col-md-4 form-group">
             <a id="{{ $name."_pre" }}" href="{{ $placeholderImage }}">

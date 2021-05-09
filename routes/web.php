@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BankAccountController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomerProductController;
+use App\Http\Controllers\DaliveryServiceController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductPromotionController;
@@ -156,6 +158,24 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminAuth'], function () {
     Route::delete('orders/{order:slug}', [OrderController::class, 'destroy']);
     Route::put('orders/{order:slug}/status', [OrderController::class, 'updateStatus']);
     Route::put('orders/{order:slug}/shipment_price/{price}', [OrderController::class, 'updateShipmentPrice']);
+
+    Route::get('deliveries', [DaliveryServiceController::class, 'index']);
+    Route::post('deliveries', [DaliveryServiceController::class, 'store']);
+    Route::get('deliveries/create', [DaliveryServiceController::class, 'create']);
+    Route::post('deliveries/search', [DaliveryServiceController::class, 'search']);
+    Route::get('deliveries/{delivery:slug}/edit', [DaliveryServiceController::class, 'edit']);
+    Route::put('deliveries/{delivery:slug}', [DaliveryServiceController::class, 'update']);
+    Route::get('deliveries/{delivery:slug}', [DaliveryServiceController::class, 'show']);
+    Route::delete('deliveries/{delivery:slug}', [DaliveryServiceController::class, 'destroy']);
+
+    Route::get('banks', [BankAccountController::class, 'index']);
+    Route::post('banks', [BankAccountController::class, 'store']);
+    Route::get('banks/create', [BankAccountController::class, 'create']);
+    Route::post('banks/search', [BankAccountController::class, 'search']);
+    Route::get('banks/{bank:slug}/edit', [BankAccountController::class, 'edit']);
+    Route::put('banks/{bank:slug}', [BankAccountController::class, 'update']);
+    Route::get('banks/{bank:slug}', [BankAccountController::class, 'show']);
+    Route::delete('banks/{bank:slug}', [BankAccountController::class, 'destroy']);
 
     Route::get('logout', [GuestController::class, 'adminLogout']);
 });

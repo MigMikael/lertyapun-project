@@ -12,8 +12,14 @@ class DaliveryService extends Model
     protected $table = 'dalivery_services';
 
     protected $fillable = [
+        'slug',
         'name',
         'status',
         'image_id'
     ];
+
+    public function image()
+    {
+        return $this->belongsTo(Image::class);
+    }
 }

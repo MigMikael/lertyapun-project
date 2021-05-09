@@ -12,6 +12,7 @@ class BankAccount extends Model
     protected $table = 'bank_accounts';
 
     protected $fillable = [
+        'slug',
         'account_no',
         'account_name',
         'bank_name',
@@ -19,4 +20,9 @@ class BankAccount extends Model
         'status',
         'image_id'
     ];
+
+    public function image()
+    {
+        return $this->belongsTo(Image::class);
+    }
 }

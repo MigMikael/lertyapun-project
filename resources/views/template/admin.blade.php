@@ -39,6 +39,8 @@
                     <a href="{{ url('admin/products') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;"><i class="fab fa-product-hunt"></i> สินค้า</a>
                     <a href="{{ url('admin/promotions') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;"><i class="fas fa-percent"></i> โปรโมชัน</a>
                     <a href="{{ url('admin/orders') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;"><i class="fas fa-clipboard-list"></i> คำสั่งซื้อ</a>
+                    <a href="{{ url('admin/deliveries') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;"><i class="fas fa-clipboard-list"></i> บริการขนส่ง</a>
+                    <a href="{{ url('admin/banks') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;"><i class="fas fa-clipboard-list"></i> บัญชีธนาคาร</a>
                 </div>
             </div>
 

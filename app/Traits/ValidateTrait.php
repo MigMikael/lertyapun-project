@@ -150,4 +150,25 @@ trait ValidateTrait
             'expired_enddate' => 'nullable|date',
         ]);
     }
+
+    public function validateDeliverService(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|max:255',
+            'status' => 'required|max:255',
+            'delivery_image' => 'image',
+        ]);
+    }
+
+    public function validateBankAccount(Request $request)
+    {
+        $request->validate([
+            'account_no' => 'required|max:255',
+            'account_name' => 'required|max:255',
+            'bank_name' => 'required|max:255',
+            'branch_name' => 'required|max:255',
+            'status' => 'required|max:255',
+            'bank_image' => 'image',
+        ]);
+    }
 }
