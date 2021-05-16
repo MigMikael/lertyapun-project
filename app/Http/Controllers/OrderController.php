@@ -22,6 +22,7 @@ class OrderController extends Controller
     public $orderStatus = [
         'pending' => 'Pending', // รอแอดมินอนุมัติ
         'payment' => 'Wait Payment', // รอลูกค้ายืนยันการจ่ายเงิน
+        'credit' => 'Credit', // สำเร็จแต่ยังไม่จ่ายตัง
         'success' => 'Success', // สำเร็จ
         'cancle' => 'Cancle', // ยกเลิก
     ];
@@ -29,12 +30,14 @@ class OrderController extends Controller
     public $orderStatusTH = [
         'pending' => 'รอแอดมินอนุมัติ', // รอแอดมินอนุมัติ
         'payment' => 'รอยืนยันเงินเข้า', // รอลูกค้ายืนยันการจ่ายเงิน
+        'credit' => 'เครดิต', // สำเร็จแต่ยังไม่จ่ายตัง
         'success' => 'สำเร็จ', // สำเร็จ
         'cancle' => 'ยกเลิก', // ยกเลิก
     ];
 
     public $orderApproveOption = [
         'payment' => 'อนุมัติคำสั่งซื้อ', // รอลูกค้ายืนยันการจ่ายเงิน
+        'credit' => 'เครดิต', // สำเร็จแต่ยังไม่จ่ายตัง
         'cancle' => 'ยกเลิก', // ยกเลิก
     ];
 
@@ -128,7 +131,7 @@ class OrderController extends Controller
         $newOrderId = 'ORD-'.$dt->format('Ymd').sprintf("%06d", $order->id);*/
         $stringGenerator = new StringGenerator('0123456789');
         $newOrder['slug'] = $stringGenerator->generate(12);
-        $newOrder['slug'] = $newOrderId;
+        // $newOrder['slug'] = $newOrderId;
         $newOrder['payment_method'] = 'direct transfer';
 
         if($request->hasFile('slip_image')) {
@@ -311,20 +314,22 @@ class OrderController extends Controller
             return response()->json(['errors' => 'ยอดสั่งสินค้าขั้นต่ำต้องมากกว่า 5,000 บาท'], 422);
         }
 
-        $shipmentPrice = $this->calculateShipmentPrice($sumWeight);
+        // $shipmentPrice = $this->calculateShipmentPrice($sumWeight);
+        $shipmentMethod = $request->get('shipment_method');
 
         /*$stringGenerator = new StringGenerator('0123456789');*/
         $stringGenerator = new StringGenerator('ABCDEFGHIFKLMNOPQRSTUVWXYZ0123456789');
         $newOrder = [
             'slug' => '',
             /*'slug' => $stringGenerator->generate(12),*/
-            'total_amount' => $sumFinalPrice + $shipmentPrice,
+            'total_amount' => $sumFinalPrice,
             'status' => 'pending',
             'order_date' => Carbon::now(),
             'payment_method' => 'direct transfer',
             'customer_id' => $customer->id,
             'weight' => $sumWeight,
-            'shipment_price' => $shipmentPrice,
+            // 'shipment_price' => $shipmentPrice,
+            'shipment_method' => $shipmentMethod,
         ];
 
         $order = Order::create($newOrder);
@@ -407,6 +412,21 @@ class OrderController extends Controller
     {
         $status = $request->get('status');
         $order['status'] = $status;
+
+        $newShipmentPrice = $request->get('shipment_price');
+        $oldShipmentPrice = $order['shipment_price'];
+
+        if ($newShipmentPrice != $oldShipmentPrice) {
+            // update new shipment price
+            $order['shipment_price'] = $newShipmentPrice;
+
+            // update total amount
+            $totalAmount = $order['total_amount'];
+            $newTototalAmount = $totalAmount - $oldShipmentPrice;
+            $newTototalAmount = $newTototalAmount + $newShipmentPrice;
+            $order['total_amount'] = $newTototalAmount;
+        }
+
         $order->save();
 
         if ($order->status == 'success') {

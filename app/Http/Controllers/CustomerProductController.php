@@ -8,6 +8,7 @@ use App\Models\CustomerProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Traits\PriceTrait;
+use App\Models\DaliveryService;
 
 class CustomerProductController extends Controller
 {
@@ -53,9 +54,12 @@ class CustomerProductController extends Controller
         $customer['totalDiscount'] = $sumTotalDiscount;
         $customer['finalPrice'] = $sumFinalPrice;
 
+        $deliveryServices = DaliveryService::where('status', 'show')->get();
+
         // return $customer;
         return view('customer.cart', [
-            'customer' => $customer
+            'customer' => $customer,
+            'deliveryServices' => $deliveryServices
         ]);
     }
 

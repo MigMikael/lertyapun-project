@@ -23,6 +23,7 @@ class Order extends Model
         'remark',
         'weight',
         'shipment_price',
+        'shipment_method',
     ];
 
     public function customer()

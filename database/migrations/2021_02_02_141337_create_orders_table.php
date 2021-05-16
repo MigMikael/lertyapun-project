@@ -27,6 +27,7 @@ class CreateOrdersTable extends Migration
             $table->text('remark')->nullable();
             $table->float('weight')->default(0);
             $table->float('shipment_price')->default(0);
+            $table->string('shipment_method')->default('');
 
             $table->foreign('customer_id')
                 ->references('id')

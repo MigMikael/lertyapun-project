@@ -89,35 +89,7 @@ input[type=checkbox]:checked:after {
                     @enderror
                 </div>
                 </div>
-                @if(Request::is('customer/pending/*/edit'))
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>รหัสผ่านปัจจุบัน <span class="required">*</span></label>
-                        <input name="old_password" type="password" class="form-control @error('old_password') is-invalid @enderror" placeholder="">
-                        @error('old_password')
-                            <div class="text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>รหัสผ่านใหม่</label>
-                        <input name="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="">
-                        @error('password')
-                            <div class="text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>ยืนยันรหัสผ่านใหม่</label>
-                        <input name="confirm_password" type="password" class="form-control @error('confirm_password') is-invalid @enderror" placeholder="">
-                        @error('confirm_password')
-                            <div class="text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                @else
+
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>รหัสผ่าน <span class="required">*</span></label>
@@ -136,7 +108,6 @@ input[type=checkbox]:checked:after {
                         @enderror
                     </div>
                 </div>
-                @endif
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>หมายเลขบัตรประชาชน <span class="required">*</span></label>

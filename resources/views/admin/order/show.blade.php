@@ -8,7 +8,7 @@
 <script src="{{ URL::asset('js/print.min.js') }}"></script>
 <style>
     .table-bordered thead td, .table-bordered thead th {
-        border-bottom-width: 1px !important; 
+        border-bottom-width: 1px !important;
     }
 
     .table thead th {
@@ -173,7 +173,7 @@ crossorigin="anonymous"></script>
             </div>
             <h6>{{ number_format($order->total_amount - $order->shipment_price, 2) }} บาท</h6>
         </div>
-        @if($order->shipment_price != 0)
+        {{-- @if($order->shipment_price != 0)
         <div class="col-md-3">
             <div class="form-group">
                 <strong>ค่าจัดส่งสินค้า</strong>
@@ -191,7 +191,13 @@ crossorigin="anonymous"></script>
             <h6>{{ number_format($order->shipment_price, 2) }} บาท</h6><button type="submit" class="btn btn-outline-primary btn-sm" style="margin-left: 25px;">คิดค่าจัดส่ง</button>
             {!! Form::close() !!}
         </div>
-        @endif
+        @endif --}}
+        <div class="col-md-3">
+            <div class="form-group">
+                <strong>ค่าจัดส่งสินค้า</strong>
+            </div>
+            <h6>{{ number_format($order->shipment_price, 2) }} บาท</h6>
+        </div>
         <div class="col-md-3">
             <div class="form-group">
                 <strong>ยอดรวมสุทธิ</strong>
@@ -201,13 +207,19 @@ crossorigin="anonymous"></script>
     </div>
     <hr>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="form-group">
                 <strong>ที่อยู่จัดส่ง</strong>
             </div>
             <p>{{ $order->customer->addresses[0]->detail }} ตำบล{{ $order->customer->addresses[0]->subDistrict }}</p>
             <p>อำเภอ{{ $order->customer->addresses[0]->district }} จังหวัด{{ $order->customer->addresses[0]->province }}</p>
             <p>รหัสไปรษณีย์ {{ $order->customer->addresses[0]->zipcode }}</p>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <strong>จัดส่งโดย</strong>
+            </div>
+            <p>{{ $order->shipment_method }}</p>
         </div>
     </div>
     <hr>
@@ -227,7 +239,7 @@ crossorigin="anonymous"></script>
     <div class="row">
         <div class="col-md-12">
             {!! Form::open(['url' => 'admin/orders/'. $order->slug .'/status', 'method' => 'put']) !!}
-            <div class="form-group">
+            <div class="form-group" style="margin-bottom: 3%">
                 <div class="form-group">
                     <strong>สถานะคำสั่งซื้อ</strong>
                         @if($order->status == 'pending')
@@ -243,6 +255,10 @@ crossorigin="anonymous"></script>
                         @endif
                 </div>
                 {!! Form::select('status', $status, $order->status, ['class' => 'form-control']) !!}
+            </div>
+            <div class="form-group" style="margin-bottom: 3%">
+                <strong>{!! Form::label('shipment_price', 'ค่าขนส่ง (บาท)') !!}</strong>
+                {!! Form::text('shipment_price', $order->shipment_price, ['placeholder' => 'ค่าขนส่ง', 'class' => 'form-control']) !!}
             </div>
             <button type="submit" class="btn btn-primary btn-block" style="margin-top: 25px;">ยืนยัน</button>
             {!! Form::close() !!}
@@ -269,11 +285,11 @@ crossorigin="anonymous"></script>
         function printDiv(divName) {
              var printContents = document.getElementById(divName).innerHTML;
              var originalContents = document.body.innerHTML;
-        
+
              document.body.innerHTML = printContents;
-        
+
              window.print();
-        
+
              document.body.innerHTML = originalContents;
         }
     </script>

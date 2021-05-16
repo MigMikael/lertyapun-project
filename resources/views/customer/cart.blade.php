@@ -44,7 +44,7 @@
                                                     จำนวน
                                                 </th>
                                                 <th class="text-center">
-                                                
+
                                                 </th>
                                             </tr>
                                         </thead>
@@ -110,6 +110,21 @@
                                                 </td>
                                             </tr>
                                             @endforeach
+
+                                            <tr id="shipment_method">
+                                                <td style="padding-left: 0px;">
+                                                    <p>เลือกบริการขนส่ง</p>
+                                                </td>
+                                                <td id="shipment_method_select">
+                                                    <select id="deliveryService" name="deliveryService" id="deliveryService" class="form-control">
+                                                        @foreach($deliveryServices as $deliveryService)
+                                                        <option value="{{ $deliveryService->name }}">
+                                                            {{ $deliveryService->name }}
+                                                        </option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -340,6 +355,9 @@
                 units.push(unit)
             });
 
+            var shipmentMethod = $('#shipment_method #shipment_method_select #deliveryService').val();
+
+            // console.log("shipmentMethod", shipmentMethod)
             // console.log("product_slug", productSlug)
             // console.log("product_quantity", productQuantity)
             // console.log("unit", units)
@@ -352,6 +370,7 @@
                     "product_slug": productSlug,
                     "product_quantity": productQuantity,
                     "unit": units,
+                    "shipment_method": shipmentMethod,
                 },
                 success: function(result) {
                     // console.log('success', result);

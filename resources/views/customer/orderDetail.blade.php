@@ -102,6 +102,15 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
+                        <h5>จัดส่งสินค้าโดย</h5>
+                        <p>{{ $order->shipment_method }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
                         <h5>แนบหลักฐานการชำระเงิน</h5>
                         @if($order->status == 'pending')
                         <p>(กรุณารอการอนุมัติคำสั่งซื้อ ก่อนแนบหลักฐานการโอนเงิน)</p>
@@ -114,7 +123,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label class="btn btn-primary">
-                            <i class="fa fa-image"></i> 
+                            <i class="fa fa-image"></i>
                             @if($order->slip_image_id != null)
                             แก้ไขรูปสลิป
                             @else
@@ -138,7 +147,7 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary" 
+                    <button type="submit" class="btn btn-primary"
                     @if($order->status == 'pending')
                         disabled
                     @endif>
@@ -155,15 +164,15 @@
 <script>
     function changeImgUrl(input) {
         if (input.files && input.files[0]) {
-            var reader = new FileReader();            
+            var reader = new FileReader();
             reader.onload = function (e) {
                 $('#slip-img').attr('src', e.target.result);
             }
-            
+
             reader.readAsDataURL(input.files[0]);
         }
     }
-    
+
     $("#upload-slip-img").change(function(){
         changeImgUrl(this);
     });
