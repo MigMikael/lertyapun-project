@@ -61,7 +61,8 @@
             <thead>
               <tr>
                 <th scope="col" width="5%">#</th>
-                <th scope="col" width="65%">โปรโมชัน</th>
+                <th scope="col" width="40%">โปรโมชัน</th>
+                <th scope="col" width="25%">ประเภท</th>
                 <th class="text-center">จัดการ</th>
                 <th class="text-center">ดูข้อมูล</th>
               </tr>
@@ -73,7 +74,20 @@
                             {{ $loop->iteration }}
                         </th>
                         <td>
-                            {{ $promotion->name }}%
+                            ลดราคา
+                            {{ $promotion->name }}
+                            @if($promotion->type == 'percent')
+                            %
+                            @elseif($promotion->type == 'discount')
+                            บาท
+                            @endif
+                        </td>
+                        <td>
+                            @if($promotion->type == 'percent')
+                            ลดราคา (เปอร์เซนต์)
+                            @elseif($promotion->type == 'discount')
+                            ลดราคา (บาท)
+                            @endif
                         </td>
                         <td class="text-center">
                             <div class="btn-group">

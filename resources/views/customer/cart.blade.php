@@ -61,7 +61,14 @@
                                                                 <strong>{{ $product->name }}</strong>
                                                                 @if(count($product->promotions) > 0)
                                                                     @foreach ($product->promotions->reverse() as $promotion)
-                                                                        <span class="badge badge-danger" style="font-weight: normal" id="promotion_name">ลด {{ $promotion->name }}%</span>
+                                                                        <span class="badge badge-danger" style="font-weight: normal" id="promotion_name">
+                                                                            ลด {{ $promotion->name }}
+                                                                            @if($promotion->type == 'percent')
+                                                                            %
+                                                                            @elseif($promotion->type == 'discount')
+                                                                            บาท
+                                                                            @endif
+                                                                        </span>
                                                                         @if($loop->iteration == 1)
                                                                             @break
                                                                         @endif
@@ -204,9 +211,14 @@
 
             $("#product-table #name .itemside .info .title #promotion_name").each(function() {
                 var value = $(this).text()
-                var matches = value.match(/(\d+)/)[0]
+                if (value.includes("%")) {
+                    var matches = value.match(/(\d+)/)[0]
+                    discounts.push(matches + "%")
+                } else {
+                    var matches = value.match(/(\d+)/)[0]
+                    discounts.push(matches + "฿")
+                }
                 // console.log("matches", matches)
-                discounts.push(matches)
             })
 
             // console.log(prices)
@@ -215,11 +227,19 @@
             var count = 0
             $("#product-table #price #discount_price").each(function() {
                 var price = parseFloat(prices[count])
-                var discountPercent = parseFloat(discounts[count])
 
-                var discountMultiply = 1 - (discountPercent / 100)
-                var discountPrice = price * discountMultiply
                 // console.log(discountPrice)
+
+                if (discounts[count].includes("%")) {
+                    var pureNumber = discounts[count].replace("%", "")
+                    var discountPercent = parseFloat(discounts[count])
+
+                    var discountMultiply = 1 - (discountPercent / 100)
+                    var discountPrice = price * discountMultiply
+                } else {
+                    var pureNumber = discounts[count].replace("฿", "")
+                    var discountPrice = price - parseFloat(pureNumber)
+                }
 
                 if (price == discountPrice) {
                     $(this).parent().css('color', 'white')

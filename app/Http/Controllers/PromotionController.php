@@ -14,7 +14,8 @@ class PromotionController extends Controller
 {
     use ValidateTrait;
     public $promotionType = [
-        'discount' => 'Discount',
+        'discount' => 'ลดราคา (บาท)',
+        'percent' => 'ลดราคา (เปอร์เซนต์)'
     ];
     /**
      * Display a listing of the resource.

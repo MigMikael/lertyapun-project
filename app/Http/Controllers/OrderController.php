@@ -429,7 +429,7 @@ class OrderController extends Controller
 
         $order->save();
 
-        if ($order->status == 'success') {
+        if ($order->status == 'success' || $order->status == 'credit') {
             // update quantity
             foreach($order->orderDetails as $orderDetail) {
                 $product = Product::where('id', $orderDetail->product_id)->first();

@@ -44,6 +44,10 @@
                             role="tab" aria-controls="pills-waiting-payment" aria-selected="false">รอการชำระเงิน</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" id="pills-credit-tab" data-toggle="pill" href="#credit"
+                            role="tab" aria-controls="pills-credit" aria-selected="false">เครดิต</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" id="pills-success-tab" data-toggle="pill" href="#success" role="tab"
                             aria-controls="pills-success" aria-selected="false">สำเร็จ</a>
                     </li>
@@ -92,6 +96,25 @@
                             @endif
                         @endforeach
                         @if ($count_payment === 0)
+                        <div class="text-center">
+                            <img class="search-no-result-img" src="{{ url('img/no-order.png') }}">
+                            <h5>ไม่พบข้อมูลคำสั่งซื้อ</h5>
+                        </div>
+                        @endif
+                    </div>
+                    <div class="tab-pane fade" id="credit" role="tabpanel" aria-labelledby="credit-tab">
+                        <div class="hidden">
+                            {{ $count_credit = 0 }}
+                        </div>
+                        @foreach ($orders as $order)
+                            @if ($order->status == 'credit')
+                                <div class="hidden">
+                                    {{ $count_credit++ }}
+                                </div>
+                                @include('customer._orderCard')
+                            @endif
+                        @endforeach
+                        @if ($count_credit === 0)
                         <div class="text-center">
                             <img class="search-no-result-img" src="{{ url('img/no-order.png') }}">
                             <h5>ไม่พบข้อมูลคำสั่งซื้อ</h5>

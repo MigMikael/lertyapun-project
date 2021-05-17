@@ -20,7 +20,7 @@ class PromotionSeeder extends Seeder
         DB::table('promotions')->insert([
             'slug' => (new StringGenerator())->generateSlug(),
             'name' => 5,
-            'type' => 'discount',
+            'type' => 'percent',
             'valid_start' => Carbon::now(),
             'valid_start' => Carbon::now(),
         ]);
@@ -28,7 +28,7 @@ class PromotionSeeder extends Seeder
         DB::table('promotions')->insert([
             'slug' => (new StringGenerator())->generateSlug(),
             'name' => 10,
-            'type' => 'discount',
+            'type' => 'percent',
             'valid_start' => Carbon::now(),
             'valid_start' => Carbon::now(),
         ]);
@@ -36,7 +36,7 @@ class PromotionSeeder extends Seeder
         DB::table('promotions')->insert([
             'slug' => (new StringGenerator())->generateSlug(),
             'name' => 20,
-            'type' => 'discount',
+            'type' => 'percent',
             'valid_start' => Carbon::now(),
             'valid_start' => Carbon::now(),
         ]);
@@ -44,6 +44,14 @@ class PromotionSeeder extends Seeder
         DB::table('promotions')->insert([
             'slug' => (new StringGenerator())->generateSlug(),
             'name' => 30,
+            'type' => 'percent',
+            'valid_start' => Carbon::now(),
+            'valid_start' => Carbon::now(),
+        ]);
+
+        DB::table('promotions')->insert([
+            'slug' => (new StringGenerator())->generateSlug(),
+            'name' => 1,
             'type' => 'discount',
             'valid_start' => Carbon::now(),
             'valid_start' => Carbon::now(),

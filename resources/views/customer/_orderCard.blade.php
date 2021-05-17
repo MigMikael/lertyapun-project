@@ -16,13 +16,15 @@
                         <span class="order-waiting-confirm">รอการอนุมัติ</span>
                         @elseif($order->status == 'payment')
                         <span class="order-waiting-payment">รอการชำระเงิน</span>
+                        @elseif($order->status == 'credit')
+                        <span class="order-success">เครดิต</span>
                         @elseif($order->status == 'success')
                         <span class="order-success">สำเร็จ</span>
                         @elseif($order->status == 'cancle')
                         <span class="order-cancel">ยกเลิก</span>
                     @endif
                 </div>
-                
+
                 <div class="hidden">
                     <label>
                         <strong>ชำระเงินเมื่อ </strong>
