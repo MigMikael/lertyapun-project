@@ -1,14 +1,14 @@
 <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('name', 'เปอร์เซ็นลดราคา') !!}
-    {!! Form::number('name', null, ['placeholder' => 'เปอร์เซ็นลดราคา', 'class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : null)]) !!}
-    @error('name')
+    {!! Form::label('ประเภท') !!}
+    {!! Form::select('type', $type, null, ['class' => 'form-control' . ($errors->has('type') ? ' is-invalid' : null)]) !!}
+    @error('type')
         <div class="text-danger">{{ $message }}</div>
     @enderror
 </div>
 <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('ประเภท') !!}
-    {!! Form::select('type', $type, null, ['class' => 'form-control' . ($errors->has('type') ? ' is-invalid' : null)]) !!}
-    @error('type')
+    {!! Form::label('name', 'หน่วยลดราคา') !!}
+    {!! Form::number('name', null, ['placeholder' => 'หน่วยลดราคา', 'class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : null)]) !!}
+    @error('name')
         <div class="text-danger">{{ $message }}</div>
     @enderror
 </div>
