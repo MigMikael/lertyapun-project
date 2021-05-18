@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Traits\ImageTrait;
 use App\Helpers\StringGenerator;
 use App\Traits\ValidateTrait;
+use Illuminate\Support\Facades\Log;
 
 class BankAccountController extends Controller
 {
@@ -68,8 +69,10 @@ class BankAccountController extends Controller
      */
     public function create()
     {
+        // $bankNames = config('constants.bankNames');
         return view('admin.bank.create', [
             'status' => $this->status,
+            // 'bankNames' => $bankNames,
         ]);
     }
 
@@ -117,9 +120,11 @@ class BankAccountController extends Controller
      */
     public function edit(BankAccount $bank)
     {
+        // $bankNames = config('constants.bankNames');
         return view('admin.bank.edit', [
             'bank' => $bank,
             'status' => $this->status,
+            // 'bankNames' => $bankNames,
         ]);
     }
 

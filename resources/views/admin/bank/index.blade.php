@@ -75,7 +75,7 @@
                             {{ $loop->iteration }}
                         </th>
                         <td>
-                            {{ $bank->bank_name }}
+                            {{ config('constants.bankNames')[$bank->bank_name] }}
                         </td>
                         <td>
                             {{ $bank->account_name }}

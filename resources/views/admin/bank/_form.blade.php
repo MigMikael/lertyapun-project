@@ -14,7 +14,7 @@
 </div>
 <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('bank_name', 'bank_name') !!}
-    {!! Form::text('bank_name', null, ['placeholder' => 'bank_name', 'class' => 'form-control' . ($errors->has('bank_name') ? ' is-invalid' : null)]) !!}
+    {!! Form::select('bank_name', config('constants.bankNames'), null, ['class' => 'form-control' . ($errors->has('bank_name') ? ' is-invalid' : null)]) !!}
     @error('bank_name')
         <div class="text-danger">{{ $message }}</div>
     @enderror
