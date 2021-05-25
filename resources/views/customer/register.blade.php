@@ -189,7 +189,7 @@ input[type=checkbox]:checked:after {
         </div>
     </div>
 </section>
-<!-- Footer -->
+<!-- Footer
 <footer class="footer bg-white">
     <div class="container">
         <div class="row">
@@ -199,6 +199,7 @@ input[type=checkbox]:checked:after {
         </div>
     </div>
 </footer>
+-->
 @endsection
 
 @section('script')
