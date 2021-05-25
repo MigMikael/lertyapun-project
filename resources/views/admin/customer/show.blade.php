@@ -46,7 +46,7 @@
         </div>
     </div>
     <hr>
-    <div id="aniimated-thumbnials" class="row">
+    <div class="row">
         <div class="col-md-12">
             <div class="form-group">
                 <strong>
@@ -54,6 +54,8 @@
                 </strong>
             </div>
         </div>
+    </div>
+    <div id="aniimated-thumbnials" class="row">
         @if ($customer->citizenCardImage == null && $customer->drugStoreApproveImage == null && $customer->medicalLicenseImage == null &&
         $customer->commercialRegisterImage == null && $customer->juristicPersonImage == null && $customer->vatRegisterCertImage == null)
         <div class="col-md-12">
