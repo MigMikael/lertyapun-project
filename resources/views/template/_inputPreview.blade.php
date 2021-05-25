@@ -25,14 +25,14 @@
         </div>
         @elseif(Request::is('admin/deliveries/*/edit'))
         <div class="col-md-4 form-group">
-            <a id="{{ $name."_pre" }}" href="{{ url('image/show/'.$delivery->image->slug) }}">
-                <img id="{{ $name }}" src="{{ url('image/show/'.$delivery->image->slug) }}" style="width: 100%;" />
+            <a id="{{ $name."_pre" }}" href="@if($delivery->image_id != null) {{ url('image/show/'.$delivery->image->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif">
+                <img id="{{ $name }}" src="@if($delivery->image_id != null) {{ url('image/show/'.$delivery->image->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif" style="width: 100%;" />
             </a>
         </div>
         @elseif(Request::is('admin/banks/*/edit'))
         <div class="col-md-4 form-group">
-            <a id="{{ $name."_pre" }}" href="{{ url('image/show/'.$bank->image->slug) }}">
-                <img id="{{ $name }}" src="{{ url('image/show/'.$bank->image->slug) }}" style="width: 100%;" />
+            <a id="{{ $name."_pre" }}" href="@if($bank->image_id) {{ url('image/show/'.$bank->image->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif">
+                <img id="{{ $name }}" src="@if($bank->image_id) {{ url('image/show/'.$bank->image->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif" style="width: 100%;" />
             </a>
         </div>
         @else

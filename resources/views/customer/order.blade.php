@@ -1,6 +1,11 @@
 @extends('template.customer')
 
 @section('content')
+<style>
+    #content {
+        margin-bottom: 0px !important;
+    }
+</style>
 <div class="wrapper d-flex align-items-stretch">
     @include('customer._sidebar')
     <nav id="content">

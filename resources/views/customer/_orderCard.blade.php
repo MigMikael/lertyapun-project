@@ -3,9 +3,12 @@
         <div class="row">
             <div class="col-md-6">
                 <label class="title">เลขที่คำสั่งซื้อ {{ $order->slug }}</label><br>
-                <label>คำสั่งซื้อวันที่ {{ \Carbon\Carbon::parse($order->order_date)->format('d/m/Y เวลา h:m') }} น.</label><br>
+                <label>คำสั่งซื้อวันที่ {{ \Carbon\Carbon::parse($order->order_date)->format('d/m/Y เวลา h:m') }} น.</label>
+                @if($order->status != 'pending')
+                <br>
                 <label class="title">ยอดเงินที่ต้องชำระ</label><br>
                 <label>รวมสุทธิ {{ number_format($order->total_amount, 2) }} บาท</label>
+                @endif
             </div>
             <div class="col-md-6">
                 <div class="form-group">

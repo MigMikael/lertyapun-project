@@ -117,21 +117,6 @@
                                                 </td>
                                             </tr>
                                             @endforeach
-
-                                            <tr id="shipment_method">
-                                                <td style="padding-left: 0px;">
-                                                    <p>เลือกบริการขนส่ง</p>
-                                                </td>
-                                                <td id="shipment_method_select">
-                                                    <select id="deliveryService" name="deliveryService" id="deliveryService" class="form-control">
-                                                        @foreach($deliveryServices as $deliveryService)
-                                                        <option value="{{ $deliveryService->name }}">
-                                                            {{ $deliveryService->name }}
-                                                        </option>
-                                                        @endforeach
-                                                    </select>
-                                                </td>
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -143,6 +128,44 @@
             </main>
 
             <aside class="col-sm-12 col-lg-4">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-12 mb-3">
+                                <h5 class="title">บริการขนส่ง</h5>
+                            </div>
+                            <div class="col-md-12">
+                                <div id="shipment_method">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label>เลือกบริการขนส่ง</label>
+                                            <div id="shipment_method_select">
+                                                <select id="deliveryService" name="deliveryService" id="deliveryService" class="form-control">
+                                                    @foreach($deliveryServices as $deliveryService)
+                                                    <option value="{{ $deliveryService->name }}">
+                                                        {{ $deliveryService->name }}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--
+                                    <td id="shipment_method_select">
+                                        <select id="deliveryService" name="deliveryService" id="deliveryService" class="form-control">
+                                            @foreach($deliveryServices as $deliveryService)
+                                            <option value="{{ $deliveryService->name }}">
+                                                {{ $deliveryService->name }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="card">
                     <div class="card-body">
                         <div class="row mb-3">
@@ -152,10 +175,10 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label>รวมการสั่งซื้อ</label>
+                                <label>ราคารวมสินค้า</label>
                             </div>
                             <div class="col-md-6 text-right">
-                                ฿<span id="total_price">฿{{ number_format($customer->totalPrice, 2) }}</span>
+                                <span id="total_price">{{ number_format($customer->totalPrice, 2) }}</span><span> บาท</span>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -163,23 +186,25 @@
                                 <label>ส่วนลด</label>
                             </div>
                             <div class="col-md-6 text-right">
-                                ฿<span id="total_discount">฿{{ number_format($customer->totalDiscount, 2) }}</span>
+                                <span id="total_discount">{{ number_format($customer->totalDiscount, 2) }}</span><span> บาท</span>
                             </div>
                         </div>
+                        <!--
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label>ค่าจัดส่งสินค้า</label>
                             </div>
                             <div class="col-md-6 text-right">
-                                ฿<span id="shipment_price">{{ number_format(0, 2) }}</span>
+                                <span id="shipment_price">{{ number_format(0, 2) }}</span>
                             </div>
                         </div>
+                        -->
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label>รวมสุทธิ</label>
+                                <label>ราคารวม<br>(หลังส่วนลด)</label>
                             </div>
                             <div class="col-md-6 text-right">
-                                <h5>฿<span id="final_price">{{ number_format($customer->finalPrice, 2) }}<span></h5>
+                                <span id="final_price" style="font-weight: 700; font-size: 1.25rem;">{{ number_format($customer->finalPrice, 2) }}</span><span> บาท</span>
                             </div>
                         </div>
                         <div class="row">
@@ -308,6 +333,7 @@
                 totalWeight += productWeight
             }
             var totalWeightKg = Math.floor(totalWeight / 1000)
+            /*
             var shipmentRate = [ 15, 25, 35, 45, 55, 60, 77, 89, 101, 113, 125, 137, 149, 161, 173, 185, 205, 225, 245, 265, 270, 270, 280, 290, 300, 310, 320, 330, 340, 350, 360, 370, 380, 390, 400, 410, 420, 430, 440, 450, 460, 470, 480, 490, 500, 510, 520, 530, 540, 550, 560, 575, 590, 605, 620, 635, 650, 665, 680, 695, 710, 725, 740, 755, 770, 785, 800, 815, 830, 845, 860, 875, 890, 905, 920, 935, 950, 965, 980, 995, 1010, 1025, 1040, 1055, 1070, 1085, 1100, 1115, 1130, 1145, 1160, 1175, 1190, 1205, 1220, 1235, 1250, 1265, 1280, 1295, 1310 ]
 
             var shipmentPrice = 0
@@ -318,8 +344,8 @@
             } else {
                 shipmentPrice = shipmentRate.slice(-1)[0]
             }
-
-            var finalPrice = (totalPrice - totalDiscount) + shipmentPrice
+            */
+            var finalPrice = (totalPrice - totalDiscount)/*+ shipmentPrice*/
             if(finalPrice < 5000){
                 $("#order_submit").prop('disabled', true)
                 $("#remark").text("*ยอดสั่งสินค้าขั้นต่ำ 5,000 บาท")
@@ -328,10 +354,10 @@
                 $("#remark").text("")
             }
 
-            $("#total_price").text(totalPrice.toLocaleString())
-            $("#total_discount").text(totalDiscount.toLocaleString())
-            $("#shipment_price").text(shipmentPrice.toLocaleString())
-            $("#final_price").text(finalPrice.toLocaleString())
+            $("#total_price").text(totalPrice.toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+            $("#total_discount").text(totalDiscount.toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+            /*$("#shipment_price").text(shipmentPrice.toLocaleString())*/
+            $("#final_price").text(finalPrice.toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
         }
 
         $(document).ready(function(){

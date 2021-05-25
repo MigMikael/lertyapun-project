@@ -175,8 +175,9 @@ class GuestController extends Controller
             $image_record = $this->storeImage($file, "");
             $newCustomer['vat_register_cert_image'] = $image_record->id;
         }
-        $newRemark = "\n(แก้ไขแล้วเมื่อ " . (\Carbon\Carbon::parse(\Carbon\Carbon::now())->format('d/m/Y h:m:s')) . ")\n";
-        $newCustomer['remark'] = $customer->remark . $newRemark;
+        $newRemark = "\n(แก้ไขล่าสุด วันที่ " . (\Carbon\Carbon::parse(\Carbon\Carbon::now())->format('d/m/Y')) . " เวลา " . (\Carbon\Carbon::parse(\Carbon\Carbon::now())->format('H:i:s')) . " น.)\n";
+        //$newCustomer['remark'] = $customer->remark . $newRemark;
+        $newCustomer['remark'] = $newRemark;
 
         $customer->update($newCustomer);
         return redirect('customer/pending/'.$customer->slug)

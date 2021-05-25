@@ -95,7 +95,7 @@
                     <input
                     name="promotionTag"
                     placeholder="เลือกโปรโมชัน..."
-                    value="@foreach($productPromotions as $productPro)ลด {!! $productPro !!}%,@endforeach"
+                    value="@foreach($productPromotions as $productPro){!! $productPro !!} บาท,@endforeach"
                 />
                 <input name="product_id" type="hidden" value="{{ $product->slug }}" />
                 </div>
@@ -268,7 +268,7 @@
             @foreach($promotions as $key => $promotion)
             {
                 "value": "{!! $key !!}",
-                "name": "ลด {!! $promotion !!}%",
+                "name": "{!! $promotion !!} บาท",
             },
             @endforeach
         ]

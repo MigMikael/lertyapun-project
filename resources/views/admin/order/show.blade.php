@@ -101,8 +101,8 @@ crossorigin="anonymous"></script>
                                 <th class="text-center">#</th>
                                 <th class="text-center">รหัสสินค้า</th>
                                 <th class="text-center">รายการ</th>
-                                <th class="text-center">จำนวน</th>
-                                <th class="text-right">ราคา</th>
+                                <th class="text-center">จำนวน/หน่วย</th>
+                                <th class="text-right">ราคา/หน่วย</th>
                                 <th class="text-right">รวม</th>
                             </tr>
                         </thead>

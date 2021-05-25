@@ -124,7 +124,7 @@ trait ValidateTrait
     {
         $request->validate([
             'name' => 'required|max:255',
-            'description' => 'nullable|max:255',
+            'description' => 'nullable',
             'weight' => 'required|numeric',
             'product_image' => 'required|image',
             'status' => 'required|max:255',

@@ -6,8 +6,8 @@
     @enderror
 </div>
 <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('name', 'หน่วยลดราคา') !!}
-    {!! Form::number('name', null, ['placeholder' => 'หน่วยลดราคา', 'class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : null)]) !!}
+    {!! Form::label('name', 'จำนวน') !!}
+    {!! Form::number('name', null, ['placeholder' => 'จำนวน', 'class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : null)]) !!}
     @error('name')
         <div class="text-danger">{{ $message }}</div>
     @enderror

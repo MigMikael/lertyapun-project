@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BankAccount;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Traits\ImageTrait;
@@ -363,10 +364,12 @@ class OrderController extends Controller
     {
         $order->products;
         // return $order;
+        $banks = BankAccount::where('status', 'show')->get();
 
         return view('customer.orderDetail', [
             'order' => $order,
             'customer' => $order->customer,
+            'banks' => $banks,
         ]);
     }
 

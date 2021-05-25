@@ -14,8 +14,8 @@ class PromotionController extends Controller
 {
     use ValidateTrait;
     public $promotionType = [
-        'discount' => 'ลดราคา (บาท)',
-        'percent' => 'ลดราคา (เปอร์เซนต์)'
+        'discount' => 'บาท (THB)',
+        //'percent' => 'เปอร์เซ็นต์ (%)'
     ];
     /**
      * Display a listing of the resource.
@@ -84,10 +84,8 @@ class PromotionController extends Controller
     public function store(Request $request)
     {
         $this->validateCreatePromotion($request);
-
         $newPromotion = $request->all();
         $newPromotion['slug'] = (new StringGenerator())->generateSlug();
-
         $newPromotion = Promotion::create($newPromotion);
         return redirect()
             ->action([PromotionController::class, 'index'])

@@ -9,7 +9,7 @@
                     <h5>การสมัครสมาชิกของคุณถูกส่งเข้าระบบแล้ว !</h5>
                     <p>กรุณารอเจ้าหน้าที่ตรวจสอบข้อมูลเพื่อยืนยันการสมัครสมาชิก ระหว่างนี้คุณสามารถแก้ไขข้อมูลของคุณได้</p>
                     @if($customer->remark != "")
-                        <p>{{ $customer->remark }}</p>
+                        <p style="color: red;">{{ $customer->remark }}</p>
                     @endif
                     <div class="col-md-12">
                         <img src="{{ url('img/register-success.png') }}" style="width: 400px; max-width: 100%;">

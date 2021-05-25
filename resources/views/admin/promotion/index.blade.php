@@ -74,8 +74,7 @@
                             {{ $loop->iteration }}
                         </th>
                         <td>
-                            ลดราคา
-                            {{ $promotion->name }}
+                            ลด {{ $promotion->name }}
                             @if($promotion->type == 'percent')
                             %
                             @elseif($promotion->type == 'discount')
@@ -84,9 +83,9 @@
                         </td>
                         <td>
                             @if($promotion->type == 'percent')
-                            ลดราคา (เปอร์เซนต์)
+                            เปอร์เซ็นต์ (%)
                             @elseif($promotion->type == 'discount')
-                            ลดราคา (บาท)
+                            บาท (THB)
                             @endif
                         </td>
                         <td class="text-center">

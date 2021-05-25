@@ -8,10 +8,12 @@
                 <a href="{{ url('customer/products/'.$product->slug) }}" class="title">
                     {{ $product->name }}
                 </a>
-                <div class="price mt-1">ราคา {{ number_format($product->units['0']['pricePerUnit']) }} บาท
                 @if(count($product->promotions) != 0)
                     @foreach ($product->promotions->reverse() as $promotion)
-                        <span class="badge badge-danger" style="font-weight: normal">
+                    <div class="price mt-1">ราคา {{ number_format(doubleval($product->units['0']['pricePerUnit']) - doubleval($promotion->name)) }} บาท</div>
+                    <div style="text-decoration: line-through;">ราคา {{ number_format($product->units['0']['pricePerUnit']) }} บาท</div>
+                        <span class="badge badge-success" 
+                        style="font-weight: normal; position: absolute;top: 0;right: 0;margin-top: 7px;margin-right: 7px;">
                             ลด {{ $promotion->name }}
                             @if($promotion->type == 'percent')
                             %
@@ -23,8 +25,9 @@
                             @break
                         @endif
                     @endforeach
+                @else
+                    <div class="price mt-1">ราคา {{ number_format($product->units['0']['pricePerUnit']) }} บาท</div>
                 @endif
-                </div>
                 <!--<p>เหลือสินค้า {{ $product->quantity }} ชิ้น</p>-->
             </div>
             <button id="{{ $product->slug }}"

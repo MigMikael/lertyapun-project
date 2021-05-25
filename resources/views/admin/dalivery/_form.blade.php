@@ -1,12 +1,12 @@
 <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('name', 'Name') !!}
-    {!! Form::text('name', null, ['placeholder' => 'name', 'class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : null)]) !!}
+    {!! Form::label('name', 'ชื่อขนส่ง') !!}
+    {!! Form::text('name', null, ['placeholder' => 'ชื่อขนส่ง', 'class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : null)]) !!}
     @error('name')
         <div class="text-danger">{{ $message }}</div>
     @enderror
 </div>
 <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('status') !!}
+    {!! Form::label('status', 'สถานะการใช้งาน') !!}
     {!! Form::select('status', $status, null, ['class' => 'form-control' . ($errors->has('status') ? ' is-invalid' : null)]) !!}
     @error('status')
         <div class="text-danger">{{ $message }}</div>
