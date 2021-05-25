@@ -20,7 +20,7 @@
         </div>
     </div>
 </section>
-<!-- Footer -->
+<!-- Footer
 <footer class="footer bg-white">
     <div class="container">
         <div class="row">
@@ -30,4 +30,5 @@
         </div>
     </div>
 </footer>
+-->
 @endsection
