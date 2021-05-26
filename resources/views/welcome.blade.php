@@ -178,22 +178,11 @@
             </div>
             <div class="col-lg-12">
                 <div class="form-group">
-                    <div style="width: 100%"><iframe width="100%" height="450" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=384-386%20%E0%B8%97%E0%B9%88%E0%B8%B2%E0%B9%80%E0%B8%A3%E0%B8%B7%E0%B8%AD%20Tha%20Maka%20District,%20Kanchanaburi%2071130+(%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%82%E0%B8%B2%E0%B8%A2%E0%B8%A2%E0%B8%B2%E0%B9%80%E0%B8%A5%E0%B8%B4%E0%B8%A8%E0%B8%A2%E0%B8%B2%E0%B8%A0%E0%B8%B1%E0%B8%93%E0%B8%91%E0%B9%8C%20%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%A2%E0%B8%B2%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2%E0%B8%96%E0%B8%B9%E0%B8%81%20%E0%B8%9B%E0%B8%A5%E0%B8%B5%E0%B8%81-%E0%B8%AA%E0%B9%88%E0%B8%87)&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe></div>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15487.95385446088!2d99.7493389!3d13.9592923!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1bf9da5c69b0339!2z4Lij4LmJ4Liy4LiZ4LiC4Liy4Lii4Lii4Liy4LmA4Lil4Li04Lio4Lii4Liy4Lig4Lix4LiT4LiR4LmMIOC4o-C5ieC4suC4meC4ouC4suC4o-C4suC4hOC4suC4luC4ueC4gSDguJvguKXguLXguIEt4Liq4LmI4LiH!5e0!3m2!1sen!2sth!4v1622018400472!5m2!1sen!2sth" width="100%" height="450" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="border:0;" allowfullscreen="" loading="lazy" ></iframe>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Footer
-<footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <p class="text-muted text-center" style="margin-top: 5px; margin-bottom: 0px !important;">&copy; LERTYAPHAN 2021. All Rights Reserved.</p>
-            </div>
-        </div>
-    </div>
-</footer>
--->
 @endsection
