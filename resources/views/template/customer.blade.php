@@ -3,8 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
+        <meta NAME="keywords" CONTENT="ร้านขายยา, ร้านยา, ร้านยาราคาถูก, ร้านยาคุณภาพ, ร้านยาปลีก-ส่ง, ร้านยาโดยเภสัชกร, ร้านยาเภสัช">
+        <meta name="description" content="ร้านขายยาเลิศยาภัณฑ์ ร้านยาคุณภาพ ร้านยาราคาถูก ปลีก-ส่ง">
+        <meta name="author" content="เลิศยาภัณฑ์">
 
         <title>@yield('title', 'LERTYAPHAN')</title>
 
