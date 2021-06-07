@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="keywords" CONTENT="ร้านขายยา, ร้านยา, ร้านยาราคาถูก, ร้านยาคุณภาพ, ร้านยาปลีก-ส่ง, ร้านยาโดยเภสัชกร, ร้านยาเภสัช">
-        <meta name="description" content="ร้านขายยาเลิศยาภัณฑ์ ร้านยาคุณภาพ ร้านยาราคาถูก ปลีก-ส่ง">
+        <meta name="keywords" CONTENT="เลิศยาภัณฑ์, ร้านขายยา, ร้านยา, ร้านยาราคาถูก, ร้านยาคุณภาพ, ร้านยาปลีก-ส่ง, ร้านยาโดยเภสัชกร, ร้านยาเภสัช">
+        <meta name="description" content="เลิศยาภัณฑ์ ร้านยาคุณภาพ ราคาถูก ปลีก-ส่ง พร้อมบริการปรึกษาปัญหาทางสุขภาพและมีกิจกรรมตรวจสุขภาพฟรีตลอดทั้งปี">
         <meta name="author" content="เลิศยาภัณฑ์">
 
         <title>@yield('title', 'LERTYAPHAN')</title>
@@ -38,16 +38,6 @@
 
         @include('customer._errorModal')
         @yield('content')
-        <!-- Footer -->
-        <footer class="footer bg-white">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <p class="text-muted text-center" style="margin-top: 5px; margin-bottom: 0px !important;">&copy; LERTYAPHAN 2021. All Rights Reserved.</p>
-                    </div>
-                </div>
-            </div>
-        </footer>
         <script src="{{ URL::asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script>
             $( document ).ready(function(){

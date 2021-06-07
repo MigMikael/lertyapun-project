@@ -1,5 +1,5 @@
 <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('name', 'ชื่อสินค้า') !!}
+    {!! Form::label('name', 'ชื่อสินค้า') !!} <span class="required">*</span>
     {!! Form::text('name', null, ['placeholder' => 'ชื่อสินค้า', 'class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : null)]) !!}
     @error('name')
         <div class="text-danger">{{ $message }}</div>
@@ -17,7 +17,7 @@
     {!! Form::label('point', 'Point') !!}
     {!! Form::text('point', null, ['placeholder' => 'Point', 'class' => 'form-control']) !!}
 </div> --}}
-{!! Form::label('unit', 'หน่วยพิ้นฐาน') !!}
+{!! Form::label('unit', 'หน่วยพิ้นฐาน') !!} <span class="required">*</span>
 <div class="input-group" style="margin-bottom: 3%">
     {!! Form::select('unitName[]', config('constants.productUnit'), null, ['class' => 'form-control base-unit-name' . ($errors->has('unitName') ? ' is-invalid' : null)]) !!}
 
@@ -51,7 +51,7 @@
 @include('admin.product._unit_create')
 
 <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('quantity', 'จำนวนสินค้า (ตามหน่วยพิ้นฐาน)') !!}
+    {!! Form::label('quantity', 'จำนวนสินค้า (ตามหน่วยพิ้นฐาน)') !!} <span class="required">*</span>
     {!! Form::text('quantity', null, ['placeholder' => 'จำนวนสินค้า (ตามหน่วยพิ้นฐาน)', 'class' => 'form-control' . ($errors->has('quantity') ? ' is-invalid' : null)]) !!}
     @error('quantity')
         <div class="text-danger">{{ $message }}</div>
@@ -59,13 +59,22 @@
 </div>
 
 <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('Status', 'สถานะ') !!}
+    {!! Form::label('Status', 'สถานะ') !!} <span class="required">*</span>
     {!! Form::select('status', $status, null, ['class' => 'form-control' . ($errors->has('status') ? ' is-invalid' : null)]) !!}
     @error('status')
         <div class="text-danger">{{ $message }}</div>
     @enderror
 </div>
 
+<div class="form-group" style="margin-bottom: 3%">
+    {!! Form::label('expired_date', 'วันหมดอายุ (เดือน/วัน/ปี)') !!} <span class="required">*</span>
+    {!! Form::date('expired_date', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}
+    @error('expired_date')
+        <div class="text-danger">{{ $message }}</div>
+    @enderror
+</div>
+
+<!--
 <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('expired_startdate', 'วันหมดอายุเร็วที่สุด') !!}
     {!! Form::date('expired_startdate', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}
@@ -80,18 +89,22 @@
         <div class="text-danger">{{ $message }}</div>
     @enderror
 </div>
+-->
 
 @include('template._inputPreview', [
     'label' => 'ภาพสินค้า',
     'name' => 'product_image',
     'key' => 'productImage',
+    'required' => true
 ])
 
+<!--
 @include('template._inputPreviewMulti', [
     'label' => 'ภาพสินค้าเพิ่มเติม (สูงสุด 5 ภาพ)',
     'name' => 'additional_image',
     'key' => 'additionalImage',
 ])
+-->
 
 <script>
     $('.base-unit-name').on('change', function (e) {

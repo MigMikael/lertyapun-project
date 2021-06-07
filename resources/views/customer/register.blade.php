@@ -49,6 +49,11 @@ input[type=checkbox]:checked:after {
                 @endif
                 <hr class="my-4">
                </div>
+               <div class="col-md-12">
+                   <div class="form-group">
+                        <strong>ข้อมูลส่วนตัว</strong>
+                   </div>
+               </div>
                <div class="col-md-6">
                 <div class="form-group">
                     <label>ชื่อ <span class="required">*</span></label>
@@ -126,6 +131,12 @@ input[type=checkbox]:checked:after {
                         @enderror
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <hr class="my-4">
+                    <div class="form-group">
+                         <strong>ข้อมูลเอกสาร</strong>
+                    </div>
+                </div>
                 <div class="col-md-6">
                     @include('template._inputPreview', [
                         'label' => 'รูปบัตรประชาชน',
@@ -180,7 +191,62 @@ input[type=checkbox]:checked:after {
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mx-auto">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <hr class="my-4">
+                            <div class="form-group">
+                                 <strong>ข้อมูลที่อยู่</strong>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>เลขที่/หมู่/ถนน/ซอย <span class="required">*</span></label>
+                                <input name="detail" type="text" class="form-control @error('detail') is-invalid @enderror" placeholder="" value="@if(Request::is('customer/pending/*/edit')){{ $address->detail }}@else{{ old('detail') }}@endif">
+                                @error('detail')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>แขวง/ตำบล <span class="required">*</span></label>
+                                <input name="subDistrict" type="text" class="form-control @error('subDistrict') is-invalid @enderror" placeholder="" value="@if(Request::is('customer/pending/*/edit')){{ $address->subDistrict }}@else{{ old('subDistrict') }}@endif">
+                                @error('subDistrict')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>เขต/อำเภอ <span class="required">*</span></label>
+                                <input name="district" type="text" class="form-control @error('district') is-invalid @enderror" placeholder="" value="@if(Request::is('customer/pending/*/edit')){{ $address->district }}@else{{ old('district') }}@endif">
+                                @error('district')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>จังหวัด <span class="required">*</span></label>
+                                <input name="province" type="text" class="form-control @error('province') is-invalid @enderror" placeholder="" value="@if(Request::is('customer/pending/*/edit')){{ $address->province }}@else{{ old('province') }}@endif">
+                                @error('province')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>รหัสไปรษณีย์ <span class="required">*</span></label>
+                                <input name="zipcode" type="text" class="form-control @error('zipcode') is-invalid @enderror" placeholder="" value="@if(Request::is('customer/pending/*/edit')){{ $address->zipcode }}@else{{ old('zipcode') }}@endif">
+                                @error('zipcode')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mx-auto" style="margin-top: 25px;">
                     <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">ยืนยัน</button>
                 </div>
            </div>
@@ -189,6 +255,17 @@ input[type=checkbox]:checked:after {
         </div>
     </div>
 </section>
+
+<!-- Footer -->
+<footer class="footer bg-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-muted text-center" style="margin-top: 5px; margin-bottom: 0px !important;">&copy; LERTYAPHAN 2021. All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
 @endsection
 
 @section('script')

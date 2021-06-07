@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-6">
                 <label class="title">เลขที่คำสั่งซื้อ {{ $order->slug }}</label><br>
-                <label>คำสั่งซื้อวันที่ {{ \Carbon\Carbon::parse($order->order_date)->format('d/m/Y เวลา h:m') }} น.</label>
+                <label>คำสั่งซื้อวันที่ {{ \Carbon\Carbon::parse($order->order_date)->format('d/m/y H:i:s') }} น.</label>
                 @if($order->status != 'pending')
                 <br>
                 <label class="title">ยอดเงินที่ต้องชำระ</label><br>
@@ -32,7 +32,7 @@
                     <label>
                         <strong>ชำระเงินเมื่อ </strong>
                         @if ($order->payment_date != null)
-                        {{ \Carbon\Carbon::parse($order->payment_date)->format('d/m/Y - h:m') }} น.
+                        {{ \Carbon\Carbon::parse($order->payment_date)->format('d/m/y H:i:s') }} น.
                         @else
                          -
                         @endif

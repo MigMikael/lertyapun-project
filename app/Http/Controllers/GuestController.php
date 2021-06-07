@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Address;
 use Illuminate\Http\Request;
 use App\Helpers\StringGenerator;
 use Illuminate\Support\Facades\Hash;
@@ -100,7 +101,26 @@ class GuestController extends Controller
 
         $newCustomer = Customer::create($newCustomer);
         Auth::guard('customer')->login($newCustomer);
+        
+        $authCustomer = auth()->guard('customer')->user();
 
+        $newCustomerAddress = [
+            'slug' => '',
+            'detail' => $request['detail'],
+            'subDistrict' => $request['subDistrict'],
+            'district' => $request['district'],
+            'province' => $request['province'],
+            'zipcode' => $request['zipcode'],
+        ];
+
+        if ($authCustomer) {
+            $customer = Customer::where('slug', $authCustomer->slug)->first();
+            $newCustomerAddress['customer_id'] = $customer->id;
+
+            Address::where('customer_id', $customer->id)->delete();
+            Address::create($newCustomerAddress);
+        }
+        
         return redirect('customer/pending/'.$newCustomer->slug);
     }
 
@@ -115,7 +135,10 @@ class GuestController extends Controller
         if ($customer->status == 'active') {
             return redirect('customer/products');
         }
-        return view('customer.pending', [ 'customer' => $customer ]);
+        
+        return view('customer.pending', [ 
+            'customer' => $customer,
+        ]);
     }
 
     /**
@@ -180,6 +203,26 @@ class GuestController extends Controller
         $newCustomer['remark'] = $newRemark;
 
         $customer->update($newCustomer);
+
+        $authCustomer = auth()->guard('customer')->user();
+
+        $newCustomerAddress = [
+            'slug' => '',
+            'detail' => $request['detail'],
+            'subDistrict' => $request['subDistrict'],
+            'district' => $request['district'],
+            'province' => $request['province'],
+            'zipcode' => $request['zipcode'],
+        ];
+
+        if ($authCustomer) {
+            $customer = Customer::where('slug', $authCustomer->slug)->first();
+            $newCustomerAddress['customer_id'] = $customer->id;
+
+            Address::where('customer_id', $customer->id)->delete();
+            Address::create($newCustomerAddress);
+        }
+
         return redirect('customer/pending/'.$customer->slug)
             ->with('success', 'Edit Success');
     }
@@ -195,7 +238,10 @@ class GuestController extends Controller
         if ($customer->status != 'pending') {
             return redirect('customer/products');
         }
-        return view('customer.register', [ 'customer' => $customer ]);
+
+        $address = $customer->addresses->first();
+
+        return view('customer.register', [ 'customer' => $customer, 'address' => $address ]);
     }
 
     /**

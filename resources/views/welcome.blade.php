@@ -185,4 +185,15 @@
     </div>
 </section>
 
+<!-- Footer -->
+<footer class="footer bg-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-muted text-center" style="margin-top: 5px; margin-bottom: 0px !important;">&copy; LERTYAPHAN 2021. All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
 @endsection

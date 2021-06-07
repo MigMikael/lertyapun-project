@@ -42,8 +42,8 @@
                                     <tr>
                                         <th class="text-center">#</th>
                                         <th>สินค้า</th>
-                                        <th>จำนวน</th>
-                                        <th class="text-right">ราคา (หลังส่วนลด)</th>
+                                        <th>จำนวน/หน่วย</th>
+                                        <th class="text-right">ราคา/หน่วย</th>
                                         <th class="text-right">รวม</th>
                                     </tr>
                                 </thead>
@@ -80,7 +80,7 @@
                                     <tr>
                                         <td colspan="3"></td>
                                         <td class="text-right">
-                                            ราคารวม (หลังส่วนลด)
+                                            ราคารวม
                                         </td>
                                         <td class="text-right">
                                             {{ number_format($order->total_amount - $order->shipment_price, 2) }} บาท

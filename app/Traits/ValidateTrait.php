@@ -38,7 +38,7 @@ trait ValidateTrait
             'subDistrict' => 'required|max:255',
             'district' => 'required|max:255',
             'province' => 'required|max:255',
-            'zipcode' => 'required|max:5|min:5',
+            'zipcode' => 'required|digits:5',
         ]);
     }
 
@@ -60,7 +60,7 @@ trait ValidateTrait
             'phone' => 'required|string|min:10|max:12|regex:/[0-9]{9}/',
             'password' => 'required|min:8|max:255',
             'confirm_password' => 'required|same:password|min:8|max:255',
-            'citizen_card_id' => 'required|max:255',
+            'citizen_card_id' => 'required|digits:13',
             'drug_store_id' => 'required|max:255',
 
             'remark' => 'nullable|max:255',
@@ -73,6 +73,12 @@ trait ValidateTrait
             'commercial_register_image' => 'nullable|image',
             'juristic_person_image' => 'nullable|image',
             'vat_register_cert_image' => 'nullable|image',
+
+            'detail' => 'required|max:255',
+            'subDistrict' => 'required|max:255',
+            'district' => 'required|max:255',
+            'province' => 'required|max:255',
+            'zipcode' => 'required|digits:5',
         ]);
     }
 
@@ -85,7 +91,7 @@ trait ValidateTrait
             'phone' => 'required|string|min:10|max:12|regex:/[0-9]{9}/',
             'password' => 'required|min:8|max:255',
             'confirm_password' => 'required|same:password|min:8|max:255',
-            'citizen_card_id' => 'required|max:255',
+            'citizen_card_id' => 'required|digits:13',
             'drug_store_id' => 'required|max:255',
 
             'citizen_card_image' => 'nullable|image',
@@ -95,6 +101,12 @@ trait ValidateTrait
             'commercial_register_image' => 'nullable|image',
             'juristic_person_image' => 'nullable|image',
             'vat_register_cert_image' => 'nullable|image',
+
+            'detail' => 'required|max:255',
+            'subDistrict' => 'required|max:255',
+            'district' => 'required|max:255',
+            'province' => 'required|max:255',
+            'zipcode' => 'required|digits:5',
         ]);
     }
 
@@ -132,6 +144,7 @@ trait ValidateTrait
             'quantity' => 'required|numeric',
             'expired_startdate' => 'nullable|date',
             'expired_enddate' => 'nullable|date',
+            'expired_date' => 'nullable|date',
         ]);
     }
 

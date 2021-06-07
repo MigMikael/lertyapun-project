@@ -56,11 +56,16 @@
             <strong>จำนวน</strong>
             <p>{{ $product->quantity }} {{ $product->units['0']['unitName'] }}</p>
 
+            <strong>วันหมดอายุ (วัน/เดือน/ปี):</strong>
+            <p>{{ \Carbon\Carbon::parse($product->expired_startdate)->format('d/m/Y') }}</p>
+
+            <!--
             <strong>วันหมดอายุเร็วที่สุด:</strong>
             <p>{{ \Carbon\Carbon::parse($product->expired_startdate)->format('d/m/Y') }}</p>
 
             <strong>วันหมดอายุช้าที่สุด:</strong>
             <p>{{ \Carbon\Carbon::parse($product->expired_enddate)->format('d/m/Y') }}</p>
+            -->
 
             <strong>หน่วยสินค้า</strong><br>
             @foreach($product->units as $productUnit)

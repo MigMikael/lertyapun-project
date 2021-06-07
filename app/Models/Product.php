@@ -24,6 +24,7 @@ class Product extends Model
         'weight',
         'expired_startdate',
         'expired_enddate',
+        'expired_date',
     ];
 
     public function promotions()

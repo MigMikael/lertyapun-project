@@ -449,6 +449,53 @@ figure {
   display: none;
 }
 
+.breadcrumb {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding: .75rem 1rem;
+  margin-bottom: 0 !important;
+  list-style: none;
+  /*background-color: #f8f9fa !important;*/
+  background: transparent !important;
+  border-radius: .25rem;
+}
+
+.btn-outline-secondary:hover {
+  color: #fff;
+  background-color: #2e6bd3;
+  border-color: #2e6bd3;
+}
+
+.btn-decrement {
+  border: 1px solid #ced4da;
+}
+
+.btn-increment {
+  border: 1px solid #ced4da;
+}
+
+.radio-toolbar input[type="radio"] {
+  display: none;
+}
+
+.radio-toolbar label {
+  display: inline-block;
+  padding: 4px 11px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid rgba(0,0,0,.09);
+  border-radius: .25rem;
+  color: rgba(0,0,0,.8);
+}
+
+.radio-toolbar input[type="radio"]:checked+label { 
+  border: 1px solid #2e6bd3;
+  color: #2e6bd3;
+  position: relative;
+}
+
 @media (max-width: 991.98px) {
 #search-nav {
   width: 100%;

@@ -140,8 +140,9 @@ class ProductController extends Controller
             'weight' => $data['weight'],
             'status' => $data['status'],
             'quantity' => $data['quantity'],
-            'expired_startdate' => $data['expired_startdate'],
-            'expired_enddate' => $data['expired_enddate'],
+            /*'expired_startdate' => $data['expired_startdate'],
+            'expired_enddate' => $data['expired_enddate'],*/
+            'expired_date' => $data['expired_date'],
         ];
 
         if($request->hasFile('product_image')) {
@@ -213,7 +214,7 @@ class ProductController extends Controller
         $productPromotions = $product->promotions()->pluck('name');
 
         $productImages = $product->detailImages()->get();
-
+    
         // return $productImages;
         return view('admin.product.show', [
             'product' => $product,
@@ -264,8 +265,9 @@ class ProductController extends Controller
             'weight' => $data['weight'],
             'status' => $data['status'],
             'quantity' => $data['quantity'],
-            'expired_startdate' => $data['expired_startdate'],
-            'expired_enddate' => $data['expired_enddate'],
+             /*'expired_startdate' => $data['expired_startdate'],
+            'expired_enddate' => $data['expired_enddate'],*/
+            'expired_date' => $data['expired_date'],
         ];
 
         if($request->hasFile('product_image')) {
@@ -371,6 +373,9 @@ class ProductController extends Controller
                 ProductPromotion::create($productPromotion);
             }
         }
+        else{
+            ProductPromotion::where('product_id', $product->id)->delete();
+        }
 
         return redirect()->back();
     }
@@ -385,7 +390,7 @@ class ProductController extends Controller
     {
         $data = $request->all();
         $product = Product::where('slug', $data['product_id'])->first();
-
+        
         if ($data['categoryTag'] != "") {
             CategoryProduct::where('product_id', $product->id)->delete();
 
@@ -398,6 +403,9 @@ class ProductController extends Controller
                 ];
                 CategoryProduct::create($categoryProduct);
             }
+        }
+        else{
+            CategoryProduct::where('product_id', $product->id)->delete();
         }
 
         return redirect()->back();
@@ -494,9 +502,32 @@ class ProductController extends Controller
 
         $productImages = $product->detailImages()->get();
 
+        $productType = $product->categories()->pluck('category_id');
+        $productCategories = $product->categories()->pluck('category_id');
+        //$productCategories = $product->categories()->pluck('id');
+        $categoryProducts = CategoryProduct::whereIn('category_id', $productCategories)->pluck('product_id');
+        if (count($categoryProducts) == 0)
+        {
+            $similarProducts = Product::where('id', '!=', $product->id)->inRandomOrder()->take(3)->get();
+        }
+        else {
+            $similarProducts = Product::where('id', '!=', $product->id)->whereIn('id', $categoryProducts)->get();
+        }
+
+        if (count($product->categories()->pluck('category_id')) == 0) {
+            $productCategoryText = ['อื่นๆ'];
+        }
+        else {
+            $productCategoryText = $product->categories()->pluck('name');
+        }
+        $productNameText = $product->name;
+
         return view('customer.show', [
             'product' => $product,
             'productImages' => $productImages,
+            'similarProducts' => $similarProducts,
+            'productNameText' => $productNameText,
+            'productCategoryText' => $productCategoryText
         ]);
     }
 

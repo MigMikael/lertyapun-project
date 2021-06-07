@@ -10,9 +10,9 @@
                 </a>
                 @if(count($product->promotions) != 0)
                     @foreach ($product->promotions->reverse() as $promotion)
-                    <div class="price mt-1">ราคา {{ number_format(doubleval($product->units['0']['pricePerUnit']) - doubleval($promotion->name)) }} บาท</div>
-                    <div style="text-decoration: line-through;">ราคา {{ number_format($product->units['0']['pricePerUnit']) }} บาท</div>
-                        <span class="badge badge-success" 
+                    <div class="price mt-1">ราคา {{ number_format(doubleval($product->units['0']['pricePerUnit']) - doubleval($promotion->name), 2) }} บาท</div>
+                    <div style="text-decoration: line-through;">ราคา {{ number_format($product->units['0']['pricePerUnit'], 2) }} บาท</div>
+                        <span class="badge badge-danger" 
                         style="font-weight: normal; position: absolute;top: 0;right: 0;margin-top: 7px;margin-right: 7px;">
                             ลด {{ $promotion->name }}
                             @if($promotion->type == 'percent')
@@ -30,11 +30,11 @@
                 @endif
                 <!--<p>เหลือสินค้า {{ $product->quantity }} ชิ้น</p>-->
             </div>
-            <button id="{{ $product->slug }}"
+            <a id="{{ $product->slug }}"
                 @if($product->quantity <= 0)
-                    class="btn btn-block btn-secondary mt-3" disabled
+                    href="#" class="btn btn-block btn-secondary mt-3" disabled
                 @else
-                    class="btn btn-block btn-primary mt-3"
+                    href="{{ url('customer/products/'.$product->slug) }}" class="btn btn-block btn-primary mt-3"
                 @endif
 
                 @if(auth()->guard('admin')->check())
@@ -44,9 +44,9 @@
                     @if($product->quantity <= 0)
                     สินค้าหมด
                     @else
-                    เพิ่มใส่ตระกร้า
+                    ดูรายละเอียด
                     @endif
-            </button>
+            </a>
         </figcaption>
     </div>
 </div>

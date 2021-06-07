@@ -10,15 +10,32 @@
 @endsection
 
 @section('content')
-<!--
-<section class="section-page-top">
+<section class="bg-white">
     <div class="container">
-        <h2 class="title-page">สินค้า</h2>
-    </div>
-</section>
--->
-<section class="bg-white" style="min-height: calc(100vh - 95px);">
-    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div style="margin-bottom: 2rem !important;">
+                    <nav style="background: transparent !important;">
+                        <ol class="breadcrumb" style="padding-left: 0px;">
+                            <li class="breadcrumb-item">
+                                สินค้า
+                            </li>
+                            <li class="breadcrumb-item">
+                                @for($i = 0; $i < count($productCategoryText); $i++)
+                                    {{ $productCategoryText[$i] }} 
+                                    @if($i != count($productCategoryText) - 1)
+                                    ,
+                                    @endif
+                                @endfor
+                            </li>
+                            <li class="breadcrumb-item">
+                                {{ $productNameText }}
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-5 form-group">
                 <div class="product-image-card form-group">
@@ -34,7 +51,6 @@
                     </a>
                     @endforeach
                 </div>
-                -->
                 <div class="owl-carousel owl-theme" id="lightgallery">
                     @foreach($productImages as $productImage)
                     <a class="item" data-src="{{ url('image/show/'.$productImage->slug) }}">
@@ -42,57 +58,109 @@
                     </a>
                     @endforeach
                 </div>
+                -->
             </div>
             <div class="col-md-7 form-group">
                 <div class="product-card">
                     <div class="product-name">
-                        <h4>{{ $product->name }}</h4>
+                        <div class="form-group">
+                            <h4>{{ $product->name }}</h4>
+                        </div>
                     </div>
                     <div class="product-info">
                         <label>รายละเอียดสินค้า</label>
+                        @if ($product->description == "" || $product->description == null)
+                        <p>-</p>
+                        @else
                         <p>{{ $product->description }}</p>
+                        @endif
                     </div>
                     <div class="product-expired">
                         <div class="row">
-                            <div class="col-md-6">
-                                <label>วันหมดอายุ:</label>
-                                <p>ช่วงวันที่ {{ \Carbon\Carbon::parse($product->expired_startdate)->format('d/m/Y') }} ถึง {{ \Carbon\Carbon::parse($product->expired_enddate)->format('d/m/Y') }}</p>
+                            <div class="col-md-12">
+                                <label>วันหมดอายุ: (วัน/เดือน/ปี)</label>
+                                <p>{{ \Carbon\Carbon::parse($product->expired_date)->format('d/m/Y') }}</p>
                             </div>
                         </div>
                     </div>
+                    @if(count($product->promotions) != 0)
+                    <div class="product-promotion">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>โปรโมชัน:</label><br>
+                                    @foreach ($product->promotions->reverse() as $promotion)
+                                    <span class="badge badge-danger" style="font-weight: normal;">
+                                        ลด {{ $promotion->name }}
+                                        @if($promotion->type == 'percent')
+                                        %
+                                        @elseif($promotion->type == 'discount')
+                                        บาท
+                                        @endif
+                                    </span>
+                                    @if($loop->iteration == 1)
+                                    @break
+                                    @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                     <div class="product-price">
-                        <label>ราคา</label>
-                        @foreach ($product->promotions as $promotion)
-                            <span class="badge badge-danger" style="font-weight: normal">ลด {{ $promotion->name }}%</span>
-                        @endforeach
-                        {{-- <h5 class="price">฿{{ $product->price }} {{ $product->unit }}</h5> --}}
-                        <select id="unit" name="unit" id="unit" class="form-control" style="width: 300px;">
-                            @foreach($product->units as $productUnit)
-                            <option value="{{ $productUnit->unitName }}">
-                                {{ $productUnit->unitName }}
-                                @if(!$loop->first)
-                                - {{ $productUnit->quantityPerUnit }} {{ $product->units['0']['unitName'] }}
-                                @endif
-                                - <strong>{{ $productUnit->pricePerUnit }}฿</strong>
-                            </option>
-                            @endforeach
-                        </select>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>ราคา</label>
+                                <!--<select id="unit" name="unit" id="unit" class="form-control" style="width: 300px;">
+                                    @foreach($product->units as $productUnit)
+                                    <option value="{{ $productUnit->unitName }}">
+                                        {{ $productUnit->unitName }}
+                                        @if(!$loop->first)
+                                        - {{ $productUnit->quantityPerUnit }} {{ $product->units['0']['unitName'] }}
+                                        @endif
+                                        - <strong>{{ $productUnit->pricePerUnit }}฿</strong>
+                                    </option>
+                                    @endforeach
+                                </select>
+                                -->
+                                <div class="radio-toolbar">
+                                    @foreach($product->units as $productUnit)
+                                    <input type="radio" id="{{ $productUnit->unitName }}" id="unit" name="unit" value="{{ $productUnit->unitName }}">
+                                    <label for="{{ $productUnit->unitName }}">
+                                        {{ $productUnit->unitName }}
+                                        @if(!$loop->first)
+                                        : {{ $productUnit->quantityPerUnit }} {{ $product->units['0']['unitName'] }}
+                                        @endif
+                                        @if(count($product->promotions) != 0)
+                                        @foreach ($product->promotions->reverse() as $promotion)
+                                        <div>ราคา
+                                            {{ number_format(doubleval($productUnit->pricePerUnit) - doubleval($promotion->name), 2) }} บาท
+                                        </div>
+                                        <div style="text-decoration: line-through;">ราคา {{ number_format($productUnit->pricePerUnit, 2) }}
+                                            บาท</div>
+                                        @if($loop->iteration == 1)
+                                        @break
+                                        @endif
+                                        @endforeach
+                                        @else
+                                        <div>ราคา {{ number_format($productUnit->pricePerUnit) }} บาท</div>
+                                        @endif
+                                    </label>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <!--
-                    <div class="mt-3">
-                        @foreach ($product->promotions as $promotion)
-                            <span class="badge badge-danger" style="font-weight: normal">ลด {{ $promotion->name }}%</span>
-                        @endforeach
-                    </div>
-                    -->
-                    <div class="product-amount mt-3">
+                    <div class="product-amount mt-3" style="width: 150px;">
                         <label>จำนวน</label>
-                        <input id="quantity" type="number" class="form-control" value="1" style="width: 100px;">
-                        <label style="margin-top: 15px;">เหลือสินค้า {{ $product->quantity }} {{ $product->units['0']['unitName'] }}</label>
+                        <input id="quantity" type="number" value="1" min="0" max="{{ $product->quantity }}" step="1"/>
+                    </div>
+                    <div class="product-remaining">
+                        <label style="margin-top: 15px; color: #28a745;">คงเหลือ {{ number_format($product->quantity) }} {{ $product->units['0']['unitName'] }}</label>
                     </div>
                     <div class="buy mt-4">
-                        <button class="btn btn-secondary mr-3" id="addToCart" @if(auth()->guard('admin')->check()) disabled @endif>
-                            <i class="fa fa-shopping-cart">เพิ่มใส่ตระกร้า</i>
+                        <button class="btn btn-primary mr-3" id="addToCart" @if(auth()->guard('admin')->check()) disabled @endif>
+                            <i class="fa fa-shopping-cart"> <span style="font-weight: 300 !important;">เพิ่มใส่รถเข็น</span></i>
                         </button>
                         <!--<button class="btn btn-primary" id="buyProduct">
                             ซื้อสินค้า
@@ -103,9 +171,90 @@
         </div>
     </div>
 </section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <h5>สินค้าที่คล้ายกัน</h5>
+                </div>
+            </div>
+            @foreach ($similarProducts as $similarProduct)
+            <div class="col-sm-6 col-md-6 col-lg-4">
+                <div class="card card-product-grid">
+                    <a href="{{ url('customer/products/'.$similarProduct->slug) }}" class="img-wrap">
+                        <img src="{{ url('image/show/'.$similarProduct->image->slug) }}">
+                    </a>
+                    <figcaption class="info-wrap">
+                        <div class="fix-height">
+                            <a href="{{ url('customer/products/'.$similarProduct->slug) }}" class="title">
+                                {{ $similarProduct->name }}
+                            </a>
+                            @if(count($similarProduct->promotions) != 0)
+                                @foreach ($similarProduct->promotions->reverse() as $promotion)
+                                <div class="price mt-1">ราคา {{ number_format(doubleval($similarProduct->units['0']['pricePerUnit']) - doubleval($promotion->name), 2) }} บาท</div>
+                                <div style="text-decoration: line-through;">ราคา {{ number_format($similarProduct->units['0']['pricePerUnit'], 2) }} บาท</div>
+                                    <span class="badge badge-danger" 
+                                    style="font-weight: normal; position: absolute;top: 0;right: 0;margin-top: 7px;margin-right: 7px;">
+                                        ลด {{ $promotion->name }}
+                                        @if($promotion->type == 'percent')
+                                        %
+                                        @elseif($promotion->type == 'discount')
+                                        บาท
+                                        @endif
+                                    </span>
+                                    @if($loop->iteration == 1)
+                                        @break
+                                    @endif
+                                @endforeach
+                            @else
+                                <div class="price mt-1">ราคา {{ number_format($similarProduct->units['0']['pricePerUnit']) }} บาท</div>
+                            @endif
+                            <!--<p>เหลือสินค้า {{ $product->quantity }} ชิ้น</p>-->
+                        </div>
+                        <a id="{{ $similarProduct->slug }}"
+                            @if($similarProduct->quantity <= 0)
+                                href="#" class="btn btn-block btn-secondary mt-3" disabled
+                            @else
+                                href="{{ url('customer/products/'.$similarProduct->slug) }}" class="btn btn-block btn-primary mt-3"
+                            @endif
+            
+                            @if(auth()->guard('admin')->check())
+                                disabled
+                            @endif
+                            >
+                                @if($similarProduct->quantity <= 0)
+                                สินค้าหมด
+                                @else
+                                ดูรายละเอียด
+                                @endif
+                        </a>
+                    </figcaption>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer bg-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-muted text-center" style="margin-top: 5px; margin-bottom: 0px !important;">&copy; LERTYAPHAN 2021. All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
 @endsection
 
 @section('script')
+<script src="{{ URL::asset('vendor/bootstrap/js/bootstrap-input-spinner.js') }}"></script>
+<script>
+    $("input[type='number']").inputSpinner()
+    $('input[name="unit"]').first().prop('checked', true)
+</script>
 <script>
     $('#lightgallery').lightGallery({
         selector: '.item',
@@ -132,7 +281,7 @@
                 "product_id": "{{ $product->slug }}",
                 "customer_id": "{{ auth()->guard('customer')->user()? auth()->guard('customer')->user()->slug : '' }}",
                 "quantity": $("#quantity").val(),
-                "unit": $("#unit").val(),
+                "unit": /*$("#unit").val()*/$('input[name="unit"]:checked').val(),
             },
             success: function(result) {
                 $('#productCount').text(result.productCount);
@@ -161,14 +310,14 @@
                 "product_id": "{{ $product->slug }}",
                 "customer_id": "{{ auth()->guard('customer')->user()? auth()->guard('customer')->user()->slug : '' }}",
                 "quantity": $("#quantity").val(),
-                "unit": $("#unit").val(),
+                "unit": /*$("#unit").val()*/$('input[name="unit"]:checked').val(),
             },
             success: function(result) {
                 $('#productCount').text(result.productCount);
-                $("#addToCart").html("<i class='fa fa-shopping-cart'>เพิ่มใส่ตระกร้า</i>");
+                $("#addToCart").html("<i class='fa fa-shopping-cart'> <span style='font-weight: 300 !important;'>เพิ่มใส่รถเข็น</span></i>");
             },
             error: function(result) {
-                $("#addToCart").html("<i class='fa fa-shopping-cart'>เพิ่มใส่ตระกร้า</i>");
+                $("#addToCart").html("<i class='fa fa-shopping-cart'> <span style='font-weight: 300 !important;'>เพิ่มใส่รถเข็น</span></i>");
                 $("#errorModal .modal-dialog .modal-content #title").html("เกิดข้อผิดพลาด...");
                 $("#errorModal .modal-dialog .modal-content #message").html(result.responseJSON.errors);
                 $('#errorModal').modal('show');

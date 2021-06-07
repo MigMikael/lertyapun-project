@@ -5,15 +5,22 @@
 @endsection
 
 @section('content')
+<style>
+    @media (max-width: 991.98px) {
+        .input-group {
+        width: 150px;
+    }
+}
+</style>
 <section class="section-page-top">
     <div class="container">
         <h2 class="title-page">ตะกร้าสินค้า</h2>
     </div>
 </section>
-<section class="bg-white">
+<section class="bg-white" style="min-height: 90vh;">
     <div class="container">
         <div class="row">
-            <main class="col-sm-12 col-lg-8">
+            <main class="col-md-12">
                 <div class="card form-group">
                     <div class="card-body">
                         <div class="row">
@@ -34,14 +41,14 @@
                                     <table class="table table-border table-shopping-cart">
                                         <thead>
                                             <tr>
-                                                <th>
+                                                <th width="40%">
                                                     สินค้า
                                                 </th>
-                                                <th>
-                                                    ราคา
+                                                <th width="35%">
+                                                    ราคา/หน่วย
                                                 </th>
-                                                <th>
-                                                    จำนวน
+                                                <th width="20%">
+                                                    จำนวน/หน่วย
                                                 </th>
                                                 <th class="text-center">
 
@@ -51,17 +58,20 @@
                                         <tbody>
                                             @foreach($customer->cart as $product)
                                             <tr id="product-table">
-                                                <td id="name" style="padding-left: 0px;">
+                                                <td id="name" style="padding-left: 0px;" width="30%">
                                                     <figure class="itemside">
+                                                        <!--
                                                         <div class="aside">
                                                             <img class="img-sm" src="{{ url('image/show/'.$product->image->slug) }}">
                                                         </div>
+                                                        -->
                                                         <figcaption class="info">
                                                             <a href="{{ url('customer/products/'.$product->slug) }}" class="title text-dark">
                                                                 <strong>{{ $product->name }}</strong>
+                                                                
                                                                 @if(count($product->promotions) > 0)
                                                                     @foreach ($product->promotions->reverse() as $promotion)
-                                                                        <span class="badge badge-danger" style="font-weight: normal" id="promotion_name">
+                                                                        <span class="badge badge-danger hidden" style="font-weight: normal" id="promotion_name">
                                                                             ลด {{ $promotion->name }}
                                                                             @if($promotion->type == 'percent')
                                                                             %
@@ -74,8 +84,9 @@
                                                                         @endif
                                                                     @endforeach
                                                                 @else
-                                                                    <span class="badge badge-danger" style="font-weight: normal; display: none" id="promotion_name">0</span>
+                                                                    <span class="badge badge-danger hidden" style="font-weight: normal; display: none" id="promotion_name">0</span>
                                                                 @endif
+                                                                
                                                             </a>
                                                         </figcaption>
                                                     </figure>
@@ -86,23 +97,33 @@
                                                         <option value="{{ $productUnit->unitName }};{{ $productUnit->pricePerUnit }};{{ $productUnit->quantityPerUnit }}" @if($productUnit->unitName == $product->pivot->unitName)selected="selected"@endif>
                                                             {{ $productUnit->unitName }}
                                                             @if(!$loop->first)
-                                                            - {{ $productUnit->quantityPerUnit }} {{ $product->units['0']['unitName'] }}
+                                                            : {{ $productUnit->quantityPerUnit }} {{ $product->units['0']['unitName'] }}
                                                             @endif
-                                                            - <strong>{{ $productUnit->pricePerUnit }} บาท</strong>
+                                                            
+                                                            @if(count($product->promotions) != 0)
+                                                            @foreach ($product->promotions->reverse() as $promotion)
+                                                            <div>ราคา
+                                                                {{ number_format(doubleval($productUnit->pricePerUnit) - doubleval($promotion->name), 2) }} บาท
+                                                            </div>
+                                                            @if($loop->iteration == 1)
+                                                            @break
+                                                            @endif
+                                                            @endforeach
+                                                            @else
+                                                            <div>ราคา {{ number_format($productUnit->pricePerUnit) }} บาท</div>
+                                                            @endif
+                                                        
                                                         </option>
                                                         @endforeach
                                                     </select>
-                                                    <p id="discount_price_container" style="color: red;font-size: 14px; margin-top: 5px;">ลดราคาเหลือ <span id="discount_price">0</span> บาท</p>
+                                                    
+                                                    <p class="hidden" id="discount_price_container" style="color: red;font-size: 14px; margin-top: 5px;">ลดราคาเหลือ <span id="discount_price">0</span> บาท</p>
+                                                    
                                                 </td>
                                                 <td id="quantity">
-                                                    <input id="input_quantity"
-                                                        type="number" class="form-control"
-                                                        value="{{ $product->pivot->quantity }}"
-                                                        min="1"
-                                                        max="{{ $product->quantity }}"
-                                                        >
+                                                    <input id="input_quantity" type="number" class="form-control" value="{{ $product->pivot->quantity }}" min="1" max="{{ $product->quantity }}">
                                                     <input id="product_slug" type="hidden" value="{{ $product->slug }}">
-                                                    <p style="font-size: 14px; margin-top: 5px; color: #28a745;">เหลือ {{ number_format($product->quantity) }} {{ $product->units['0']['unitName'] }}</p>
+                                                    <p style="font-size: 14px; margin-top: 5px; color: #28a745;">คงเหลือ {{ number_format($product->quantity) }} {{ $product->units['0']['unitName'] }}</p>
                                                 </td>
                                                 <td id="action" class="text-center">
                                                     {!! Form::model($product, [
@@ -126,8 +147,8 @@
                     </div>
                 </div>
             </main>
-
-            <aside class="col-sm-12 col-lg-4">
+            
+            <div class="col-md-6">
                 <div class="card mb-3">
                     <div class="card-body">
                         <div class="row mb-3">
@@ -150,29 +171,26 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!--
-                                    <td id="shipment_method_select">
-                                        <select id="deliveryService" name="deliveryService" id="deliveryService" class="form-control">
-                                            @foreach($deliveryServices as $deliveryService)
-                                            <option value="{{ $deliveryService->name }}">
-                                                {{ $deliveryService->name }}
-                                            </option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card">
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-3">
                     <div class="card-body">
                         <div class="row mb-3">
                             <div class="col-md-12">
-                                <h5 class="title">รวมยอดชำระเงิน</h5>
+                                <div class="pull-left">
+                                    <h5 class="title">รวมยอดชำระเงิน</h5>
+                                </div>
+                                <div class="pull-right">
+                                    <span style="font-size: 14px !important; font-weight: normal;" id="remark"></span>
+                                </div>
                             </div>
                         </div>
+                        <!--
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label>ราคารวมสินค้า</label>
@@ -181,6 +199,8 @@
                                 <span id="total_price">{{ number_format($customer->totalPrice, 2) }}</span><span> บาท</span>
                             </div>
                         </div>
+                        -->
+                        <!--
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label>ส่วนลด</label>
@@ -189,39 +209,45 @@
                                 <span id="total_discount">{{ number_format($customer->totalDiscount, 2) }}</span><span> บาท</span>
                             </div>
                         </div>
-                        <!--
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label>ค่าจัดส่งสินค้า</label>
-                            </div>
-                            <div class="col-md-6 text-right">
-                                <span id="shipment_price">{{ number_format(0, 2) }}</span>
-                            </div>
-                        </div>
+                        style="font-weight: 700; font-size: 1.25rem;"
                         -->
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label>ราคารวม<br>(หลังส่วนลด)</label>
+                                <label>ราคารวม</label>
                             </div>
                             <div class="col-md-6 text-right">
-                                <span id="final_price" style="font-weight: 700; font-size: 1.25rem;">{{ number_format($customer->finalPrice, 2) }}</span><span> บาท</span>
+                                <span id="final_price">{{ number_format($customer->finalPrice, 2) }}</span><span> บาท</span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <button id="order_submit" disabled type="submit" class="btn btn-primary btn-block">ยืนยันการสั่งซื้อ</button>
-                                <p id="remark"></p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </aside>
+            </div>
         </div>
     </div>
 </section>
+
+<!-- Footer -->
+<footer class="footer bg-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-muted text-center" style="margin-top: 5px; margin-bottom: 0px !important;">&copy; LERTYAPHAN 2021. All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
 @endsection
 
 @section('script')
+<script src="{{ URL::asset('vendor/bootstrap/js/bootstrap-input-spinner.js') }}"></script>
+<script>
+    $("input[type='number']").inputSpinner()
+</script>
     <script>
         function calculateDiscount() {
             var prices = []
@@ -355,7 +381,7 @@
             }
 
             $("#total_price").text(totalPrice.toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
-            $("#total_discount").text(totalDiscount.toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+            //$("#total_discount").text(totalDiscount.toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
             /*$("#shipment_price").text(shipmentPrice.toLocaleString())*/
             $("#final_price").text(finalPrice.toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
         }

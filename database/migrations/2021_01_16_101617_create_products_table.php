@@ -29,6 +29,7 @@ class CreateProductsTable extends Migration
             $table->string('unit')->nullable();
             $table->date('expired_startdate')->default(\Carbon\Carbon::now())->nullable();
             $table->date('expired_enddate')->default(\Carbon\Carbon::now())->nullable();
+            $table->date('expired_date')->default(\Carbon\Carbon::now())->nullable();
 
             $table->foreign('image_id')
                 ->references('id')
