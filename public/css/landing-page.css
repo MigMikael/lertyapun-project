@@ -460,6 +460,7 @@ figure {
   /*background-color: #f8f9fa !important;*/
   background: transparent !important;
   border-radius: .25rem;
+  font-weight: 300;
 }
 
 .btn-outline-secondary:hover {
