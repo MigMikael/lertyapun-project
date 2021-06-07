@@ -6,7 +6,9 @@
         <figcaption class="info-wrap">
             <div class="fix-height">
                 <a href="{{ url('customer/products/'.$product->slug) }}" class="title">
-                    {{ $product->name }}
+                    <div class="text-ellipsis">
+                        {{ $product->name }}
+                    </div>
                 </a>
                 @if(count($product->promotions) != 0)
                     @foreach ($product->promotions->reverse() as $promotion)

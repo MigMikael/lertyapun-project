@@ -496,6 +496,13 @@ figure {
   position: relative;
 }
 
+.text-ellipsis {
+  width: 99%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 @media (max-width: 991.98px) {
 #search-nav {
   width: 100%;
