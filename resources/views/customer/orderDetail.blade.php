@@ -124,7 +124,9 @@
                                 </div>
                                 <label>{{ $order->customer->addresses[0]->detail }} ตำบล{{ $order->customer->addresses[0]->subDistrict }}</label><br>
                                 <label>อำเภอ{{ $order->customer->addresses[0]->district }} จังหวัด{{ $order->customer->addresses[0]->province }}</label><br>
-                                <label>รหัสไปรษณีย์ {{ $order->customer->addresses[0]->zipcode }}</label>
+                                <label>รหัสไปรษณีย์ {{ $order->customer->addresses[0]->zipcode }}</label><br>
+                                <label>เบอร์โทรศัพท์ {{ $order->customer->phone }}</label><br>
+                                <label>Email {{ $order->customer->email }}</label>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">

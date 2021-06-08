@@ -214,6 +214,8 @@ crossorigin="anonymous"></script>
             <p>{{ $order->customer->addresses[0]->detail }} ตำบล{{ $order->customer->addresses[0]->subDistrict }}</p>
             <p>อำเภอ{{ $order->customer->addresses[0]->district }} จังหวัด{{ $order->customer->addresses[0]->province }}</p>
             <p>รหัสไปรษณีย์ {{ $order->customer->addresses[0]->zipcode }}</p>
+            <p>เบอร์โทรศัพท์ {{ $order->customer->phone }}</p>
+            <p>Email {{ $order->customer->email }}</p>
         </div>
         <div class="col-md-6">
             <div class="form-group">
