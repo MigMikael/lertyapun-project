@@ -17,6 +17,7 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
+        /*
         DB::table('images')->insert([
             'slug' => (new StringGenerator())->generateSlug(),
             'name' => 're_cp_phpF26F.tmp.png',
@@ -86,5 +87,6 @@ class ProductSeeder extends Seeder
             'pricePerUnit' => 760,
             'quantityPerUnit' => 48,
         ]);
+        */
     }
 }

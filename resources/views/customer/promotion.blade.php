@@ -18,9 +18,18 @@
             <h3 class="section-title">โปรโมชัน</h3>
         </header>
         <div class="row">
-            @foreach ($products as $product)
-                @include('customer._productCard', $product)
-            @endforeach
+            @if (count($products) > 0)
+                @foreach ($products as $product)
+                    @include('customer._productCard', $product)
+                @endforeach
+            @else
+            <div class="col-md-12">
+                <div class="text-center">
+                    <img class="search-no-result-img" src="{{ url('img/no-promotion.png') }}">
+                    <h5>โปรดติดตามโปรโมชันได้เร็วๆนี้</h5>
+                </div>
+            </div>
+            @endif
         </div>
         <div class="row">
             <div class="col-md-12" style="justify-content: center; align-items: center">

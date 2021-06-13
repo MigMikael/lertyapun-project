@@ -17,6 +17,7 @@ class PromotionSeeder extends Seeder
      */
     public function run()
     {
+        /*
         DB::table('promotions')->insert([
             'slug' => (new StringGenerator())->generateSlug(),
             'name' => 10,
@@ -24,5 +25,6 @@ class PromotionSeeder extends Seeder
             'valid_start' => Carbon::now(),
             'valid_start' => Carbon::now(),
         ]);
+        */
     }
 }

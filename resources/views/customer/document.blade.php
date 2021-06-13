@@ -38,7 +38,7 @@
                                     </label>
                                 </div>
                                 <div class="rounded-lg image-preview">
-                                    <a id="citizen_card_image_pre" href="@if($customer->citizenCardImage !== null) {{ url('image/show/'.$customer->citizenCardImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif">
+                                    <a id="citizen_card_image_pre" href="@if($customer->citizenCardImage !== null) {{ url('image/show/'.$customer->citizenCardImage->slug) }} @endif">
                                         <img src="@if($customer->citizenCardImage !== null) {{ url('image/show/'.$customer->citizenCardImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif" id="citizen_card_image"/>
                                     </a>
                                 </div>
@@ -55,7 +55,7 @@
                                     </label>
                                 </div>
                                 <div class="rounded-lg image-preview">
-                                    <a id="medical_license_image_pre" href="@if($customer->medicalLicenseImage !== null) {{ url('image/show/'.$customer->medicalLicenseImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif">
+                                    <a id="medical_license_image_pre" href="@if($customer->medicalLicenseImage !== null) {{ url('image/show/'.$customer->medicalLicenseImage->slug) }} @endif">
                                         <img src="@if($customer->medicalLicenseImage !== null) {{ url('image/show/'.$customer->medicalLicenseImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif" id="medical_license_image" />
                                     </a>
                                 </div>
@@ -72,7 +72,7 @@
                                     </label>
                                 </div>
                                 <div class="rounded-lg image-preview">
-                                    <a id="commercial_register_image_pre" href="@if($customer->commercialRegisterImage !== null) {{ url('image/show/'.$customer->commercialRegisterImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif">
+                                    <a id="commercial_register_image_pre" href="@if($customer->commercialRegisterImage !== null) {{ url('image/show/'.$customer->commercialRegisterImage->slug) }} @endif">
                                         <img src="@if($customer->commercialRegisterImage !== null) {{ url('image/show/'.$customer->commercialRegisterImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif" id="commercial_register_image" />
                                     </a>
                                 </div>
@@ -93,7 +93,7 @@
                                     </label>
                                 </div>
                                 <div class="rounded-lg image-preview">
-                                    <a id="drug_store_approve_image_pre" href="@if($customer->drugStoreApproveImage !== null) {{ url('image/show/'.$customer->drugStoreApproveImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif">
+                                    <a id="drug_store_approve_image_pre" href="@if($customer->drugStoreApproveImage !== null) {{ url('image/show/'.$customer->drugStoreApproveImage->slug) }} @endif">
                                         <img src="@if($customer->drugStoreApproveImage !== null) {{ url('image/show/'.$customer->drugStoreApproveImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif" id="drug_store_approve_image" />
                                     </a>
                                 </div>
@@ -110,7 +110,7 @@
                                     </label>
                                 </div>
                                 <div class="rounded-lg image-preview">
-                                    <a id="juristic_person_image_pre" href="@if($customer->juristicPersonImage !== null) {{ url('image/show/'.$customer->juristicPersonImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif">
+                                    <a id="juristic_person_image_pre" href="@if($customer->juristicPersonImage !== null) {{ url('image/show/'.$customer->juristicPersonImage->slug) }} @endif">
                                         <img src="@if($customer->juristicPersonImage !== null) {{ url('image/show/'.$customer->juristicPersonImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif" id="juristic_person_image" />
                                     </a>
                                 </div>
@@ -127,7 +127,7 @@
                                     </label>
                                 </div>
                                 <div class="rounded-lg image-preview">
-                                    <a id="vat_register_cert_image_pre" href="@if($customer->vatRegisterCertImage !== null) {{ url('image/show/'.$customer->vatRegisterCertImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif">
+                                    <a id="vat_register_cert_image_pre" href="@if($customer->vatRegisterCertImage !== null) {{ url('image/show/'.$customer->vatRegisterCertImage->slug) }} @endif">
                                         <img src="@if($customer->vatRegisterCertImage !== null) {{ url('image/show/'.$customer->vatRegisterCertImage->slug) }} @else{{ URL::asset('img/placeholder-image.jpg') }}@endif" id="vat_register_cert_image" />
                                     </a>
                                 </div>

@@ -197,8 +197,9 @@
                                             <img id="slip-img" src="{{ url('image/show/'.$order->slipImage->slug) }}"
                                                 alt="Slip from order id {{ $order->slug }}" style="width: 250px;">
                                         </a>
+                                        <!--
                                         @else
-                                        <img id="slip-img" src="{{ URL::asset('img/placeholder-image.jpg') }}" style="width: 250px;">
+                                        <img id="slip-img" src="{{ URL::asset('img/placeholder-image.jpg') }}" style="width: 250px;">-->
                                         @endif
                                     </div>
                                 </div>

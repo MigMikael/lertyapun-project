@@ -1,12 +1,12 @@
 <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('ประเภท') !!}
+    {!! Form::label('ประเภท') !!} <span class="required">*</span>
     {!! Form::select('type', $type, null, ['class' => 'form-control' . ($errors->has('type') ? ' is-invalid' : null)]) !!}
     @error('type')
         <div class="text-danger">{{ $message }}</div>
     @enderror
 </div>
 <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('name', 'จำนวน') !!}
+    {!! Form::label('name', 'จำนวน') !!} <span class="required">*</span>
     {!! Form::number('name', null, ['placeholder' => 'จำนวน', 'class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : null)]) !!}
     @error('name')
         <div class="text-danger">{{ $message }}</div>

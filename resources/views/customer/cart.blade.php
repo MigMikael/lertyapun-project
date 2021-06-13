@@ -159,6 +159,7 @@
                                 <div id="shipment_method">
                                     <div class="row">
                                         <div class="col-md-12">
+                                            @if (count($deliveryServices) > 0)
                                             <label>เลือกบริการขนส่ง</label>
                                             <div id="shipment_method_select">
                                                 <select id="deliveryService" name="deliveryService" id="deliveryService" class="form-control">
@@ -169,6 +170,9 @@
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            @else
+                                            <label>ยังไม่มีผู้ให้บริการขนส่ง</label>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

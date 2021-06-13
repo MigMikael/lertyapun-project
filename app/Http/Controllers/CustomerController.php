@@ -21,14 +21,14 @@ class CustomerController extends Controller
         'active' => 'Active',           // normal user
         'pending' => 'Pending',         // unapprove user
         'suspend' => 'Suspend',         // banded user
-        'inactive' => 'Inactive',       // reset password user
+        //'inactive' => 'Inactive',       // reset password user
     ];
 
     public $customerStatusTH = [
         'active' => 'กำลังใช้งาน',           // normal user
         'pending' => 'รอดำเนินการ',         // unapprove user
         'suspend' => 'ระงับการใช้งาน',         // banded user
-        'inactive' => 'รีเซ็ตรหัสผ่าน',       // reset password user
+        //'inactive' => 'รีเซ็ตรหัสผ่าน',       // reset password user
     ];
     /**
      * Display a listing of the resource.
@@ -112,12 +112,12 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validateGuestRegister($request);
-
+        //$this->validateGuestRegister($request);
+        $this->validateCustomerRegisterByAdmin($request);
         $newCustomer = $request->all();
         $newCustomer['slug'] = (new StringGenerator())->generateSlug();
         $newCustomer['password'] = Hash::make($request->password);
-
+        /*
         if($request->hasFile('avatar_image')) {
             $file = $request->file('avatar_image');
             $image_record = $this->storeImage($file, "");
@@ -159,6 +159,7 @@ class CustomerController extends Controller
             $image_record = $this->storeImage($file, "");
             $newCustomer['vat_register_cert_image'] = $image_record->id;
         }
+        */
 
         $newCustomer = Customer::create($newCustomer);
         return redirect()
@@ -201,11 +202,15 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        $newCustomer = $request->all();
-        if($request->has('password')) {
+        if($request->password == '') {
+            $newCustomer = $request->except('password');
+        }
+        else {
+            $newCustomer = $request->all();
             $newCustomer['password'] = Hash::make($request->password);
         }
 
+        /*
         if($request->hasFile('avatar_image')) {
             $file = $request->file('avatar_image');
             $image_record = $this->storeImage($file, "");
@@ -247,6 +252,7 @@ class CustomerController extends Controller
             $image_record = $this->storeImage($file, "");
             $newCustomer['vat_register_cert_image'] = $image_record->id;
         }
+        */
 
         $customer->update($newCustomer);
         return redirect()

@@ -7,6 +7,18 @@ use Illuminate\Support\Facades\Log;
 
 trait ValidateTrait
 {
+    public function validateCustomerRegisterByAdmin(Request $request)
+    {
+        $request->validate([
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'email' => 'required|unique:customers,email|email|max:255',
+            'phone' => 'required|string|min:10|max:12|regex:/[0-9]{9}/',
+            'password' => 'required|min:8|max:255',
+            'status' => 'nullable|max:255',
+        ]);
+    }
+
     public function validateCustomerProfile(Request $request)
     {
         $request->validate([

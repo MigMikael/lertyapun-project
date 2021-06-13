@@ -18,8 +18,8 @@
 <section class="bg-white">
     <div class="container">
         <div class="row">
-            <aside class="col-md-4 col-lg-3 form-group">
-                <div class="card">
+            <aside class="col-lg-3 form-group">
+                <div class="card" id="category-product">
                     <article class="filter-group">
                         <header class="card-header">
                             <a href="#" data-toggle="collapse" data-target="#collapse_1">
@@ -55,8 +55,29 @@
                         </div>
                     </article>
                 </div>
+                <div id="category-product-xs" class="form-group">
+                    {!! Form::open(['method' => 'post', 'url' => 'customer/products/search']) !!}
+                    <div class="input-group mr-auto form-group" id="search-product">
+                        @if ($search != "")
+                        <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหา...">
+                        @else
+                        <input name="query" type="text" class="form-control" placeholder="ค้นหา...">
+                        @endif
+                        <div class="input-group-append">
+                            <button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                    {!! Form::close() !!}
+                    <select id="select-product-category" class="select-product-category" style="width: 100%" onchange="location = this.value;">
+                        <option value="">เลือกประเภทสินค้า</option>
+                        <option value="{{ url('customer/products') }}">สินค้าทั้งหมด</option>
+                        @foreach($categories as $key => $category)
+                            <option value="{{ url('customer/products?category='.$key) }}">{{ $category }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </aside>
-            <main class="col-md-8 col-lg-9 form-group">
+            <main class="col-lg-9 form-group">
                 <header class="section-heading">
                     <h3 class="section-title">
                         @if($currentCategory != [])
@@ -69,9 +90,18 @@
                     </h3>
                 </header>
                 <div class="row">
-                    @foreach ($products as $product)
-                        @include('customer._productCard', $product)
-                    @endforeach
+                    @if (count($products) > 0)
+                        @foreach ($products as $product)
+                            @include('customer._productCard', $product)
+                        @endforeach
+                    @else
+                    <div class="col-md-12">
+                        <div class="text-center">
+                            <img class="search-no-result-img" src="{{ url('img/no-result.png') }}">
+                            <h5>ไม่พบข้อมูล</h5>
+                        </div>
+                    </div>
+                    @endif
                 </div>
                 <div class="row">
                     <div class="col-md-12" style="justify-content: center; align-items: center">
@@ -95,32 +125,37 @@
 </footer>
 @endsection
 
+
+@section('script')
+<script>
+    $('.select-product-category').select2();
+</script>
 <!--
-section('script')
-    @foreach ($products as $product)
+    foreach ($products as $product)
     <script>
-        $("#{{ $product->slug }}").click(function(e) {
+        $("#{ $product->slug }").click(function(e) {
             e.preventDefault();
-            $("#{{ $product->slug }}").html("<span class='spinner-border spinner-border-sm'></span> Loading...");
+            $("#{ $product->slug }").html("<span class='spinner-border spinner-border-sm'></span> Loading...");
 
             $.ajax({
                 type: "post",
-                url: "{{ url('customer/cart') }}",
+                url: "{ url('customer/cart') }",
                 data: {
-                    "_token": "{{ csrf_token() }}",
-                    "product_id": "{{ $product->slug }}",
-                    "customer_id": "{{ auth()->guard('customer')->user() ? auth()->guard('customer')->user()->slug: '' }}"
+                    "_token": "{ csrf_token() }",
+                    "product_id": "{ $product->slug }",
+                    "customer_id": "{ auth()->guard('customer')->user() ? auth()->guard('customer')->user()->slug: '' }"
                 },
                 success: function(result) {
                     $('#productCount').text(result.productCount);
-                    $("#{{ $product->slug }}").text("เพิ่มใส่ตระกร้า");
+                    $("#{ $product->slug }").text("เพิ่มใส่ตระกร้า");
                 },
                 error: function(result) {
                     alert('error');
-                    $("#{{ $product->slug }}").text("เพิ่มใส่ตระกร้า");
+                    $("#{ $product->slug }").text("เพิ่มใส่ตระกร้า");
                 }
             });
         });
     </script>
-    @endforeach
-endsection-->
+    endforeach
+-->
+@endsection

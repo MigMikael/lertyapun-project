@@ -19,7 +19,7 @@ class AdminSeeder extends Seeder
         DB::table('admins')->insert([
             'slug' => (new StringGenerator())->generateSlug(),
             'name' => 'Admin',
-            'email' => 'admin@admin.com',
+            'email' => 'lertyaphan@admin.com',
             'password' => Hash::make('adminadmin'),
         ]);
     }

@@ -504,11 +504,35 @@ figure {
   text-overflow: ellipsis;
 }
 
+.select2-selection__rendered {
+  line-height: 31px !important;
+}
+
+.select2-container .select2-selection--single {
+  height: 35px !important;
+}
+
+.select2-selection__arrow {
+  height: 34px !important;
+}
+
+#category-product-xs {
+  display: none;
+}
+
 @media (max-width: 991.98px) {
 #search-nav {
   width: 100%;
   margin-top: 15px;
   margin-bottom: 15px;
+}
+
+#category-product {
+  display: none;
+}
+
+#category-product-xs {
+  display: block;
 }
 }
 
