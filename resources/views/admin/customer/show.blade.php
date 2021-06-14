@@ -33,6 +33,12 @@
                 <p>เบอร์โทรศัพท์: {{ $customer->phone }}</p>
             </div>
             <div class="form-group">
+                <p>หมายเลขบัตรประชาชน: {{ $customer->citizen_card_id }}</p>
+            </div>
+            <div class="form-group">
+                <p>หมายเลขใบอนุญาติร้านยา: {{ $customer->drug_store_id }}</p>
+            </div>
+            <div class="form-group">
                 <p>สถานะ: @if($customer->status == 'active')
                     <span class="badge badge-success">กำลังใช้งาน</span>
                 @elseif($customer->status == 'pending')
