@@ -171,6 +171,7 @@
         </div>
     </div>
 </section>
+@if (count($similarProducts) != 0)
 <section>
     <div class="container">
         <div class="row">
@@ -238,7 +239,7 @@
         </div>
     </div>
 </section>
-
+@endif
 <!-- Footer -->
 <footer class="footer bg-white">
     <div class="container">

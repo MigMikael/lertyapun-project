@@ -21,6 +21,8 @@
                         <span class="badge badge-warning-secondary">รอการชำระเงิน</span>
                         @elseif($order->status == 'payment' && $order->slip_image_id != null)
                         <span class="badge badge-warning-secondary">รอยืนยันการชำระเงิน</span>
+                        @elseif($order->status == 'credit')
+                        <span class="badge badge-success">เครดิต</span>
                         @elseif($order->status == 'success')
                         <span class="badge badge-success">สำเร็จ</span>
                         @elseif($order->status == 'cancle')
@@ -197,9 +199,8 @@
                                             <img id="slip-img" src="{{ url('image/show/'.$order->slipImage->slug) }}"
                                                 alt="Slip from order id {{ $order->slug }}" style="width: 250px;">
                                         </a>
-                                        <!--
                                         @else
-                                        <img id="slip-img" src="{{ URL::asset('img/placeholder-image.jpg') }}" style="width: 250px;">-->
+                                        <img id="slip-img" src="{{ URL::asset('img/placeholder-image.jpg') }}" style="width: 250px;">
                                         @endif
                                     </div>
                                 </div>
