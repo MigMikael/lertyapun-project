@@ -69,11 +69,11 @@
 
             <strong>หน่วยสินค้า</strong><br>
             @foreach($product->units as $productUnit)
-                <span>{{ $productUnit->unitName }}: {{ number_format($productUnit->pricePerUnit) }} บาท</span> /
+                <span>{{ $productUnit->unitName }}: {{ number_format($productUnit->pricePerUnit, 2) }} บาท</span> /
                 @if ($loop->first)
                 <span>น้ำหนัก {{ $product->weight }} กรัม</span>
                 @else
-                <span>1 {{ $productUnit->unitName }}: {{ number_format($productUnit->quantityPerUnit) }} {{ $product->units['0']['unitName'] }}</span>
+                <span>1 {{ $productUnit->unitName }}: {{ number_format($productUnit->quantityPerUnit, 2) }} {{ $product->units['0']['unitName'] }}</span>
                 @endif
                 <br>
             @endforeach

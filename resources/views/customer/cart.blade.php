@@ -110,7 +110,7 @@
                                                             @endif
                                                             @endforeach
                                                             @else
-                                                            <div>ราคา {{ number_format($productUnit->pricePerUnit) }} บาท</div>
+                                                            <div>ราคา {{ number_format($productUnit->pricePerUnit, 2) }} บาท</div>
                                                             @endif
                                                         
                                                         </option>

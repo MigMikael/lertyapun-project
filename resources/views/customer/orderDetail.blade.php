@@ -82,7 +82,7 @@
                                     <tr>
                                         <td colspan="3"></td>
                                         <td class="text-right">
-                                            ราคารวม
+                                            <strong>ราคารวม</strong>
                                         </td>
                                         <td class="text-right">
                                             {{ number_format($order->total_amount - $order->shipment_price, 2) }} บาท
@@ -92,7 +92,7 @@
                                     <tr>
                                         <td colspan="3"></td>
                                         <td class="text-right">
-                                            ค่าจัดส่งสินค้า
+                                            <strong>ค่าจัดส่งสินค้า</strong>
                                         </td>
                                         <td class="text-right">
                                             {{ number_format($order->shipment_price, 2) }} บาท
@@ -101,7 +101,7 @@
                                     <tr>
                                         <td colspan="3"></td>
                                         <td class="text-right">
-                                            รวมสุทธิ
+                                            <strong>รวมสุทธิ</strong>
                                         </td>
                                         <td class="text-right">
                                             {{ number_format($order->total_amount, 2) }} บาท
@@ -128,7 +128,7 @@
                                 <label>อำเภอ{{ $order->customer->addresses[0]->district }} จังหวัด{{ $order->customer->addresses[0]->province }}</label><br>
                                 <label>รหัสไปรษณีย์ {{ $order->customer->addresses[0]->zipcode }}</label><br>
                                 <label>เบอร์โทรศัพท์ {{ $order->customer->phone }}</label><br>
-                                <label>Email {{ $order->customer->email }}</label>
+                                <label>อีเมล {{ $order->customer->email }}</label>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">

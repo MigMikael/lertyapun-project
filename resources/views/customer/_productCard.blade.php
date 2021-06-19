@@ -33,7 +33,7 @@
                     @endif
                     @endforeach
                 @else
-                    <div class="price mt-1">ราคา {{ number_format($product->units['0']['pricePerUnit']) }} บาท</div>
+                    <div class="price mt-1">ราคา {{ number_format($product->units['0']['pricePerUnit'], 2) }} บาท</div>
                 @endif
                 <!--<p>เหลือสินค้า {{ $product->quantity }} ชิ้น</p>-->
             </div>
