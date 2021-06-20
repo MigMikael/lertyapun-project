@@ -69,7 +69,7 @@
                 @foreach($orders as $order)
                     <tr>
                         <th>
-                            {{ $loop->iteration }}
+                            {{ $orders->firstItem() + $loop->index }}
                         </th>
                         <td>
                             {{ $order->order_slug }}
@@ -89,7 +89,7 @@
                             @elseif($order->order_status == 'payment' && $order->slip_image_id != null)
                             <span class="badge badge-warning-secondary">รอยืนยันการชำระเงิน</span>
                             @elseif($order->order_status == 'credit')
-                            <span class="badge badge-success">เครดิต</span>
+                            <span class="badge badge-primary">เครดิต</span>
                             @elseif($order->order_status == 'success')
                             <span class="badge badge-success">สำเร็จ</span>
                             @elseif($order->order_status == 'cancle')

@@ -405,6 +405,11 @@ figure {
   font-weight: 400;
 }
 
+.order-primary {
+  color: #007bff;
+  font-weight: 400;
+}
+
 .order-waiting {
   color: orange;
   font-weight: 400;

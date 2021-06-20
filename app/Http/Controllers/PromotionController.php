@@ -8,6 +8,7 @@ use App\Helpers\StringGenerator;
 use App\Models\Product;
 use Illuminate\Support\Facades\Log;
 use App\Traits\ValidateTrait;
+use App\Models\ProductPromotion;
 
 
 class PromotionController extends Controller
@@ -100,8 +101,10 @@ class PromotionController extends Controller
      */
     public function show(Promotion $promotion)
     {
+        $ProductPromotions = ProductPromotion::All();
+        $productIds = $ProductPromotions->pluck('product_id');
         $products = $promotion->products()->get();
-        $productIds = $products->pluck('id');
+        //$productIds = $products->pluck('id');
         $allProducts = Product::whereNotIn('id', $productIds)->pluck('name', 'slug');
         return view('admin.promotion.show', [
             'promotion' => $promotion,

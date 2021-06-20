@@ -73,7 +73,7 @@
                 @foreach($products as $product)
                     <tr>
                         <th>
-                            {{ $loop->iteration }}
+                            {{ $products->firstItem() + $loop->index }}
                         </th>
                         <th>
                             {{ $product->slug }}

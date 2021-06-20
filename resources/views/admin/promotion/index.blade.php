@@ -71,7 +71,7 @@
                 @foreach($promotions as $promotion)
                     <tr>
                         <th>
-                            {{ $loop->iteration }}
+                            {{ $promotions->firstItem() + $loop->index }}
                         </th>
                         <td>
                             ลด {{ $promotion->name }}

@@ -15,19 +15,21 @@
                     เลขที่คำสั่งซื้อ: {{ $order->slug }}
                 </h5>
                 <div class="form-group">
-                    <span>สถานะคำสั่งซื้อ: @if($order->status == 'pending')
+                    <span>สถานะคำสั่งซื้อ: <strong>
+                        @if($order->status == 'pending')
                         <span class="badge badge-warning">รอการอนุมัติ</span>
                         @elseif($order->status == 'payment' && $order->slip_image_id == null)
                         <span class="badge badge-warning-secondary">รอการชำระเงิน</span>
                         @elseif($order->status == 'payment' && $order->slip_image_id != null)
                         <span class="badge badge-warning-secondary">รอยืนยันการชำระเงิน</span>
                         @elseif($order->status == 'credit')
-                        <span class="badge badge-success">เครดิต</span>
+                        <span class="badge badge-primary">เครดิต</span>
                         @elseif($order->status == 'success')
                         <span class="badge badge-success">สำเร็จ</span>
                         @elseif($order->status == 'cancle')
                         <span class="badge badge-danger">ยกเลิก</span>
-                        @endif
+                    @endif
+                    </strong>
                     </span>
                 </div>
                 <!--<span>น้ำหนักสินค้าโดยประมาณ {{ number_format($order->weight) }} กรัม</span>-->
@@ -44,7 +46,7 @@
                                     <tr>
                                         <th class="text-center">#</th>
                                         <th>สินค้า</th>
-                                        <th>จำนวน/หน่วย</th>
+                                        <th class="text-right">จำนวน/หน่วย</th>
                                         <th class="text-right">ราคา/หน่วย</th>
                                         <th class="text-right">รวม</th>
                                     </tr>
@@ -66,7 +68,7 @@
                                                 </figcaption>
                                             </figure>
                                         </td>
-                                        <td id="quantity">
+                                        <td id="quantity" class="text-right">
                                             <span id="base_price">{{ number_format($product->pivot->sale_quantity) }}</span>
                                             {{ $product->pivot->sale_unit }}
                                         </td>
@@ -156,7 +158,26 @@
                                     <div class="card-body">
                                         <table>
                                             <tr>
-                                              <td style="padding-right:20px"><img src="{{ url('image/show/'.$bank->image->slug) }}" style="width: 50px;"></td>
+                                              <td style="padding-right:20px">
+                                                <!--<img src=" url('image/show/'.$bank->image->slug) " style="width: 50px;">-->
+                                                @if ($bank->bank_name == "scb")
+                                                <img src="{{ URL::asset('img/bank/scb.jpg') }}" style="width: 50px;">
+                                                @elseif ($bank->bank_name == "kbank")
+                                                <img src="{{ URL::asset('img/bank/kbank.jpg') }}" style="width: 50px;">
+                                                @elseif ($bank->bank_name == "bbl")
+                                                <img src="{{ URL::asset('img/bank/bbl.png') }}" style="width: 50px;">
+                                                @elseif ($bank->bank_name == "tmb")
+                                                <img src="{{ URL::asset('img/bank/tmb.jpg') }}" style="width: 50px;">
+                                                @elseif ($bank->bank_name == "ktb")
+                                                <img src="{{ URL::asset('img/bank/ktb.jpg') }}" style="width: 50px;">
+                                                @elseif ($bank->bank_name == "gsb")
+                                                <img src="{{ URL::asset('img/bank/gsb.jpg') }}" style="width: 50px;">
+                                                @elseif ($bank->bank_name == "bay")
+                                                <img src="{{ URL::asset('img/bank/bay.jpg') }}" style="width: 50px;">
+                                                @else
+                                                <img src="{{ URL::asset('img/bank/other-bank.jpg') }}" style="width: 50px;">
+                                                @endif
+                                              </td>
                                               <td>                                            
                                                 <label style="font-weight: 700;">ธนาคาร{{ config('constants.bankNames')[$bank->bank_name] }}</label><br>
                                                 <label>เลขบัญชี {{ $bank->account_no }}</label><br>

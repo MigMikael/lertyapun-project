@@ -101,7 +101,7 @@ crossorigin="anonymous"></script>
                                 <th class="text-center">#</th>
                                 <th class="text-center">รหัสสินค้า</th>
                                 <th class="text-center">รายการ</th>
-                                <th class="text-center">จำนวน/หน่วย</th>
+                                <th class="text-right">จำนวน/หน่วย</th>
                                 <th class="text-right">ราคา/หน่วย</th>
                                 <th class="text-right">รวม</th>
                             </tr>
@@ -113,7 +113,7 @@ crossorigin="anonymous"></script>
                                     <th class="text-center">{{ $loop->iteration }}</th>
                                     <th class="text-center">{{ $product->slug }}</th>
                                     <td><a href="{{ url('admin/products/'.$product->slug) }}" style="text-decoration: none; color: #000;">{{ $product->name }}</a></td>
-                                    <td class="text-center">
+                                    <td class="text-right">
                                         {{ number_format($product->pivot->sale_quantity) }} {{ $product->pivot->sale_unit }} <!--({{ $product->pivot->quantityPerUnit * $product->pivot->sale_quantity }} ชิ้น)-->
                                     </td>
                                     <td class="text-right">
@@ -250,6 +250,8 @@ crossorigin="anonymous"></script>
                             <span class="badge badge-warning-secondary">รอการชำระเงิน</span>
                         @elseif($order->status == 'payment' && $order->slip_image_id != null)
                             <span class="badge badge-warning-secondary">รอยืนยันการชำระเงิน</span>
+                        @elseif($order->status == 'credit')
+                            <span class="badge badge-primary">เครดิต</span>
                         @elseif($order->status == 'success')
                             <span class="badge badge-success">สำเร็จ</span>
                         @elseif($order->status == 'cancle')

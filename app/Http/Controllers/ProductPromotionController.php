@@ -40,12 +40,13 @@ class ProductPromotionController extends Controller
     {
         $promotion = Promotion::where('slug', $promotion_slug)->first();
         $data = $request->all();
-        Log::info($data);
 
-        if ($data['productPromotions'] != "") {
-            $newProducts = json_decode($data['productPromotions'], True);
+        if (count($data) > 1) {
+            $newProducts = $data['productPromotions'];
+            //$newProducts = json_decode($data['productPromotions'], True);
             foreach($newProducts as $newProduct) {
-                $product = Product::where('slug', $newProduct['value'])->first();
+                //$product = Product::where('slug', $newProduct['value'])->first();
+                $product = Product::where('slug', $newProduct)->first();
                 $productPromotion = [
                     'product_id' => $product->id,
                     'promotion_id' => $promotion->id

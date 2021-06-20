@@ -94,14 +94,28 @@
     <div class="row">
         <div class="col-md-6">
             <h4 class="title">โปรโมชัน</h4>
+            <!--
+            <select class="select-product-multiple" name="productPromotions[]" multiple="multiple" style="width: 100%;">
+                @foreach($promotions as $promotion)
+                        <option {{in_array($promotion, array_keys($productPromotions->toArray())) ? 'selected':''}}>{{ $promotion }}</option>
+                @endforeach
+            </select>
+            -->
             {!! Form::open(['url' => 'admin/product/promotion', 'method' => 'post']) !!}
             <div class="row">
                 <div class="col-md-8 form-group">
+                    <select class="form-control" name="promotionTag">
+                        <option value="">เลือกโปรโมชัน</option>
+                        @foreach($promotions as $key => $promotion)
+                            <option {{ in_array($key, $productPromotions->toArray()) ? 'selected' : '' }} value="{{ $key }}">{{ $promotion }} บาท</option>
+                        @endforeach
+                    </select>
+                    <!--
                     <input
                     name="promotionTag"
                     placeholder="เลือกโปรโมชัน..."
                     value="@foreach($productPromotions as $productPro){!! $productPro !!} บาท,@endforeach"
-                />
+                />-->
                 <input name="product_id" type="hidden" value="{{ $product->slug }}" />
                 </div>
                 <div class="col-md-4 form-group">

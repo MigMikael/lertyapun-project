@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="pull-left form-group">
                 <h5 class="title">โปรโมชัน > ลด {{ $promotion->name }}
                     @if($promotion->type == 'percent')
@@ -27,6 +27,7 @@
                 </h5>
             </div>
         </div>
+        <!--
         <div class="col-md-6">
             <div class="pull-right form-group">
                 <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#editPanel">
@@ -34,6 +35,26 @@
                 </button>
             </div>
         </div>
+    -->
+
+    <div class="col-md-12">
+        {!! Form::open(['url' => 'admin/promotions/'. $promotion->slug .'/products', 'method' => 'post']) !!}
+        <div class="row form-group">
+            <div class="col-md-8 form-group">
+                <select class="select-product-multiple" name="productPromotions[]" multiple="multiple" style="width: 100%;">
+                    @foreach($allProducts as $key => $product)
+                        <option value="{{ $key }}">{{ $product }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-4 form-group">
+                <button id="add-product-promotion-btn" type="submit" class="btn btn-primary"> <i class="fas fa-plus"></i> เพิ่มสินค้า</button>
+            </div>
+        </div>
+        {!! Form::close() !!}
+    </div>
+
+    <!--
         <div class="col-md-12">
             <div id="editPanel" class="promotion-tag collapse form-group" style="margin-top: 15px;">
                 <div class="row">
@@ -50,6 +71,7 @@
                 </div>
             </div>
         </div>
+    -->
     </div>
     @if (count($products) === 0)
     <div class="text-center">
@@ -74,7 +96,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $product->name }}</td>
-                    <td class="text-right">{{ number_format($product->units['0']->pricePerUnit) }}</td>
+                    <td class="text-right">{{ number_format($product->units['0']->pricePerUnit, 2) }}</td>
                     <td class="text-right">{{ number_format($product->quantity) }} {{ $product->units['0']->unitName }}</td>
                     <td class="text-center">
                         {!! Form::model($product, [
@@ -103,6 +125,10 @@
 
 @section('script')
 <script>
+     $(document).ready(function() {
+        $('.select-product-multiple').select2();
+    });
+    
     var inputElm = document.querySelector('input[name=productPromotions]');
 
     var productList = [

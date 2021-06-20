@@ -70,7 +70,7 @@
                 @foreach($deliveries as $dalivery)
                     <tr>
                         <th>
-                            {{ $loop->iteration }}
+                            {{ $deliveries->firstItem() + $loop->index }}
                         </th>
                         <td>
                             {{ $dalivery->name }}

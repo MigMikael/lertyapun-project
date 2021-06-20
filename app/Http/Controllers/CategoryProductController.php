@@ -35,10 +35,12 @@ class CategoryProductController extends Controller
         $category = Category::where('slug', $category_slug)->first();
         $data = $request->all();
 
-        if ($data['categoryProducts'] != "") {
-            $newProducts = json_decode($data['categoryProducts'], True);
+        if (count($data) > 1) {
+            $newProducts = $data['categoryProducts'];
+            //$newProducts = json_decode($data['categoryProducts'], True);
             foreach($newProducts as $newProduct) {
-                $product = Product::where('slug', $newProduct['value'])->first();
+                //$product = Product::where('slug', $newProduct['value'])->first();
+                $product = Product::where('slug', $newProduct)->first();
                 $categoryProduct = [
                     'product_id' => $product->id,
                     'category_id' => $category->id

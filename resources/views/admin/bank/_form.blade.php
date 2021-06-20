@@ -33,8 +33,10 @@
         <div class="text-danger">{{ $message }}</div>
     @enderror
 </div>
-@include('template._inputPreview', [
+<!--
+include('template._inputPreview', [
     'label' => 'โลโก้ธนาคาร',
     'name' => 'bank_image',
     'key' => 'bankImage',
 ])
+-->

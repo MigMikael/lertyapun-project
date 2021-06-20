@@ -196,14 +196,19 @@
                             @if(count($similarProduct->promotions) != 0)
                                 @foreach ($similarProduct->promotions->reverse() as $promotion)
                                 <div class="price mt-1">ราคา {{ number_format(doubleval($similarProduct->units['0']['pricePerUnit']) - doubleval($promotion->name), 2) }} บาท</div>
-                                <div style="text-decoration: line-through;">ราคา {{ number_format($similarProduct->units['0']['pricePerUnit'], 2) }} บาท</div>
-                                    <span class="badge badge-danger" 
-                                    style="font-weight: normal; position: absolute;top: 0;right: 0;margin-top: 7px;margin-right: 7px;">
+                                @if ($promotion->name != "0")
+                                    <div style="text-decoration: line-through;">ราคา {{ number_format($similarProduct->units['0']['pricePerUnit'], 2) }} บาท</div>
+                                @endif
+                                    <span class="badge badge-danger" style="font-weight: normal; position: absolute;top: 0;right: 0;margin-top: 7px;margin-right: 7px;">
+                                      @if ($promotion->name != "0")
                                         ลด {{ $promotion->name }}
                                         @if($promotion->type == 'percent')
                                         %
                                         @elseif($promotion->type == 'discount')
                                         บาท
+                                        @endif
+                                        @else
+                                        ราคาพิเศษ
                                         @endif
                                     </span>
                                     @if($loop->iteration == 1)

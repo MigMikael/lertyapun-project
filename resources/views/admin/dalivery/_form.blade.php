@@ -12,8 +12,10 @@
         <div class="text-danger">{{ $message }}</div>
     @enderror
 </div>
-@include('template._inputPreview', [
+<!--
+include('template._inputPreview', [
     'label' => 'โลโก้บริการขนส่ง',
     'name' => 'delivery_image',
     'key' => 'deliveryImage',
 ])
+-->

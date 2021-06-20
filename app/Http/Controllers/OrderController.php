@@ -336,7 +336,8 @@ class OrderController extends Controller
         $order = Order::create($newOrder);
 
         $dt = Carbon::now()->format('ymd');
-        $orderSlug = 'ORD-'.$dt.$stringGenerator->generate(5);
+        //$orderSlug = 'ORD-'.$dt.$stringGenerator->generate(5);
+        $orderSlug = $dt.$stringGenerator->generate(5);
         $order->slug = $orderSlug;
         $order->save();
 

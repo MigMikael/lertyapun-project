@@ -72,7 +72,7 @@
                 @foreach($banks as $bank)
                     <tr>
                         <th>
-                            {{ $loop->iteration }}
+                            {{ $banks->firstItem() + $loop->index }}
                         </th>
                         <td>
                             {{ config('constants.bankNames')[$bank->bank_name] }}

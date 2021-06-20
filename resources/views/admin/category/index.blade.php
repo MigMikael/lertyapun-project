@@ -70,7 +70,7 @@
                 @foreach($categories as $category)
                     <tr>
                         <th>
-                            {{ $loop->iteration }}
+                            {{ $categories->firstItem() + $loop->index }}
                         </th>
                         <td>
                             {{ $category->name }}

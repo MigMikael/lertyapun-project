@@ -20,7 +20,7 @@
                         @elseif($order->status == 'payment')
                         <span class="order-waiting-payment">รอการชำระเงิน</span>
                         @elseif($order->status == 'credit')
-                        <span class="order-success">เครดิต</span>
+                        <span class="order-primary">เครดิต</span>
                         @elseif($order->status == 'success')
                         <span class="order-success">สำเร็จ</span>
                         @elseif($order->status == 'cancle')

@@ -211,7 +211,10 @@ class ProductController extends Controller
         $productTags = $product->tags()->pluck('name');
 
         $promotions = Promotion::all()->pluck('name', 'slug');
-        $productPromotions = $product->promotions()->pluck('name');
+        //$productPromotions = $product->promotions()->pluck('name');
+        $productPromotions = $product->promotions()->pluck('slug');
+        //dd($productPromotions);
+        //dd($productPromotions->toArray());
 
         $productImages = $product->detailImages()->get();
     
@@ -359,21 +362,35 @@ class ProductController extends Controller
     {
         $data = $request->all();
         $product = Product::where('slug', $data['product_id'])->first();
-
-        if ($data['promotionTag'] != "") {
+        //dd($data['promotionTag']);
+        if ($data['promotionTag'] != null || $data['promotionTag'] != '') {
             ProductPromotion::where('product_id', $product->id)->delete();
 
-            $newPromotions = json_decode($data['promotionTag'], True);
+            $newPromotion = $data['promotionTag'];
+            //dd($newPromotion);
+            $promotion = Promotion::where('slug', $newPromotion)->first();
+            //dd($promotion);
+            $productPromotion = [
+                'product_id' => $product->id,
+                'promotion_id' => $promotion->id
+            ];
+
+            ProductPromotion::create($productPromotion);
+
+            //$newPromotions = json_decode($data['promotionTag'], True);
+            /*
             foreach($newPromotions as $newPromotion) {
-                $promotion = Promotion::where('slug', $newPromotion['value'])->first();
+                //$promotion = Promotion::where('slug', $newPromotion['value'])->first();
+                $promotion = Promotion::where('slug', $newPromotion)->first();
                 $productPromotion = [
                     'product_id' => $product->id,
                     'promotion_id' => $promotion->id
                 ];
                 ProductPromotion::create($productPromotion);
             }
+            */
         }
-        else{
+        else {
             ProductPromotion::where('product_id', $product->id)->delete();
         }
 

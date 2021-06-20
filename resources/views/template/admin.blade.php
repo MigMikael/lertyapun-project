@@ -15,6 +15,8 @@
         <script src="{{ URL::asset('js/bootstrap.bundle.min.js') }}"></script>
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         @yield('head')
     </head>
     <body>
@@ -39,8 +41,8 @@
                     <a href="{{ url('admin/products') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;"><i class="fab fa-product-hunt"></i> สินค้า</a>
                     <a href="{{ url('admin/promotions') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;"><i class="fas fa-percent"></i> โปรโมชัน</a>
                     <a href="{{ url('admin/orders') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;"><i class="fas fa-clipboard-list"></i> คำสั่งซื้อ</a>
-                    <a href="{{ url('admin/deliveries') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;"><i class="fas fa-clipboard-list"></i> บริการขนส่ง</a>
-                    <a href="{{ url('admin/banks') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;"><i class="fas fa-clipboard-list"></i> บัญชีธนาคาร</a>
+                    <a href="{{ url('admin/deliveries') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;"><i class="fas fa-truck"></i> บริการขนส่ง</a>
+                    <a href="{{ url('admin/banks') }}" class="list-group-item list-group-item-action" style="background-color: #2e6bd3; color: white;"><i class="fas fa-university"></i> บัญชีธนาคาร</a>
                 </div>
             </div>
 
