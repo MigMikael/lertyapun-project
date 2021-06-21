@@ -174,6 +174,8 @@
                                                 <img src="{{ URL::asset('img/bank/gsb.jpg') }}" style="width: 50px;">
                                                 @elseif ($bank->bank_name == "bay")
                                                 <img src="{{ URL::asset('img/bank/bay.jpg') }}" style="width: 50px;">
+                                                @elseif ($bank->bank_name == "tbank")
+                                                <img src="{{ URL::asset('img/bank/tbank.jpg') }}" style="width: 50px;">
                                                 @else
                                                 <img src="{{ URL::asset('img/bank/other-bank.jpg') }}" style="width: 50px;">
                                                 @endif
