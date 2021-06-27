@@ -91,11 +91,15 @@
                                     <label>โปรโมชัน:</label><br>
                                     @foreach ($product->promotions->reverse() as $promotion)
                                     <span class="badge badge-danger" style="font-weight: normal;">
+                                        @if ($promotion->name != "0")
                                         ลด {{ $promotion->name }}
                                         @if($promotion->type == 'percent')
                                         %
                                         @elseif($promotion->type == 'discount')
                                         บาท
+                                        @endif
+                                        @else
+                                        ราคาพิเศษ
                                         @endif
                                     </span>
                                     @if($loop->iteration == 1)
@@ -136,8 +140,10 @@
                                         <div>ราคา
                                             {{ number_format(doubleval($productUnit->pricePerUnit) - doubleval($promotion->name), 2) }} บาท
                                         </div>
+                                        @if ($promotion->name != "0")
                                         <div style="text-decoration: line-through;">ราคา {{ number_format($productUnit->pricePerUnit, 2) }}
                                             บาท</div>
+                                        @endif
                                         @if($loop->iteration == 1)
                                         @break
                                         @endif

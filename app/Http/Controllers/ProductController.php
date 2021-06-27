@@ -528,7 +528,7 @@ class ProductController extends Controller
             $similarProducts = Product::where('id', '!=', $product->id)->inRandomOrder()->take(3)->get();
         }
         else {
-            $similarProducts = Product::where('id', '!=', $product->id)->whereIn('id', $categoryProducts)->get();
+            $similarProducts = Product::where('id', '!=', $product->id)->whereIn('id', $categoryProducts)->take(3)->get();
         }
 
         if (count($product->categories()->pluck('category_id')) == 0) {
