@@ -34,7 +34,7 @@
     </div> --}}
 
     <div class="input-group-prepend">
-        <span class="input-group-text base-unit-weight-label">แต่ละ{{ $product->units['0']->unitName }}หนัก</span>
+        <span class="input-group-text base-unit-weight-label"><!--{{ $product->units['0']->unitName }}-->น้ำหนัก</span>
     </div>
     <input type="text" class="form-control" placeholder="" name="weight" value="{{ $product->weight }}" required>
     <div class="input-group-prepend">
@@ -55,7 +55,7 @@
 </div>
 
 <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('expired_date', 'วันหมดอายุ (เดือน/วัน/ปี)') !!} <span class="required">*</span>
+    {!! Form::label('expired_date', 'วันหมดอายุ (วัน/เดือน/ปี)') !!} <span class="required">*</span>
     {!! Form::date('expired_date', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}
     @error('expired_date')
         <div class="text-danger">{{ $message }}</div>
