@@ -57,7 +57,7 @@
             <p>{{ $product->quantity }} {{ $product->units['0']['unitName'] }}</p>
 
             <strong>วันหมดอายุ (วัน/เดือน/ปี):</strong>
-            <p>{{ \Carbon\Carbon::parse($product->expired_startdate)->format('d/m/Y') }}</p>
+            <p>{{ \Carbon\Carbon::parse($product->expired_date)->format('d/m/Y') }}</p>
 
             <!--
             <strong>วันหมดอายุเร็วที่สุด:</strong>
