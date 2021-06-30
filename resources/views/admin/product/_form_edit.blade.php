@@ -56,7 +56,7 @@
 
 <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('expired_date', 'วันหมดอายุ (วัน/เดือน/ปี)') !!} <span class="required">*</span>
-    {!! Form::date('expired_date', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}
+    {!! Form::date('expired_date', null, ['class' => 'form-control']) !!}
     @error('expired_date')
         <div class="text-danger">{{ $message }}</div>
     @enderror
