@@ -10,11 +10,11 @@
 @endsection
 
 @section('content')
-<section class="bg-white">
+<section style="padding-top: 25px; padding-bottom: 20px;">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div style="margin-bottom: 2rem !important;">
+                <div>
                     <nav style="background: transparent !important;">
                         <ol class="breadcrumb" style="padding-left: 0px; font-weight: 400;">
                             <li class="breadcrumb-item">
@@ -36,29 +36,17 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+    </div>
+</section>
+<section style="padding: 0;">
+    <div class="container">
+        <div class="row" style="background: #FFF; padding: 25px; margin: 0px; border: 1px solid rgba(0,0,0,.125);">
             <div class="col-md-5 form-group">
                 <div class="product-image-card form-group">
                     <div class="product-image">
                         <img src="{{ url('image/show/'.$product->image->slug) }}" style="width: 100%;">
                     </div>
                 </div>
-                <!--
-                <div id="aniimated-thumbnials" class="row" style="margin-top: 30px;">
-                    @foreach($productImages as $productImage)
-                    <a class="col-xs-4 col-md-4 col-lg-2 form-group" href="{{ url('image/show/'.$productImage->slug) }}">
-                        <img src="{{ url('image/show/'.$productImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $product->name }}">
-                    </a>
-                    @endforeach
-                </div>
-                <div class="owl-carousel owl-theme" id="lightgallery">
-                    @foreach($productImages as $productImage)
-                    <a class="item" data-src="{{ url('image/show/'.$productImage->slug) }}">
-                        <img src="{{ url('image/show/'.$productImage->slug) }}" style="width: 100%" class="img-fluid" alt="{{ $product->name }}">
-                    </a>
-                    @endforeach
-                </div>
-                -->
             </div>
             <div class="col-md-7 form-group">
                 <div class="product-card">
@@ -115,18 +103,6 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <label>ราคา</label>
-                                <!--<select id="unit" name="unit" id="unit" class="form-control" style="width: 300px;">
-                                    @foreach($product->units as $productUnit)
-                                    <option value="{{ $productUnit->unitName }}">
-                                        {{ $productUnit->unitName }}
-                                        @if(!$loop->first)
-                                        - {{ $productUnit->quantityPerUnit }} {{ $product->units['0']['unitName'] }}
-                                        @endif
-                                        - <strong>{{ $productUnit->pricePerUnit }}฿</strong>
-                                    </option>
-                                    @endforeach
-                                </select>
-                                -->
                                 <div class="radio-toolbar">
                                     @foreach($product->units as $productUnit)
                                     <input type="radio" id="{{ $productUnit->unitName }}" id="unit" name="unit" value="{{ $productUnit->unitName }}">
@@ -168,9 +144,6 @@
                         <button class="btn btn-primary mr-3" id="addToCart" @if(auth()->guard('admin')->check()) disabled @endif>
                             <i class="fa fa-shopping-cart"> <span style="font-weight: 300 !important;">เพิ่มใส่รถเข็น</span></i>
                         </button>
-                        <!--<button class="btn btn-primary" id="buyProduct">
-                            ซื้อสินค้า
-                        </button>-->
                     </div>
                 </div>
             </div>
@@ -178,12 +151,12 @@
     </div>
 </section>
 @if (count($similarProducts) != 0)
-<section>
+<section style="padding-top: 45px;">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <h5>สินค้าที่คล้ายกัน</h5>
+                    <h5>สินค้าแนะนำ</h5>
                 </div>
             </div>
             @foreach ($similarProducts as $similarProduct)
@@ -224,7 +197,6 @@
                             @else
                                 <div class="price mt-1">ราคา {{ number_format($similarProduct->units['0']['pricePerUnit'], 2) }} บาท</div>
                             @endif
-                            <!--<p>เหลือสินค้า {{ $product->quantity }} ชิ้น</p>-->
                         </div>
                         <a id="{{ $similarProduct->slug }}"
                             @if($similarProduct->quantity <= 0)
