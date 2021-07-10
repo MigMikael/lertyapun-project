@@ -40,15 +40,15 @@
 </section>
 <section style="padding: 0;">
     <div class="container">
-        <div class="row" style="background: #FFF; padding: 25px; margin: 0px; border: 1px solid rgba(0,0,0,.125);">
-            <div class="col-md-5 form-group">
+        <div class="row" style="background: #FFF; padding: 25px; margin: 0px; border: 1px solid rgba(0,0,0,.125); border-radius: .25rem;">
+            <div class="col-md-6 form-group">
                 <div class="product-image-card form-group">
                     <div class="product-image">
                         <img src="{{ url('image/show/'.$product->image->slug) }}" style="width: 100%;">
                     </div>
                 </div>
             </div>
-            <div class="col-md-7 form-group">
+            <div class="col-md-6 form-group">
                 <div class="product-card">
                     <div class="product-name">
                         <div class="form-group">
