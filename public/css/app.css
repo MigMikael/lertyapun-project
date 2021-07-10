@@ -266,11 +266,8 @@ nav {
 */
 
 .badge-warning-secondary {
-    color: #6f6033;
-    background-color: #ffecb4;
-    /*color: #FFF;
-    background-color: #f0b400;
-    border: 2px solid #f0b400;*/
+    color: #ffffff;
+    background-color: #f77f0b;
 }
 
 .btn-warning:hover {

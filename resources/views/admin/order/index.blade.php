@@ -17,16 +17,24 @@
         </div>
         <div class="col-md-12">
             {!! Form::open(['method' => 'post', 'url' => 'admin/orders/search']) !!}
-            <div class="input-group admin-search-wrapper">
-                @if (isSet($search) && $search != '')
-                <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหาตาม เลขที่คำสั่งซื้อ" autocomplete="off">
-                @else
-                <input name="query" type="text" class="form-control" placeholder="ค้นหาตาม เลขที่คำสั่งซื้อ" autocomplete="off">
-                @endif
-                <div class="input-group-append">
-                    <button class="btn btn-light" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
+            <div class="admin-search-wrapper">
+                <div class="row">
+                    <div class="col-md-4">
+                        {!! Form::select('status', $orderStatus, $status, ['class' => 'form-control select2']) !!}
+                    </div>
+                    <div class="col-md-6">
+                            @if (isSet($search) && $search != '')
+                            <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหาตาม เลขที่คำสั่งซื้อ"
+                                autocomplete="off">
+                            @else
+                            <input name="query" type="text" class="form-control" placeholder="ค้นหาตาม เลขที่คำสั่งซื้อ" autocomplete="off">
+                            @endif
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-light btn-block" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
             {!! Form::close() !!}
@@ -62,6 +70,7 @@
                 <th scope="col">ชื่อลูกค้า</th>
                 <th scope="col" class="text-right">ยอดรวมทั้งหมด (บาท)</th>
                 <th scope="col" class="text-center">สถานะคำสั่งซื้อ</th>
+                <th class="text-center">จัดการ</th>
                 <th scope="col" class="text-center">ดูข้อมูล</th>
             </tr>
             </thead>
@@ -97,6 +106,18 @@
                             @endif
                         </td>
                         <td class="text-center">
+                            <div class="btn-group">
+                                {!! Form::model($order, [
+                                    'method' => 'delete',
+                                    'url' => 'admin/orders/'.$order->order_slug,
+                                    'class' => '']) !!}
+                                <button class="btn btn-danger btn-sm delete-action ml-2">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                {!! Form::close() !!}
+                            </div>
+                        </td>
+                        <td class="text-center">
                             <a class="btn btn-primary btn-sm" href="{{ url('admin/orders/'.$order->order_slug) }}">
                                 <i class="fas fa-external-link-square-alt"></i>
                             </a>
@@ -115,9 +136,11 @@
 
 @section('script')
 <script>
+    $('.select2').select2();
+
     $('.delete-action').click(function(e){
         e.preventDefault()
-        if (confirm('Are you sure?')) {
+        if (confirm('คุณแน่ใจที่จะลบข้อมูลดังกล่าว หากลบแล้วจะไม่สามารถกู้คืนข้อมูลได้ ?')) {
             $(e.target).closest('form').submit()
         }
     });

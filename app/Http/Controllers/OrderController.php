@@ -22,15 +22,15 @@ class OrderController extends Controller
     use ImageTrait;
     public $orderStatus = [
         'pending' => 'Pending', // รอแอดมินอนุมัติ
-        'payment' => 'Wait Payment', // รอลูกค้ายืนยันการจ่ายเงิน
+        'payment' => 'WaitingPayment', // รอลูกค้ายืนยันการจ่ายเงิน
         'credit' => 'Credit', // สำเร็จแต่ยังไม่จ่ายตัง
         'success' => 'Success', // สำเร็จ
-        'cancle' => 'Cancle', // ยกเลิก
+        'cancle' => 'Cancel', // ยกเลิก
     ];
 
     public $orderStatusTH = [
-        'pending' => 'รอแอดมินอนุมัติ', // รอแอดมินอนุมัติ
-        'payment' => 'รอยืนยันเงินเข้า', // รอลูกค้ายืนยันการจ่ายเงิน
+        'pending' => 'รอการอนุมัติ', // รอแอดมินอนุมัติ
+        'payment' => 'รอการชำระเงิน', // รอลูกค้ายืนยันการจ่ายเงิน
         'credit' => 'เครดิต', // สำเร็จแต่ยังไม่จ่ายตัง
         'success' => 'สำเร็จ', // สำเร็จ
         'cancle' => 'ยกเลิก', // ยกเลิก
@@ -55,9 +55,10 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        $page = 15;
+        $page = 10;
         $sort = $request->query('sort');
         $query = $request->query('query');
+        $status = $request->query('status');
 
         if($sort == 'name_asc') {
             $orders = Order::join('customers', 'orders.customer_id', '=', 'customers.id')
@@ -65,6 +66,7 @@ class OrderController extends Controller
                 /*->where("first_name", "like", "%".$query."%")
                 ->orWhere("last_name", "like", "%".$query."%")*/
                 ->Where("orders.slug", "like", "%".$query."%")
+                ->Where("orders.status", "like", "%".$status."%")
                 ->orderBy('first_name', 'ASC')
                 ->paginate($page);
         } else if($sort == 'name_desc') {
@@ -73,6 +75,7 @@ class OrderController extends Controller
                 ->where("first_name", "like", "%".$query."%")
                 ->orWhere("last_name", "like", "%".$query."%")*/
                 ->Where("orders.slug", "like", "%".$query."%")
+                ->Where("orders.status", "like", "%".$status."%")
                 ->orderBy('first_name', 'DESC')
                 ->paginate($page);
         } else {
@@ -81,14 +84,18 @@ class OrderController extends Controller
                 /*->where("first_name", "like", "%".$query."%")
                 ->orWhere("last_name", "like", "%".$query."%")*/
                 ->Where("orders.slug", "like", "%".$query."%")
+                ->Where("orders.status", "like", "%".$status."%")
                 ->orderBy('orders.updated_at', 'DESC')
                 ->paginate($page);
         }
         $orders->appends(['query' => $query]);
         $orders->appends(['sort' => $sort]);
+        $orders->appends(['status' => $status]);
         return view('admin.order.index', [
             'orders' => $orders,
             'search' => $query,
+            'status' => $status,
+            'orderStatus' => $this->orderStatusTH
         ]);
         // return $orders;
     }
@@ -103,7 +110,8 @@ class OrderController extends Controller
     {
         $request = $request->all();
         $query = $request['query'];
-        return redirect("admin/orders?query=".$query);
+        $status = $request['status'];
+        return redirect("admin/orders?query=".$query."&status=".$status);
     }
 
     /**

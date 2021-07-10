@@ -15,6 +15,7 @@ class AdminController extends Controller
         $customerSuspend = Customer::where('status', 'suspend')->count();
         $orderPending = Order::where('status', 'pending')->count();
         $orderPayment = Order::where('status', 'payment')->count();
+        $orderCredit = Order::where('status', 'credit')->count();
         $orderSuccess = Order::where('status', 'success')->count();
         $orderCancel = Order::where('status', 'cancle')->count();
         return view('admin.dashboard', [
@@ -23,6 +24,7 @@ class AdminController extends Controller
             'customerSuspend' => $customerSuspend,
             'orderPending' => $orderPending,
             'orderPayment' => $orderPayment,
+            'orderCredit' => $orderCredit,
             'orderSuccess' => $orderSuccess,
             'orderCancel' => $orderCancel,
         ]);

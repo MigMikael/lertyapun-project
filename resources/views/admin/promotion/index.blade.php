@@ -124,7 +124,7 @@
 <script>
     $('.delete-action').click(function(e){
         e.preventDefault()
-        if (confirm('Are you sure?')) {
+        if (confirm('คุณแน่ใจที่จะลบข้อมูลดังกล่าว หากลบแล้วจะไม่สามารถกู้คืนข้อมูลได้ ?')) {
             $(e.target).closest('form').submit()
         }
     });
