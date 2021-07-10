@@ -121,7 +121,9 @@
         </table>
     </div>
     @endif
-    {{ $customers->render("pagination::bootstrap-4") }}
+    <div class="d-flex justify-content-center">
+        {{ $customers->render("pagination::bootstrap-4") }}
+    </div>
 </div>
 @endsection
 

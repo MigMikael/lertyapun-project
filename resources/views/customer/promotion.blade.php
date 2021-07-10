@@ -12,7 +12,7 @@
         </div>
     </div>
 </header>
-<section class="bg-white">
+<section>
     <div class="container">
         <header class="section-heading">
             <h3 class="section-title">โปรโมชัน</h3>
@@ -32,7 +32,7 @@
             @endif
         </div>
         <div class="row">
-            <div class="col-md-12" style="justify-content: center; align-items: center">
+            <div class="col-md-12 pagination-wrapper" style="justify-content: center; align-items: center">
                 {{ $products->render("pagination::bootstrap-4") }}
             </div>
         </div>

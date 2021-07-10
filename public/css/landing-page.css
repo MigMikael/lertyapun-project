@@ -525,6 +525,10 @@ figure {
   display: none;
 }
 
+.pagination-wrapper > nav {
+  background: none;
+}
+
 @media (max-width: 991.98px) {
 #search-nav {
   width: 100%;

@@ -12,12 +12,14 @@
     }
 }
 </style>
+<!--
 <section class="section-page-top">
     <div class="container">
         <h2 class="title-page">ตะกร้าสินค้า</h2>
     </div>
 </section>
-<section class="bg-white" style="min-height: 90vh;">
+-->
+<section style="min-height: 90vh;">
     <div class="container">
         <div class="row">
             <main class="col-md-12">

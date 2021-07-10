@@ -16,7 +16,7 @@
             <div class="col-md-12">
                 <div style="margin-bottom: 2rem !important;">
                     <nav style="background: transparent !important;">
-                        <ol class="breadcrumb" style="padding-left: 0px;">
+                        <ol class="breadcrumb" style="padding-left: 0px; font-weight: 400;">
                             <li class="breadcrumb-item">
                                 สินค้า
                             </li>

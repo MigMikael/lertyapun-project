@@ -15,7 +15,7 @@
         </div>
     </div>
 </header>
-<section class="bg-white">
+<section>
     <div class="container">
         <div class="row">
             <aside class="col-lg-3 form-group">
@@ -104,7 +104,7 @@
                     @endif
                 </div>
                 <div class="row">
-                    <div class="col-md-12" style="justify-content: center; align-items: center">
+                    <div class="col-md-12 pagination-wrapper" style="justify-content: center; align-items: center;">
                         {{ $products->render("pagination::bootstrap-4") }}
                     </div>
                 </div>
