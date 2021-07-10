@@ -69,7 +69,7 @@
                                                         -->
                                                         <figcaption class="info">
                                                             <a href="{{ url('customer/products/'.$product->slug) }}" class="title text-dark">
-                                                                <strong>{{ $product->name }}</strong>
+                                                                <strong style="font-weight: 500;">{{ $product->name }}</strong>
                                                                 
                                                                 @if(count($product->promotions) > 0)
                                                                     @foreach ($product->promotions->reverse() as $promotion)
