@@ -22,6 +22,37 @@
     .table-bordered td, .table-bordered th {
         border: none !important;
     }
+
+    .order-header-wrapper {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .order-header-wrapper > .order-header {
+        display: inline-block; 
+        width: 350px; 
+        height: 40px; 
+        border: 2px solid #000; 
+        position: relative;
+    }
+
+    @page {
+        size: A4;
+        padding: 20mm;
+        margin: 10mm auto;
+    }
+
+    @media (max-width: 319.98px) {
+        .order-header-wrapper > .order-header {
+            display: inline-block; 
+            width: 100%; 
+            height: 55px; 
+            border: 2px solid #000; 
+            position: relative;
+        }
+    }
+}
 </style>
 <!-- CDN/Reference To the pluggin PrintThis.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/printThis/1.15.0/printThis.js"
@@ -46,8 +77,40 @@ crossorigin="anonymous"></script>
             <hr>
         </div>
     </div>
-    <div id="printOrderForm">
+    <div id="printOrderForm" class="page">
         <div class="row">
+            <div class="col-md-12">
+                <div class="order-header-wrapper">
+                    <div class="order-header">
+                        <div class="center">
+                            <strong>ใบรายการคำสั่งซื้อ</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div style="float: left">
+                    <strong>เลิศยาภัณฑ์</strong><br>
+                <span>
+                    384-386 ถ.แสงชูโต ต.ท่าเรือ อ.ท่ามะกา จ.กาญจนบุรี 71130
+                </span><br>
+                <span>
+                    โทร: 034-561128
+                </span>
+                </div>
+                <div style="float: right">
+                    <span style="float: right;">
+                        <strong>เลขที่คำสั่งซื้อ:</strong> {{ $order->slug }}
+                    </span><br>
+                    <span style="float: right;">
+                        <strong>วันที่คำสั่งซื้อ:</strong> {{ \Carbon\Carbon::parse($order->order_date)->format('d/m/y') }} {{ \Carbon\Carbon::parse($order->order_date)->format('H:i:s') }}
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <hr>
+            </div>
+            <!--
             <div class="col-md-4">
                 <strong>เลิศยาภัณฑ์</strong><br>
                 <span>
@@ -58,7 +121,7 @@ crossorigin="anonymous"></script>
                 </span>
             </div>
             <div class="col-md-4">
-               <div style="widh: 100%; height: 40px; border: 2px solid #000; position: relative;">
+               <div style="widh: 100px; height: 40px; border: 2px solid #000; position: relative;">
                 <div class="center">
                     <strong>ใบรายการคำสั่งซื้อ</strong>
                 </div>
@@ -75,26 +138,25 @@ crossorigin="anonymous"></script>
             <div class="col-md-12">
                 <hr>
             </div>
+            -->
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="form-group">
-                    <span><strong>ชื่อลูกค้า:</strong> {{ $order->customer->first_name }} {{ $order->customer->last_name }}</span><br>
-                    <span><strong>โทร:</strong> {{ $order->customer->phone }}</span>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <span style="float: right;">
-                        <strong>ที่อยู่:</strong> {{ $order->customer->addresses[0]->detail }} ต.{{ $order->customer->addresses[0]->subDistrict }}
+                    <div style="float: left">
+                        <span><strong>ชื่อลูกค้า:</strong> {{ $order->customer->first_name }} {{ $order->customer->last_name }}</span><br>
+                        <span><strong>โทร:</strong> {{ $order->customer->phone }}</span>
+                    </div>
+                    <div style="float: right;">
+                        <strong>ที่อยู่:</strong> {{ $order->customer->addresses[0]->detail }} ต.{{ $order->customer->addresses[0]->subDistrict }}<br>
                         อ.{{ $order->customer->addresses[0]->district }} จ.{{ $order->customer->addresses[0]->province }} {{ $order->customer->addresses[0]->zipcode }}
-                    </span>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="table-responsive">
+                <div class="table-responsive" style="margin-top: 15px;">
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
