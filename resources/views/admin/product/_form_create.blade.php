@@ -39,20 +39,20 @@
         <span class="input-group-text base-unit-quantity-label">ชิ้น</span>
     </div> --}}
 
-    <div class="input-group-prepend">
+    <div class="input-group-prepend hidden">
         <span class="input-group-text base-unit-weight-label">น้ำหนัก</span>
     </div>
-    <input type="text" class="form-control{{ $errors->has('weight') ? ' is-invalid' : null }}" placeholder="" name="weight" required>
-    <div class="input-group-prepend">
+    <input type="hidden" class="form-control{{ $errors->has('weight') ? ' is-invalid' : null }}" placeholder="" name="weight" value="0" required>
+    <div class="input-group-prepend hidden">
         <span class="input-group-text">กรัม</span>
     </div>
 </div>
 
 @include('admin.product._unit_create')
 
-<div class="form-group" style="margin-bottom: 3%">
+<div class="form-group hidden" style="margin-bottom: 3%">
     {!! Form::label('quantity', 'จำนวนสินค้า (ตามหน่วยพิ้นฐาน)') !!} <span class="required">*</span>
-    {!! Form::text('quantity', null, ['placeholder' => 'จำนวนสินค้า (ตามหน่วยพิ้นฐาน)', 'class' => 'form-control' . ($errors->has('quantity') ? ' is-invalid' : null)]) !!}
+    {!! Form::text('quantity', 99999, ['placeholder' => 'จำนวนสินค้า (ตามหน่วยพิ้นฐาน)', 'class' => 'form-control' . ($errors->has('quantity') ? ' is-invalid' : null)]) !!}
     @error('quantity')
         <div class="text-danger">{{ $message }}</div>
     @enderror
@@ -66,6 +66,7 @@
     @enderror
 </div>
 
+<!--
 <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('expired_date', 'วันหมดอายุ (วัน/เดือน/ปี)') !!} <span class="required">*</span>
     {!! Form::date('expired_date', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}
@@ -73,6 +74,7 @@
         <div class="text-danger">{{ $message }}</div>
     @enderror
 </div>
+-->
 
 <!--
 <div class="form-group" style="margin-bottom: 3%">

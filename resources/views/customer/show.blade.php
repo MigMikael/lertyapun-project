@@ -63,6 +63,7 @@
                         <p>{{ $product->description }}</p>
                         @endif
                     </div>
+                    <!--
                     <div class="product-expired">
                         <div class="row">
                             <div class="col-md-12">
@@ -71,6 +72,7 @@
                             </div>
                         </div>
                     </div>
+                    -->
                     @if(count($product->promotions) != 0)
                     <div class="product-promotion">
                         <div class="row">

@@ -162,8 +162,8 @@ class BankAccountController extends Controller
     public function destroy(BankAccount $bank)
     {
         $bank->delete();
-        return redirect()
-            ->action([BankAccountController::class, 'index'])
-            ->with('success', 'Delete Success');
+        return redirect()->back()->with('success', 'Delete Success');
+            //->action([BankAccountController::class, 'index'])
+            //->with('success', 'Delete Success');
     }
 }

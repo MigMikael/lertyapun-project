@@ -223,20 +223,22 @@ crossorigin="anonymous"></script>
         <div class="col-md-12">
             <hr>
         </div>
+        <!--
         <div class="col-md-3">
             <div class="form-group">
                 <strong>น้ำหนักโดยประมาณ</strong>
             </div>
             <h6>{{ number_format($order->weight, 2) }} กรัม</h6>
         </div>
-        <div class="col-md-3">
+        -->
+        <div class="col-md-4">
             <div class="form-group">
                 <strong>ยอดรวมการสั่งซื้อ</strong>
             </div>
             <h6>{{ number_format($order->total_amount - $order->shipment_price, 2) }} บาท</h6>
         </div>
         {{-- @if($order->shipment_price != 0)
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="form-group">
                 <strong>ค่าจัดส่งสินค้า</strong>
             </div>
@@ -245,7 +247,7 @@ crossorigin="anonymous"></script>
             {!! Form::close() !!}
         </div>
         @else
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="form-group">
                 <strong>ค่าจัดส่งสินค้า</strong>
             </div>
@@ -254,13 +256,13 @@ crossorigin="anonymous"></script>
             {!! Form::close() !!}
         </div>
         @endif --}}
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="form-group">
                 <strong>ค่าจัดส่งสินค้า</strong>
             </div>
             <h6>{{ number_format($order->shipment_price, 2) }} บาท</h6>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="form-group">
                 <strong>ยอดรวมสุทธิ</strong>
             </div>

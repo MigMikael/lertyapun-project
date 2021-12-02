@@ -146,8 +146,8 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect()
-            ->action([CategoryController::class, 'index'])
-            ->with('success', 'Delete Success');
+        return redirect()->back()->with('success', 'Delete Success');
+            //->action([CategoryController::class, 'index'])
+            //->with('success', 'Delete Success');
     }
 }

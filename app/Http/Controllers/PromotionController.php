@@ -153,8 +153,8 @@ class PromotionController extends Controller
     public function destroy(Promotion $promotion)
     {
         $promotion->delete();
-        return redirect()
-            ->action([PromotionController::class, 'index'])
-            ->with('success', 'Delete Success');
+        return redirect()->back()->with('success', 'Delete Success');
+            //->action([PromotionController::class, 'index'])
+            //->with('success', 'Delete Success');
     }
 }

@@ -154,9 +154,9 @@ trait ValidateTrait
             'status' => 'required|max:255',
             'point' => 'nullable|numeric',
             'quantity' => 'required|numeric',
-            'expired_startdate' => 'nullable|date',
-            'expired_enddate' => 'nullable|date',
-            'expired_date' => 'nullable|date',
+            //'expired_startdate' => 'nullable|date',
+            //'expired_enddate' => 'nullable|date',
+            //'expired_date' => 'nullable|date',
         ]);
     }
 
@@ -170,8 +170,8 @@ trait ValidateTrait
             'status' => 'required|max:255',
             'point' => 'nullable|numeric',
             'quantity' => 'required|numeric',
-            'expired_startdate' => 'nullable|date',
-            'expired_enddate' => 'nullable|date',
+            //'expired_startdate' => 'nullable|date',
+            //'expired_enddate' => 'nullable|date',
         ]);
     }
 

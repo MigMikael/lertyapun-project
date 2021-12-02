@@ -33,18 +33,18 @@
         <span class="input-group-text base-unit-quantity-label">{{ $product->units['0']->unitName }}</span>
     </div> --}}
 
-    <div class="input-group-prepend">
+    <div class="input-group-prepend hidden">
         <span class="input-group-text base-unit-weight-label"><!--{{ $product->units['0']->unitName }}-->น้ำหนัก</span>
     </div>
-    <input type="text" class="form-control" placeholder="" name="weight" value="{{ $product->weight }}" required>
-    <div class="input-group-prepend">
+    <input type="text" class="form-control hidden" placeholder="" name="weight" value="{{ $product->weight }}" required>
+    <div class="input-group-prepend hidden">
         <span class="input-group-text">กรัม</span>
     </div>
 </div>
 
 @include('admin.product._unit_edit')
 
-<div class="form-group" style="margin-bottom: 3%">
+<div class="form-group hidden" style="margin-bottom: 3%">
     {!! Form::label('quantity', 'จำนวนสินค้า (ตามหน่วยพิ้นฐาน)') !!} <span class="required">*</span>
     {!! Form::text('quantity', null, ['placeholder' => 'Quantity', 'class' => 'form-control']) !!}
 </div>
@@ -54,6 +54,7 @@
     {!! Form::select('status', $status, null, ['class' => 'form-control']) !!}
 </div>
 
+<!--
 <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('expired_date', 'วันหมดอายุ (วัน/เดือน/ปี)') !!} <span class="required">*</span>
     {!! Form::date('expired_date', null, ['class' => 'form-control']) !!}
@@ -61,6 +62,7 @@
         <div class="text-danger">{{ $message }}</div>
     @enderror
 </div>
+-->
 
 <!--
 <div class="form-group" style="margin-bottom: 3%">

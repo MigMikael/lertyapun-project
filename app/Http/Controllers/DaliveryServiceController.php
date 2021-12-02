@@ -158,8 +158,8 @@ class DaliveryServiceController extends Controller
     public function destroy(DaliveryService $delivery)
     {
         $delivery->delete();
-        return redirect()
-            ->action([DaliveryServiceController::class, 'index'])
-            ->with('success', 'Delete Success');
+        return redirect()->back()->with('success', 'Delete Success');
+            //->action([DaliveryServiceController::class, 'index'])
+            //->with('success', 'Delete Success');
     }
 }

@@ -142,7 +142,7 @@ class ProductController extends Controller
             'quantity' => $data['quantity'],
             /*'expired_startdate' => $data['expired_startdate'],
             'expired_enddate' => $data['expired_enddate'],*/
-            'expired_date' => $data['expired_date'],
+            //'expired_date' => $data['expired_date'],
         ];
 
         if($request->hasFile('product_image')) {
@@ -270,7 +270,7 @@ class ProductController extends Controller
             'quantity' => $data['quantity'],
              /*'expired_startdate' => $data['expired_startdate'],
             'expired_enddate' => $data['expired_enddate'],*/
-            'expired_date' => $data['expired_date'],
+            //'expired_date' => $data['expired_date'],
         ];
 
         if($request->hasFile('product_image')) {
@@ -347,9 +347,9 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect()
-            ->action([ProductController::class, 'index'])
-            ->with('success', 'Delete Success');
+        return redirect()->back()->with('success', 'Delete Success');
+            //->action([ProductController::class, 'index'])
+            //->with('success', 'Delete Success');
     }
 
     /**

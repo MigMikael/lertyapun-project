@@ -221,9 +221,9 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         $order->delete();
-        return redirect()
-            ->action([OrderController::class, 'index'])
-            ->with('success', 'Delete Success');
+        return redirect()->back()->with('success', 'Delete Success');
+            //->action([OrderController::class, 'index'])
+            //->with('success', 'Delete Success');
     }
 
     /**

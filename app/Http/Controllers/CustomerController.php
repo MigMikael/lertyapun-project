@@ -289,9 +289,9 @@ class CustomerController extends Controller
     public function destroy(Customer $customer)
     {
         $customer->delete();
-        return redirect()
-            ->action([CustomerController::class, 'index'])
-            ->with('success', 'Delete Success');
+        return redirect()->back()->with('success', 'Delete Success');
+            //->action([CustomerController::class, 'index'])
+            //->with('success', 'Delete Success');
     }
 
     public function showProfile()
