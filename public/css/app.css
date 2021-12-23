@@ -482,7 +482,7 @@ input[type="date"]::-webkit-datetime-edit-day-field {
     .select2-container--default .select2-selection--single .select2-selection__arrow {
         height: 26px;
         position: absolute;
-        top: 1px;
+        top: -4px !important;
         right: 7px !important;
         width: 20px;
     }

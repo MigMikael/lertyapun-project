@@ -1,4 +1,4 @@
-<div class="col-sm-6 col-md-6 col-lg-4">
+<div class="col-lg-3">
     <div class="card card-product-grid">
         <a href="{{ url('customer/products/'.$product->slug) }}" class="img-wrap">
             <img src="{{ url('image/show/'.$product->image->slug) }}">

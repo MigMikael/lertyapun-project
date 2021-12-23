@@ -52,7 +52,7 @@
 
 <div class="form-group hidden" style="margin-bottom: 3%">
     {!! Form::label('quantity', 'จำนวนสินค้า (ตามหน่วยพิ้นฐาน)') !!} <span class="required">*</span>
-    {!! Form::text('quantity', 99999, ['placeholder' => 'จำนวนสินค้า (ตามหน่วยพิ้นฐาน)', 'class' => 'form-control' . ($errors->has('quantity') ? ' is-invalid' : null)]) !!}
+    {!! Form::text('quantity', 999999, ['placeholder' => 'จำนวนสินค้า (ตามหน่วยพิ้นฐาน)', 'class' => 'form-control' . ($errors->has('quantity') ? ' is-invalid' : null)]) !!}
     @error('quantity')
         <div class="text-danger">{{ $message }}</div>
     @enderror

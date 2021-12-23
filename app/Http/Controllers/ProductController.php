@@ -464,7 +464,7 @@ class ProductController extends Controller
      */
     public function indexCustomerProduct(Request $request)
     {
-        $page = 6;
+        $page = 100;
         $query = "";
         $category = [];
         $category_slug = $request->query('category');
@@ -473,7 +473,23 @@ class ProductController extends Controller
         if ($category_slug != "") {
             $category = Category::where('slug', $category_slug)->first();
             $products = $category->products()
+                    ->where('status', 'active')
+                    ->where('name', 'like', '%'.$query.'%')
+                    ->orderBy('updated_at', 'DESC')
+                    ->paginate($page);
+        }
+        else {
+            $products = Product::where('name', 'like', '%'.$query.'%')
+            ->where('status', 'active')
+            ->orderBy('updated_at', 'DESC')
+            ->paginate($page);
+        }
+        /*
+        if ($category_slug != "") {
+            $category = Category::where('slug', $category_slug)->first();
+            $products = $category->products()
                 ->where('status', 'active')
+                //->where('category_id', $category->category_id)
                 ->orderBy('updated_at', 'DESC')
                 ->paginate($page);
         } else if ($query != "") {
@@ -487,12 +503,14 @@ class ProductController extends Controller
                 ->with('image')
                 ->paginate($page);
         }
+        */
 
         $categories = Category::all()->pluck('name', 'slug');
         return view('customer.index', [
             'products' => $products,
             'categories' => $categories,
             'currentCategory' => $category,
+            'currentCategorySlug' => $category_slug,
             'search' => $query,
         ]);
     }
@@ -501,7 +519,9 @@ class ProductController extends Controller
     {
         $request = $request->all();
         $query = $request['query'];
-        return redirect("customer/products?query=".$query);
+        $category = $request['category'];
+        return redirect("customer/products?query=".$query."&category=".$category);
+        //return redirect("customer/products?query=".$query);
     }
 
     /**
@@ -527,14 +547,19 @@ class ProductController extends Controller
         {
             $similarProducts = Product::where('id', '!=', $product->id)->inRandomOrder()->take(3)->get();
         }
+        else if (count($categoryProducts) > 1) {
+            $similarProducts = Product::where('id', '!=', $product->id)->inRandomOrder()->take(3)->get();
+        }
         else {
             $similarProducts = Product::where('id', '!=', $product->id)->whereIn('id', $categoryProducts)->take(3)->get();
         }
 
         if (count($product->categories()->pluck('category_id')) == 0) {
+            $productCategoryId = [''];
             $productCategoryText = ['อื่นๆ'];
         }
         else {
+            $productCategoryId = $product->categories()->pluck('slug');
             $productCategoryText = $product->categories()->pluck('name');
         }
         $productNameText = $product->name;
@@ -544,7 +569,8 @@ class ProductController extends Controller
             'productImages' => $productImages,
             'similarProducts' => $similarProducts,
             'productNameText' => $productNameText,
-            'productCategoryText' => $productCategoryText
+            'productCategoryText' => $productCategoryText,
+            'productCategoryId' => $productCategoryId
         ]);
     }
 

@@ -19,10 +19,10 @@
             {!! Form::open(['method' => 'post', 'url' => 'admin/orders/search']) !!}
             <div class="admin-search-wrapper">
                 <div class="row">
-                    <div class="col-md-4">
-                        {!! Form::select('status', $orderStatus, $status, ['class' => 'form-control select2']) !!}
+                    <div class="col-md-4 form-group">
+                        {!! Form::select('status', $orderStatus, $status, ['class' => 'form-control select2', 'style' => 'width:100% !important']) !!}
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 form-group">
                             @if (isSet($search) && $search != '')
                             <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหาตาม เลขที่คำสั่งซื้อ"
                                 autocomplete="off">
@@ -30,7 +30,7 @@
                             <input name="query" type="text" class="form-control" placeholder="ค้นหาตาม เลขที่คำสั่งซื้อ" autocomplete="off">
                             @endif
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 form-group">
                         <button class="btn btn-light btn-block" type="submit">
                             <i class="fas fa-search"></i>
                         </button>

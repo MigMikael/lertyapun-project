@@ -18,18 +18,18 @@
                     <nav style="background: transparent !important;">
                         <ol class="breadcrumb" style="padding-left: 0px; font-weight: 400;">
                             <li class="breadcrumb-item">
-                                สินค้า
+                                <a href="{{ url('customer/products') }}">สินค้า</a>
                             </li>
                             <li class="breadcrumb-item">
                                 @for($i = 0; $i < count($productCategoryText); $i++)
-                                    {{ $productCategoryText[$i] }} 
+                                    <a href="{{ url('customer/products?category='.$productCategoryId[$i]) }}">{{ $productCategoryText[$i] }}</a>
                                     @if($i != count($productCategoryText) - 1)
-                                    ,
+                                    , 
                                     @endif
                                 @endfor
                             </li>
                             <li class="breadcrumb-item">
-                                {{ $productNameText }}
+                                <a href="{{ url('customer/products/'.$product->slug) }}">{{ $productNameText }}</a>
                             </li>
                         </ol>
                     </nav>
@@ -42,11 +42,17 @@
     <div class="container">
         <div class="row" style="background: #FFF; padding: 25px; margin: 0px; border: 1px solid rgba(0,0,0,.125); border-radius: .25rem;">
             <div class="col-md-6 form-group">
-                <div class="product-image-card form-group">
-                    <div class="product-image">
-                        <img src="{{ url('image/show/'.$product->image->slug) }}" style="width: 100%;">
+                <div class="product-image-card form-group zoom">
+                    <div class="product-image original">
+                        <img src="{{ url('image/show/'.$product->image->slug) }}" style="width: 100%;" id="target">
                     </div>
-                </div>
+                      <!-- Large Image -->
+  <div class="viewer">
+    <img src="{{ url('image/show/'.$product->image->slug) }}">
+  </div>
+  <!-- Magnifier Effect -->
+  <div class="magnifier"></div>
+                </div> 
             </div>
             <div class="col-md-6 form-group">
                 <div class="product-card">
@@ -139,9 +145,11 @@
                         <label>จำนวน</label>
                         <input id="quantity" type="number" value="1" min="0" max="{{ $product->quantity }}" step="1"/>
                     </div>
+                    <!--
                     <div class="product-remaining">
                         <label style="margin-top: 15px; color: #28a745;">คงเหลือ {{ number_format($product->quantity) }} {{ $product->units['0']['unitName'] }}</label>
                     </div>
+                    -->
                     <div class="buy mt-4">
                         <button class="btn btn-primary mr-3" id="addToCart" @if(auth()->guard('admin')->check()) disabled @endif>
                             <i class="fa fa-shopping-cart"> <span style="font-weight: 300 !important;">เพิ่มใส่รถเข็น</span></i>
@@ -239,6 +247,7 @@
 
 @section('script')
 <script src="{{ URL::asset('vendor/bootstrap/js/bootstrap-input-spinner.js') }}"></script>
+<script src="{{ URL::asset('js/zoom.js') }}"></script>
 <script>
     $("input[type='number']").inputSpinner()
     $('input[name="unit"]').first().prop('checked', true)
@@ -255,6 +264,9 @@
     nav:false,
     items: 3
 })
+</script>
+<script>
+    $('#target').zoom(2);
 </script>
 <script>
     $("#buyProduct").click(function(e) {
