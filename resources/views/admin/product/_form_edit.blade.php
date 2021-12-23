@@ -44,7 +44,7 @@
 
 @include('admin.product._unit_edit')
 
-<div class="form-group hidden" style="margin-bottom: 3%">
+<div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('quantity', 'จำนวนสินค้า (ตามหน่วยพิ้นฐาน)') !!} <span class="required">*</span>
     {!! Form::text('quantity', null, ['placeholder' => 'Quantity', 'class' => 'form-control']) !!}
 </div>
