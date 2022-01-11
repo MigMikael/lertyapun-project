@@ -38,14 +38,14 @@
                 <!--<p>เหลือสินค้า {{ $product->quantity }} ชิ้น</p>-->
             </div>
             @if($product->quantity <= 0)
-            <a class="btn btn-block btn-danger mt-3" style="cursor: unset !important;">
+            <button class="btn btn-block btn-danger mt-3" style="cursor: unset !important;">
                 สินค้าหมด
-            </a>
+            </button>
             @else
-            <a class="btn btn-block btn-primary mt-3 addToCart" data-product_id="{{ $product->slug }}" data-product_name="{{ $product->name }}" data-product_unit="{{ $product->units['0']->unitName }}" 
+            <button class="btn btn-block btn-primary mt-3 addToCart" data-product_id="{{ $product->slug }}" data-product_name="{{ $product->name }}" data-product_unit="{{ $product->units['0']->unitName }}" 
             @if(auth()->guard('admin')->check()) disabled @endif>
                 เพิ่มใส่รถเข็น
-            </a>
+            </button>
             @endif
             <a id="{{ $product->slug }}" href="{{ url('customer/products/'.$product->slug) }}" class="btn btn-block btn-secondary mt-3"
                 @if(auth()->guard('admin')->check())
