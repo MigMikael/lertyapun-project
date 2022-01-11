@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-<section style="padding-top: 25px; padding-bottom: 20px;">
+<section class="breadcrumb-wrapper">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -150,11 +150,17 @@
                         <label style="margin-top: 15px; color: #28a745;">คงเหลือ {{ number_format($product->quantity) }} {{ $product->units['0']['unitName'] }}</label>
                     </div>
                     -->
+                    @if ($product->quantity != 0)
                     <div class="buy mt-4">
                         <button class="btn btn-primary mr-3" id="addToCart" @if(auth()->guard('admin')->check()) disabled @endif>
                             <i class="fa fa-shopping-cart"> <span style="font-weight: 300 !important;">เพิ่มใส่รถเข็น</span></i>
                         </button>
                     </div>
+                    @else
+                    <div class="buy mt-4">
+                        <label style="color: red;">สินค้าหมด</label>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -248,6 +254,7 @@
 @section('script')
 <script src="{{ URL::asset('vendor/bootstrap/js/bootstrap-input-spinner.js') }}"></script>
 <script src="{{ URL::asset('js/zoom.js') }}"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     $("input[type='number']").inputSpinner()
     $('input[name="unit"]').first().prop('checked', true)
@@ -315,6 +322,11 @@
             success: function(result) {
                 $('#productCount').text(result.productCount);
                 $("#addToCart").html("<i class='fa fa-shopping-cart'> <span style='font-weight: 300 !important;'>เพิ่มใส่รถเข็น</span></i>");
+                Swal.fire(
+                    'สำเร็จ !',
+                    'คุณเพิ่ม ' + '{{ $product->name }}' + '<br> ใส่รถเข็นสำเร็จแล้ว !',
+                    'success'
+                )
             },
             error: function(result) {
                 $("#addToCart").html("<i class='fa fa-shopping-cart'> <span style='font-weight: 300 !important;'>เพิ่มใส่รถเข็น</span></i>");

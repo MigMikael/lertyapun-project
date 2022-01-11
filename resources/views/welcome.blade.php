@@ -114,7 +114,7 @@
                 <div class="testimonial-item mx-auto mb-5 mb-lg-0">
                     <img class="img-fluid rounded-circle mb-3" src="img/mint.jpg" alt="">
                     <h5>พลาพร บรรจงคชาธาร</h5>
-                    <p class="font-weight-light mb-0">กำลังศึกษาคณะเภสัชศาสตร์<br>มหาวิทยาลัยหัวเฉียวเฉลิมพระเกียรติ</p>
+                    <p class="font-weight-light mb-0">กำลังศึกษาคณะเภสัชศาสตร์<br>มหาวิทยาลัยศิลปากร</p>
                 </div>
             </div>
         </div>
@@ -127,7 +127,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xl-9 mx-auto">
-                <h2 class="mb-4">พร้อมจะร่วมเป็นพาร์ทเนอร์กับเราแล้วหรือยัง สมัครเลย !</h2>
+                <h2 class="mb-4">ร่วมเป็นพาร์ทเนอร์กับเรา</h2>
             </div>
             <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
                 <form method="GET" action="{{ url('register') }}">
@@ -145,7 +145,7 @@
     </div>
 </section>
 
-<section class="testimonials text-center bg-white">
+<section class="testimonials text-center bg-white" id="contactUs">
     <div class="container">
         <h2 class="mb-5">ติดต่อเรา</h2>
         <div class="row">

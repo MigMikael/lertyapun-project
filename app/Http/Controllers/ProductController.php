@@ -519,7 +519,14 @@ class ProductController extends Controller
     {
         $request = $request->all();
         $query = $request['query'];
-        $category = $request['category'];
+
+        if (isset($request['category'])) {
+            $category = $request['category'];
+        }
+        else {
+            $category = "";
+        }
+
         return redirect("customer/products?query=".$query."&category=".$category);
         //return redirect("customer/products?query=".$query);
     }
@@ -585,7 +592,7 @@ class ProductController extends Controller
         $products = Product::has('promotions')
             ->where('status', 'active')
             ->with('promotions')
-            ->paginate(6);
+            ->paginate(100);
         return view('customer.promotion', [
             'products' => $products
         ]);

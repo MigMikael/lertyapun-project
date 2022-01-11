@@ -125,7 +125,7 @@
                                                 <td id="quantity">
                                                     <input id="input_quantity" type="number" class="form-control" value="{{ $product->pivot->quantity }}" min="1" max="{{ $product->quantity }}">
                                                     <input id="product_slug" type="hidden" value="{{ $product->slug }}">
-                                                    <p style="font-size: 14px; margin-top: 5px; color: #28a745;">คงเหลือ {{ number_format($product->quantity) }} {{ $product->units['0']['unitName'] }}</p>
+                                                    <!--<p style="font-size: 14px; margin-top: 5px; color: #28a745;">คงเหลือ {{ number_format($product->quantity) }} {{ $product->units['0']['unitName'] }}</p>-->
                                                 </td>
                                                 <td id="action" class="text-center">
                                                     {!! Form::model($product, [

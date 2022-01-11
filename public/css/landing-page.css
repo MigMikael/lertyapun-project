@@ -71,6 +71,7 @@ header.masthead {
   background-size: cover;
   padding-top: 8rem;
   padding-bottom: 8rem;
+  margin-top: 85px !important;
 }
 
 .masthead-overlay {
@@ -725,6 +726,16 @@ footer.footer {
   display: none;
 }
 
+.breadcrumb-wrapper {
+  padding-top: 105px; 
+  padding-bottom: 20px;
+}
+
+.product-image {
+  width: 100% !important;
+  height: 100% !important;
+}
+
 @media (max-width: 767.98px) {
   .login-img-wrapper {
     display: none;
@@ -741,6 +752,15 @@ footer.footer {
 
   #user-menu-toggle {
     display: block;
+  }
+
+  header.masthead {
+    margin-top: unset !important;
+  }
+
+  .breadcrumb-wrapper {
+    padding-top: 70px; 
+    padding-bottom: 20px;
   }
 }
 

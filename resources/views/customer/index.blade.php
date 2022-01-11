@@ -19,7 +19,6 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 form-group">
-                
                 {!! Form::open(['method' => 'post', 'url' => 'customer/products/search']) !!}
                 <div class="row">
                     <div class="col-md-4 form-group">
@@ -34,20 +33,18 @@
                             @endforeach
                         </select>
                     </div>
-
                     <div class="col-md-8 form-group">
                         <div class="input-group">
                         @if (isset($search) && $search != "")
-                        <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหาตาม ชื่อสินค้า...">
+                        <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหาสินค้า...">
                         @else
-                        <input name="query" type="text" class="form-control" placeholder="ค้นหาตาม ชื่อสินค้า...">
+                        <input name="query" type="text" class="form-control" placeholder="ค้นหาสินค้า...">
                         @endif
                         <div class="input-group-append">
                             <button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button>
                         </div>
                         </div>
                     </div>
-
                 </div>
                 {!! Form::close() !!}
             </div>
