@@ -28,7 +28,7 @@
         @if(auth()->guard('customer')->check() || auth()->guard('admin')->check())
         @include('template._navbar')
         @else
-        <nav class="navbar navbar-light static-top" style="border-bottom: 1px solid #DEDEDE !important;">
+        <nav class="navbar navbar-light fixed-top" style="border-bottom: 1px solid #DEDEDE !important;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ URL::asset('img/logo.jpg') }}" style="width: 60px; height: 60px;">
