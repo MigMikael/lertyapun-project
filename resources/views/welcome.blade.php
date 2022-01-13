@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- Masthead -->
-<header class="masthead text-white text-center bg-landing-page">
+<header class="masthead text-white text-center bg-landing-page" style="margin-top: 0px !important;">
     <div class="masthead-overlay"></div>
     <div class="container">
         <div class="row">

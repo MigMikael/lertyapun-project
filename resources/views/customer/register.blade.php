@@ -30,16 +30,6 @@ input[type=checkbox]:checked:after {
     content: "";
     display: inline-block;
 }
-
-.section-register {
-    padding-top: 150px !important;
-}
-
-@media (max-width: 767.98px) {
-    .section-register {
-        padding-top: 120px !important;
-    }
-}
 </style>
 <section class="section-register">
     <div class="container">
