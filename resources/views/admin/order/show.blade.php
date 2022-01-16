@@ -23,6 +23,10 @@
         border: none !important;
     }
 
+    .table td, .table th {
+        padding: 0.35rem !important;
+    }
+
     .order-header-wrapper {
         width: 100%;
         text-align: center;
@@ -31,7 +35,7 @@
 
     .order-header-wrapper > .order-header {
         display: inline-block; 
-        width: 350px; 
+        width: 300px; 
         height: 40px; 
         border: 2px solid #000; 
         position: relative;
@@ -83,7 +87,7 @@ crossorigin="anonymous"></script>
                 <div class="order-header-wrapper">
                     <div class="order-header">
                         <div class="center">
-                            <strong>ใบรายการคำสั่งซื้อ</strong>
+                            <strong>ใบส่งสินค้า</strong>
                         </div>
                     </div>
                 </div>
@@ -92,64 +96,37 @@ crossorigin="anonymous"></script>
                 <div style="float: left">
                     <strong>เลิศยาภัณฑ์</strong><br>
                 <span>
-                    384-386 ถ.แสงชูโต ต.ท่าเรือ อ.ท่ามะกา จ.กาญจนบุรี 71130
+                    384-386 ถ.แสงชูโต ต.ท่าเรือ <br>
+                    อ.ท่ามะกา จ.กาญจนบุรี 71130
                 </span><br>
                 <span>
-                    โทร: 034-561128
+                    โทร: 095-254-4525 แฟกซ์ 034-561128
                 </span>
                 </div>
                 <div style="float: right">
                     <span style="float: right;">
-                        <strong>เลขที่คำสั่งซื้อ:</strong> {{ $order->slug }}
+                        <strong>เลขที่คำสั่งซื้อ</strong> {{ $order->slug }}<br>
                     </span><br>
                     <span style="float: right;">
-                        <strong>วันที่คำสั่งซื้อ:</strong> {{ \Carbon\Carbon::parse($order->order_date)->format('d/m/y') }} {{ \Carbon\Carbon::parse($order->order_date)->format('H:i:s') }}
-                    </span>
+                        <strong>วันที่คำสั่งซื้อ</strong> {{ \Carbon\Carbon::parse($order->order_date)->format('d/m/y') }} {{ \Carbon\Carbon::parse($order->order_date)->format('H:i:s') }}<br>
+                    </span><br>
                 </div>
             </div>
             <div class="col-md-12">
                 <hr>
             </div>
-            <!--
-            <div class="col-md-4">
-                <strong>เลิศยาภัณฑ์</strong><br>
-                <span>
-                    384-386 ถ.แสงชูโต ต.ท่าเรือ อ.ท่ามะกา จ.กาญจนบุรี 71130
-                </span><br>
-                <span>
-                    โทร: 034-561128
-                </span>
-            </div>
-            <div class="col-md-4">
-               <div style="widh: 100px; height: 40px; border: 2px solid #000; position: relative;">
-                <div class="center">
-                    <strong>ใบรายการคำสั่งซื้อ</strong>
-                </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                    <span style="float: right;">
-                        <strong>เลขที่คำสั่งซื้อ:</strong> {{ $order->slug }}
-                    </span>
-                    <span style="float: right;">
-                        <strong>วันที่คำสั่งซื้อ:</strong> {{ \Carbon\Carbon::parse($order->order_date)->format('d/m/y') }} {{ \Carbon\Carbon::parse($order->order_date)->format('H:i:s') }}
-                    </span>
-            </div>
-            <div class="col-md-12">
-                <hr>
-            </div>
-            -->
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
                     <div style="float: left">
-                        <span><strong>ชื่อลูกค้า:</strong> {{ $order->customer->first_name }} {{ $order->customer->last_name }}</span><br>
+                        <span><strong>ชื่อร้าน</strong> {{ $order->customer->store_name }}</span><br>
+                        <span><strong>ชื่อลูกค้า</strong> {{ $order->customer->first_name }} {{ $order->customer->last_name }}</span><br>
                         <span><strong>โทร:</strong> {{ $order->customer->phone }}</span>
                     </div>
                     <div style="float: right;">
                         <strong>ที่อยู่:</strong> {{ $order->customer->addresses[0]->detail }} ต.{{ $order->customer->addresses[0]->subDistrict }}<br>
-                        อ.{{ $order->customer->addresses[0]->district }} จ.{{ $order->customer->addresses[0]->province }} {{ $order->customer->addresses[0]->zipcode }}
+                        อ.{{ $order->customer->addresses[0]->district }} จ.{{ $order->customer->addresses[0]->province }} {{ $order->customer->addresses[0]->zipcode }}<br>
                     </div>
                 </div>
             </div>
@@ -169,7 +146,7 @@ crossorigin="anonymous"></script>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($order->products as $product)
+                            @foreach($order->products->sortBy('name') as $product)
                             <!--onclick="window.location='{{ url('admin/products/'.$product->slug) }}'"-->
                                 <tr>
                                     <th class="text-center">{{ $loop->iteration }}</th>
@@ -275,10 +252,13 @@ crossorigin="anonymous"></script>
             <div class="form-group">
                 <strong>ที่อยู่จัดส่ง</strong>
             </div>
-            <p>{{ $order->customer->addresses[0]->detail }} ตำบล{{ $order->customer->addresses[0]->subDistrict }}</p>
-            <p>อำเภอ{{ $order->customer->addresses[0]->district }} จังหวัด{{ $order->customer->addresses[0]->province }}</p>
+            @if ($order->customer->store_name != "")
+                <p>{{ $order->customer->store_name }}</span><p>
+            @endif
+            <p>{{ $order->customer->addresses[0]->detail }} ต.{{ $order->customer->addresses[0]->subDistrict }}</p>
+            <p>อ.{{ $order->customer->addresses[0]->district }} จ.{{ $order->customer->addresses[0]->province }}</p>
             <p>รหัสไปรษณีย์ {{ $order->customer->addresses[0]->zipcode }}</p>
-            <p>เบอร์โทรศัพท์ {{ $order->customer->phone }}</p>
+            <p>โทร {{ $order->customer->phone }}</p>
             <p>อีเมล {{ $order->customer->email }}</p>
         </div>
         <div class="col-md-6">

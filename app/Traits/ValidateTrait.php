@@ -74,6 +74,7 @@ trait ValidateTrait
             'confirm_password' => 'required|same:password|min:8|max:255',
             'citizen_card_id' => 'required|digits:13',
             'drug_store_id' => 'required|max:255',
+            'store_name' => 'required|max:255',
 
             'remark' => 'nullable|max:255',
             'status' => 'nullable|max:255',

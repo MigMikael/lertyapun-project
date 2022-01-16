@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-expand-md fixed-top" style="border-bottom: 1px solid #DEDEDE !important;">
+<nav class="navbar navbar-expand-lg navbar-expand-md" style="border-bottom: 1px solid #DEDEDE !important;">
     <div class="container">
         @if (\Request::is('customer/profile') || \Request::is('customer/document') || \Request::is('customer/address') || \Request::is('customer/password') || \Request::is('customer/order')) 
         <button class="btn btn-primary" id="user-menu-toggle">

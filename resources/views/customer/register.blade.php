@@ -88,7 +88,7 @@ input[type=checkbox]:checked:after {
                <div class="col-md-6">
                 <div class="form-group">
                     <label>เบอร์โทรศัพท์ <span class="required">*</span></label>
-                    <input name="phone" type="text" class="form-control @error('phone') is-invalid @enderror" placeholder="" value="@if(Request::is('customer/pending/*/edit')){{ $customer->phone }}@else{{ old('phone') }}@endif">
+                    <input name="phone" type="tel" class="form-control @error('phone') is-invalid @enderror" placeholder="" value="@if(Request::is('customer/pending/*/edit')){{ $customer->phone }}@else{{ old('phone') }}@endif">
                     @error('phone')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -199,7 +199,16 @@ input[type=checkbox]:checked:after {
                                  <strong>ข้อมูลที่อยู่</strong>
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>ชื่อร้าน <span class="required">*</span></label>
+                                <input name="store_name" type="text" class="form-control @error('store_name') is-invalid @enderror" placeholder="" value="@if(Request::is('customer/pending/*/edit')){{ $customer->store_name }}@else{{ old('store_name') }}@endif">
+                                @error('detail')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>เลขที่/หมู่/ถนน/ซอย <span class="required">*</span></label>
                                 <input name="detail" type="text" class="form-control @error('detail') is-invalid @enderror" placeholder="" value="@if(Request::is('customer/pending/*/edit')){{ $address->detail }}@else{{ old('detail') }}@endif">

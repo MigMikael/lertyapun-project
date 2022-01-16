@@ -47,16 +47,23 @@
     @enderror
 </div>
 <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('citizen_card_id', 'หมายเลขบัตรประชาชน') !!} 
+    {!! Form::label('citizen_card_id', 'หมายเลขบัตรประชาชน') !!} <span class="required">*</span>
     {!! Form::text('citizen_card_id', null, ['placeholder' => 'หมายเลขบัตรประชาชน', 'class' => 'form-control' . ($errors->has('citizen_card_id') ? ' is-invalid' : null)]) !!}
     @error('citizen_card_id')
         <div class="text-danger">{{ $message }}</div>
     @enderror
 </div>
 <div class="form-group" style="margin-bottom: 3%">
-    {!! Form::label('drug_store_id', 'หมายเลขใบอนุญาติร้านยา') !!}
+    {!! Form::label('drug_store_id', 'หมายเลขใบอนุญาติร้านยา') !!} <span class="required">*</span>
     {!! Form::text('drug_store_id', null, ['placeholder' => 'หมายเลขใบอนุญาติร้านยา', 'class' => 'form-control' . ($errors->has('drug_store_id') ? ' is-invalid' : null)]) !!}
     @error('drug_store_id')
+        <div class="text-danger">{{ $message }}</div>
+    @enderror
+</div>
+<div class="form-group" style="margin-bottom: 3%">
+    {!! Form::label('store_name', 'ชื่อร้านยา') !!} <span class="required">*</span>
+    {!! Form::text('store_name', null, ['placeholder' => 'ชื่อร้านยา', 'class' => 'form-control' . ($errors->has('store_name') ? ' is-invalid' : null)]) !!}
+    @error('store_name')
         <div class="text-danger">{{ $message }}</div>
     @enderror
 </div>

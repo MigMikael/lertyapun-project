@@ -25,34 +25,11 @@
                 </div>
                 @endif
             </div>
-            <div class="col-md-12 col-lg-6">
+            <div class="col-lg-6">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div id="profile-wrapper" class="form-group">
-                            <div class="profile-img-upload">
-                                <div class="profile-img-wrapper">
-                                    @if($customer->avatarImage != null)
-                                        <img id="profile-img" class="profile-img" src="{{ url('image/show/'.$customer->avatarImage->slug) }}">
-                                    @else
-                                        <img id="profile-img" class="profile-img" src="{{ url('img/avatar.png') }}">
-                                    @endif
-                                </div>
-                                <label class="btn btn-primary profile-btn">
-                                    <i class="fa fa-image"></i> 
-                                    @if($customer->avatarImage != null)
-                                    แก้ไขรูปประจำตัว
-                                    @else
-                                    เพิ่มรูปประจำตัว
-                                    @endif
-                                    {!! Form::file('avatar_image', ['accept'=>'image/*', 'id' => 'upload-profile-img', 'class' => 'form-control hidden',
-                                    'value' => 'เลือกรูป']) !!}
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
                         <div class="form-group">
-                            <label>ชื่อ</label>
+                            <label>ชื่อ <span class="required">*</span></label>
                             {!! Form::text('first_name', null, ['placeholder' => '', 'class' => 'form-control'.
                             ($errors->has('first_name') ? ' is-invalid' : null)]) !!}
                             @error('first_name')
@@ -62,7 +39,7 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label>นามสกุล</label>
+                            <label>นามสกุล <span class="required">*</span></label>
                             {!! Form::text('last_name', null, ['placeholder' => '', 'class' => 'form-control'.
                             ($errors->has('last_name') ? ' is-invalid' : null)]) !!}
                             @error('last_name')
@@ -72,7 +49,7 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label>อีเมล</label>
+                            <label>อีเมล <span class="required">*</span></label>
                             {!! Form::text('email', null, ['placeholder' => '', 'class' => 'form-control'.
                             ($errors->has('email') ? ' is-invalid' : null)]) !!}
                             @error('email')
@@ -82,13 +59,45 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label>เบอร์โทรศัพท์</label>
+                            <label>เบอร์โทรศัพท์ <span class="required">*</span></label>
                             {!! Form::text('phone', null, ['placeholder' => '', 'class' => 'form-control'.
                             ($errors->has('phone') ? ' is-invalid' : null)]) !!}
                             @error('phone')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>ชื่อร้าน <span class="required">*</span></label>
+                            {!! Form::text('store_name', null, ['placeholder' => '', 'class' => 'form-control'.
+                            ($errors->has('store_name') ? ' is-invalid' : null)]) !!}
+                            @error('store_name')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div id="profile-wrapper" class="form-group">
+                    <div class="profile-img-upload">
+                        <div class="profile-img-wrapper">
+                            @if($customer->avatarImage != null)
+                            <img id="profile-img" class="profile-img" src="{{ url('image/show/'.$customer->avatarImage->slug) }}">
+                            @else
+                            <img id="profile-img" class="profile-img" src="{{ url('img/avatar.png') }}">
+                            @endif
+                        </div>
+                        <label class="btn btn-primary profile-btn">
+                            <i class="fa fa-image"></i> 
+                            @if($customer->avatarImage != null)
+                            แก้ไขรูปประจำตัว
+                            @else
+                            เพิ่มรูปประจำตัว
+                            @endif
+                            {!! Form::file('avatar_image', ['accept'=>'image/*', 'id' => 'upload-profile-img', 'class' => 'form-control hidden', 'value' => 'เลือกรูป']) !!}
+                        </label>
                     </div>
                 </div>
             </div>
