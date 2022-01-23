@@ -140,6 +140,8 @@ class ProductController extends Controller
             'weight' => $data['weight'],
             'status' => $data['status'],
             'quantity' => $data['quantity'],
+            'keyword_search' => $data['keyword_search'],
+            'company_name' => $data['company_name']
             /*'expired_startdate' => $data['expired_startdate'],
             'expired_enddate' => $data['expired_enddate'],*/
             //'expired_date' => $data['expired_date'],
@@ -268,6 +270,8 @@ class ProductController extends Controller
             'weight' => $data['weight'],
             'status' => $data['status'],
             'quantity' => $data['quantity'],
+            'keyword_search' => $data['keyword_search'],
+            'company_name' => $data['company_name']
              /*'expired_startdate' => $data['expired_startdate'],
             'expired_enddate' => $data['expired_enddate'],*/
             //'expired_date' => $data['expired_date'],
@@ -475,11 +479,13 @@ class ProductController extends Controller
             $products = $category->products()
                     ->where('status', 'active')
                     ->where('name', 'like', '%'.$query.'%')
+                    ->orWhere("keyword_search", "like", "%".$query."%")
                     ->orderBy('updated_at', 'DESC')
                     ->paginate($page);
         }
         else {
             $products = Product::where('name', 'like', '%'.$query.'%')
+            ->orWhere("keyword_search", "like", "%".$query."%")
             ->where('status', 'active')
             ->orderBy('updated_at', 'DESC')
             ->paginate($page);

@@ -13,6 +13,23 @@
         <div class="text-danger">{{ $message }}</div>
     @enderror
 </div>
+
+<div class="form-group" style="margin-bottom: 3%">
+    {!! Form::label('keyword_search', 'คำค้นหาสินค้า') !!}
+    <textarea name="keyword_search" class="form-control{{ $errors->has('keyword_search') ? ' is-invalid' : null }}" placeholder="คำค้นหาสินค้า" rows="6">{{ $product->keyword_search ?? '' }}</textarea>
+    @error('keyword_search')
+        <div class="text-danger">{{ $message }}</div>
+    @enderror
+</div>
+
+<div class="form-group" style="margin-bottom: 3%">
+    {!! Form::label('company_name', 'บริษัท (แบรนด์)') !!}
+    {!! Form::text('company_name', null, ['placeholder' => 'บริษัท (แบรนด์)', 'class' => 'form-control' . ($errors->has('company_name') ? ' is-invalid' : null)]) !!}
+    @error('name')
+        <div class="text-danger">{{ $message }}</div>
+    @enderror
+</div>
+
 {{-- <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('point', 'Point') !!}
     {!! Form::text('point', null, ['placeholder' => 'Point', 'class' => 'form-control']) !!}

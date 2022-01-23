@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-<section class="breadcrumb-wrapper">
+<section class="breadcrumb-wrapper" style="padding-top: 50px !important;">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -67,6 +67,14 @@
                         <p>-</p>
                         @else
                         <p>{{ $product->description }}</p>
+                        @endif
+                    </div>
+                    <div class="product-company">
+                        <label>บริษัท (แบรนด์)</label>
+                        @if ($product->company_name == "" || $product->company_name == null)
+                        <p>-</p>
+                        @else
+                        <p>{{ $product->company_name }}</p>
                         @endif
                     </div>
                     <!--

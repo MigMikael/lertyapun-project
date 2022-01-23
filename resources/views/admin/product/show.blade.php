@@ -53,6 +53,9 @@
             <strong>คำอธิบาย</strong>
             <p>{{ $product->description }}</p>
 
+            <strong>บริษัท (แบรนด์)</strong>
+            <p>{{ $product->company_name }}</p>
+
             <strong>จำนวน</strong>
             <p>{{ $product->quantity }} {{ $product->units['0']['unitName'] }}</p>
 

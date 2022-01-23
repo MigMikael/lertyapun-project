@@ -19,7 +19,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 form-group">
-                {!! Form::open(['method' => 'post', 'url' => 'customer/products/search']) !!}
+                {!! Form::open(['method' => 'post', 'url' => 'customer/products/search', 'id' => 'search-product-form']) !!}
                 <div class="row">
                     <div class="col-md-4 form-group">
                         <select class="form-control select-product-category" name="category" style="width: 100%;">
@@ -96,37 +96,5 @@
 </footer>
 @endsection
 
-
 @section('script')
-<script>
-    $('.select-product-category').select2();
-</script>
-<!--
-    foreach ($products as $product)
-    <script>
-        $("#{ $product->slug }").click(function(e) {
-            e.preventDefault();
-            $("#{ $product->slug }").html("<span class='spinner-border spinner-border-sm'></span> Loading...");
-
-            $.ajax({
-                type: "post",
-                url: "{ url('customer/cart') }",
-                data: {
-                    "_token": "{ csrf_token() }",
-                    "product_id": "{ $product->slug }",
-                    "customer_id": "{ auth()->guard('customer')->user() ? auth()->guard('customer')->user()->slug: '' }"
-                },
-                success: function(result) {
-                    $('#productCount').text(result.productCount);
-                    $("#{ $product->slug }").text("เพิ่มใส่ตระกร้า");
-                },
-                error: function(result) {
-                    alert('error');
-                    $("#{ $product->slug }").text("เพิ่มใส่ตระกร้า");
-                }
-            });
-        });
-    </script>
-    endforeach
--->
 @endsection

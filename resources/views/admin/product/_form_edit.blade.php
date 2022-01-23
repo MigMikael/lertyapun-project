@@ -7,6 +7,17 @@
     {!! Form::label('description', 'คำอธิบายสินค้า') !!}
     <textarea name="description" class="form-control" placeholder="คำอธิบายสินค้า" rows="6">{{ $product->description ?? '' }}</textarea>
 </div>
+
+<div class="form-group" style="margin-bottom: 3%">
+    {!! Form::label('keyword_search', 'คำค้นหาสินค้า') !!}
+    <textarea name="keyword_search" class="form-control" placeholder="คำค้นหาสินค้า" rows="6">{{ $product->keyword_search ?? '' }}</textarea>
+</div>
+
+<div class="form-group" style="margin-bottom: 3%">
+    {!! Form::label('company_name', 'บริษัท (แบรนด์)') !!}
+    {!! Form::text('company_name', null, ['placeholder' => 'บริษัท (แบรนด์)', 'class' => 'form-control']) !!}
+</div>
+
 {{-- <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('point', 'Point') !!}
     {!! Form::text('point', null, ['placeholder' => 'Point', 'class' => 'form-control']) !!}

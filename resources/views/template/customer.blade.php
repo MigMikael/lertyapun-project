@@ -43,6 +43,12 @@
         <script src="{{ URL::asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script>
             $( document ).ready(function(){
+                $('.select-product-category').select2();
+
+                $('.select-product-category').change(function() {
+                    $('#search-product-form').submit();
+                });
+
                 $.ajax({
                     url: '{{ url("customer/cart/product/count") }}',
                     type: 'get',

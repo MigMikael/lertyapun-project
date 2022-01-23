@@ -25,6 +25,8 @@ class Product extends Model
         'expired_startdate',
         'expired_enddate',
         'expired_date',
+        'keyword_search',
+        'company_name'
     ];
 
     public function promotions()
