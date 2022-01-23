@@ -24,7 +24,7 @@
                         <i class="icon-check m-auto text-primary"></i>
                     </div>
                     <h3>ร้านยาคุณภาพ</h3>
-                    <p class="lead mb-0">ร้านของเราผ่านการรับรองจากสภาเภสัชกรรม ว่ามีมาตรฐานการให้ “บริการด้านยาและสุขภาพที่ดี มีคุณภาพ”</p>
+                    <p class="lead mb-0">ร้านของเราผ่านการรับรองจากสภาเภสัชกรรม ว่ามีมาตรฐานการให้ บริการด้านยาและสุขภาพที่ดี มีคุณภาพ</p>
                 </div>
             </div>
             <div class="col-lg-4">
@@ -32,8 +32,8 @@
                     <div class="features-icons-icon d-flex">
                         <i class="icon-layers m-auto text-primary"></i>
                     </div>
-                    <h3>บริการให้คำปรึกษาด้านยาและปัญหาสุขภาพ</h3>
-                    <p class="lead mb-0">ร้านของเราให้บริการโดยเภสัชกรผู้ได้รับใบอนุญาติประกอบวิชาชีพเภสัชกรรม</p>
+                    <h3>บริการให้คำปรึกษาด้านยา</h3>
+                    <p class="lead mb-0">ร้านของเราให้บริการโดยเภสัชกรผู้ได้รับใบอนุญาติประกอบวิชาชีพเภสัชกรรม พร้อมให้คำปรึกษาอย่างมีคุณภาพ</p>
                 </div>
             </div>
             <div class="col-lg-4">
@@ -41,8 +41,8 @@
                     <div class="features-icons-icon d-flex">
                         <i class="fa fa-shipping-fast m-auto text-primary"></i>
                     </div>
-                    <h3>จัดส่งสินค้าถึงมือคุณ</h3>
-                    <p class="lead mb-0">ร้านของเรามีบริการจัดส่งสินค้าทั่วประเทศไทย เราใส่ใจในทุกกระบวนการ เพื่อให้คุณได้รับการบริการอย่างดีที่สุด</p>
+                    <h3>บริการจัดส่งฟรี</h3>
+                    <p class="lead mb-0">จัดส่งฟรีเมื่อสั่งซื้อขั้นต่ำ 5,000 บาท พื้นที่ห่างไกลคิดเพิ่มเพียง 100 บาท ให้บริการโดย Best / Flash Express</p>
                 </div>
             </div>
         </div>
@@ -73,8 +73,8 @@
         <div class="row no-gutters">
             <div class="col-lg-6 text-white showcase-img" style="background-image: url('img/health.jpg');"></div>
             <div class="col-lg-6 my-auto showcase-text">
-                <h2>บริการให้คำปรึกษาด้านยาและปัญหาสุขภาพ</h2>
-                <p class="lead mb-2">ร้านของเราให้บริการโดยเภสัชกรผู้ได้รับใบอนุญาติประกอบวิชาชีพเภสัชกรรม เราใส่ใจในการใช้ยาให้มีคุณภาพ เหมาะสม และปลอดภัย เราพร้อมให้คำปรึกษาทางด้านยาและปัญหาสุขภาพ
+                <h2>บริการให้คำปรึกษาด้านยา</h2>
+                <p class="lead mb-2">ร้านของเราให้บริการโดยเภสัชกรผู้ได้รับใบอนุญาติประกอบวิชาชีพเภสัชกรรม เราใส่ใจในการใช้ยาให้มีคุณภาพ เหมาะสม และปลอดภัย
                 </p>
                 <p class="lead mb-0">
                 ร้านของเรายังจัดกิจกรรมตรวจสุขภาพฟรีตลอดทั้งปี โดยได้รับความร่วมมือจากหน่วยงานและบริษัทต่างๆเพื่อดูแลสุขภาพของคุณอย่างดีที่สุด
@@ -84,8 +84,9 @@
         <div class="row no-gutters">
             <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('img/delivery.jpg');"></div>
             <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-                <h2>จัดส่งสินค้าถึงมือคุณ</h2>
-                <p class="lead mb-0">ร้านของเรามีบริการจัดส่งสินค้าทั่วประเทศไทย เราตั้งใจส่งมอบสินค้าที่ดี มีคุณภาพและปลอดภัย เพื่อให้คุณได้ใช้ชีวิตประจำวันอย่างเต็มที่และมีคุณภาพ เราใส่ใจในทุกกระบวนการส่งมอบสินค้า เพื่อให้คุณได้รับการบริการอย่างดีที่สุด</p>
+                <h2>บริการจัดส่งฟรี</h2>
+                <p class="lead mb-2">ร้านของเรามีบริการจัดส่งสินค้าทั่วประเทศไทย เราตั้งใจส่งมอบสินค้าที่ดี มีคุณภาพและปลอดภัย เพื่อให้คุณได้ใช้ชีวิตประจำวันอย่างเต็มที่และมีคุณภาพ</p>
+                <p class="lead mb-0">บริการจัดส่งฟรีเมื่อสั่งซื้อขั้นต่ำ 5,000 บาท พื้นที่ห่างไกลคิดเพิ่มเพียง 100 บาท ให้บริการโดยบริษัทขนส่งเอกชนชั้นนำ Best / Flash Express เป็นขนส่งหลัก</p>
             </div>
         </div>
     </div>
@@ -149,31 +150,38 @@
     <div class="container">
         <h2 class="mb-5">ติดต่อเรา</h2>
         <div class="row">
-            <div class="col-md-6 col-lg-3">
+            <div class="col-lg-4">
                 <div class="contact-box">
-                    <h5><i class="fas fa-map-marker-alt text-primary"></i> เลิศยาภัณฑ์</h5>
-                   <p>384-386 ตำบลท่าเรือ<br>
-                    อำเภอท่ามะกา จังหวัดกาญจนบุรี 71130</p>
+                    <h5 class="mb-3"><i class="fas fa-map-marker-alt text-primary"></i> ที่อยู่</h5>
+                   <p>384-386 ต.ท่าเรือ<br>
+                    อ.ท่ามะกา จ.กาญจนบุรี 71130</p>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3">
+            <div class="col-lg-4">
                 <div class="contact-box">
-                    <h5><i class="fas fa-phone-alt text-primary"></i> เบอร์โทรศัพท์</h5>
-                    <p>034-561-128</p>
+                    <h5 class="mb-3"><i class="fas fa-phone-alt text-primary"></i> เบอร์โทรศัพท์</h5>
+                    <p>034-561-128<br>
+                    095-254-4525</p>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3">
+            <div class="col-lg-4">
                 <div class="contact-box">
-                    <h5><i class="fab fa-facebook text-primary"></i> Facebook</h5>
-                    <a href="https://web.facebook.com/Lertyaphan" target="_blank"><strong>fb.com/Lertyaphan</strong></a>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="contact-box">
-                    <h5><i class="fas fa-clock text-primary"></i> เวลาเปิดทำการ</h5>
+                    <h5 class="mb-3"><i class="fas fa-clock text-primary"></i> เวลาเปิดทำการ</h5>
                     <p class="mb-0">จันทร์ - ศุกร์ : 7.30 - 19.00 น</p>
                     <p class="mb-0">เสาร์ : 7.30 - 12.00 น.</p>
                     <p>อาทิตย์ : 7.30 - 19.00 น.</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="contact-box">
+                    <h5><i class="fab fa-facebook" style="color: #1b74e4;"></i> Facebook</h5>
+                    <img src="https://i.ibb.co/nCgL9GV/fb.png" alt="fb" style="height: 150px;">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="contact-box">
+                    <h5><i class="fab fa-line" style="color: green"></i> Line Official</h5>
+                    <img src="https://i.ibb.co/27q6ftx/line.png" alt="line" style="height: 150px;">
                 </div>
             </div>
             <div class="col-lg-12">
