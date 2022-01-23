@@ -20,17 +20,19 @@
             <div class="admin-search-wrapper">
                 <div class="row">
                     <div class="col-md-4 form-group">
+                        <label>สถานะคำสั่งซื้อ</label>
                         {!! Form::select('status', $orderStatus, $status, ['class' => 'form-control select2', 'style' => 'width:100% !important']) !!}
                     </div>
                     <div class="col-md-6 form-group">
-                            @if (isSet($search) && $search != '')
-                            <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหาตาม เลขที่คำสั่งซื้อ"
-                                autocomplete="off">
-                            @else
-                            <input name="query" type="text" class="form-control" placeholder="ค้นหาตาม เลขที่คำสั่งซื้อ" autocomplete="off">
-                            @endif
+                        <label>ค้นหา</label>
+                        @if (isSet($search) && $search != '')
+                        <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหาตาม เลขที่คำสั่งซื้อ" autocomplete="off">
+                        @else
+                        <input name="query" type="text" class="form-control" placeholder="ค้นหาตาม เลขที่คำสั่งซื้อ" autocomplete="off">
+                        @endif
                     </div>
                     <div class="col-md-2 form-group">
+                        <label style="visibility: hidden;">กดค้นหา</label>
                         <button class="btn btn-light btn-block" type="submit">
                             <i class="fas fa-search"></i>
                         </button>

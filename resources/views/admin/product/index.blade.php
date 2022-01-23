@@ -21,6 +21,29 @@
         </div>
         <div class="col-md-12">
             {!! Form::open(['method' => 'post', 'url' => 'admin/products/search']) !!}
+            <div class="admin-search-wrapper">
+                <div class="row">
+                    <div class="col-md-4 form-group">
+                        <label>สถานะคงเหลือสินค้า</label>
+                        {!! Form::select('statusAmountSearch', $productAmountStatus, $statusAmountSearch, ['class' => 'form-control select2', 'style' => 'width:100% !important']) !!}
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>ค้นหา</label>
+                        @if (isSet($search) && $search != '')
+                        <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหาตาม ชื่อสินค้า" autocomplete="off">
+                        @else
+                        <input name="query" type="text" class="form-control" placeholder="ค้นหาตาม ชื่อสินค้า" autocomplete="off">
+                        @endif
+                    </div>
+                    <div class="col-md-2 form-group">
+                        <label style="visibility: hidden;">กดค้นหา</label>
+                        <button class="btn btn-light btn-block" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--
             <div class="input-group admin-search-wrapper">
                 @if ($search != '')
                 <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหาตาม ชื่อสินค้า" autocomplete="off">
@@ -33,6 +56,7 @@
                     </button>
                 </div>
             </div>
+            -->
             {!! Form::close() !!}
         </div>
     </div>
@@ -64,7 +88,7 @@
                 <th scope="col">รหัสสินค้า</th>
                 <th scope="col">รูปสินค้า</th>
                 <th scope="col">ชื่อสินค้า</th>
-                <th class="text-center">สถานะสินค้า</th>
+                <th class="text-center">สถานะ</th>
                 <th class="text-center">จัดการ</th>
                 <th class="text-center">ดูข้อมูล</th>
             </tr>
@@ -82,7 +106,12 @@
                             <img src="{{ url('image/show/'.$product->image->slug) }}" class="admin-img-table img-fluid" alt="{{ $product->name }}">
                         </td>
                         <td>
+                            <div class="form-group">
                             {{ $product->name }}
+                            </div>
+                            @if($product->quantity <= 0)
+                                <span class="badge badge-danger-secondary">สินค้าหมด</span>
+                            @endif
                         </td>
                         <td class="text-center">
                             @if($product->status == 'active')
@@ -135,11 +164,13 @@
 
 @section('script')
 <script>
+    $('.select2').select2();
+
     $('.delete-action').click(function(e){
         e.preventDefault()
         if (confirm('คุณแน่ใจที่จะลบข้อมูลดังกล่าว หากลบแล้วจะไม่สามารถกู้คืนข้อมูลได้ ?')) {
             $(e.target).closest('form').submit()
         }
-    })
+    });
 </script>
 @endsection

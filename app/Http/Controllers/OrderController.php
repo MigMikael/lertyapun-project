@@ -29,6 +29,7 @@ class OrderController extends Controller
     ];
 
     public $orderStatusTH = [
+        '' => 'ทั้งหมด',
         'pending' => 'รอการอนุมัติ', // รอแอดมินอนุมัติ
         'payment' => 'รอการชำระเงิน', // รอลูกค้ายืนยันการจ่ายเงิน
         'credit' => 'เครดิต', // สำเร็จแต่ยังไม่จ่ายตัง
