@@ -149,10 +149,12 @@
                             </div>
                         </div>
                     </div>
+                    @if ($product->quantity > 0)
                     <div class="product-amount mt-3" style="width: 150px;">
                         <label>จำนวน</label>
                         <input id="quantity" type="number" value="1" min="0" max="{{ $product->quantity }}" step="1"/>
                     </div>
+                    @endif
                     <!--
                     <div class="product-remaining">
                         <label style="margin-top: 15px; color: #28a745;">คงเหลือ {{ number_format($product->quantity) }} {{ $product->units['0']['unitName'] }}</label>
