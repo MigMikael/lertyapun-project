@@ -599,7 +599,7 @@ class ProductController extends Controller
         $products = Product::has('promotions')
             ->where('status', 'active')
             ->with('promotions')
-            ->paginate(100);
+            ->paginate(40);
         return view('customer.promotion', [
             'products' => $products
         ]);
