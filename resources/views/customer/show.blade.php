@@ -158,7 +158,7 @@
                         <label style="margin-top: 15px; color: #28a745;">คงเหลือ {{ number_format($product->quantity) }} {{ $product->units['0']['unitName'] }}</label>
                     </div>
                     -->
-                    @if ($product->quantity != 0)
+                    @if ($product->quantity <= 0)
                     <div class="buy mt-4">
                         <button class="btn btn-primary mr-3" id="addToCart" @if(auth()->guard('admin')->check()) disabled @endif>
                             <i class="fa fa-shopping-cart"> <span style="font-weight: 300 !important;">เพิ่มใส่รถเข็น</span></i>
