@@ -175,13 +175,13 @@
             <div class="col-lg-6">
                 <div class="contact-box">
                     <h5><i class="fab fa-facebook" style="color: #1b74e4;"></i> Facebook</h5>
-                    <img src="https://i.ibb.co/nCgL9GV/fb.png" alt="fb" style="height: 150px;">
+                    <img src="https://i.ibb.co/nCgL9GV/fb.png" alt="fb" style="height: 120px;">
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="contact-box">
                     <h5><i class="fab fa-line" style="color: green"></i> Line Official</h5>
-                    <img src="https://i.ibb.co/27q6ftx/line.png" alt="line" style="height: 150px;">
+                    <img src="https://i.ibb.co/27q6ftx/line.png" alt="line" style="height: 120px;">
                 </div>
             </div>
             <div class="col-lg-12">
