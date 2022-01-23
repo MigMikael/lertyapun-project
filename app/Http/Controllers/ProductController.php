@@ -468,7 +468,7 @@ class ProductController extends Controller
      */
     public function indexCustomerProduct(Request $request)
     {
-        $page = 50;
+        $page = 40;
         $query = "";
         $category = [];
         $category_slug = $request->query('category');
