@@ -472,20 +472,21 @@ class ProductController extends Controller
         $query = "";
         $category = [];
         $category_slug = $request->query('category');
-        $query = $request->query('query');
+        $search = $request->query('query');
 
         if ($category_slug != "") {
             $category = Category::where('slug', $category_slug)->first();
             $products = $category->products()
+            ->where(function ($query) use ($search) {
+                $query->where('name', 'like', '%'.$search.'%')
+                    ->orWhere('keyword_search', "like", "%".$search."%")
                     ->where('status', 'active')
-                    ->where('name', 'like', '%'.$query.'%')
-                    ->orWhere("keyword_search", "like", "%".$query."%")
-                    ->orderBy('updated_at', 'DESC')
-                    ->paginate($page);
+                    ->orderBy('updated_at', 'DESC');
+            })->paginate($page);  
         }
         else {
-            $products = Product::where('name', 'like', '%'.$query.'%')
-            ->orWhere("keyword_search", "like", "%".$query."%")
+            $products = Product::where('name', 'like', '%'.$search.'%')
+            ->orWhere('keyword_search', "like", "%".$search."%")
             ->where('status', 'active')
             ->orderBy('updated_at', 'DESC')
             ->paginate($page);
@@ -517,7 +518,7 @@ class ProductController extends Controller
             'categories' => $categories,
             'currentCategory' => $category,
             'currentCategorySlug' => $category_slug,
-            'search' => $query,
+            'search' => $search,
         ]);
     }
 
