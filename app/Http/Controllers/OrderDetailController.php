@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\OrderDetail;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class OrderDetailController extends Controller
@@ -81,5 +82,28 @@ class OrderDetailController extends Controller
     public function destroy(OrderDetail $orderDetail)
     {
         //
+    }
+
+    public function destroyProduct($product_id, $order_id, $order_slug)
+    {
+        $product = OrderDetail::where('product_id', $product_id)
+            ->where('order_id', $order_id)
+            ->first();
+        
+        $product_total_price = $product->order_price;
+
+        $order = Order::where('slug', $order_slug)->first();
+        
+        $new_total_amount = $order->total_amount - $product_total_price;
+
+        $updateOrder['total_amount'] = $new_total_amount;
+
+        $order->update($updateOrder);
+
+        OrderDetail::where('product_id', $product_id)
+            ->where('order_id', $order_id)
+            ->delete();
+
+        return redirect()->back();
     }
 }

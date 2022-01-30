@@ -68,7 +68,20 @@ crossorigin="anonymous"></script>
 <div class="admin-container">
     <div class="row">
         <div class="col-md-6">
-            <h5 class="title">เลขที่คำสั่งซื้อ: {{ $order->slug }}</h5>
+            <h5 class="title">เลขที่คำสั่งซื้อ: {{ $order->slug }}  
+                        @if($order->status == 'pending')
+                            <span class="badge badge-warning">รอการอนุมัติ</span>
+                        @elseif($order->status == 'payment' && $order->slip_image_id == null)
+                            <span class="badge badge-warning-secondary">รอการชำระเงิน</span>
+                        @elseif($order->status == 'payment' && $order->slip_image_id != null)
+                            <span class="badge badge-warning-secondary">รอยืนยันการชำระเงิน</span>
+                        @elseif($order->status == 'credit')
+                            <span class="badge badge-primary">เครดิต</span>
+                        @elseif($order->status == 'success')
+                            <span class="badge badge-success">สำเร็จ</span>
+                        @elseif($order->status == 'cancle')
+                            <span class="badge badge-danger">ยกเลิก</span>
+                        @endif</h5>
         </div>
         <div class="col-md-6">
             <div class="pull-right">
@@ -200,6 +213,11 @@ crossorigin="anonymous"></script>
         <div class="col-md-12">
             <hr>
         </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <h5 style="font-weight: bold;">ส่วนจัดการคำสั่งซื้อสำหรับ Admin</h5>
+            </div>
+        </div>
         <!--
         <div class="col-md-3">
             <div class="form-group">
@@ -208,6 +226,7 @@ crossorigin="anonymous"></script>
             <h6>{{ number_format($order->weight, 2) }} กรัม</h6>
         </div>
         -->
+        <!--
         <div class="col-md-4">
             <div class="form-group">
                 <strong>ยอดรวมการสั่งซื้อ</strong>
@@ -245,8 +264,52 @@ crossorigin="anonymous"></script>
             </div>
             <h6>{{ number_format($order->total_amount, 2) }} บาท</h6>
         </div>
+        -->
     </div>
-    <hr>
+    <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive" style="margin-top: 15px;">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-center">#</th>
+                                <th class="text-center">รหัสสินค้า</th>
+                                <th class="text-center">รายการ</th>
+                                <th class="text-right">จำนวน/หน่วย</th>
+                                <th class="text-right">ราคา/หน่วย</th>
+                                <th class="text-center">จัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($order->products->sortBy('name') as $product)
+                            <!--onclick="window.location='{{ url('admin/products/'.$product->slug) }}'"-->
+                                <tr>
+                                    <th class="text-center">{{ $loop->iteration }}</th>
+                                    <th class="text-center">{{ $product->slug }}</th>
+                                    <td><a href="{{ url('admin/products/'.$product->slug) }}" style="text-decoration: none; color: #000;">{{ $product->name }}</a></td>
+                                    <td class="text-right">
+                                        {{ number_format($product->pivot->sale_quantity) }} {{ $product->pivot->sale_unit }} <!--({{ $product->pivot->quantityPerUnit * $product->pivot->sale_quantity }} ชิ้น)-->
+                                    </td>
+                                    <td class="text-right">
+                                        {{ number_format($product->pivot->order_price / $product->pivot->sale_quantity, 2) }}
+                                    </td>
+                                    <td class="text-center">
+                                    {!! Form::model($product, [
+                                                        'method' => 'delete',
+                                                        'url' => 'admin/orderDetail/'.$product->id.'/'.$order->id.'/'.$order->slug ]) !!}
+                                                    <button class="btn btn-danger delete-product-btn" type="submit" data-product_name="{{ $product->name }}">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                    <p style="font-size: 12px; color: white">x</p>
+                                                    {!! Form::close() !!}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
@@ -288,19 +351,6 @@ crossorigin="anonymous"></script>
             <div class="form-group" style="margin-bottom: 3%">
                 <div class="form-group">
                     <strong>สถานะคำสั่งซื้อ</strong>
-                        @if($order->status == 'pending')
-                            <span class="badge badge-warning">รอการอนุมัติ</span>
-                        @elseif($order->status == 'payment' && $order->slip_image_id == null)
-                            <span class="badge badge-warning-secondary">รอการชำระเงิน</span>
-                        @elseif($order->status == 'payment' && $order->slip_image_id != null)
-                            <span class="badge badge-warning-secondary">รอยืนยันการชำระเงิน</span>
-                        @elseif($order->status == 'credit')
-                            <span class="badge badge-primary">เครดิต</span>
-                        @elseif($order->status == 'success')
-                            <span class="badge badge-success">สำเร็จ</span>
-                        @elseif($order->status == 'cancle')
-                            <span class="badge badge-danger">ยกเลิก</span>
-                        @endif
                 </div>
                 {!! Form::select('status', $status, $order->status, ['class' => 'form-control']) !!}
             </div>
@@ -340,5 +390,13 @@ crossorigin="anonymous"></script>
 
              document.body.innerHTML = originalContents;
         }
+
+        $('.delete-product-btn').click(function(e){
+            e.preventDefault();
+            var product_name = $(this).attr("data-product_name");
+            if (confirm('คุณแน่ใจที่จะลบ ' + product_name + ' หากลบแล้วจะไม่สามารถกู้คืนข้อมูลได้ ?')) {
+                $(e.target).closest('form').submit()
+            }
+        });
     </script>
 @endsection

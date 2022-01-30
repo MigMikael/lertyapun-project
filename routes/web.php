@@ -13,6 +13,7 @@ use App\Http\Controllers\CustomerProductController;
 use App\Http\Controllers\DaliveryServiceController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\ProductPromotionController;
 use App\Http\Controllers\ProductTagController;
 use App\Http\Controllers\PromotionController;
@@ -158,6 +159,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminAuth'], function () {
     Route::delete('orders/{order:slug}', [OrderController::class, 'destroy']);
     Route::put('orders/{order:slug}/status', [OrderController::class, 'updateStatus']);
     Route::put('orders/{order:slug}/shipment_price/{price}', [OrderController::class, 'updateShipmentPrice']);
+
+    Route::delete('orderDetail/{product_id}/{order_id}/{order_slug}', [OrderDetailController::class, 'destroyProduct']);
 
     Route::get('deliveries', [DaliveryServiceController::class, 'index']);
     Route::post('deliveries', [DaliveryServiceController::class, 'store']);
