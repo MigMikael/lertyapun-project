@@ -67,9 +67,10 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">เลขที่คำสั่งซื้อ</th>
-                <th scope="col">วันที่คำสั่งซื้อ</th>
-                <th scope="col">ชื่อลูกค้า</th>
+                <th scope="col" width="15%">เลขที่คำสั่งซื้อ</th>
+                <th scope="col" width="15%">วันที่คำสั่งซื้อ</th>
+                <th scope="col" width="15%">ชื่อร้าน</th>
+                <th scope="col" width="15%">ชื่อลูกค้า</th>
                 <th scope="col" class="text-right">ยอดรวมทั้งหมด (บาท)</th>
                 <th scope="col" class="text-center">สถานะคำสั่งซื้อ</th>
                 <th class="text-center">จัดการ</th>
@@ -85,7 +86,12 @@
                         <td>
                             {{ $order->order_slug }}
                         </td>
-                        <td>{{ \Carbon\Carbon::parse($order->order_date)->format('d/m/y H:i:s') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($order->order_date)->format('d/m/y') }} <br>
+                            {{ \Carbon\Carbon::parse($order->order_date)->format('H:i') }} น.
+                            <!--{{ \Carbon\Carbon::parse($order->order_date)->format('H:i:s') }}--></td>
+                        <td>
+                            {{ $order->customer->store_name }}
+                        </td>
                         <td>
                             {{ $order->customer->first_name }} {{ $order->customer->last_name }}
                         </td>
