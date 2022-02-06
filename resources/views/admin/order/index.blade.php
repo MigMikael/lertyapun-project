@@ -73,7 +73,9 @@
                 <th scope="col" width="15%">ชื่อลูกค้า</th>
                 <th scope="col" class="text-right">ยอดรวมทั้งหมด (บาท)</th>
                 <th scope="col" class="text-center">สถานะคำสั่งซื้อ</th>
+                <!--
                 <th class="text-center">จัดการ</th>
+                -->
                 <th scope="col" class="text-center">ดูข้อมูล</th>
             </tr>
             </thead>
@@ -113,6 +115,7 @@
                             <span class="badge badge-danger">ยกเลิก</span>
                             @endif
                         </td>
+                        <!--
                         <td class="text-center">
                             <div class="btn-group">
                                 {!! Form::model($order, [
@@ -125,6 +128,7 @@
                                 {!! Form::close() !!}
                             </div>
                         </td>
+                        -->
                         <td class="text-center">
                             <a class="btn btn-primary btn-sm" href="{{ url('admin/orders/'.$order->order_slug) }}">
                                 <i class="fas fa-external-link-square-alt"></i>

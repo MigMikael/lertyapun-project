@@ -23,11 +23,15 @@
             {!! Form::open(['method' => 'post', 'url' => 'admin/products/search']) !!}
             <div class="admin-search-wrapper">
                 <div class="row">
-                    <div class="col-md-4 form-group">
+                    <div class="col-md-3 form-group">
+                        <label>สถานะการใช้งานสินค้า</label>
+                        {!! Form::select('productStatusSearch', $productStatusTH, $productStatusSearch, ['class' => 'form-control select2', 'style' => 'width:100% !important']) !!}
+                    </div>
+                    <div class="col-md-3 form-group">
                         <label>สถานะคงเหลือสินค้า</label>
                         {!! Form::select('statusAmountSearch', $productAmountStatus, $statusAmountSearch, ['class' => 'form-control select2', 'style' => 'width:100% !important']) !!}
                     </div>
-                    <div class="col-md-6 form-group">
+                    <div class="col-md-4 form-group">
                         <label>ค้นหา</label>
                         @if (isSet($search) && $search != '')
                         <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหาตาม ชื่อสินค้า" autocomplete="off">

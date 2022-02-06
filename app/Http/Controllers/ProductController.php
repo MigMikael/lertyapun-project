@@ -51,16 +51,19 @@ class ProductController extends Controller
         $sort = $request->query('sort');
         $query = $request->query('query');
         $statusAmountSearch = $request->query('statusAmountSearch');
+        $productStatusSearch = $request->query('productStatusSearch');
 
         if ($sort == 'name_asc') {
             if ($statusAmountSearch == "all") {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->orderBy('name', 'ASC')
                 ->with('image')
                 ->paginate($page);
             }
             else if ($statusAmountSearch == "has") {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->where("products.quantity", ">", 0)
                 ->orderBy('name', 'ASC')
                 ->with('image')
@@ -68,6 +71,7 @@ class ProductController extends Controller
             }
             else if ($statusAmountSearch == "empty") {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->where("products.quantity", "<=", 0)
                 ->orderBy('name', 'ASC')
                 ->with('image')
@@ -75,6 +79,7 @@ class ProductController extends Controller
             }
             else {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->orderBy('name', 'ASC')
                 ->with('image')
                 ->paginate($page);
@@ -82,12 +87,14 @@ class ProductController extends Controller
         } else if ($sort == 'name_desc') {
             if ($statusAmountSearch == "all") {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->orderBy('name', 'DESC')
                 ->with('image')
                 ->paginate($page);
             }
             else if ($statusAmountSearch == "has") {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->where("products.quantity", ">", 0)
                 ->orderBy('name', 'DESC')
                 ->with('image')
@@ -95,6 +102,7 @@ class ProductController extends Controller
             }
             else if ($statusAmountSearch == "empty") {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->where("products.quantity", "<=", 0)
                 ->orderBy('name', 'DESC')
                 ->with('image')
@@ -102,6 +110,7 @@ class ProductController extends Controller
             }
             else {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->orderBy('name', 'DESC')
                 ->with('image')
                 ->paginate($page);
@@ -109,12 +118,14 @@ class ProductController extends Controller
         } else if ($sort == 'price_asc') {
             if ($statusAmountSearch == "all") {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->orderBy('price', 'ASC')
                 ->with('image')
                 ->paginate($page);
             }
             else if ($statusAmountSearch == "has") {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->where("products.quantity", ">", 0)
                 ->orderBy('price', 'ASC')
                 ->with('image')
@@ -122,6 +133,7 @@ class ProductController extends Controller
             }
             else if ($statusAmountSearch == "empty") {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->where("products.quantity", "<=", 0)
                 ->orderBy('price', 'ASC')
                 ->with('image')
@@ -129,6 +141,7 @@ class ProductController extends Controller
             }
             else {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->orderBy('price', 'ASC')
                 ->with('image')
                 ->paginate($page);
@@ -136,12 +149,14 @@ class ProductController extends Controller
         } else if ($sort == 'price_desc') {
             if ($statusAmountSearch == "all") {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->orderBy('price', 'DESC')
                 ->with('image')
                 ->paginate($page);
             }
             else if ($statusAmountSearch == "has") {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->where("products.quantity", ">", 0)
                 ->orderBy('price', 'DESC')
                 ->with('image')
@@ -149,6 +164,7 @@ class ProductController extends Controller
             }
             else if ($statusAmountSearch == "empty") {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->where("products.quantity", "<=", 0)
                 ->orderBy('price', 'DESC')
                 ->with('image')
@@ -156,6 +172,7 @@ class ProductController extends Controller
             }
             else {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->orderBy('price', 'DESC')
                 ->with('image')
                 ->paginate($page);
@@ -163,12 +180,14 @@ class ProductController extends Controller
         } else if ($sort == 'quantity_asc') {
             if ($statusAmountSearch == "all") {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->orderBy('quantity', 'ASC')
                 ->with('image')
                 ->paginate($page);
             }
             else if ($statusAmountSearch == "has") {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->where("products.quantity", ">", 0)
                 ->orderBy('quantity', 'ASC')
                 ->with('image')
@@ -176,6 +195,7 @@ class ProductController extends Controller
             }
             else if ($statusAmountSearch == "empty") {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->where("products.quantity", "<=", 0)
                 ->orderBy('quantity', 'ASC')
                 ->with('image')
@@ -183,6 +203,7 @@ class ProductController extends Controller
             }
             else {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->orderBy('quantity', 'ASC')
                 ->with('image')
                 ->paginate($page);
@@ -190,12 +211,14 @@ class ProductController extends Controller
         } else if ($sort == 'quantity_desc') {
             if ($statusAmountSearch == "all") {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->orderBy('quantity', 'DESC')
                 ->with('image')
                 ->paginate($page);
             }
             else if ($statusAmountSearch == "has") {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->where("products.quantity", ">", 0)
                 ->orderBy('quantity', 'DESC')
                 ->with('image')
@@ -203,6 +226,7 @@ class ProductController extends Controller
             }
             else if ($statusAmountSearch == "empty") {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->where("products.quantity", "<=", 0)
                 ->orderBy('quantity', 'DESC')
                 ->with('image')
@@ -210,6 +234,7 @@ class ProductController extends Controller
             }
             else {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->orderBy('quantity', 'DESC')
                 ->with('image')
                 ->paginate($page);
@@ -217,12 +242,14 @@ class ProductController extends Controller
         } else {
             if ($statusAmountSearch == "all") {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->orderBy('updated_at', 'DESC')
                 ->with('image')
                 ->paginate($page);
             }
             else if ($statusAmountSearch == "has") {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->where("products.quantity", ">", 0)
                 ->orderBy('updated_at', 'DESC')
                 ->with('image')
@@ -230,6 +257,7 @@ class ProductController extends Controller
             }
             else if ($statusAmountSearch == "empty") {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->where("products.quantity", "<=", 0)
                 ->orderBy('updated_at', 'DESC')
                 ->with('image')
@@ -237,20 +265,32 @@ class ProductController extends Controller
             }
             else {
                 $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', 'active')
                 ->orderBy('updated_at', 'DESC')
                 ->with('image')
                 ->paginate($page);
             }
         }
 
+        if ($productStatusSearch != "" && $productStatusSearch != "active") {
+            $products = Product::where("name", "like", "%".$query."%")
+                ->where('status', $productStatusSearch)
+                ->orderBy('updated_at', 'DESC')
+                ->with('image')
+                ->paginate($page);
+        }
+
         $products->appends(['query' => $query]);
         $products->appends(['sort' => $sort]);
         $products->appends(['statusAmountSearch' => $statusAmountSearch]);
+        $products->appends(['productStatusSearch' => $productStatusSearch]);
         return view('admin.product.index', [
             'products' => $products,
             'search' => $query,
             'statusAmountSearch' => $statusAmountSearch,
-            'productAmountStatus' => $this->productAmountStatus
+            'productAmountStatus' => $this->productAmountStatus,
+            'productStatusSearch' => $productStatusSearch,
+            'productStatusTH' => $this->productStatusTH
         ]);
         // return $products;
     }
@@ -266,7 +306,8 @@ class ProductController extends Controller
         $request = $request->all();
         $query = $request['query'];
         $statusAmountSearch = $request['statusAmountSearch'];
-        return redirect("admin/products?query=".$query."&statusAmountSearch=".$statusAmountSearch);
+        $productStatusSearch = $request['productStatusSearch'];
+        return redirect("admin/products?query=".$query."&statusAmountSearch=".$statusAmountSearch."&productStatusSearch=".$productStatusSearch);
     }
 
     /**
@@ -301,7 +342,8 @@ class ProductController extends Controller
             'status' => $data['status'],
             'quantity' => $data['quantity'],
             'keyword_search' => $data['keyword_search'],
-            'company_name' => $data['company_name']
+            'company_name' => $data['company_name'],
+            'cost' => $data['cost']
             /*'expired_startdate' => $data['expired_startdate'],
             'expired_enddate' => $data['expired_enddate'],*/
             //'expired_date' => $data['expired_date'],
@@ -431,7 +473,8 @@ class ProductController extends Controller
             'status' => $data['status'],
             'quantity' => $data['quantity'],
             'keyword_search' => $data['keyword_search'],
-            'company_name' => $data['company_name']
+            'company_name' => $data['company_name'],
+            'cost' => $data['cost']
              /*'expired_startdate' => $data['expired_startdate'],
             'expired_enddate' => $data['expired_enddate'],*/
             //'expired_date' => $data['expired_date'],
@@ -510,7 +553,9 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        $product->delete();
+        //$product->delete();
+        $query_product = Product::where('slug', $product->slug)
+                        ->update(['status' => 'inactive']);
         return redirect()->back()->with('success', 'Delete Success');
             //->action([ProductController::class, 'index'])
             //->with('success', 'Delete Success');
@@ -642,14 +687,20 @@ class ProductController extends Controller
                     ->orWhere('keyword_search', "like", "%".$search."%")
                     ->where('status', 'active')
                     ->orderBy('updated_at', 'DESC');
-            })->paginate($page);  
+            })->where('status', 'active')->paginate($page);  
         }
         else {
-            $products = Product::where('name', 'like', '%'.$search.'%')
-            ->orWhere('keyword_search', "like", "%".$search."%")
-            ->where('status', 'active')
-            ->orderBy('updated_at', 'DESC')
-            ->paginate($page);
+            $products = Product::where('status', 'active')
+            ->where(function ($query) use ($search) {
+                $query->where('name', 'like', '%'.$search.'%')
+                    ->orWhere('keyword_search', "like", "%".$search."%")
+                    ->orderBy('updated_at', 'DESC');
+            })->paginate($page);  
+            //$products = Product::where('name', 'like', '%'.$search.'%')
+            //->orWhere('keyword_search', "like", "%".$search."%")
+            //->where('status', 'active')
+            //->orderBy('updated_at', 'DESC')
+            //->paginate($page);
         }
         /*
         if ($category_slug != "") {

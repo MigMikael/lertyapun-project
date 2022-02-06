@@ -167,12 +167,21 @@ class OrderController extends Controller
         $order->products;
         $order->customer->addresses;
 
+        $sum_cost = 0;
+
+        foreach ($order->products as $product) 
+        { 
+            $product_test = Product::where("slug", $product->slug)->get();
+            $sum_cost += ($product_test[0]->cost * $product->pivot->sale_quantity);
+        }
+
         // return $order;
         return view('admin.order.show', [
             'order' => $order,
             'status' => $this->orderStatusTH,
             'orderApproveOption' => $this->orderApproveOption,
             'paymentApproveOption' => $this->paymentApproveOption,
+            'sum_cost' => $sum_cost
         ]);
     }
 

@@ -25,7 +25,15 @@
 <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('company_name', 'บริษัท (แบรนด์)') !!}
     {!! Form::text('company_name', null, ['placeholder' => 'บริษัท (แบรนด์)', 'class' => 'form-control' . ($errors->has('company_name') ? ' is-invalid' : null)]) !!}
-    @error('name')
+    @error('company_name')
+        <div class="text-danger">{{ $message }}</div>
+    @enderror
+</div>
+
+<div class="form-group" style="margin-bottom: 3%">
+    {!! Form::label('cost', 'ราคาต้นทุน (ตามหน่วยพิ้นฐาน)') !!}
+    {!! Form::text('cost', null, ['placeholder' => 'ราคาต้นทุน (ตามหน่วยพิ้นฐาน)', 'class' => 'form-control' . ($errors->has('cost') ? ' is-invalid' : null)]) !!}
+    @error('cost')
         <div class="text-danger">{{ $message }}</div>
     @enderror
 </div>

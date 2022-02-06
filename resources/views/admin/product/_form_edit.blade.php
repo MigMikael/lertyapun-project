@@ -18,6 +18,11 @@
     {!! Form::text('company_name', null, ['placeholder' => 'บริษัท (แบรนด์)', 'class' => 'form-control']) !!}
 </div>
 
+<div class="form-group" style="margin-bottom: 3%">
+    {!! Form::label('cost', 'ราคาต้นทุน (ตามหน่วยพิ้นฐาน)') !!}
+    {!! Form::text('cost', null, ['placeholder' => 'ราคาต้นทุน (ตามหน่วยพิ้นฐาน)', 'class' => 'form-control']) !!}
+</div>
+
 {{-- <div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('point', 'Point') !!}
     {!! Form::text('point', null, ['placeholder' => 'Point', 'class' => 'form-control']) !!}

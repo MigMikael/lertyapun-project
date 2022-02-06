@@ -133,12 +133,12 @@ crossorigin="anonymous"></script>
             <div class="col-md-12">
                 <div class="form-group">
                     <div style="float: left">
-                        <span><strong>ชื่อร้าน</strong> {{ $order->customer->store_name }}</span><br>
-                        <span><strong>ชื่อลูกค้า</strong> {{ $order->customer->first_name }} {{ $order->customer->last_name }}</span><br>
-                        <span><strong>โทร:</strong> {{ $order->customer->phone }}</span>
+                        <span><strong>ชื่อร้าน: </strong> {{ $order->customer->store_name }}</span><br>
+                        <span><strong>ชื่อลูกค้า: </strong> {{ $order->customer->first_name }} {{ $order->customer->last_name }}</span><br>
+                        <span><strong>โทร: </strong> {{ $order->customer->phone }}</span>
                     </div>
                     <div style="float: right;">
-                        <strong>ที่อยู่:</strong> {{ $order->customer->addresses[0]->detail }} ต.{{ $order->customer->addresses[0]->subDistrict }}<br>
+                        <strong>ที่อยู่: </strong> {{ $order->customer->addresses[0]->detail }} ต.{{ $order->customer->addresses[0]->subDistrict }}<br>
                         อ.{{ $order->customer->addresses[0]->district }} จ.{{ $order->customer->addresses[0]->province }} {{ $order->customer->addresses[0]->zipcode }}<br>
                     </div>
                 </div>
@@ -214,10 +214,12 @@ crossorigin="anonymous"></script>
             <hr>
         </div>
         <div class="col-md-12">
-            <div class="form-group">
-                <h5 style="font-weight: bold;">ส่วนจัดการคำสั่งซื้อสำหรับ Admin</h5>
-            </div>
+            <h5 style="font-weight: bold; margin-bottom: 0px;">ส่วนจัดการคำสั่งซื้อสำหรับ Admin</h5>
         </div>
+        <div class="col-md-12">
+            <hr>
+        </div>
+    </div>
         <!--
         <div class="col-md-3">
             <div class="form-group">
@@ -265,66 +267,87 @@ crossorigin="anonymous"></script>
             <h6>{{ number_format($order->total_amount, 2) }} บาท</h6>
         </div>
         -->
-    </div>
-    <div class="row">
-            <div class="col-md-12">
-                <div class="table-responsive" style="margin-top: 15px;">
-                    <table class="table table-bordered table-striped">
-                        <thead>
+    <!--
+    <div class="row form-group">
+        <div class="col-md-12">
+            <div class="table-responsive" style="margin-top: 15px;">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th class="text-center">รหัสสินค้า</th>
+                            <th class="text-center">รายการ</th>
+                            <th class="text-right">จำนวน/หน่วย</th>
+                            <th class="text-right">ราคา/หน่วย</th>
+                            <th class="text-center">จัดการ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($order->products->sortBy('name') as $product)
                             <tr>
-                                <th class="text-center">#</th>
-                                <th class="text-center">รหัสสินค้า</th>
-                                <th class="text-center">รายการ</th>
-                                <th class="text-right">จำนวน/หน่วย</th>
-                                <th class="text-right">ราคา/หน่วย</th>
-                                <th class="text-center">จัดการ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($order->products->sortBy('name') as $product)
-                            <!--onclick="window.location='{{ url('admin/products/'.$product->slug) }}'"-->
-                                <tr>
-                                    <th class="text-center">{{ $loop->iteration }}</th>
-                                    <th class="text-center">{{ $product->slug }}</th>
-                                    <td><a href="{{ url('admin/products/'.$product->slug) }}" style="text-decoration: none; color: #000;">{{ $product->name }}</a></td>
-                                    <td class="text-right">
-                                        {{ number_format($product->pivot->sale_quantity) }} {{ $product->pivot->sale_unit }} <!--({{ $product->pivot->quantityPerUnit * $product->pivot->sale_quantity }} ชิ้น)-->
-                                    </td>
-                                    <td class="text-right">
-                                        {{ number_format($product->pivot->order_price / $product->pivot->sale_quantity, 2) }}
-                                    </td>
-                                    <td class="text-center">
-                                    {!! Form::model($product, [
-                                                        'method' => 'delete',
-                                                        'url' => 'admin/orderDetail/'.$product->id.'/'.$order->id.'/'.$order->slug ]) !!}
-                                                    <button class="btn btn-danger delete-product-btn" type="submit" data-product_name="{{ $product->name }}">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                    <p style="font-size: 12px; color: white">x</p>
-                                                    {!! Form::close() !!}
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                                <th class="text-center">{{ $loop->iteration }}</th>
+                                <th class="text-center">{{ $product->slug }}</th>
+                                <td><a href="{{ url('admin/products/'.$product->slug) }}" style="text-decoration: none; color: #000;">{{ $product->name }}</a></td>
+                                <td class="text-right">
+                                    {{ number_format($product->pivot->sale_quantity) }} {{ $product->pivot->sale_unit }}
+                                </td>
+                                <td class="text-right">
+                                    {{ number_format($product->pivot->order_price / $product->pivot->sale_quantity, 2) }}
+                                </td>
+                                <td class="text-center">
+                                {!! Form::model($product, ['method' => 'delete', 'url' => 'admin/orderDetail/'.$product->id.'/'.$order->id.'/'.$order->slug ]) !!}
+                                <button class="btn btn-danger delete-product-btn" type="submit" data-product_name="{{ $product->name }}">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                                <p style="font-size: 12px; color: white">x</p>
+                                {!! Form::close() !!}
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
+    </div>
+    -->
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
+            <div class="form-group">
+                <strong>ราคารวมสุทธิ</strong>
+                <p>{{ number_format($order->total_amount, 2) }}</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <strong>ราคาต้นทุนรวม</strong>
+                <p>{{ number_format($sum_cost, 2) }}</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <strong>กำไร</strong>
+                @if (floatval($order->total_amount) - floatval($sum_cost) >= 0)
+                <p style="color: #02ad02;">+ {{ number_format(floatval($order->total_amount) - floatval($sum_cost), 2) }}</p>
+                @else
+                <p style="color: #dc3545">{{ number_format(floatval($order->total_amount) - floatval($sum_cost), 2) }}</p>
+                @endif
+            </div>
+        </div>
+        <div class="col-md-4">
             <div class="form-group">
                 <strong>ที่อยู่จัดส่ง</strong>
             </div>
             @if ($order->customer->store_name != "")
                 <p>{{ $order->customer->store_name }}</span><p>
             @endif
+            <p>{{ $order->customer->first_name }} {{ $order->customer->last_name }}</p>
             <p>{{ $order->customer->addresses[0]->detail }} ต.{{ $order->customer->addresses[0]->subDistrict }}</p>
             <p>อ.{{ $order->customer->addresses[0]->district }} จ.{{ $order->customer->addresses[0]->province }}</p>
             <p>รหัสไปรษณีย์ {{ $order->customer->addresses[0]->zipcode }}</p>
             <p>โทร {{ $order->customer->phone }}</p>
             <p>อีเมล {{ $order->customer->email }}</p>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="form-group">
                 <strong>จัดส่งโดย</strong>
             </div>
