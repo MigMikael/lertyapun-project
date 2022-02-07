@@ -124,6 +124,33 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <h5>ขั้นตอนในการใช้บริการ</h5>
+                                </div>
+                                <label>1. เมื่อสั่งสินค้าในระบบเรียบร้อยแล้ว ให้คุณลูกค้า Add Line Official ของทางร้าน</label><br>
+                                <label>2. แจ้งเลขที่คำสั่งซื้อแก่เจ้าหน้าที่ของทางร้านผ่าน Line Official</label><br>
+                                <label>3. หลังจากพนักงานของร้านได้รับเลขที่คำสั่งซื้อแล้ว จะดำเนินการตรวจสอบรายการสินค้า</label><br>
+                                <label>4. เมื่อตรวจสอบเรียบร้อยแล้ว พนักงานจะปรับสถานะออเดอร์ให้รอการชำระเงิน</label><br>
+                                <label>5. ลูกค้าสามารถชำระเงินตามรายการคำสั่งซื้อ และแนบหลักฐานการชำระเงินเข้ามาในระบบ</label><br>
+                                <label>6. เมื่อเจ้าหน้าที่ตรวจสอบหลักฐานการชำระเงินเรียบร้อยแล้ว จะดำเนินการจัดส่งสินค้าแก่คุณลูกค้า</label><br>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <h5><i class="fab fa-line" style="color: green"></i> Line Official</h5>
+                                </div>
+                                <img src="https://i.ibb.co/27q6ftx/line.png" alt="line" style="height: 120px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <h5>ที่อยู่จัดส่ง</h5>
                                 </div>
                                 <label>{{ $order->customer->addresses[0]->detail }} ตำบล{{ $order->customer->addresses[0]->subDistrict }}</label><br>
