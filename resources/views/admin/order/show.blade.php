@@ -71,6 +71,8 @@ crossorigin="anonymous"></script>
             <h5 class="title">เลขที่คำสั่งซื้อ: {{ $order->slug }}  
                         @if($order->status == 'pending')
                             <span class="badge badge-warning">รอการอนุมัติ</span>
+                        @elseif($order->status == 'packing')
+                            <span class="badge badge-warning-secondary">กำลังจัดสินค้า</span>
                         @elseif($order->status == 'payment' && $order->slip_image_id == null)
                             <span class="badge badge-warning-secondary">รอการชำระเงิน</span>
                         @elseif($order->status == 'payment' && $order->slip_image_id != null)

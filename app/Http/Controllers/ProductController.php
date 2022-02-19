@@ -279,7 +279,7 @@ class ProductController extends Controller
                 ->with('image')
                 ->paginate($page);
         }
-
+        
         $products->appends(['query' => $query]);
         $products->appends(['sort' => $sort]);
         $products->appends(['statusAmountSearch' => $statusAmountSearch]);
@@ -292,7 +292,6 @@ class ProductController extends Controller
             'productStatusSearch' => $productStatusSearch,
             'productStatusTH' => $this->productStatusTH
         ]);
-        // return $products;
     }
 
     /**
@@ -344,9 +343,6 @@ class ProductController extends Controller
             'keyword_search' => $data['keyword_search'],
             'company_name' => $data['company_name'],
             'cost' => $data['cost']
-            /*'expired_startdate' => $data['expired_startdate'],
-            'expired_enddate' => $data['expired_enddate'],*/
-            //'expired_date' => $data['expired_date'],
         ];
 
         if($request->hasFile('product_image')) {
@@ -415,10 +411,7 @@ class ProductController extends Controller
         $productTags = $product->tags()->pluck('name');
 
         $promotions = Promotion::all()->pluck('name', 'slug');
-        //$productPromotions = $product->promotions()->pluck('name');
         $productPromotions = $product->promotions()->pluck('slug');
-        //dd($productPromotions);
-        //dd($productPromotions->toArray());
 
         $productImages = $product->detailImages()->get();
     
@@ -475,9 +468,6 @@ class ProductController extends Controller
             'keyword_search' => $data['keyword_search'],
             'company_name' => $data['company_name'],
             'cost' => $data['cost']
-             /*'expired_startdate' => $data['expired_startdate'],
-            'expired_enddate' => $data['expired_enddate'],*/
-            //'expired_date' => $data['expired_date'],
         ];
 
         if($request->hasFile('product_image')) {
@@ -557,8 +547,6 @@ class ProductController extends Controller
         $query_product = Product::where('slug', $product->slug)
                         ->update(['status' => 'inactive']);
         return redirect()->back()->with('success', 'Delete Success');
-            //->action([ProductController::class, 'index'])
-            //->with('success', 'Delete Success');
     }
 
     /**
@@ -571,14 +559,12 @@ class ProductController extends Controller
     {
         $data = $request->all();
         $product = Product::where('slug', $data['product_id'])->first();
-        //dd($data['promotionTag']);
+
         if ($data['promotionTag'] != null || $data['promotionTag'] != '') {
             ProductPromotion::where('product_id', $product->id)->delete();
 
             $newPromotion = $data['promotionTag'];
-            //dd($newPromotion);
             $promotion = Promotion::where('slug', $newPromotion)->first();
-            //dd($promotion);
             $productPromotion = [
                 'product_id' => $product->id,
                 'promotion_id' => $promotion->id
@@ -685,9 +671,8 @@ class ProductController extends Controller
             ->where(function ($query) use ($search) {
                 $query->where('name', 'like', '%'.$search.'%')
                     ->orWhere('keyword_search', "like", "%".$search."%")
-                    ->where('status', 'active')
                     ->orderBy('updated_at', 'DESC');
-            })->where('status', 'active')->paginate($page);  
+            })->where('status', 'active')->where("quantity", ">", 0)->paginate($page);  
         }
         else {
             $products = Product::where('status', 'active')
@@ -695,33 +680,8 @@ class ProductController extends Controller
                 $query->where('name', 'like', '%'.$search.'%')
                     ->orWhere('keyword_search', "like", "%".$search."%")
                     ->orderBy('updated_at', 'DESC');
-            })->paginate($page);  
-            //$products = Product::where('name', 'like', '%'.$search.'%')
-            //->orWhere('keyword_search', "like", "%".$search."%")
-            //->where('status', 'active')
-            //->orderBy('updated_at', 'DESC')
-            //->paginate($page);
+            })->where("quantity", ">", 0)->paginate($page);  
         }
-        /*
-        if ($category_slug != "") {
-            $category = Category::where('slug', $category_slug)->first();
-            $products = $category->products()
-                ->where('status', 'active')
-                //->where('category_id', $category->category_id)
-                ->orderBy('updated_at', 'DESC')
-                ->paginate($page);
-        } else if ($query != "") {
-            $products = Product::where('name', 'like', '%'.$query.'%')
-                ->where('status', 'active')
-                ->paginate($page)
-                ->appends(['search' => $query]);
-        } else {
-            $products = Product::where('status', 'active')
-                ->orderBy('updated_at', 'DESC')
-                ->with('image')
-                ->paginate($page);
-        }
-        */
 
         $categories = Category::all()->pluck('name', 'slug');
         return view('customer.index', [
@@ -746,7 +706,6 @@ class ProductController extends Controller
         }
 
         return redirect("customer/products?query=".$query."&category=".$category);
-        //return redirect("customer/products?query=".$query);
     }
 
     /**
@@ -766,7 +725,6 @@ class ProductController extends Controller
 
         $productType = $product->categories()->pluck('category_id');
         $productCategories = $product->categories()->pluck('category_id');
-        //$productCategories = $product->categories()->pluck('id');
         $categoryProducts = CategoryProduct::whereIn('category_id', $productCategories)->pluck('product_id');
         if (count($categoryProducts) == 0)
         {

@@ -103,6 +103,8 @@
                         <td class="text-center">
                             @if($order->order_status == 'pending')
                             <span class="badge badge-warning">รอการอนุมัติ</span>
+                            @elseif($order->order_status == 'packing')
+                            <span class="badge badge-warning-secondary">กำลังจัดสินค้า</span>
                             @elseif($order->order_status == 'payment' && $order->slip_image_id == null)
                             <span class="badge badge-warning-secondary">รอการชำระเงิน</span>
                             @elseif($order->order_status == 'payment' && $order->slip_image_id != null)

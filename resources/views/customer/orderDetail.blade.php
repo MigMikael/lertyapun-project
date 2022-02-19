@@ -18,6 +18,8 @@
                     <span>สถานะคำสั่งซื้อ: <strong>
                         @if($order->status == 'pending')
                         <span class="badge badge-warning">รอการอนุมัติ</span>
+                        @elseif($order->status == 'packing')
+                        <span class="badge badge-warning-secondary">กำลังจัดสินค้า</span>
                         @elseif($order->status == 'payment' && $order->slip_image_id == null)
                         <span class="badge badge-warning-secondary">รอการชำระเงิน</span>
                         @elseif($order->status == 'payment' && $order->slip_image_id != null)
@@ -129,7 +131,7 @@
                                 <label>1. เมื่อสั่งสินค้าในระบบเรียบร้อยแล้ว ให้คุณลูกค้า Add Line Official ของทางร้าน</label><br>
                                 <label>2. แจ้งเลขที่คำสั่งซื้อแก่พนักงานของทางร้านผ่าน Line Official</label><br>
                                 <label>3. หลังจากพนักงานของร้านได้รับเลขที่คำสั่งซื้อแล้ว จะดำเนินการตรวจสอบรายการสินค้า</label><br>
-                                <label>4. เมื่อตรวจสอบเรียบร้อยแล้ว พนักงานจะปรับสถานะออเดอร์ให้รอการชำระเงิน</label><br>
+                                <label>4. เมื่อตรวจสอบและจัดสินค้าเรียบร้อยแล้ว พนักงานจะปรับสถานะออเดอร์ให้รอการชำระเงิน</label><br>
                                 <label>5. ลูกค้าสามารถชำระเงินตามรายการคำสั่งซื้อ และแนบหลักฐานการชำระเงินเข้ามาในระบบ</label><br>
                                 <label>6. เมื่อพนักงานของร้านตรวจสอบหลักฐานการชำระเงินเรียบร้อยแล้ว จะดำเนินการจัดส่งสินค้าแก่คุณลูกค้า</label><br>
                             </div>
@@ -170,7 +172,7 @@
                 </div>
             </div>
         </div>
-        @if ($order->status != 'pending')
+        @if ($order->status != 'pending' && $order->status != 'packing')
         <div class="row">
             <div class="col-md-12">
                 <div class="card">

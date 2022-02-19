@@ -45,6 +45,10 @@
                             role="tab" aria-controls="pills-waiting-confirm" aria-selected="false">รอการอนุมัติ</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" id="pills-packing-tab" data-toggle="pill" href="#packing"
+                            role="tab" aria-controls="pills-packing" aria-selected="false">กำลังจัดสินค้า</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" id="pills-waiting-payment-tab" data-toggle="pill" href="#waiting-payment"
                             role="tab" aria-controls="pills-waiting-payment" aria-selected="false">รอการชำระเงิน</a>
                     </li>
@@ -82,6 +86,25 @@
                             @endif
                         @endforeach
                         @if ($count_waiting_confirm === 0)
+                        <div class="text-center">
+                            <img class="search-no-result-img" src="{{ url('img/no-order.png') }}">
+                            <h5>ไม่พบข้อมูลคำสั่งซื้อ</h5>
+                        </div>
+                        @endif
+                    </div>
+                    <div class="tab-pane fade" id="packing" role="tabpanel" aria-labelledby="packing-tab">
+                        <div class="hidden">
+                            {{ $count_packing = 0 }}
+                        </div>
+                        @foreach ($orders as $order)
+                            @if ($order->status == 'packing')
+                                <div class="hidden">
+                                    {{ $count_packing++ }}
+                                </div>
+                                @include('customer._orderCard')
+                            @endif
+                        @endforeach
+                        @if ($count_packing === 0)
                         <div class="text-center">
                             <img class="search-no-result-img" src="{{ url('img/no-order.png') }}">
                             <h5>ไม่พบข้อมูลคำสั่งซื้อ</h5>

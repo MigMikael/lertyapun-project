@@ -17,13 +17,15 @@
                     </strong>
                     @if($order->status == 'pending')
                         <span class="order-waiting-confirm">รอการอนุมัติ</span>
-                        @elseif($order->status == 'payment')
+                    @elseif($order->status == 'packing')
+                        <span class="order-waiting-payment">กำลังจัดสินค้า</span>
+                    @elseif($order->status == 'payment')
                         <span class="order-waiting-payment">รอการชำระเงิน</span>
-                        @elseif($order->status == 'credit')
+                    @elseif($order->status == 'credit')
                         <span class="order-primary">เครดิต</span>
-                        @elseif($order->status == 'success')
+                    @elseif($order->status == 'success')
                         <span class="order-success">สำเร็จ</span>
-                        @elseif($order->status == 'cancle')
+                    @elseif($order->status == 'cancle')
                         <span class="order-cancel">ยกเลิก</span>
                     @endif
                 </div>

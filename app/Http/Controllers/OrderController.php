@@ -22,6 +22,7 @@ class OrderController extends Controller
     use ImageTrait;
     public $orderStatus = [
         'pending' => 'Pending', // รอแอดมินอนุมัติ
+        'packing' => 'Packing', // กำลังจัดของ
         'payment' => 'WaitingPayment', // รอลูกค้ายืนยันการจ่ายเงิน
         'credit' => 'Credit', // สำเร็จแต่ยังไม่จ่ายตัง
         'success' => 'Success', // สำเร็จ
@@ -31,6 +32,7 @@ class OrderController extends Controller
     public $orderStatusTH = [
         '' => 'ทั้งหมด',
         'pending' => 'รอการอนุมัติ', // รอแอดมินอนุมัติ
+        'packing' => 'กำลังจัดสินค้า', // กำลังจัดของ
         'payment' => 'รอการชำระเงิน', // รอลูกค้ายืนยันการจ่ายเงิน
         'credit' => 'เครดิต', // สำเร็จแต่ยังไม่จ่ายตัง
         'success' => 'สำเร็จ', // สำเร็จ
