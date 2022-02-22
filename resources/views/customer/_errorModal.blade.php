@@ -1,5 +1,5 @@
 <div class="modal fade" id="errorModal">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
@@ -12,7 +12,7 @@
             </div>
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button id="closeButton" type="button" class="btn btn-danger" data-dismiss="modal" onclick="">Close</button>
+                <button id="closeButton" type="button" class="btn btn-danger" data-dismiss="modal" onclick="">ปิด</button>
             </div>
         </div>
     </div>

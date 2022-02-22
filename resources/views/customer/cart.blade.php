@@ -114,7 +114,6 @@
                                                             @else
                                                             <div>ราคา {{ number_format($productUnit->pricePerUnit, 2) }} บาท</div>
                                                             @endif
-                                                        
                                                         </option>
                                                         @endforeach
                                                     </select>
@@ -126,6 +125,11 @@
                                                     <input id="input_quantity" type="number" class="form-control" value="{{ $product->pivot->quantity }}" min="1" max="{{ $product->quantity }}">
                                                     <input id="product_slug" type="hidden" value="{{ $product->slug }}">
                                                     <!--<p style="font-size: 14px; margin-top: 5px; color: #28a745;">คงเหลือ {{ number_format($product->quantity) }} {{ $product->units['0']['unitName'] }}</p>-->
+                                                    @if ($product->quantity <= 0)
+                                                    <div class="text-center">
+                                                        <p style="font-size: 14px; margin-top: 5px; color: red;">สินค้าหมด</p>
+                                                    </div>
+                                                    @endif
                                                 </td>
                                                 <td id="action" class="text-center">
                                                     {!! Form::model($product, [

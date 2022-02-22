@@ -294,6 +294,7 @@ class OrderController extends Controller
         $sumTotalDiscount = 0;
         $sumFinalPrice = 0;
         $newOrderDetails = [];
+
         for ($i=0; $i < count($product_slug); $i++) {
             $slug = $product_slug[$i];
             $quantity = $product_quantity[$i];
@@ -308,6 +309,11 @@ class OrderController extends Controller
             if($baseQuantity > $product->quantity) {
                 return response()->json(['errors' => 'จำนวนสินค้าเกินกว่าในสต็อก กรุณารีเฟรชหน้าใหม่อีกครั้ง'], 422);
             }
+
+            if($quantity <= 0) {
+                return response()->json(['errors' => 'พบรายการสินค้าหมด กรุณาตรวจสอบรายการสินค้าอีกครั้ง'], 422);
+            }
+
             $sumWeight += $this->calculateOrderWeight($product, $baseQuantity);
 
             $totalPrice = $productUnit->pricePerUnit * $quantity;
@@ -320,15 +326,17 @@ class OrderController extends Controller
             $finalPrice = $totalPrice - $discount;
             $sumFinalPrice += $finalPrice;
 
-            $newOrderDetail = [
-                'order_id' => 0,
-                'product_id' => $product->id,
-                'sale_quantity' => $quantity,
-                'sale_unit' => $productUnit->unitName,
-                'quantityPerUnit' => $productUnit->quantityPerUnit,
-                'order_price' => $finalPrice,
-            ];
-            array_push($newOrderDetails, $newOrderDetail);
+            if ($quantity > 0) {
+                $newOrderDetail = [
+                    'order_id' => 0,
+                    'product_id' => $product->id,
+                    'sale_quantity' => $quantity,
+                    'sale_unit' => $productUnit->unitName,
+                    'quantityPerUnit' => $productUnit->quantityPerUnit,
+                    'order_price' => $finalPrice,
+                ];
+                array_push($newOrderDetails, $newOrderDetail);
+            }
         }
 
         if ($sumFinalPrice < 5000) {
