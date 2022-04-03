@@ -41,18 +41,53 @@
             <div class="form-group">
                 <p>สถานะ: @if($customer->status == 'active')
                     <span class="badge badge-success">กำลังใช้งาน</span>
-                @elseif($customer->status == 'pending')
+                    @elseif($customer->status == 'pending')
                     <span class="badge badge-warning">รอดำเนินการ</span>
-                @elseif($customer->status == 'suspend')
+                    @elseif($customer->status == 'suspend')
                     <span class="badge badge-danger-secondary">ระงับการใช้งาน</span>
-                @elseif($customer->status == 'inactive')
+                    @elseif($customer->status == 'inactive')
                     <span class="badge badge-danger">รีเซ็ตรหัสผ่าน</span>
-                @endif</p>
+                    @endif
+                </p>
             </div>
         </div>
     </div>
     <hr>
-    <!--
+    <div class="row">
+        <div class="col-md-8 col-xs-6" style="border: 0px solid black;">
+            <div class="form-group">
+                <strong>
+                    ข้อมูลที่อยู่
+                </strong>
+            </div>
+            <div class="form-group">
+                <p>
+                    ที่อยู่: {{ $address->detail }}
+                </p>
+            </div>
+            <div class="form-group">
+                <p>
+                    ตำบล/แขวง: {{ $address->subDistrict }}
+                </p>
+            </div>
+            <div class="form-group">
+                <p>
+                    อำเภอ/เขต {{ $address->district }}
+                </p>
+            </div>
+            <div class="form-group">
+                <p>
+                    จังหวัด: {{ $address->province }}
+                </p>
+            </div>
+            <div class="form-group">
+                <p>
+                    รหัสไปรษณีย์: {{ $address->zipcode }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <hr>
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
@@ -107,7 +142,6 @@
         @endif
     </div>
     <hr>
-    -->
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
@@ -134,9 +168,9 @@
 @endsection
 
 @section('script')
-    <script>
-        $('#aniimated-thumbnials').lightGallery({
-            thumbnail:true
-        });
-    </script>
+<script>
+    $('#aniimated-thumbnials').lightGallery({
+        thumbnail: true
+    });
+</script>
 @endsection

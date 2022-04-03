@@ -176,8 +176,12 @@ class CustomerController extends Controller
     public function show(Customer $customer)
     {
         // $customer = Customer::where('slug', $customer->slug)->first();
+        $customer = Customer::where('slug', $customer->slug)->first();
+        $address = $customer->addresses->first();
+
         return view('admin.customer.show', [
             'customer' => $customer,
+            'address' => $address,
             'status' => $this->customerStatusTH,
         ]);
     }
