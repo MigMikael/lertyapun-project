@@ -112,56 +112,27 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //$this->validateGuestRegister($request);
         $this->validateCustomerRegisterByAdmin($request);
         $newCustomer = $request->all();
         $newCustomer['slug'] = (new StringGenerator())->generateSlug();
         $newCustomer['password'] = Hash::make($request->password);
-        /*
-        if($request->hasFile('avatar_image')) {
-            $file = $request->file('avatar_image');
-            $image_record = $this->storeImage($file, "");
-            $newCustomer['avatar_image'] = $image_record->id;
-        }
-
-        if($request->hasFile('citizen_card_image')) {
-            $file = $request->file('citizen_card_image');
-            $image_record = $this->storeImage($file, "");
-            $newCustomer['citizen_card_image'] = $image_record->id;
-        }
-
-        if($request->hasFile('drug_store_approve_image')) {
-            $file = $request->file('drug_store_approve_image');
-            $image_record = $this->storeImage($file, "");
-            $newCustomer['drug_store_approve_image'] = $image_record->id;
-        }
-
-        if($request->hasFile('medical_license_image')) {
-            $file = $request->file('medical_license_image');
-            $image_record = $this->storeImage($file, "");
-            $newCustomer['medical_license_image'] = $image_record->id;
-        }
-
-        if($request->hasFile('commercial_register_image')) {
-            $file = $request->file('commercial_register_image');
-            $image_record = $this->storeImage($file, "");
-            $newCustomer['commercial_register_image'] = $image_record->id;
-        }
-
-        if($request->hasFile('juristic_person_image')) {
-            $file = $request->file('juristic_person_image');
-            $image_record = $this->storeImage($file, "");
-            $newCustomer['juristic_person_image'] = $image_record->id;
-        }
-
-        if($request->hasFile('vat_register_cert_image')) {
-            $file = $request->file('vat_register_cert_image');
-            $image_record = $this->storeImage($file, "");
-            $newCustomer['vat_register_cert_image'] = $image_record->id;
-        }
-        */
 
         $newCustomer = Customer::create($newCustomer);
+
+        $newCustomerAddress = [
+            'slug' => '',
+            'detail' => $request['detail'],
+            'subDistrict' => $request['subDistrict'],
+            'district' => $request['district'],
+            'province' => $request['province'],
+            'zipcode' => $request['zipcode'],
+        ];
+
+        $customer = Customer::where('slug', $newCustomer->slug)->first();
+        $newCustomerAddress['customer_id'] = $customer->id;
+        Address::where('customer_id', $customer->id)->delete();
+        Address::create($newCustomerAddress);
+
         return redirect()
             ->action([CustomerController::class, 'index'])
             ->with('success', 'Create Success');
@@ -175,7 +146,6 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        // $customer = Customer::where('slug', $customer->slug)->first();
         $customer = Customer::where('slug', $customer->slug)->first();
         $address = $customer->addresses->first();
 
@@ -194,7 +164,9 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        return view('admin.customer.edit', ['customer' => $customer, 'status' => $this->customerStatusTH]);
+        $address = $customer->addresses->first();
+
+        return view('admin.customer.edit', ['customer' => $customer, 'address' => $address, 'status' => $this->customerStatusTH]);
     }
 
     /**
@@ -214,51 +186,48 @@ class CustomerController extends Controller
             $newCustomer['password'] = Hash::make($request->password);
         }
 
-        /*
-        if($request->hasFile('avatar_image')) {
-            $file = $request->file('avatar_image');
-            $image_record = $this->storeImage($file, "");
-            $newCustomer['avatar_image'] = $image_record->id;
-        }
-
-        if($request->hasFile('citizen_card_image')) {
-            $file = $request->file('citizen_card_image');
-            $image_record = $this->storeImage($file, "");
-            $newCustomer['citizen_card_image'] = $image_record->id;
-        }
-
-        if($request->hasFile('drug_store_approve_image')) {
-            $file = $request->file('drug_store_approve_image');
-            $image_record = $this->storeImage($file, "");
-            $newCustomer['drug_store_approve_image'] = $image_record->id;
-        }
-
-        if($request->hasFile('medical_license_image')) {
-            $file = $request->file('medical_license_image');
-            $image_record = $this->storeImage($file, "");
-            $newCustomer['medical_license_image'] = $image_record->id;
-        }
-
-        if($request->hasFile('commercial_register_image')) {
-            $file = $request->file('commercial_register_image');
-            $image_record = $this->storeImage($file, "");
-            $newCustomer['commercial_register_image'] = $image_record->id;
-        }
-
-        if($request->hasFile('juristic_person_image')) {
-            $file = $request->file('juristic_person_image');
-            $image_record = $this->storeImage($file, "");
-            $newCustomer['juristic_person_image'] = $image_record->id;
-        }
-
-        if($request->hasFile('vat_register_cert_image')) {
-            $file = $request->file('vat_register_cert_image');
-            $image_record = $this->storeImage($file, "");
-            $newCustomer['vat_register_cert_image'] = $image_record->id;
-        }
-        */
-
         $customer->update($newCustomer);
+
+        $getDetail = "";
+        $getSubDistrict = "";
+        $getDistrict = "";
+        $getProvince = "";
+        $getZipcode = "";
+
+        if (!is_null($request['detail'])) {
+            $getDetail = $request['detail'];
+        }
+
+        if (!is_null($request['subDistrict'])) {
+            $getSubDistrict = $request['subDistrict'];
+        }
+
+        if (!is_null($request['district'])) {
+            $getDistrict = $request['district'];
+        }
+
+        if (!is_null($request['province'])) {
+            $getProvince = $request['province'];
+        }
+
+        if (!is_null($request['zipcode'])) {
+            $getZipcode = $request['zipcode'];
+        }
+
+        $newCustomerAddress = [
+            'detail' => $getDetail,
+            'subDistrict' => $getSubDistrict,
+            'district' => $getDistrict,
+            'province' => $getProvince,
+            'zipcode' => $getZipcode,
+        ];
+
+        $customer = Customer::where('slug', $customer->slug)->first();
+        $newCustomerAddress['customer_id'] = $customer->id;
+        
+        $address = Address::where('customer_id', $customer->id);
+        $address->update($newCustomerAddress);
+
         return redirect()
             ->action([CustomerController::class, 'index'])
             ->with('success', 'Edit Success');

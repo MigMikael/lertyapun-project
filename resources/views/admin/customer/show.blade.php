@@ -60,6 +60,7 @@
                     ข้อมูลที่อยู่
                 </strong>
             </div>
+            @if (isset($address))
             <div class="form-group">
                 <p>
                     ที่อยู่: {{ $address->detail }}
@@ -85,6 +86,13 @@
                     รหัสไปรษณีย์: {{ $address->zipcode }}
                 </p>
             </div>
+            @else
+            <div class="form-group">
+                <span>
+                    ไม่มีข้อมูล
+                </span>
+            </div>
+            @endif
         </div>
     </div>
     <hr>
@@ -101,7 +109,7 @@
         @if ($customer->citizenCardImage == null && $customer->drugStoreApproveImage == null && $customer->medicalLicenseImage == null &&
         $customer->commercialRegisterImage == null && $customer->juristicPersonImage == null && $customer->vatRegisterCertImage == null)
         <div class="col-md-12">
-            <span>ไม่พบข้อมูล</span>
+            <span>ไม่มีข้อมูล</span>
         </div>
         @endif
 
