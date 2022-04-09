@@ -905,7 +905,7 @@ class ProductController extends Controller
                 $query->where('name', 'like', '%'.$search.'%')
                     ->orWhere('keyword_search', "like", "%".$search."%")
                     ->orderBy('updated_at', 'DESC');
-            })->where('status', 'active')->where("quantity", ">", 0)->paginate($page);  
+            })->where('status', 'active')->paginate($page);  
         }
         else {
             $products = Product::where('status', 'active')
@@ -913,7 +913,7 @@ class ProductController extends Controller
                 $query->where('name', 'like', '%'.$search.'%')
                     ->orWhere('keyword_search', "like", "%".$search."%")
                     ->orderBy('updated_at', 'DESC');
-            })->where("quantity", ">", 0)->paginate($page);  
+            })->paginate($page);  
         }
 
         $categories = Category::all()->pluck('name', 'slug');

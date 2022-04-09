@@ -28,7 +28,7 @@
                         @if (isSet($search) && $search != '')
                         <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหาตาม เลขที่คำสั่งซื้อ" autocomplete="off">
                         @else
-                        <input name="query" type="text" class="form-control" placeholder="ค้นหาตาม เลขที่คำสั่งซื้อ" autocomplete="off">
+                        <input name="query" type="text" class="form-control" placeholder="ค้นหาตาม เลขที่คำสั่งซื้อ, ชื่อ, นามสกุล, ชื่อร้าน" autocomplete="off">
                         @endif
                     </div>
                     <div class="col-md-2 form-group">
@@ -88,7 +88,7 @@
                         <td>
                             {{ $order->order_slug }}
                         </td>
-                        <td>{{ \Carbon\Carbon::parse($order->order_date)->format('d/m/y') }} <br>
+                        <td>{{ \Carbon\Carbon::parse($order->order_date)->format('d/m/Y') }} <br>
                             {{ \Carbon\Carbon::parse($order->order_date)->format('H:i') }} น.
                             <!--{{ \Carbon\Carbon::parse($order->order_date)->format('H:i:s') }}--></td>
                         <td>

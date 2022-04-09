@@ -60,43 +60,57 @@ class OrderController extends Controller
     {
         $page = 10;
         $sort = $request->query('sort');
-        $query = $request->query('query');
+        $search = $request->query('query');
         $status = $request->query('status');
 
-        if($sort == 'name_asc') {
+        if($sort == 'order_date_asc') {
             $orders = Order::join('customers', 'orders.customer_id', '=', 'customers.id')
                 ->select('orders.*','orders.slug as order_slug','customers.slug as customer_slug', 'orders.status as order_status', 'customers.*')
                 /*->where("first_name", "like", "%".$query."%")
                 ->orWhere("last_name", "like", "%".$query."%")*/
-                ->Where("orders.slug", "like", "%".$query."%")
-                ->Where("orders.status", "like", "%".$status."%")
-                ->orderBy('first_name', 'ASC')
-                ->paginate($page);
-        } else if($sort == 'name_desc') {
+                //->Where("orders.slug", "like", "%".$query."%")
+                ->where(function ($query) use ($search) {
+                    $query->where('customers.first_name', 'like', '%'.$search.'%')
+                        ->orWhere('customers.last_name', "like", "%".$search."%")
+                        ->orWhere('customers.store_name', "like", "%".$search."%");
+                })->where("orders.status", "like", "%".$status."%")->orderBy('orders.created_at', 'ASC')->paginate($page);
+                //->Where("orders.status", "like", "%".$status."%")
+                //->orderBy('first_name', 'ASC')
+        } else if($sort == 'order_date_desc') {
             $orders = Order::join('customers', 'orders.customer_id', '=', 'customers.id')
-                /*->select('orders.*','orders.slug as order_slug','customers.slug as customer_slug', 'orders.status as order_status', 'customers.*')
-                ->where("first_name", "like", "%".$query."%")
-                ->orWhere("last_name", "like", "%".$query."%")*/
-                ->Where("orders.slug", "like", "%".$query."%")
-                ->Where("orders.status", "like", "%".$status."%")
-                ->orderBy('first_name', 'DESC')
-                ->paginate($page);
+                ->select('orders.*','orders.slug as order_slug','customers.slug as customer_slug', 'orders.status as order_status', 'customers.*')
+                ->where(function ($query) use ($search) {
+                    $query->where('customers.first_name', 'like', '%'.$search.'%')
+                        ->orWhere('customers.last_name', "like", "%".$search."%")
+                        ->orWhere('customers.store_name', "like", "%".$search."%");
+                })->where("orders.status", "like", "%".$status."%")->orderBy('orders.created_at', 'DESC')->paginate($page);
+                //->where("first_name", "like", "%".$query."%")
+                //->orWhere("last_name", "like", "%".$query."%")
+                //->Where("orders.slug", "like", "%".$query."%")
+                //->Where("orders.status", "like", "%".$status."%")
+                //->orderBy('first_name', 'DESC')
+                //->paginate($page);
         } else {
             $orders = Order::join('customers', 'orders.customer_id', '=', 'customers.id')
                 ->select('orders.*','orders.slug as order_slug','customers.slug as customer_slug', 'orders.status as order_status', 'customers.*')
+                ->where(function ($query) use ($search) {
+                    $query->where('customers.first_name', 'like', '%'.$search.'%')
+                        ->orWhere('customers.last_name', "like", "%".$search."%")
+                        ->orWhere('customers.store_name', "like", "%".$search."%");
+                })->where("orders.status", "like", "%".$status."%")->orderBy('orders.created_at', 'DESC')->paginate($page);
                 /*->where("first_name", "like", "%".$query."%")
                 ->orWhere("last_name", "like", "%".$query."%")*/
-                ->Where("orders.slug", "like", "%".$query."%")
-                ->Where("orders.status", "like", "%".$status."%")
-                ->orderBy('orders.updated_at', 'DESC')
-                ->paginate($page);
+                //->Where("orders.slug", "like", "%".$query."%")
+                //->Where("orders.status", "like", "%".$status."%")
+                //->orderBy('orders.updated_at', 'DESC')
+                //->paginate($page);
         }
-        $orders->appends(['query' => $query]);
+        $orders->appends(['query' => $search]);
         $orders->appends(['sort' => $sort]);
         $orders->appends(['status' => $status]);
         return view('admin.order.index', [
             'orders' => $orders,
-            'search' => $query,
+            'search' => $search,
             'status' => $status,
             'orderStatus' => $this->orderStatusTH
         ]);
@@ -306,12 +320,13 @@ class OrderController extends Controller
 
             $baseQuantity = $quantity * $productUnit->quantityPerUnit;
 
-            if($baseQuantity > $product->quantity) {
+            /*if($baseQuantity > $product->quantity) {
                 return response()->json(['errors' => 'จำนวนสินค้าเกินกว่าในสต็อก กรุณารีเฟรชหน้าใหม่อีกครั้ง'], 422);
             }
+            */
 
             if($quantity <= 0) {
-                return response()->json(['errors' => 'พบรายการสินค้าหมด กรุณาตรวจสอบรายการสินค้าอีกครั้ง'], 422);
+                return response()->json(['errors' => 'พบรายการสินค้าหมด กดปุ่ม Refresh หน้าจอ แล้วตรวจสอบรายการสินค้าอีกครั้ง'], 422);
             }
 
             $sumWeight += $this->calculateOrderWeight($product, $baseQuantity);
@@ -339,8 +354,8 @@ class OrderController extends Controller
             }
         }
 
-        if ($sumFinalPrice < 5000) {
-            return response()->json(['errors' => 'ยอดสั่งสินค้าขั้นต่ำต้องมากกว่า 5,000 บาท'], 422);
+        if ($sumFinalPrice < 7000) {
+            return response()->json(['errors' => '*ยอดสั่งสินค้าขั้นต่ำ 7,000 บาท'], 422);
         }
 
         // $shipmentPrice = $this->calculateShipmentPrice($sumWeight);

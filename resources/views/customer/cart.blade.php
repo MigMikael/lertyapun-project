@@ -382,9 +382,9 @@
             }
             */
             var finalPrice = (totalPrice - totalDiscount)/*+ shipmentPrice*/
-            if(finalPrice < 5000){
+            if(finalPrice < 7000){
                 $("#order_submit").prop('disabled', true)
-                $("#remark").text("*ยอดสั่งสินค้าขั้นต่ำ 5,000 บาท")
+                $("#remark").text("*ยอดสั่งสินค้าขั้นต่ำ 7,000 บาท")
             } else {
                 $("#order_submit").prop('disabled', false)
                 $("#remark").text("")
