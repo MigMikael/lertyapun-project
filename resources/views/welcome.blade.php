@@ -42,7 +42,7 @@
                         <i class="fa fa-shipping-fast m-auto text-primary"></i>
                     </div>
                     <h3>บริการจัดส่งฟรี</h3>
-                    <p class="lead mb-0">จัดส่งฟรีเมื่อสั่งซื้อขั้นต่ำ 5,000 บาท พื้นที่ห่างไกลคิดเพิ่มเพียง 100 บาท ให้บริการโดย Best / Flash Express</p>
+                    <p class="lead mb-0">จัดส่งฟรีเมื่อสั่งซื้อขั้นต่ำ 7,000 บาท พื้นที่ห่างไกลคิดเพิ่มเพียง 100 บาท ให้บริการโดย Best / Flash Express</p>
                 </div>
             </div>
         </div>

@@ -59,6 +59,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('name', 'ASC')
                         ->with('image');
                 })->paginate($page); 
@@ -74,6 +75,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('name', 'ASC')
                         ->with('image');
                 })->where("products.quantity", ">", 0)->paginate($page); 
@@ -90,6 +92,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('name', 'ASC')
                         ->with('image');
                 })->where("products.quantity", "<=", 0)->paginate($page); 
@@ -106,6 +109,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('name', 'ASC')
                         ->with('image');
                 })->paginate($page);
@@ -122,6 +126,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('name', 'DESC')
                         ->with('image');
                 })->paginate($page); 
@@ -137,6 +142,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('name', 'DESC')
                         ->with('image');
                 })->where("products.quantity", ">", 0)->paginate($page); 
@@ -153,6 +159,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('name', 'DESC')
                         ->with('image');
                 })->where("products.quantity", "<=", 0)->paginate($page); 
@@ -170,6 +177,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('name', 'DESC')
                         ->with('image');
                 })->paginate($page); 
@@ -186,6 +194,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('price', 'ASC')
                         ->with('image');
                 })->paginate($page); 
@@ -201,6 +210,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('price', 'ASC')
                         ->with('image');
                 })->where("products.quantity", ">", 0)->paginate($page); 
@@ -217,6 +227,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('price', 'ASC')
                         ->with('image');
                 })->where("products.quantity", "<=", 0)->paginate($page); 
@@ -233,6 +244,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('price', 'ASC')
                         ->with('image');
                 })->paginate($page); 
@@ -249,6 +261,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('price', 'DESC')
                         ->with('image');
                 })->paginate($page); 
@@ -264,6 +277,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('price', 'DESC')
                         ->with('image');
                 })->where("products.quantity", ">", 0)->paginate($page); 
@@ -280,6 +294,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('price', 'DESC')
                         ->with('image');
                 })->where("products.quantity", "<=", 0)->paginate($page);
@@ -296,6 +311,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('price', 'DESC')
                         ->with('image');
                 })->paginate($page); 
@@ -312,6 +328,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('quantity', 'ASC')
                         ->with('image');
                 })->paginate($page); 
@@ -327,6 +344,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('quantity', 'ASC')
                         ->with('image');
                 })->where("products.quantity", ">", 0)->paginate($page); 
@@ -343,6 +361,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('quantity', 'ASC')
                         ->with('image');
                 })->where("products.quantity", "<=", 0)->paginate($page);
@@ -359,6 +378,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('quantity', 'ASC')
                         ->with('image');
                 })->paginate($page); 
@@ -375,6 +395,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('quantity', 'DESC')
                         ->with('image');
                 })->paginate($page); 
@@ -390,6 +411,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('quantity', 'DESC')
                         ->with('image');
                 })->where("products.quantity", ">", 0)->paginate($page); 
@@ -406,6 +428,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('quantity', 'DESC')
                         ->with('image');
                 })->where("products.quantity", "<=", 0)->paginate($page);
@@ -422,6 +445,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('quantity', 'DESC')
                         ->with('image');
                 })->paginate($page); 
@@ -438,6 +462,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('updated_at', 'DESC')
                         ->with('image');
                 })->paginate($page); 
@@ -453,6 +478,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('updated_at', 'DESC')
                         ->with('image');
                 })->where("products.quantity", ">", 0)->paginate($page); 
@@ -469,6 +495,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('updated_at', 'DESC')
                         ->with('image');
                 })->where("products.quantity", "<=", 0)->paginate($page);
@@ -485,6 +512,7 @@ class ProductController extends Controller
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('updated_at', 'DESC')
                         ->with('image');
                 })->paginate($page); 
@@ -502,6 +530,7 @@ class ProductController extends Controller
             ->where(function ($query) use ($search) {
                 $query->where('name', 'like', '%'.$search.'%')
                     ->orWhere('keyword_search', "like", "%".$search."%")
+                    ->orWhere('barcode', "like", "%".$search."%")
                     ->orderBy('updated_at', 'DESC')
                     ->with('image');
             })->paginate($page); 
@@ -574,6 +603,7 @@ class ProductController extends Controller
             'status' => $data['status'],
             'quantity' => $data['quantity'],
             'keyword_search' => $data['keyword_search'],
+            'barcode' => $data['barcode'],
             'company_name' => $data['company_name'],
             'cost' => $data['cost']
         ];
@@ -699,6 +729,7 @@ class ProductController extends Controller
             'status' => $data['status'],
             'quantity' => $data['quantity'],
             'keyword_search' => $data['keyword_search'],
+            'barcode' => $data['barcode'],
             'company_name' => $data['company_name'],
             'cost' => $data['cost']
         ];

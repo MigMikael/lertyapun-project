@@ -14,6 +14,11 @@
 </div>
 
 <div class="form-group" style="margin-bottom: 3%">
+    {!! Form::label('barcode', 'เลขบาร์โค้ด') !!}
+    {!! Form::text('barcode', null, ['placeholder' => 'เลขบาร์โค้ด', 'class' => 'form-control']) !!}
+</div>
+
+<div class="form-group" style="margin-bottom: 3%">
     {!! Form::label('company_name', 'บริษัท (แบรนด์)') !!}
     {!! Form::text('company_name', null, ['placeholder' => 'บริษัท (แบรนด์)', 'class' => 'form-control']) !!}
 </div>
