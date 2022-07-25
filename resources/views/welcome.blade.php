@@ -151,12 +151,14 @@
         <h2 class="mb-5">ติดต่อเรา</h2>
         <div class="row">
             <div class="col-lg-4">
-                <div class="contact-box">
+                <div class="contact-box" style="min-height: 250px;">
                     <h5 class="mb-3"><i class="fas fa-map-marker-alt text-primary"></i> ที่อยู่</h5>
-                   <p>384-386 ต.ท่าเรือ<br>
+                    <p class="mb-0" style="font-size: 20px;">ร้านเลิศยาภัณฑ์<br>
+                    <p style="font-size: 20px;">384-386 ต.ท่าเรือ<br>
                     อ.ท่ามะกา จ.กาญจนบุรี 71130</p>
                 </div>
             </div>
+            <!--
             <div class="col-lg-4">
                 <div class="contact-box">
                     <h5 class="mb-3"><i class="fas fa-phone-alt text-primary"></i> เบอร์โทรศัพท์</h5>
@@ -164,24 +166,36 @@
                     095-254-4525</p>
                 </div>
             </div>
+            -->
             <div class="col-lg-4">
-                <div class="contact-box">
+                <div class="contact-box" style="min-height: 250px;">
                     <h5 class="mb-3"><i class="fas fa-clock text-primary"></i> เวลาเปิดทำการ</h5>
-                    <p class="mb-0">จันทร์ - ศุกร์ : 7.30 - 19.00 น</p>
-                    <p class="mb-0">เสาร์ : 7.30 - 12.00 น.</p>
-                    <p>อาทิตย์ : 7.30 - 19.00 น.</p>
+                    <p class="mb-0" style="font-size: 20px;">จันทร์ - ศุกร์ : 7.30 - 19.00 น</p>
+                    <p class="mb-0" style="font-size: 20px;">เสาร์ : 7.30 - 12.00 น.</p>
+                    <p style="font-size: 20px;">อาทิตย์ : 7.30 - 19.00 น.</p>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="contact-box">
+            <div class="col-lg-4">
+                <div class="contact-box" style="min-height: 250px;">
                     <h5><i class="fab fa-facebook" style="color: #1b74e4;"></i> Facebook</h5>
+                    <p class="mb-0" style="font-size: 20px;"><a href="https://www.facebook.com/Lertyaphan" target="_blank">facebook.com/Lertyaphan</a></span></p>
                     <img src="https://i.ibb.co/nCgL9GV/fb.png" alt="fb" style="height: 120px;">
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="contact-box">
-                    <h5><i class="fab fa-line" style="color: green"></i> Line Official</h5>
+                <div class="contact-box" style="min-height: 250px;">
+                    <h5><i class="fab fa-line" style="color: green"></i> ร้านยา / ขายส่ง</h5>
+                    <p class="mb-0" style="font-size: 20px;">@lertyaphan <span>(มี @ นำหน้า)</span></p>
+                    <p class="mb-0" style="font-size: 20px;">โทร 095-254-4525</p>
                     <img src="https://i.ibb.co/27q6ftx/line.png" alt="line" style="height: 120px;">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="contact-box" style="min-height: 250px;">
+                    <h5><i class="fab fa-line" style="color: green"></i> ร้านยา / ขายปลีก</h5>
+                    <p class="mb-0" style="font-size: 20px;">@lyp007 <span>(มี @ นำหน้า)</span></p>
+                    <p class="mb-0" style="font-size: 20px;">โทร 034-561128</p>
+                    <img src="https://i.ibb.co/2qJBv2T/294633317-1997034553815507-3499732937996048111-n.png" alt="line" style="height: 120px;">
                 </div>
             </div>
             <div class="col-lg-12">
@@ -198,7 +212,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <p class="text-muted text-center" style="margin-top: 5px; margin-bottom: 0px !important;">&copy; LERTYAPHAN 2021. All Rights Reserved.</p>
+                <p class="text-muted text-center" style="margin-top: 5px; margin-bottom: 0px !important;">&copy; LERTYAPHAN 2022. All Rights Reserved.</p>
             </div>
         </div>
     </div>
