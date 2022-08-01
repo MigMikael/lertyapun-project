@@ -185,8 +185,8 @@ class OrderController extends Controller
 
         $sum_cost = 0;
 
-        foreach ($order->products as $product) 
-        { 
+        foreach ($order->products as $product)
+        {
             $product_test = Product::where("slug", $product->slug)->get();
             $sum_cost += ($product_test[0]->cost * $product->pivot->sale_quantity);
         }
@@ -354,8 +354,8 @@ class OrderController extends Controller
             }
         }
 
-        if ($sumFinalPrice < 7000) {
-            return response()->json(['errors' => '*ยอดสั่งสินค้าขั้นต่ำ 7,000 บาท'], 422);
+        if ($sumFinalPrice < 7500) {
+            return response()->json(['errors' => '*ยอดสั่งสินค้าขั้นต่ำ 7,500 บาท'], 422);
         }
 
         // $shipmentPrice = $this->calculateShipmentPrice($sumWeight);

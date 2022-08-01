@@ -70,7 +70,7 @@
                                                         <figcaption class="info">
                                                             <a href="{{ url('customer/products/'.$product->slug) }}" class="title text-dark">
                                                                 <strong style="font-weight: 500;">{{ $product->name }}</strong>
-                                                                
+
                                                                 @if(count($product->promotions) > 0)
                                                                     @foreach ($product->promotions->reverse() as $promotion)
                                                                         <span class="badge badge-danger hidden" style="font-weight: normal" id="promotion_name">
@@ -88,7 +88,7 @@
                                                                 @else
                                                                     <span class="badge badge-danger hidden" style="font-weight: normal; display: none" id="promotion_name">0</span>
                                                                 @endif
-                                                                
+
                                                             </a>
                                                         </figcaption>
                                                     </figure>
@@ -101,7 +101,7 @@
                                                             @if(!$loop->first)
                                                             : {{ $productUnit->quantityPerUnit }} {{ $product->units['0']['unitName'] }}
                                                             @endif
-                                                            
+
                                                             @if(count($product->promotions) != 0)
                                                             @foreach ($product->promotions->reverse() as $promotion)
                                                             <div>ราคา
@@ -117,9 +117,9 @@
                                                         </option>
                                                         @endforeach
                                                     </select>
-                                                    
+
                                                     <p class="hidden" id="discount_price_container" style="color: red;font-size: 14px; margin-top: 5px;">ลดราคาเหลือ <span id="discount_price">0</span> บาท</p>
-                                                    
+
                                                 </td>
                                                 <td id="quantity">
                                                     <input id="input_quantity" type="number" class="form-control" value="{{ $product->pivot->quantity }}" min="1" max="{{ $product->quantity }}">
@@ -153,7 +153,7 @@
                     </div>
                 </div>
             </main>
-            
+
             <div class="col-md-6">
                 <div class="card mb-3">
                     <div class="card-body">
@@ -382,9 +382,9 @@
             }
             */
             var finalPrice = (totalPrice - totalDiscount)/*+ shipmentPrice*/
-            if(finalPrice < 7000){
+            if(finalPrice < 7500){
                 $("#order_submit").prop('disabled', true)
-                $("#remark").text("*ยอดสั่งสินค้าขั้นต่ำ 7,000 บาท")
+                $("#remark").text("*ยอดสั่งสินค้าขั้นต่ำ 7,500 บาท")
             } else {
                 $("#order_submit").prop('disabled', false)
                 $("#remark").text("")
