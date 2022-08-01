@@ -77,7 +77,8 @@
                 <div class="row">
                     <div class="col-md-12 pagination-wrapper" style="justify-content: center; align-items: center;">
                         <!--{{ $products->render("pagination::bootstrap-4") }}-->
-                        {{ $products->appends(['query' => $search])->links("pagination::bootstrap-4") }}
+                        <!--{{ $products->appends(['query' => $search, 'category' => $currentCategory])->links("pagination::bootstrap-4") }}-->
+                        {{ $products->withQueryString()->links("pagination::bootstrap-4") }}
                     </div>
                 </div>
             </main>

@@ -62,8 +62,8 @@ class ProductController extends Controller
                         ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('name', 'ASC')
                         ->with('image');
-                })->paginate($page); 
-                
+                })->paginate($page);
+
                 /*$products = Product::where("name", "like", "%".$query."%")
                 ->where('status', 'active')
                 ->orderBy('name', 'ASC')
@@ -78,7 +78,7 @@ class ProductController extends Controller
                         ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('name', 'ASC')
                         ->with('image');
-                })->where("products.quantity", ">", 0)->paginate($page); 
+                })->where("products.quantity", ">", 0)->paginate($page);
 
                 /*$products = Product::where("name", "like", "%".$query."%")
                 ->where('status', 'active')
@@ -95,7 +95,7 @@ class ProductController extends Controller
                         ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('name', 'ASC')
                         ->with('image');
-                })->where("products.quantity", "<=", 0)->paginate($page); 
+                })->where("products.quantity", "<=", 0)->paginate($page);
 
                 /*$products = Product::where("name", "like", "%".$query."%")
                 ->where('status', 'active')
@@ -129,7 +129,7 @@ class ProductController extends Controller
                         ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('name', 'DESC')
                         ->with('image');
-                })->paginate($page); 
+                })->paginate($page);
 
                 /*$products = Product::where("name", "like", "%".$query."%")
                 ->where('status', 'active')
@@ -145,7 +145,7 @@ class ProductController extends Controller
                         ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('name', 'DESC')
                         ->with('image');
-                })->where("products.quantity", ">", 0)->paginate($page); 
+                })->where("products.quantity", ">", 0)->paginate($page);
 
                 /*$products = Product::where("name", "like", "%".$query."%")
                 ->where('status', 'active')
@@ -162,7 +162,7 @@ class ProductController extends Controller
                         ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('name', 'DESC')
                         ->with('image');
-                })->where("products.quantity", "<=", 0)->paginate($page); 
+                })->where("products.quantity", "<=", 0)->paginate($page);
 
                 /*
                 $products = Product::where("name", "like", "%".$query."%")
@@ -180,8 +180,8 @@ class ProductController extends Controller
                         ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('name', 'DESC')
                         ->with('image');
-                })->paginate($page); 
-                
+                })->paginate($page);
+
                 /*$products = Product::where("name", "like", "%".$query."%")
                 ->where('status', 'active')
                 ->orderBy('name', 'DESC')
@@ -197,7 +197,7 @@ class ProductController extends Controller
                         ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('price', 'ASC')
                         ->with('image');
-                })->paginate($page); 
+                })->paginate($page);
 
                 /*$products = Product::where("name", "like", "%".$query."%")
                 ->where('status', 'active')
@@ -213,7 +213,7 @@ class ProductController extends Controller
                         ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('price', 'ASC')
                         ->with('image');
-                })->where("products.quantity", ">", 0)->paginate($page); 
+                })->where("products.quantity", ">", 0)->paginate($page);
 
                 /*$products = Product::where("name", "like", "%".$query."%")
                 ->where('status', 'active')
@@ -230,7 +230,7 @@ class ProductController extends Controller
                         ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('price', 'ASC')
                         ->with('image');
-                })->where("products.quantity", "<=", 0)->paginate($page); 
+                })->where("products.quantity", "<=", 0)->paginate($page);
 
                 /*$products = Product::where("name", "like", "%".$query."%")
                 ->where('status', 'active')
@@ -247,7 +247,7 @@ class ProductController extends Controller
                         ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('price', 'ASC')
                         ->with('image');
-                })->paginate($page); 
+                })->paginate($page);
 
                 /*$products = Product::where("name", "like", "%".$query."%")
                 ->where('status', 'active')
@@ -264,7 +264,7 @@ class ProductController extends Controller
                         ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('price', 'DESC')
                         ->with('image');
-                })->paginate($page); 
+                })->paginate($page);
 
                 /*$products = Product::where("name", "like", "%".$query."%")
                 ->where('status', 'active')
@@ -280,7 +280,7 @@ class ProductController extends Controller
                         ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('price', 'DESC')
                         ->with('image');
-                })->where("products.quantity", ">", 0)->paginate($page); 
+                })->where("products.quantity", ">", 0)->paginate($page);
 
                 /*$products = Product::where("name", "like", "%".$query."%")
                 ->where('status', 'active')
@@ -314,7 +314,7 @@ class ProductController extends Controller
                         ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('price', 'DESC')
                         ->with('image');
-                })->paginate($page); 
+                })->paginate($page);
 
                 /*$products = Product::where("name", "like", "%".$query."%")
                 ->where('status', 'active')
@@ -331,7 +331,7 @@ class ProductController extends Controller
                         ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('quantity', 'ASC')
                         ->with('image');
-                })->paginate($page); 
+                })->paginate($page);
 
                 /*$products = Product::where("name", "like", "%".$query."%")
                 ->where('status', 'active')
@@ -347,7 +347,7 @@ class ProductController extends Controller
                         ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('quantity', 'ASC')
                         ->with('image');
-                })->where("products.quantity", ">", 0)->paginate($page); 
+                })->where("products.quantity", ">", 0)->paginate($page);
 
                 /*$products = Product::where("name", "like", "%".$query."%")
                 ->where('status', 'active')
@@ -365,7 +365,7 @@ class ProductController extends Controller
                         ->orderBy('quantity', 'ASC')
                         ->with('image');
                 })->where("products.quantity", "<=", 0)->paginate($page);
-                
+
                 /*$products = Product::where("name", "like", "%".$query."%")
                 ->where('status', 'active')
                 ->where("products.quantity", "<=", 0)
@@ -381,7 +381,7 @@ class ProductController extends Controller
                         ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('quantity', 'ASC')
                         ->with('image');
-                })->paginate($page); 
+                })->paginate($page);
 
                 /*$products = Product::where("name", "like", "%".$query."%")
                 ->where('status', 'active')
@@ -398,7 +398,7 @@ class ProductController extends Controller
                         ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('quantity', 'DESC')
                         ->with('image');
-                })->paginate($page); 
+                })->paginate($page);
 
                 /*$products = Product::where("name", "like", "%".$query."%")
                 ->where('status', 'active')
@@ -414,7 +414,7 @@ class ProductController extends Controller
                         ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('quantity', 'DESC')
                         ->with('image');
-                })->where("products.quantity", ">", 0)->paginate($page); 
+                })->where("products.quantity", ">", 0)->paginate($page);
 
                 /*$products = Product::where("name", "like", "%".$query."%")
                 ->where('status', 'active')
@@ -448,7 +448,7 @@ class ProductController extends Controller
                         ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('quantity', 'DESC')
                         ->with('image');
-                })->paginate($page); 
+                })->paginate($page);
 
                 /*$products = Product::where("name", "like", "%".$query."%")
                 ->where('status', 'active')
@@ -465,7 +465,7 @@ class ProductController extends Controller
                         ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('updated_at', 'DESC')
                         ->with('image');
-                })->paginate($page); 
+                })->paginate($page);
 
                 /*$products = Product::where("name", "like", "%".$query."%")
                 ->where('status', 'active')
@@ -481,7 +481,7 @@ class ProductController extends Controller
                         ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('updated_at', 'DESC')
                         ->with('image');
-                })->where("products.quantity", ">", 0)->paginate($page); 
+                })->where("products.quantity", ">", 0)->paginate($page);
 
                 /*$products = Product::where("name", "like", "%".$query."%")
                 ->where('status', 'active')
@@ -515,7 +515,7 @@ class ProductController extends Controller
                         ->orWhere('barcode', "like", "%".$search."%")
                         ->orderBy('updated_at', 'DESC')
                         ->with('image');
-                })->paginate($page); 
+                })->paginate($page);
 
                 /*$products = Product::where("name", "like", "%".$query."%")
                 ->where('status', 'active')
@@ -533,7 +533,7 @@ class ProductController extends Controller
                     ->orWhere('barcode', "like", "%".$search."%")
                     ->orderBy('updated_at', 'DESC')
                     ->with('image');
-            })->paginate($page); 
+            })->paginate($page);
 
             /*$products = Product::where("name", "like", "%".$query."%")
                 ->where('status', $productStatusSearch)
@@ -541,7 +541,7 @@ class ProductController extends Controller
                 ->with('image')
                 ->paginate($page);*/
         }
-        
+
         $products->appends(['query' => $search]);
         $products->appends(['sort' => $sort]);
         $products->appends(['statusAmountSearch' => $statusAmountSearch]);
@@ -677,7 +677,7 @@ class ProductController extends Controller
         $productPromotions = $product->promotions()->pluck('slug');
 
         $productImages = $product->detailImages()->get();
-    
+
         // return $productImages;
         return view('admin.product.show', [
             'product' => $product,
@@ -866,7 +866,7 @@ class ProductController extends Controller
     {
         $data = $request->all();
         $product = Product::where('slug', $data['product_id'])->first();
-        
+
         if ($data['categoryTag'] != "") {
             CategoryProduct::where('product_id', $product->id)->delete();
 
@@ -923,7 +923,7 @@ class ProductController extends Controller
      */
     public function indexCustomerProduct(Request $request)
     {
-        $page = 40;
+        $page = 20;
         $query = "";
         $category = [];
         $category_slug = $request->query('category');
@@ -936,7 +936,7 @@ class ProductController extends Controller
                 $query->where('name', 'like', '%'.$search.'%')
                     ->orWhere('keyword_search', "like", "%".$search."%")
                     ->orderBy('updated_at', 'DESC');
-            })->where('status', 'active')->paginate($page);  
+            })->where('status', 'active')->paginate($page);
         }
         else {
             $products = Product::where('status', 'active')
@@ -944,7 +944,7 @@ class ProductController extends Controller
                 $query->where('name', 'like', '%'.$search.'%')
                     ->orWhere('keyword_search', "like", "%".$search."%")
                     ->orderBy('updated_at', 'DESC');
-            })->paginate($page);  
+            })->paginate($page);
         }
 
         $categories = Category::all()->pluck('name', 'slug');
@@ -1032,7 +1032,7 @@ class ProductController extends Controller
         $products = Product::has('promotions')
             ->where('status', 'active')
             ->with('promotions')
-            ->paginate(40);
+            ->paginate(20);
         return view('customer.promotion', [
             'products' => $products
         ]);
