@@ -77,7 +77,7 @@
                             {{ $customers->firstItem() + $loop->index }}
                         </th>
                         <td>
-                            {{ $customer->company_name }}
+                            {{ $customer->store_name }}
                         </td>
                         <td>
                             {{ $customer->first_name }} {{ $customer->last_name }}
