@@ -61,6 +61,7 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
+                <th scope="col">ชื่อร้าน</th>
                 <th scope="col">ชื่อ-นามสกุล</th>
                 <th scope="col">อีเมล</th>
                 <th scope="col">เบอร์โทรศัพท์</th>
@@ -75,6 +76,9 @@
                         <th>
                             {{ $customers->firstItem() + $loop->index }}
                         </th>
+                        <td>
+                            {{ $customer->company_name }}
+                        </td>
                         <td>
                             {{ $customer->first_name }} {{ $customer->last_name }}
                         </td>
