@@ -205,6 +205,15 @@ crossorigin="anonymous"></script>
                                     {{ number_format($order->total_amount, 2) }}
                                 </td>
                             </tr>
+                            <tr>
+                                <td colspan="4"></td>
+                                <td class="text-right">
+                                    <strong>จัดส่งโดย</strong>
+                                </td>
+                                <td class="text-right">
+                                    {{ $order->shipment_method }}
+                                </td>
+                            </tr>
                         </tfoot>
                     </table>
                 </div>
