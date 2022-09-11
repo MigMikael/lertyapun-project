@@ -34,10 +34,10 @@
     }
 
     .order-header-wrapper > .order-header {
-        display: inline-block; 
-        width: 300px; 
-        height: 40px; 
-        border: 2px solid #000; 
+        display: inline-block;
+        width: 300px;
+        height: 40px;
+        border: 2px solid #000;
         position: relative;
     }
 
@@ -49,10 +49,10 @@
 
     @media (max-width: 319.98px) {
         .order-header-wrapper > .order-header {
-            display: inline-block; 
-            width: 100%; 
-            height: 55px; 
-            border: 2px solid #000; 
+            display: inline-block;
+            width: 100%;
+            height: 55px;
+            border: 2px solid #000;
             position: relative;
         }
     }
@@ -68,13 +68,13 @@ crossorigin="anonymous"></script>
 <div class="admin-container">
     <div class="row">
         <div class="col-md-6">
-            <h5 class="title">เลขที่คำสั่งซื้อ: {{ $order->slug }}  
+            <h5 class="title">เลขที่คำสั่งซื้อ: {{ $order->slug }}
                         @if($order->status == 'pending')
                             <span class="badge badge-warning">รอการอนุมัติ</span>
                         @elseif($order->status == 'packing')
                             <span class="badge badge-warning-secondary">กำลังจัดสินค้า</span>
                         @elseif($order->status == 'payment' && $order->slip_image_id == null)
-                            <span class="badge badge-warning-secondary">รอการชำระเงิน</span>
+                            <span class="badge btn-info">รอการชำระเงิน</span>
                         @elseif($order->status == 'payment' && $order->slip_image_id != null)
                             <span class="badge badge-warning-secondary">รอยืนยันการชำระเงิน</span>
                         @elseif($order->status == 'credit')
@@ -315,6 +315,18 @@ crossorigin="anonymous"></script>
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
+                <strong>รวมการสั่งซื้อ</strong>
+                <p>{{ number_format($order->total_amount - $order->shipment_price, 2) }}</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <strong>ค่าจัดส่งสินค้า</strong>
+                <p>{{ number_format($order->shipment_price, 2) }}</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
                 <strong>ราคารวมสุทธิ</strong>
                 <p>{{ number_format($order->total_amount, 2) }}</p>
             </div>
@@ -335,7 +347,7 @@ crossorigin="anonymous"></script>
                 @endif
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-12">
             <div class="form-group">
                 <strong>ที่อยู่จัดส่ง</strong>
             </div>

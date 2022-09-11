@@ -106,7 +106,7 @@
                             @elseif($order->order_status == 'packing')
                             <span class="badge badge-warning-secondary">กำลังจัดสินค้า</span>
                             @elseif($order->order_status == 'payment' && $order->slip_image_id == null)
-                            <span class="badge badge-warning-secondary">รอการชำระเงิน</span>
+                            <span class="badge btn-info">รอการชำระเงิน</span>
                             @elseif($order->order_status == 'payment' && $order->slip_image_id != null)
                             <span class="badge badge-warning-secondary">รอยืนยันการชำระเงิน</span>
                             @elseif($order->order_status == 'credit')

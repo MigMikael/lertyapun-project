@@ -21,7 +21,7 @@
                         @elseif($order->status == 'packing')
                         <span class="badge badge-warning-secondary">กำลังจัดสินค้า</span>
                         @elseif($order->status == 'payment' && $order->slip_image_id == null)
-                        <span class="badge badge-warning-secondary">รอการชำระเงิน</span>
+                        <span class="badge btn-info">รอการชำระเงิน</span>
                         @elseif($order->status == 'payment' && $order->slip_image_id != null)
                         <span class="badge badge-warning-secondary">รอยืนยันการชำระเงิน</span>
                         @elseif($order->status == 'credit')
@@ -209,7 +209,7 @@
                                                 <img src="{{ URL::asset('img/bank/other-bank.jpg') }}" style="width: 50px;">
                                                 @endif
                                               </td>
-                                              <td>                                            
+                                              <td>
                                                 <label style="font-weight: 700;">ธนาคาร{{ config('constants.bankNames')[$bank->bank_name] }}</label><br>
                                                 <label>เลขบัญชี {{ $bank->account_no }}</label><br>
                                                 <label>ชื่อบัญชี {{ $bank->account_name }}</label><br>
