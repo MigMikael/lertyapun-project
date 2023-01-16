@@ -89,6 +89,12 @@ Route::group(['prefix' => 'customer', 'middleware' => 'customerAuth'], function 
 Route::group(['prefix' => 'admin', 'middleware' => 'adminAuth'], function () {
     Route::get('', [AdminController::class, 'dashboard']);
     Route::get('dashboard',  [AdminController::class, 'dashboard']);
+    Route::get('super_admins', [AdminController::class, 'index']);
+    Route::post('super_admins', [AdminController::class, 'store']);
+    Route::get('super_admins/create', [AdminController::class, 'create']);
+    Route::post('super_admins/search', [AdminController::class, 'search']);
+    Route::get('super_admins/{super_admin:slug}/edit', [AdminController::class, 'edit']);
+    Route::put('super_admins/{super_admin:slug}', [AdminController::class, 'update']);
 
     Route::get('products', [ProductController::class, 'index']);
     Route::post('products', [ProductController::class, 'store']);
