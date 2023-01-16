@@ -74,6 +74,7 @@ Route::group(['prefix' => 'customer', 'middleware' => 'customerAuth'], function 
 
         Route::get('cart', [CustomerProductController::class, 'index']);
         Route::post('cart', [CustomerProductController::class, 'store']);
+        Route::put('cart/{product:slug}', [CustomerProductController::class, 'updateCartQuantity']);
         Route::delete('cart/{product:slug}', [CustomerProductController::class, 'destroy']);
         Route::get('cart/product/count', [CustomerProductController::class, 'productCount']);
     });

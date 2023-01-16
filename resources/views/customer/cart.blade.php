@@ -122,7 +122,7 @@
 
                                                 </td>
                                                 <td id="quantity">
-                                                    <input id="input_quantity" type="number" class="form-control" value="{{ $product->pivot->quantity }}" min="1" max="{{ $product->quantity }}">
+                                                    <input id="input_quantity" type="number" class="form-control quantity_{{ $product->slug }}" value="{{ $product->pivot->quantity }}" min="1" max="{{ $product->quantity }}">
                                                     <input id="product_slug" type="hidden" value="{{ $product->slug }}">
                                                     <!--<p style="font-size: 14px; margin-top: 5px; color: #28a745;">คงเหลือ {{ number_format($product->quantity) }} {{ $product->units['0']['unitName'] }}</p>-->
                                                     @if ($product->quantity <= 0)
@@ -254,10 +254,33 @@
 @endsection
 
 @section('script')
-<script src="{{ URL::asset('vendor/bootstrap/js/bootstrap-input-spinner.js') }}"></script>
-<script>
-    $("input[type='number']").inputSpinner()
-</script>
+    <script src="{{ URL::asset('vendor/bootstrap/js/bootstrap-input-spinner.js') }}"></script>
+    @foreach ($customer->cart as $product)
+    <script>
+        $(".quantity_{{ $product->slug }}").on("change", function (event) {
+            newValue = $(this).val()
+            console.log("quantity_{{ $product->slug }}", newValue)
+
+            $.ajax({
+                type: "put",
+                url: "{{ url('customer/cart') }}/{{ $product->slug }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "quantity": newValue,
+                },
+                success: function(result) {
+                    console.log("success", result);
+                },
+                error: function(result) {
+                    console.log('error', result);
+                }
+            });
+        })
+    </script>
+    @endforeach
+    <script>
+        $("input[type='number']").inputSpinner()
+    </script>
     <script>
         function calculateDiscount() {
             var prices = []

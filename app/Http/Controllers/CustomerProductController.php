@@ -150,6 +150,31 @@ class CustomerProductController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function updateCartQuantity(Request $request, Product $product)
+    {
+        $authCustomer = auth()->guard('customer')->user();
+        $customer = Customer::where('slug', $authCustomer->slug)->first();
+        $data = $request->all();
+        $quantity = $data["quantity"];
+
+        Log::info($quantity);
+
+        if ($quantity <= $product->quantity) {
+            $customerProduct = CustomerProduct::where('customer_id', $customer->id)
+                ->where('product_id', $product->id)
+                ->first();
+            $customerProduct->update(['quantity' => $data["quantity"]]);
+        }
+        return "update quantity success";
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Product  $product
