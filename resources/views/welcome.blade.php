@@ -42,7 +42,7 @@
                         <i class="fa fa-shipping-fast m-auto text-primary"></i>
                     </div>
                     <h3>บริการจัดส่งฟรี</h3>
-                    <p class="lead mb-0">จัดส่งฟรีเมื่อสั่งซื้อขั้นต่ำ 7,500 บาท พื้นที่ห่างไกลคิดเพิ่มเพียง 100 บาท ให้บริการโดย Best / Flash Express</p>
+                    <p class="lead mb-0">จัดส่งฟรีเมื่อสั่งซื้อขั้นต่ำ 7,500 บาท พื้นที่ห่างไกลคิดเพิ่มเพียง 100 บาท ให้บริการโดย Kerry / Flash Express</p>
                 </div>
             </div>
         </div>
@@ -86,7 +86,7 @@
             <div class="col-lg-6 order-lg-1 my-auto showcase-text">
                 <h2>บริการจัดส่งฟรี</h2>
                 <p class="lead mb-2">ร้านของเรามีบริการจัดส่งสินค้าทั่วประเทศไทย เราตั้งใจส่งมอบสินค้าที่ดี มีคุณภาพและปลอดภัย เพื่อให้คุณได้ใช้ชีวิตประจำวันอย่างเต็มที่และมีคุณภาพ</p>
-                <p class="lead mb-0">บริการจัดส่งฟรีเมื่อสั่งซื้อขั้นต่ำ 5,000 บาท พื้นที่ห่างไกลคิดเพิ่มเพียง 100 บาท ให้บริการโดยบริษัทขนส่งเอกชนชั้นนำ Best / Flash Express เป็นขนส่งหลัก</p>
+                <p class="lead mb-0">บริการจัดส่งฟรีเมื่อสั่งซื้อขั้นต่ำ 7,500 บาท พื้นที่ห่างไกลคิดเพิ่มเพียง 100 บาท ให้บริการโดยบริษัทขนส่งเอกชนชั้นนำ Kerry / Flash Express เป็นขนส่งหลัก</p>
             </div>
         </div>
     </div>
@@ -192,7 +192,7 @@
             </div>
             <div class="col-lg-6">
                 <div class="contact-box" style="min-height: 250px;">
-                    <h5><i class="fab fa-line" style="color: green"></i> ร้านยา / ขายปลีก</h5>
+                    <h5><i class="fab fa-line" style="color: green"></i> สอบถามข้อมูลยา ราคาสินค้า เพิ่มเติมได้ที่</h5>
                     <p class="mb-0" style="font-size: 20px;">@lyp007 <span>(มี @ นำหน้า)</span></p>
                     <p class="mb-0" style="font-size: 20px;">โทร 034-561128</p>
                     <img src="https://i.ibb.co/2qJBv2T/294633317-1997034553815507-3499732937996048111-n.png" alt="line" style="height: 120px;">
@@ -212,7 +212,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <p class="text-muted text-center" style="margin-top: 5px; margin-bottom: 0px !important;">&copy; LERTYAPHAN 2022. All Rights Reserved.</p>
+                <p class="text-muted text-center" style="margin-top: 5px; margin-bottom: 0px !important;">&copy; LERTYAPHAN <?php echo date("Y"); ?>. All Rights Reserved.</p>
             </div>
         </div>
     </div>
