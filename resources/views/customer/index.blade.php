@@ -23,7 +23,7 @@
                 <div class="row">
                     <div class="col-md-4 form-group">
                         <select class="form-control select-product-category" name="category" style="width: 100%;">
-                            <option value="">สินค้าทั้งหมด</option>
+                            <option value="all">สินค้าทั้งหมด</option>
                             @foreach($categories as $key => $category)
                             @if ($currentCategorySlug == $key)
                             <option value="{{ $key }}" selected>{{ $category }}</option>

@@ -930,6 +930,26 @@ class ProductController extends Controller
         $search = $request->query('query');
 
         if ($category_slug != "") {
+            if ($category_slug == "all") {
+                $products = Product::where('status', 'active')
+                ->where(function ($query) use ($search) {
+                    $query->where('name', 'like', '%'.$search.'%')
+                        ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orderBy('updated_at', 'DESC');
+                })->paginate($page);
+            }
+            else {
+                $category = Category::where('slug', $category_slug)->first();
+                $products = $category->products()
+                ->where(function ($query) use ($search) {
+                    $query->where('name', 'like', '%'.$search.'%')
+                        ->orWhere('keyword_search', "like", "%".$search."%")
+                        ->orderBy('updated_at', 'DESC');
+                })->where('status', 'active')->paginate($page);
+            }
+        }
+        else {
+            $category_slug = "WGNVqKwiy10h19nVDG2wZxucDNMupVcf12FQBQZK";
             $category = Category::where('slug', $category_slug)->first();
             $products = $category->products()
             ->where(function ($query) use ($search) {
@@ -937,14 +957,6 @@ class ProductController extends Controller
                     ->orWhere('keyword_search', "like", "%".$search."%")
                     ->orderBy('updated_at', 'DESC');
             })->where('status', 'active')->paginate($page);
-        }
-        else {
-            $products = Product::where('status', 'active')
-            ->where(function ($query) use ($search) {
-                $query->where('name', 'like', '%'.$search.'%')
-                    ->orWhere('keyword_search', "like", "%".$search."%")
-                    ->orderBy('updated_at', 'DESC');
-            })->paginate($page);
         }
 
         $categories = Category::all()->pluck('name', 'slug');
