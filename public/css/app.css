@@ -45,7 +45,7 @@ body {
 }
 
 .card-product-grid .fix-height {
-    height: 80px;
+    height: 150px;
     overflow: hidden;
 }
 
@@ -181,7 +181,7 @@ body.loading .overlay{
 }
 
 .login-wrapper {
-    padding: 25px; 
+    padding: 25px;
     background: #FFF;
 }
 
@@ -327,12 +327,12 @@ nav {
 */
 
 .admin-search-wrapper {
-    padding-top: 10px; 
+    padding-top: 10px;
     padding-bottom: 20px;
 }
 
 .admin-img-table {
-    max-height: 120px; 
+    max-height: 120px;
     max-width: 120px;
 }
 
@@ -379,7 +379,7 @@ nav {
 input[type="date"]::-webkit-datetime-edit, input[type="date"]::-webkit-inner-spin-button, input[type="date"]::-webkit-clear-button {
     color: #fff;
     position: relative;
-    
+
 }
 
 input[type="date"]::-webkit-datetime-edit-year-field {
@@ -449,7 +449,7 @@ input[type="date"]::-webkit-datetime-edit-day-field {
 .section-login {
     min-height: calc(100vh - 95px);
   }
-  
+
   .section-register {
     min-height: calc(100vh - 95px);
   }
@@ -503,7 +503,7 @@ input[type="date"]::-webkit-datetime-edit-day-field {
         .select2-selection__rendered {
             line-height: 31px !important;
         }
-        
+
         .select2-selection__arrow {
             height: 34px !important;
         }
@@ -511,9 +511,9 @@ input[type="date"]::-webkit-datetime-edit-day-field {
         input[type="date"]::-webkit-datetime-edit, input[type="date"]::-webkit-inner-spin-button, input[type="date"]::-webkit-clear-button {
             color: #fff;
             position: relative;
-            
+
         }
-        
+
         input[type="date"]::-webkit-datetime-edit-year-field {
             position: absolute !important;
             /*border-left:1px solid #8c8c8c;*/
@@ -521,7 +521,7 @@ input[type="date"]::-webkit-datetime-edit-day-field {
             color:#000;
             left: 56px;
         }
-        
+
         input[type="date"]::-webkit-datetime-edit-month-field {
             position: absolute !important;
             /*border-left:1px solid #8c8c8c;*/
@@ -529,8 +529,8 @@ input[type="date"]::-webkit-datetime-edit-day-field {
             color:#000;
             left: 30px;
         }
-        
-        
+
+
         input[type="date"]::-webkit-datetime-edit-day-field {
             position: absolute !important;
             color:#000;

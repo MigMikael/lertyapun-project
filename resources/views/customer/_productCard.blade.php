@@ -1,4 +1,4 @@
-<div class="col-lg-3">
+<div class="col-lg-3 col-md-6">
     <div class="card card-product-grid">
         <a href="{{ url('customer/products/'.$product->slug) }}" class="img-wrap">
             <img src="{{ url('image/show/'.$product->image->slug) }}">
@@ -42,7 +42,7 @@
                 สินค้าหมด
             </button>
             @else
-            <button class="btn btn-block btn-primary mt-3 addToCart" data-product_id="{{ $product->slug }}" data-product_name="{{ $product->name }}" data-product_unit="{{ $product->units['0']->unitName }}" 
+            <button class="btn btn-block btn-primary mt-3 addToCart" data-product_id="{{ $product->slug }}" data-product_name="{{ $product->name }}" data-product_unit="{{ $product->units['0']->unitName }}"
             @if(auth()->guard('admin')->check()) disabled @endif>
                 เพิ่มใส่รถเข็น
             </button>
