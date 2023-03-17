@@ -36,9 +36,9 @@
                     <div class="col-md-8 form-group">
                         <div class="input-group">
                         @if (isset($search) && $search != "")
-                        <input name="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหาสินค้า...">
+                        <input name="query" id="query" value="{{ $search }}" type="text" class="form-control" placeholder="ค้นหาสินค้า...">
                         @else
-                        <input name="query" type="text" class="form-control" placeholder="ค้นหาสินค้า...">
+                        <input name="query" id="query" type="text" class="form-control" placeholder="ค้นหาสินค้า...">
                         @endif
                         <div class="input-group-append">
                             <button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button>
