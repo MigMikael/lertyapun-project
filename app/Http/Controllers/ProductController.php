@@ -950,6 +950,9 @@ class ProductController extends Controller
                     })->where('status', 'active')->paginate($page);
                 }
                 else {
+                    if (!is_string($category_slug)) {
+                        $category_slug = "WGNVqKwiy10h19nVDG2wZxucDNMupVcf12FQBQZK";
+                    }
                     $category = Category::where('slug', $category_slug)->first();
                     $products = $category->products()
                     ->where(function ($query) use ($search) {
