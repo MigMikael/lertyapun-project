@@ -196,7 +196,7 @@
                                     <h5 class="title">รวมยอดชำระเงิน</h5>
                                 </div>
                                 <div class="pull-right">
-                                    <span style="font-size: 14px !important; font-weight: normal;" id="remark"></span>
+                                    <span style="font-size: 14px !important; font-weight: normal;" id="remark">*ยอดสั่งสินค้าขั้นต่ำ 1,000 บาท จัดส่งฟรีเมื่อซื้อสินค้าครบ 7,500 บาทขึ้นไป</span>
                                 </div>
                             </div>
                         </div>
@@ -407,10 +407,10 @@
             var finalPrice = (totalPrice - totalDiscount)/*+ shipmentPrice*/
             if(finalPrice < 1000){
                 $("#order_submit").prop('disabled', true)
-                $("#remark").text("*ยอดสั่งสินค้าขั้นต่ำ 1,000 บาท จัดส่งฟรีเมื่อซื้อสินค้าครบ 7,500 บาทขึ้นไป")
+                //$("#remark").text("*ยอดสั่งสินค้าขั้นต่ำ 1,000 บาท จัดส่งฟรีเมื่อซื้อสินค้าครบ 7,500 บาทขึ้นไป")
             } else {
                 $("#order_submit").prop('disabled', false)
-                $("#remark").text("")
+                //$("#remark").text("")
             }
 
             $("#total_price").text(totalPrice.toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
