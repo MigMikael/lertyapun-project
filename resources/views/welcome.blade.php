@@ -184,7 +184,7 @@
             </div>
             <div class="col-lg-6">
                 <div class="contact-box" style="min-height: 250px;">
-                    <h5><i class="fab fa-line" style="color: green"></i> ร้านยา / ขายส่ง</h5>
+                    <h5><i class="fab fa-line" style="color: green"></i> คลินิก / ร้านยา / ขายส่ง</h5>
                     <p class="mb-0" style="font-size: 20px;">@lertyaphan <span>(มี @ นำหน้า)</span></p>
                     <p class="mb-0" style="font-size: 20px;">โทร 095-254-4525</p>
                     <img src="https://i.ibb.co/27q6ftx/line.png" alt="line" style="height: 120px;">

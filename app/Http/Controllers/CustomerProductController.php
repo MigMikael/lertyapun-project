@@ -29,7 +29,7 @@ class CustomerProductController extends Controller
         $sumTotalPrice = 0;
         $sumTotalDiscount = 0;
         $sumFinalPrice = 0;
-        foreach($customer->cart as $product) {
+        foreach ($customer->cart as $product) {
             $discountPrice = $this->getDiscountPrice($product);
             Log::info($discountPrice);
             $basePrice = $product->units['0']['pricePerUnit'];
@@ -89,7 +89,7 @@ class CustomerProductController extends Controller
         if ($request->has('quantity')) {
             $quantity = intval($request['quantity']);
         }
-        if($quantity > $product->quantity) {
+        if ($quantity > $product->quantity) {
             return response()->json(['errors' => 'จำนวนสินค้าเกินกว่าในสต็อก กรุณารีเฟรชหน้าใหม่อีกครั้ง'], 422);
         }
         $unitName = "";
@@ -109,6 +109,14 @@ class CustomerProductController extends Controller
             'quantity' => $quantity,
             'unitName' => $unitName
         ];
+
+        $checkCustomerProductExist = CustomerProduct::where('customer_id', $customer->id)
+            ->where('product_id', $product->id);
+
+        if ($checkCustomerProductExist) {
+            $checkCustomerProductExist->delete();
+        }
+
         CustomerProduct::firstOrCreate($customerProductCheck, $customerProduct);
 
         $productCount = CustomerProduct::where('customer_id', $customer->id)->count();
