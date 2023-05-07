@@ -109,7 +109,9 @@
                             'คุณได้เพิ่ม ' + product_name +
                             ' <br> ใส่รถเข็นสำเร็จแล้ว !',
                             'success'
-                        )
+                        ).then(function() {
+                            window.location.reload();
+                        });
                     },
                     error: function(result) {
                         $(".addToCart").html(
