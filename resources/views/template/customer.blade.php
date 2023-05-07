@@ -46,6 +46,7 @@
                 $('.select-product-category').select2();
 
                 $('.select-product-category').change(function() {
+                    $('#query').val('');
                     $('#search-product-form').submit();
                 });
 

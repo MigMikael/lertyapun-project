@@ -354,8 +354,8 @@ class OrderController extends Controller
             }
         }
 
-        if ($sumFinalPrice < 7500) {
-            return response()->json(['errors' => '*ยอดสั่งสินค้าขั้นต่ำ 7,500 บาท'], 422);
+        if ($sumFinalPrice < 1000) {
+            return response()->json(['errors' => '*ยอดสั่งสินค้าขั้นต่ำ 1,000 บาท'], 422);
         }
 
         // $shipmentPrice = $this->calculateShipmentPrice($sumWeight);

@@ -500,7 +500,7 @@ figure {
   color: rgba(0,0,0,.8);
 }
 
-.radio-toolbar input[type="radio"]:checked+label { 
+.radio-toolbar input[type="radio"]:checked+label {
   border: 1px solid #2e6bd3;
   color: #2e6bd3;
   position: relative;
@@ -508,7 +508,7 @@ figure {
 
 .text-ellipsis {
   width: 99%;
-  white-space: nowrap;
+  /*white-space: nowrap;*/
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -726,7 +726,7 @@ footer.footer {
 }
 
 .breadcrumb-wrapper {
-  padding-top: 105px; 
+  padding-top: 105px;
   padding-bottom: 20px;
 }
 
@@ -758,7 +758,7 @@ footer.footer {
   }
 
   .breadcrumb-wrapper {
-    padding-top: 70px; 
+    padding-top: 70px;
     padding-bottom: 20px;
   }
 }
