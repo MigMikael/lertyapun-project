@@ -85,6 +85,13 @@ class CustomerProductController extends Controller
 
         $customer = Customer::where('slug', $data['customer_id'])->first();
         $product = Product::where('slug', $data['product_id'])->first();
+
+        $productCount = CustomerProduct::where('customer_id', $customer->id)->count();
+
+        if ($productCount > 100) {
+            return response()->json(['errors' => 'ไม่สามารถเพิ่มสินค้าได้มากกว่า 100 รายการ'], 400);
+        }
+
         $quantity = 1;
         if ($request->has('quantity')) {
             $quantity = intval($request['quantity']);
@@ -119,7 +126,6 @@ class CustomerProductController extends Controller
 
         CustomerProduct::firstOrCreate($customerProductCheck, $customerProduct);
 
-        $productCount = CustomerProduct::where('customer_id', $customer->id)->count();
         return response()->json(['productCount' => $productCount], 200);
     }
 
