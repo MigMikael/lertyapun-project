@@ -88,9 +88,11 @@ class CustomerProductController extends Controller
 
         $productCount = CustomerProduct::where('customer_id', $customer->id)->count();
 
+        /*
         if ($productCount > 100) {
             return response()->json(['errors' => 'ไม่สามารถเพิ่มสินค้าได้มากกว่า 100 รายการ'], 400);
         }
+        */
 
         $quantity = 1;
         if ($request->has('quantity')) {

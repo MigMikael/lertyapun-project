@@ -354,9 +354,11 @@ class OrderController extends Controller
             }
         }
 
+        /*
         if (count($newOrderDetails) > 100) {
             return response()->json(['errors' => 'รายการสินค้าไม่สามารถเกิน 100 รายการ'], 422);
         }
+        */
 
         if ($sumFinalPrice < 1000) {
             return response()->json(['errors' => '*ยอดสั่งสินค้าขั้นต่ำ 1,000 บาท'], 422);
