@@ -896,6 +896,75 @@ class ProductController extends Controller
         return redirect()->back();
     }
 
+    public function indexCustomerProductAll(Request $request)
+    {
+        $page = 20;
+        $query = "";
+        $category = [];
+        $category_slug = $request->query('category');
+        $search = $request->query('query');
+
+        if ($category_slug != "") {
+            if ($category_slug == "all") {
+                $products = Product::where('status', 'active')
+                    ->where(function ($query) use ($search) {
+                        $query->where('name', 'like', '%' . $search . '%')
+                            ->orWhere('keyword_search', "like", "%" . $search . "%")
+                            ->orderBy('updated_at', 'DESC');
+                    })->paginate($page);
+            } else {
+                if ($search != "") {
+                    $category = [];
+                    $category_slug = "";
+                    $products = Product::where('status', 'active')
+                        ->where(function ($query) use ($search) {
+                            $query->where('name', 'like', '%' . $search . '%')
+                                ->orWhere('keyword_search', "like", "%" . $search . "%")
+                                ->orderBy('updated_at', 'DESC');
+                        })->where('status', 'active')->paginate($page);
+                } else {
+                    if (!is_string($category_slug)) {
+                        $category_slug = "all";
+                    }
+                    $products = Product::where('status', 'active')
+                    ->where(function ($query) use ($search) {
+                        $query->where('name', 'like', '%' . $search . '%')
+                            ->orWhere('keyword_search', "like", "%" . $search . "%")
+                            ->orderBy('updated_at', 'DESC');
+                    })->paginate($page);
+                }
+            }
+        } else {
+            if ($search != "") {
+                $category = [];
+                $category_slug = "";
+                $products = Product::where('status', 'active')
+                    ->where(function ($query) use ($search) {
+                        $query->where('name', 'like', '%' . $search . '%')
+                            ->orWhere('keyword_search', "like", "%" . $search . "%")
+                            ->orderBy('updated_at', 'DESC');
+                    })->where('status', 'active')->paginate($page);
+            } else {
+                $category_slug = "all";
+                $products = Product::where('status', 'active')
+                    ->where(function ($query) use ($search) {
+                        $query->where('name', 'like', '%' . $search . '%')
+                            ->orWhere('keyword_search', "like", "%" . $search . "%")
+                            ->orderBy('updated_at', 'DESC');
+                    })->paginate($page);
+            }
+        }
+
+        $categories = Category::all()->pluck('name', 'slug');
+        return view('customer.index', [
+            'products' => $products,
+            'categories' => $categories,
+            'currentCategory' => $category,
+            'currentCategorySlug' => $category_slug,
+            'search' => $search,
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *

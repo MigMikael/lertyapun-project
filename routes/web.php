@@ -52,6 +52,7 @@ Route::get('test', [TestController::class, 'index']);
 Route::group(['prefix' => 'customer', 'middleware' => 'customerAuth'], function () {
     Route::group(['middleware' => 'customerActiveAuth'], function () {
         Route::get('products', [ProductController::class, 'indexCustomerProduct']);
+        Route::get('products/all', [ProductController::class, 'indexCustomerProductAll']);
         Route::post('products/search', [ProductController::class, 'searchCustomerProduct']);
         Route::get('products/promotions', [ProductController::class, 'indexCustomerPromotion']);
         Route::get('products/{product:slug}', [ProductController::class, 'showCustomerProduct']);

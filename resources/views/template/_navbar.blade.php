@@ -18,7 +18,10 @@
             </a>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ url('customer/products') }}">สินค้า</a>
+                    <a class="nav-link" href="{{ url('customer/products') }}">สินค้ายอดนิยม</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url('customer/products/all') }}">สินค้าทั้งหมด</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('customer/products/promotions') }}">โปรโมชัน</a>
