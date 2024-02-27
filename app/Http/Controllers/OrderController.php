@@ -292,7 +292,11 @@ class OrderController extends Controller
         }
 
         if (!$request->has('product_slug') || !$request->has('product_quantity')) {
-            return response()->json(['errors' => 'กรุณาลองใหม่อีกครั้ง'], 422);
+            return response()->json(['errors' => 'กรุณาเลือกสินค้าและระบุจำนวนสินค้า'], 422);
+        }
+
+        if (!$request->has('shipment_method')) {
+            return response()->json(['errors' => 'กรุณาเลือกผู้ให้บริการขนส่ง'], 422);
         }
 
         if ($customer->addresses->first() == null) {

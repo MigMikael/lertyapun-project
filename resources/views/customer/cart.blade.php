@@ -478,11 +478,11 @@
                     "shipment_method": shipmentMethod,
                 },
                 success: function(result) {
-                    // console.log('success', result);
+                    console.log('success', result);
                     window.location.href = "{{ url('customer/order') }}";
                 },
                 error: function(result) {
-                    // console.log('error', result);
+                    console.log('error', result);
                     if (result.responseJSON.redirect) {
                         $("#errorModal .modal-dialog .modal-content #title").html("ต้องการข้อมูลเพิ่มเติม...");
                         $("#errorModal .modal-dialog .modal-content .modal-footer #closeButton").text("กรอกที่อยู่")
