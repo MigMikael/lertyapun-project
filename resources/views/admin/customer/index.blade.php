@@ -9,7 +9,6 @@
         </div>
         <div class="col-md-6">
             <div class="pull-right">
-                @include('admin.customer._sort')
                 <a class="btn btn-primary" href="{{ url("admin/customers/create") }}">
                     <i class="fas fa-plus"></i>
                     เพิ่มผู้ใช้งาน

@@ -39,47 +39,16 @@ class CustomerController extends Controller
     public function index(Request $request)
     {
         $page = 10;
-        $sort = $request->query('sort');
         $query = $request->query('query');
 
-        if($sort == 'name_asc') {
-            $customers = Customer::where("first_name", "like", "%".$query."%")
+        $customers = Customer::where("first_name", "like", "%".$query."%")
                 ->orWhere("last_name", "like", "%".$query."%")
                 ->orWhere("email", "like", "%".$query."%")
                 ->orWhere("store_name", "like", "%".$query."%")
-                ->orderBy("first_name", 'ASC')
+                ->orderBy("created_at", 'DESC')
                 ->paginate($page);
-        } else if($sort == 'name_desc') {
-            $customers = Customer::where("first_name", "like", "%".$query."%")
-                ->orWhere("last_name", "like", "%".$query."%")
-                ->orWhere("email", "like", "%".$query."%")
-                ->orWhere("store_name", "like", "%".$query."%")
-                ->orderBy("first_name", 'DESC')
-                ->paginate($page);
-        } else if($sort == 'email_asc') {
-            $customers = Customer::where("first_name", "like", "%".$query."%")
-                ->orWhere("last_name", "like", "%".$query."%")
-                ->orWhere("email", "like", "%".$query."%")
-                ->orWhere("store_name", "like", "%".$query."%")
-                ->orderBy("email", 'ASC')
-                ->paginate($page);
-        } else if($sort == 'email_desc') {
-            $customers = Customer::where("first_name", "like", "%".$query."%")
-                ->orWhere("last_name", "like", "%".$query."%")
-                ->orWhere("email", "like", "%".$query."%")
-                ->orWhere("store_name", "like", "%".$query."%")
-                ->orderBy("email", 'DESC')
-                ->paginate($page);
-        } else {
-            $customers = Customer::where("first_name", "like", "%".$query."%")
-                ->orWhere("last_name", "like", "%".$query."%")
-                ->orWhere("email", "like", "%".$query."%")
-                ->orWhere("store_name", "like", "%".$query."%")
-                ->orderBy("updated_at", 'DESC')
-                ->paginate($page);
-        }
+
         $customers->appends(['query' => $query]);
-        $customers->appends(['sort' => $sort]);
         return view('admin.customer.index', [
             'customers' => $customers,
             'search' => $query,

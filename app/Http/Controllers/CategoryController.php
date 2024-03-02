@@ -21,24 +21,13 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $page = 10;
-        $sort = $request->query('sort');
         $query = $request->query('query');
 
-        if($sort == 'name_asc') {
-            $categories = Category::where("name", "like", "%".$query."%")
-                ->orderBy('name', 'ASC')
-                ->paginate($page);
-        } else if($sort == 'name_desc') {
-            $categories = Category::where("name", "like", "%".$query."%")
-                ->orderBy('name', 'DESC')
-                ->paginate($page);
-        } else {
-            $categories = Category::where("name", "like", "%".$query."%")
-                ->orderBy('updated_at', 'DESC')
-                ->paginate($page);
-        }
+        $categories = Category::where("name", "like", "%".$query."%")
+        ->orderBy('created_at', 'DESC')
+        ->paginate($page);
+
         $categories->appends(['query' => $query]);
-        $categories->appends(['sort' => $sort]);
         return view('admin.category.index', [
             'categories' => $categories,
             'search' => $query,

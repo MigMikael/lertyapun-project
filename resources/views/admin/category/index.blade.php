@@ -9,7 +9,6 @@
         </div>
         <div class="col-md-6">
             <div class="pull-right">
-                @include('admin.category._sort')
                 <a class="btn btn-primary" href="{{ url("admin/categories/create") }}">
                     <i class="fas fa-plus"></i>
                     เพิ่มประเภทสินค้า

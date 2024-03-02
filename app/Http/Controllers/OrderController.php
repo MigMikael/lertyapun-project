@@ -59,54 +59,25 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $page = 10;
-        $sort = $request->query('sort');
         $search = $request->query('query');
         $status = $request->query('status');
 
-        if($sort == 'order_date_asc') {
-            $orders = Order::join('customers', 'orders.customer_id', '=', 'customers.id')
-                ->select('orders.*','orders.slug as order_slug','customers.slug as customer_slug', 'orders.status as order_status', 'customers.*')
-                /*->where("first_name", "like", "%".$query."%")
-                ->orWhere("last_name", "like", "%".$query."%")*/
-                //->Where("orders.slug", "like", "%".$query."%")
-                ->where(function ($query) use ($search) {
-                    $query->where('customers.first_name', 'like', '%'.$search.'%')
-                        ->orWhere('customers.last_name', "like", "%".$search."%")
-                        ->orWhere('customers.store_name', "like", "%".$search."%");
-                })->where("orders.status", "like", "%".$status."%")->orderBy('orders.created_at', 'ASC')->paginate($page);
-                //->Where("orders.status", "like", "%".$status."%")
-                //->orderBy('first_name', 'ASC')
-        } else if($sort == 'order_date_desc') {
-            $orders = Order::join('customers', 'orders.customer_id', '=', 'customers.id')
-                ->select('orders.*','orders.slug as order_slug','customers.slug as customer_slug', 'orders.status as order_status', 'customers.*')
-                ->where(function ($query) use ($search) {
-                    $query->where('customers.first_name', 'like', '%'.$search.'%')
-                        ->orWhere('customers.last_name', "like", "%".$search."%")
-                        ->orWhere('customers.store_name', "like", "%".$search."%");
-                })->where("orders.status", "like", "%".$status."%")->orderBy('orders.created_at', 'DESC')->paginate($page);
-                //->where("first_name", "like", "%".$query."%")
-                //->orWhere("last_name", "like", "%".$query."%")
-                //->Where("orders.slug", "like", "%".$query."%")
-                //->Where("orders.status", "like", "%".$status."%")
-                //->orderBy('first_name', 'DESC')
-                //->paginate($page);
-        } else {
-            $orders = Order::join('customers', 'orders.customer_id', '=', 'customers.id')
-                ->select('orders.*','orders.slug as order_slug','customers.slug as customer_slug', 'orders.status as order_status', 'customers.*')
-                ->where(function ($query) use ($search) {
-                    $query->where('customers.first_name', 'like', '%'.$search.'%')
-                        ->orWhere('customers.last_name', "like", "%".$search."%")
-                        ->orWhere('customers.store_name', "like", "%".$search."%");
-                })->where("orders.status", "like", "%".$status."%")->orderBy('orders.created_at', 'DESC')->paginate($page);
-                /*->where("first_name", "like", "%".$query."%")
-                ->orWhere("last_name", "like", "%".$query."%")*/
-                //->Where("orders.slug", "like", "%".$query."%")
-                //->Where("orders.status", "like", "%".$status."%")
-                //->orderBy('orders.updated_at', 'DESC')
-                //->paginate($page);
-        }
+        $orders = Order::join('customers', 'orders.customer_id', '=', 'customers.id')
+        ->select('orders.*','orders.slug as order_slug','customers.slug as customer_slug', 'orders.status as order_status', 'customers.*')
+        ->where(function ($query) use ($search) {
+            $query->where('customers.first_name', 'like', '%'.$search.'%')
+                ->orWhere('customers.last_name', "like", "%".$search."%")
+                ->orWhere('customers.store_name', "like", "%".$search."%");
+        })->where("orders.status", "like", "%".$status."%")->orderBy('orders.created_at', 'DESC')->paginate($page);
+
+        /*->where("first_name", "like", "%".$query."%")
+        ->orWhere("last_name", "like", "%".$query."%")*/
+        //->Where("orders.slug", "like", "%".$query."%")
+        //->Where("orders.status", "like", "%".$status."%")
+        //->orderBy('orders.updated_at', 'DESC')
+        //->paginate($page);
+
         $orders->appends(['query' => $search]);
-        $orders->appends(['sort' => $sort]);
         $orders->appends(['status' => $status]);
         return view('admin.order.index', [
             'orders' => $orders,

@@ -3,14 +3,9 @@
 @section('content')
 <div class="admin-container">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <h4 class="title">การจัดการคำสั่งซื้อ</h4>
             <span>รายการคำสั่งซื้อทั้งหมด</span>
-        </div>
-        <div class="col-md-6">
-            <div class="pull-right">
-                @include('admin.order._sort')
-            </div>
         </div>
         <div class="col-md-12">
             <hr>

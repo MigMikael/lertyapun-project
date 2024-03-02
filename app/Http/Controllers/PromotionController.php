@@ -27,24 +27,13 @@ class PromotionController extends Controller
     public function index(Request $request)
     {
         $page = 10;
-        $sort = $request->query('sort');
         $query = $request->query('query');
 
-        if($sort == 'name_asc') {
-            $promotions = Promotion::where("name", "like", "%".$query."%")
-                ->orderBy('name', 'ASC')
-                ->paginate($page);
-        } else if($sort == 'name_desc') {
-            $promotions = Promotion::where("name", "like", "%".$query."%")
-                ->orderBy('name', 'DESC')
-                ->paginate($page);
-        } else {
-            $promotions = Promotion::where("name", "like", "%".$query."%")
-                ->orderBy('updated_at', 'DESC')
-                ->paginate($page);
-        }
+        $promotions = Promotion::where("name", "like", "%".$query."%")
+        ->orderBy('created_at', 'DESC')
+        ->paginate($page);
+
         $promotions->appends(['query' => $query]);
-        $promotions->appends(['sort' => $sort]);
         return view('admin.promotion.index', [
             'promotions' => $promotions,
             'search' => $query,
