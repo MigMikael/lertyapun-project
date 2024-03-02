@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
-use Illuminate\Http\Request;
-use App\Helpers\StringGenerator;
-use App\Models\Category;
 use App\Models\Tag;
-use App\Models\CategoryProduct;
-use App\Models\ProductPromotion;
-use App\Models\ProductTag;
-use App\Models\ProductImage;
-use App\Models\ProductUnit;
+use App\Models\Image;
+use App\Models\Product;
+use App\Models\Category;
 use App\Models\Promotion;
+use App\Models\ProductTag;
 use App\Traits\ImageTrait;
+use App\Models\ProductUnit;
+use App\Models\ProductImage;
+use Illuminate\Http\Request;
 use App\Traits\ValidateTrait;
+use App\Models\CategoryProduct;
+use App\Helpers\StringGenerator;
+use App\Models\ProductPromotion;
 use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
@@ -716,6 +717,11 @@ class ProductController extends Controller
         ];
 
         if ($request->hasFile('product_image')) {
+            if (!is_null($product->image_id)) {
+                $old_product_image = Image::Where('id', '=', $product->image_id)->first();
+                $this->deleteImage($old_product_image, "");
+            }
+
             $file = $request->file('product_image');
             $product_image = $this->storeImage($file, "");
             $newProduct['image_id'] = $product_image->id;

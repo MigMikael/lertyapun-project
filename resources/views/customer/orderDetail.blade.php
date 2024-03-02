@@ -60,7 +60,7 @@
                                         <td class="text-center">
                                             <figure class="itemside">
                                                 <div class="aside">
-                                                    <img class="img-sm" src="{{ url('image/thumb/'.$product->image->slug) }}">
+                                                    <img class="img-sm" src="{{ url('image/show/'.$product->image->slug) }}">
                                                 </div>
                                                 <figcaption class="info">
                                                     <a href="{{ url('customer/products/'.$product->slug) }}"

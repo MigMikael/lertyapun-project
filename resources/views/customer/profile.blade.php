@@ -79,6 +79,7 @@
                     </div>
                 </div>
             </div>
+            <!--
             <div class="col-lg-6">
                 <div id="profile-wrapper" class="form-group">
                     <div class="profile-img-upload">
@@ -90,7 +91,7 @@
                             @endif
                         </div>
                         <label class="btn btn-primary profile-btn">
-                            <i class="fa fa-image"></i> 
+                            <i class="fa fa-image"></i>
                             @if($customer->avatarImage != null)
                             แก้ไขรูปประจำตัว
                             @else
@@ -101,6 +102,7 @@
                     </div>
                 </div>
             </div>
+            -->
         </div>
         <div class="footer-submit">
             <div class="btn-submit-wrapper">
@@ -115,15 +117,15 @@
 <script>
     function changeImgUrl(input) {
         if (input.files && input.files[0]) {
-            var reader = new FileReader();            
+            var reader = new FileReader();
             reader.onload = function (e) {
                 $('#profile-img').attr('src', e.target.result);
             }
-            
+
             reader.readAsDataURL(input.files[0]);
         }
     }
-    
+
     $("#upload-profile-img").change(function(){
         changeImgUrl(this);
     });

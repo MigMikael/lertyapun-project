@@ -1,10 +1,12 @@
 <nav id="sidebar">
     <div class="p-4 pt-5">
+        <!--
         @if($customer->avatarImage != null)
         <img src="{{ url('image/show/'.$customer->avatarImage->slug) }}" class="img logo rounded-circle mb-5">
         @else
         <img src="{{ URL::asset('img/avatar.png') }}" class="img logo rounded-circle mb-5">
         @endif
+        -->
         <ul class="list-unstyled components mb-5">
             <li class="active">
                 <a href="#userAccount" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
