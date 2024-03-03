@@ -7,7 +7,7 @@
         <meta name="description" content="เลิศยาภัณฑ์ ร้านยาคุณภาพ ราคาถูก ปลีก-ส่ง พร้อมบริการปรึกษาปัญหาทางสุขภาพและมีกิจกรรมตรวจสุขภาพฟรีตลอดทั้งปี">
         <meta name="author" content="เลิศยาภัณฑ์">
 
-        <title>@yield('title', 'LERTYAPHAN')</title>
+        <title>@yield('title', 'เลิศยาภัณฑ์ ร้านยาคุณภาพ ราคาถูก ปลีก-ส่ง')</title>
 
         <link href="{{ URL::asset('css/bootstrap.min.css') }}" type="text/css" rel="stylesheet">
         <link rel="shortcut icon" href="{{ URL::asset('favicon.ico') }}" type="image/x-icon">

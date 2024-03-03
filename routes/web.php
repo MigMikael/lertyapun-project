@@ -11,6 +11,7 @@ use App\Http\Controllers\TagController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomerProductController;
 use App\Http\Controllers\DaliveryServiceController;
+use App\Http\Controllers\DeliveryReportController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailController;
@@ -187,6 +188,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminAuth'], function () {
     Route::put('banks/{bank:slug}', [BankAccountController::class, 'update']);
     Route::get('banks/{bank:slug}', [BankAccountController::class, 'show']);
     Route::delete('banks/{bank:slug}', [BankAccountController::class, 'destroy']);
+
+    Route::get('delivery-reports', [DeliveryReportController::class, 'index'])->name('admin.delivery.report.index');
+    Route::post('delivery-reports', [DeliveryReportController::class, 'store'])->name('admin.delivery.report.store');
+    Route::get('delivery-reports/create', [DeliveryReportController::class, 'create'])->name('admin.delivery.report.create');
+    Route::get('delivery-reports/{id}/edit', [DeliveryReportController::class, 'edit'])->name('admin.delivery.report.edit');
+    Route::put('delivery-reports/{id}', [DeliveryReportController::class, 'update'])->name('admin.delivery.report.update');
+    Route::delete('delivery-reports/{id}', [DeliveryReportController::class, 'destroy'])->name('admin.delivery.report.destroy');
 
     Route::get('logout', [GuestController::class, 'adminLogout']);
 });

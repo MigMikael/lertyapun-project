@@ -519,7 +519,7 @@ input[type="date"]::-webkit-datetime-edit-day-field {
             /*border-left:1px solid #8c8c8c;*/
             padding: 2px;
             color:#000;
-            left: 56px;
+            left: 60px;
         }
 
         input[type="date"]::-webkit-datetime-edit-month-field {
