@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\Address;
 use Illuminate\Http\Request;
 use App\Helpers\StringGenerator;
+use App\Models\DeliveryReport;
 use Illuminate\Support\Facades\Hash;
 use App\Traits\ImageTrait;
 use App\Traits\ValidateTrait;
@@ -101,7 +102,7 @@ class GuestController extends Controller
 
         $newCustomer = Customer::create($newCustomer);
         Auth::guard('customer')->login($newCustomer);
-        
+
         $authCustomer = auth()->guard('customer')->user();
 
         $newCustomerAddress = [
@@ -120,7 +121,7 @@ class GuestController extends Controller
             Address::where('customer_id', $customer->id)->delete();
             Address::create($newCustomerAddress);
         }
-        
+
         return redirect('customer/pending/'.$newCustomer->slug);
     }
 
@@ -135,8 +136,8 @@ class GuestController extends Controller
         if ($customer->status == 'active') {
             return redirect('customer/products');
         }
-        
-        return view('customer.pending', [ 
+
+        return view('customer.pending', [
             'customer' => $customer,
         ]);
     }
@@ -326,5 +327,31 @@ class GuestController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/');
+    }
+
+    public function deliveryReport(Request $request) {
+        $filterDate = $request->get('filter_date');
+
+        $deliveryReportFilter = DeliveryReport::orderBy('created_at', 'DESC');
+
+        if (!$request->get('filter_date')) {
+            $filterDate = date("Y-m-d");
+            $deliveryReportFilter->whereDate('delivery_date', '=', $filterDate);
+        }
+
+        $filterSearch = $request->get('filter_search');
+
+        if ($request->get('filter_date')) {
+            $deliveryReportFilter->whereDate('delivery_date', '=', $filterDate);
+        }
+
+        if ($request->get('filter_search')) {
+            $deliveryReportFilter->where("customer_name", "like", "%".$filterSearch."%");
+        }
+
+        $deliveryReports = $deliveryReportFilter->get();
+
+        return view('delivery-report',
+        compact('deliveryReports', 'filterDate', 'filterSearch'));
     }
 }

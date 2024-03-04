@@ -17,7 +17,8 @@ class CreateDeliveryReportsTable extends Migration
             $table->id();
             $table->date('delivery_date');
             $table->string('delivery_tracking');
-            $table->string('store_name');
+            $table->string('customer_name');
+            $table->string('customer_other')->nullable();
             $table->string('delivery_name');
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('delivery_id');

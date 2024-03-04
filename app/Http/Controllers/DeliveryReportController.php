@@ -27,7 +27,12 @@ class DeliveryReportController extends Controller
         }
 
         if ($request->get('filter_customer')) {
-            $deliveryReportFilter->where('customer_id', $filterCustomer);
+            if ($filterCustomer == "other") {
+                $deliveryReportFilter->where('customer_id', 0);
+            }
+            else {
+                $deliveryReportFilter->where('customer_id', $filterCustomer);
+            }
         }
 
         if ($request->get('filter_delivery')) {
@@ -70,10 +75,19 @@ class DeliveryReportController extends Controller
         $deliveryReport = new DeliveryReport();
         $deliveryReport->delivery_date = $request->delivery_date;
         $deliveryReport->delivery_tracking = $request->delivery_tracking;
-        $deliveryReport->store_name = $customer->store_name;
         $deliveryReport->delivery_name = $delivery->name;
-        $deliveryReport->customer_id = $request->customer_id;
         $deliveryReport->delivery_id = $request->delivery_id;
+
+        if ($request->customer_id == "other") {
+            $deliveryReport->customer_name = $request->customer_other;
+            $deliveryReport->customer_other = $request->customer_other;
+            $deliveryReport->customer_id = 0;
+        }
+        else {
+            $deliveryReport->customer_name = $customer->store_name;
+            $deliveryReport->customer_id = $request->customer_id;
+        }
+
         $deliveryReport->save();
 
         return redirect()
@@ -103,10 +117,19 @@ class DeliveryReportController extends Controller
         $deliveryReport = DeliveryReport::find($id);
         $deliveryReport->delivery_date = $request->delivery_date;
         $deliveryReport->delivery_tracking = $request->delivery_tracking;
-        $deliveryReport->store_name = $customer->store_name;
         $deliveryReport->delivery_name = $delivery->name;
-        $deliveryReport->customer_id = $request->customer_id;
         $deliveryReport->delivery_id = $request->delivery_id;
+
+        if ($request->customer_id == "other") {
+            $deliveryReport->customer_name = $request->customer_other;
+            $deliveryReport->customer_other = $request->customer_other;
+            $deliveryReport->customer_id = 0;
+        }
+        else {
+            $deliveryReport->customer_name = $customer->store_name;
+            $deliveryReport->customer_id = $request->customer_id;
+        }
+
         $deliveryReport->save();
 
         return redirect()

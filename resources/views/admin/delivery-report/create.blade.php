@@ -16,19 +16,26 @@
                     <div class="form-group">
                         <label>วันที่จัดส่ง (วัน/เดือน/ปี)<span class="required">*</span></label>
                         <input type="date" class="form-control" name="delivery_date"
-                            value="" required>
+                            value="" required onfocus="this.showPicker()">
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label>ร้านขายยา <span class="required">*</span></label>
+                        <label>ร้านยา <span class="required">*</span></label>
                         <select class="form-control select2" name="customer_id" required
                         style="width:100%;">
                             <option value="">กรุณาระบุร้านขายยา</option>
+                            <option value="other">อื่นๆ</option>
                             @foreach ($customers as $customer)
                                 <option value="{{ $customer->id }}">{{ $customer->store_name }}</option>
                             @endforeach
                         </select>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>ร้านยาอื่นๆ (ภายนอกระบบ)</label>
+                        <input type="text" class="form-control" name="customer_other" value="">
                     </div>
                 </div>
                 <div class="col-md-12">

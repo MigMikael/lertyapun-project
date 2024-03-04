@@ -23,12 +23,14 @@
             <div class="row">
                 <div class="col-lg-4 form-group">
                     <label>วันที่</label>
-                    <input type="date" class="form-control" name="filter_date" value="{{ $filterDate }}" onfocus="this.showPicker()">
+                    <input type="date" class="form-control" name="filter_date" value="{{ $filterDate }}"
+                    onfocus="this.showPicker()">
                 </div>
                 <div class="col-lg-4 form-group">
-                    <label>ร้านยา</label>
+                    <label>ผู้รับสินค้า (ร้านยา/อื่นๆ)</label>
                     <select class="form-control select2" name="filter_customer" style="width:100%;">
                         <option value="">ทั้งหมด</option>
+                        <option value="other" {{ $filterCustomer == "other" ? 'selected' : '' }}>อื่นๆ</option>
                         @foreach ($customers as $customer)
                             <option value="{{ $customer->id }}" {{ $customer->id == $filterCustomer ? 'selected' : '' }}>
                                 {{ $customer->store_name }}</option>
@@ -76,7 +78,6 @@
                 {{ session('fail', 'Fail !') }}
             </div>
         @endif
-
         @if (count($deliveryReports) === 0)
             <div class="text-center">
                 <img class="search-no-result-img" src="{{ url('img/no-result.png') }}">
@@ -89,7 +90,7 @@
                         <tr>
                             <th scope="col" width="5%">#</th>
                             <th>วันที่</th>
-                            <th>ร้านยา</th>
+                            <th>ผู้รับสินค้า</th>
                             <th>ผู้ให้บริการขนส่ง</th>
                             <th>หมายเลขพัสดุ</th>
                             <th>จัดการ</th>
@@ -105,7 +106,7 @@
                                     {{ \Carbon\Carbon::parse($deliveryReport->delivery_date)->format('d/m/Y') }}
                                 </td>
                                 <td>
-                                    {{ $deliveryReport->store_name }}
+                                    {{ $deliveryReport->customer_name }}
                                 </td>
                                 <td>
                                     {{ $deliveryReport->delivery_name }}
