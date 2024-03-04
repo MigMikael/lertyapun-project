@@ -508,7 +508,6 @@ input[type="date"]::-webkit-datetime-edit-day-field {
             height: 34px !important;
         }
 
-        /*
         input[type="date"]::-webkit-datetime-edit, input[type="date"]::-webkit-inner-spin-button, input[type="date"]::-webkit-clear-button {
             color: #fff;
             position: relative;
@@ -536,7 +535,6 @@ input[type="date"]::-webkit-datetime-edit-day-field {
             padding: 2px;
             left: 4px;
         }
-        */
 
 @media (max-width: 991.98px) {
     .category-tag .tagify {
