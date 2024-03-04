@@ -41,7 +41,7 @@ Route::get('about', [GuestController::class, 'about']);
 Route::get('contact', [GuestController::class, 'contact']);
 Route::get('term_of_use', [GuestController::class, 'termOfUse']);
 Route::get('privacy_policy', [GuestController::class, 'privacyPolicy']);
-Route::get('delivery-report', [GuestController::class, 'deliveryReport'])->name('delivery.report.index');
+Route::get('delivery-reports', [GuestController::class, 'deliveryReport'])->name('delivery.report.index');
 
 Route::get('image/show/{image:slug}', [ImageController::class, 'show']);
 Route::get('image/thumb/{image:slug}', [ImageController::class, 'showThumb']);
