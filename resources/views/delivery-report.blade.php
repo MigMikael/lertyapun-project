@@ -22,7 +22,7 @@
             <form action="{{ route('delivery.report.index') }}">
                 <div class="row mt-2 mb-3">
                     <div class="col-lg-4 form-group">
-                        <label>วันที่</label>
+                        <label>วันที่ (วัน/เดือน/ปี)</label>
                         <input type="date" class="form-control" name="filter_date" value="{{ $filterDate }}"
                             onfocus="this.showPicker()">
                     </div>
