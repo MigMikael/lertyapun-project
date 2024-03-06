@@ -21,10 +21,10 @@
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label>ร้านยา <span class="required">*</span></label>
+                        <label>ผู้รับสินค้า <span class="required">*</span></label>
                         <select class="form-control select2" name="customer_id" required
                         style="width:100%;">
-                            <option value="">กรุณาระบุร้านขายยา</option>
+                            <option value="">กรุณาระบุผู้รับสินค้า</option>
                             <option value="other">อื่นๆ</option>
                             @foreach ($customers as $customer)
                                 <option value="{{ $customer->id }}">{{ $customer->store_name }}</option>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label>ร้านยาอื่นๆ (ภายนอกระบบ)</label>
+                        <label>ผู้รับสินค้าอื่นๆ (ภายนอกระบบ)</label>
                         <input type="text" class="form-control" name="customer_other" value="">
                     </div>
                 </div>
