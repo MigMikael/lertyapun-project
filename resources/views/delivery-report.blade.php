@@ -8,7 +8,8 @@
         padding-top: 35px;
         padding-bottom: 35px;
         border-radius: 0.25rem;
-        min-height: 85vh;">
+        min-height: 85vh;
+        box-shadow: 0 0.15rem 1.75rem 0 rgb(58 59 69 / 15%) !important;">
             <div class="row">
                 <div class="col-md-12">
                     <div class="text-center">
