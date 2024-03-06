@@ -90,9 +90,9 @@
                         <tr>
                             <th scope="col" width="5%">#</th>
                             <th>วันที่</th>
-                            <th>ผู้รับสินค้า</th>
-                            <th>ผู้ให้บริการขนส่ง</th>
-                            <th>หมายเลขพัสดุ</th>
+                            <th style="min-width: 200px;">ผู้รับสินค้า</th>
+                            <th style="min-width: 200px;">ผู้ให้บริการขนส่ง</th>
+                            <th style="min-width: 200px;">หมายเลขพัสดุ</th>
                             <th>จัดการ</th>
                         </tr>
                     </thead>

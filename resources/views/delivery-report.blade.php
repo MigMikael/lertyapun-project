@@ -60,9 +60,9 @@
                                 <thead>
                                     <tr>
                                         <th>วันที่</th>
-                                        <th>ผู้รับสินค้า</th>
-                                        <th>ผู้ให้บริการขนส่ง</th>
-                                        <th>หมายเลขพัสดุ</th>
+                                        <th style="min-width: 200px;">ผู้รับสินค้า</th>
+                                        <th style="min-width: 200px;">ผู้ให้บริการขนส่ง</th>
+                                        <th style="min-width: 200px;">หมายเลขพัสดุ</th>
                                     </tr>
                                 </thead>
                                 <tbody>
