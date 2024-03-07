@@ -22,12 +22,17 @@
             </div>
             <form action="{{ route('delivery.report.index') }}">
                 <div class="row mt-2 mb-3">
-                    <div class="col-lg-4 form-group">
-                        <label>วันที่</label>
-                        <input type="date" class="form-control" name="filter_date" value="{{ $filterDate }}"
-                            onfocus="this.showPicker()">
+                    <div class="col-lg-3 form-group">
+                        <label>เริ่มวันที่</label>
+                        <input type="date" class="form-control" name="filter_start_date" value="{{ $filterStartDate }}"
+                            onfocus="this.showPicker()" required>
                     </div>
-                    <div class="col-lg-6 form-group">
+                    <div class="col-lg-3 form-group">
+                        <label>ถึงวันที่</label>
+                        <input type="date" class="form-control" name="filter_end_date" value="{{ $filterEndDate }}"
+                            onfocus="this.showPicker()" required>
+                    </div>
+                    <div class="col-lg-4 form-group">
                         <label>ผู้รับสินค้า</label>
                         <div class="input-group">
                             @if ($filterSearch != '')

@@ -330,19 +330,22 @@ class GuestController extends Controller
     }
 
     public function deliveryReport(Request $request) {
-        $filterDate = $request->get('filter_date');
+        $filterStartDate = $request->get('filter_start_date');
+        $filterEndDate = $request->get('filter_end_date');
+        $filterSearch = $request->get('filter_search');
 
         $deliveryReportFilter = DeliveryReport::orderBy('created_at', 'DESC');
 
-        if (!$request->get('filter_date')) {
-            $filterDate = date("Y-m-d");
-            $deliveryReportFilter->whereDate('delivery_date', '=', $filterDate);
+        if (!$request->get('filter_start_date') && !$request->get('filter_end_date')) {
+            $filterStartDate = date("Y-m-d");
+            $filterEndDate = date("Y-m-d");
+            $deliveryReportFilter->whereDate('delivery_date', '>=', $filterStartDate)
+            ->whereDate('delivery_date', '<=', $filterEndDate);
         }
 
-        $filterSearch = $request->get('filter_search');
-
-        if ($request->get('filter_date')) {
-            $deliveryReportFilter->whereDate('delivery_date', '=', $filterDate);
+        if ($request->get('filter_start_date') && $request->get('filter_end_date')) {
+            $deliveryReportFilter->whereDate('delivery_date', '>=', $filterStartDate)
+            ->whereDate('delivery_date', '<=', $filterEndDate);
         }
 
         if ($request->get('filter_search')) {
@@ -352,6 +355,6 @@ class GuestController extends Controller
         $deliveryReports = $deliveryReportFilter->get();
 
         return view('delivery-report',
-        compact('deliveryReports', 'filterDate', 'filterSearch'));
+        compact('deliveryReports', 'filterStartDate', 'filterEndDate', 'filterSearch'));
     }
 }
