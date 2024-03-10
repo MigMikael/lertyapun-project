@@ -16,8 +16,8 @@
         <link href="{{ URL::asset('vendor/simple-line-icons/css/simple-line-icons.css') }}" rel="stylesheet" type="text/css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
-        <link href="{{ URL::asset('css/landing-page.css') }}" type="text/css" rel="stylesheet">
-        <link href="{{ URL::asset('css/app.css') }}" type="text/css" rel="stylesheet">
+        <link href="{{ URL::asset('css/landing-page.css') }}?v=<?=time()?>" type="text/css" rel="stylesheet">
+        <link href="{{ URL::asset('css/app.css') }}?v=<?=time()?>" type="text/css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
         <script src="{{ URL::asset('vendor/jquery/jquery.min.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
