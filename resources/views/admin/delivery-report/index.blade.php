@@ -93,6 +93,7 @@
                             <th style="min-width: 200px;">ผู้รับสินค้า</th>
                             <th style="min-width: 200px;">ผู้ให้บริการขนส่ง</th>
                             <th style="min-width: 200px;">หมายเลขพัสดุ</th>
+                            <th style="min-width: 100px;" class="text-center">จำนวนลังที่จัดส่ง</th>
                             <th>จัดการ</th>
                         </tr>
                     </thead>
@@ -113,6 +114,9 @@
                                 </td>
                                 <td>
                                     {{ $deliveryReport->delivery_tracking }}
+                                </td>
+                                <td class="text-center">
+                                    {{ $deliveryReport->delivery_amount }}
                                 </td>
                                 <td>
                                     <div class="input-group">

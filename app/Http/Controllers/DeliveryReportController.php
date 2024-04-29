@@ -67,6 +67,7 @@ class DeliveryReportController extends Controller
             'delivery_tracking' => 'required',
             'customer_id' => 'required',
             'delivery_id' => 'required',
+            'delivery_amount' => 'required',
         ]);
 
         $customer = Customer::where('id', $request->customer_id)->first();
@@ -77,6 +78,7 @@ class DeliveryReportController extends Controller
         $deliveryReport->delivery_tracking = $request->delivery_tracking;
         $deliveryReport->delivery_name = $delivery->name;
         $deliveryReport->delivery_id = $request->delivery_id;
+        $deliveryReport->delivery_amount = $request->delivery_amount;
 
         if ($request->customer_id == "other") {
             $deliveryReport->customer_name = $request->customer_other;
@@ -108,6 +110,7 @@ class DeliveryReportController extends Controller
             'delivery_tracking' => 'required',
             'customer_id' => 'required',
             'delivery_id' => 'required',
+            'delivery_amount' => 'required',
         ]);
 
         $customer = Customer::where('id', $request->customer_id)->first();
@@ -119,6 +122,7 @@ class DeliveryReportController extends Controller
         $deliveryReport->delivery_tracking = $request->delivery_tracking;
         $deliveryReport->delivery_name = $delivery->name;
         $deliveryReport->delivery_id = $request->delivery_id;
+        $deliveryReport->delivery_amount = $request->delivery_amount;
 
         if ($request->customer_id == "other") {
             $deliveryReport->customer_name = $request->customer_other;

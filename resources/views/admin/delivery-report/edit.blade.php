@@ -57,6 +57,13 @@
                         <input type="text" class="form-control" name="delivery_tracking" value="{{ $deliveryReport->delivery_tracking }}" required>
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>จำนวนลังที่จัดส่ง <span class="required">*</span></label>
+                        <input type="number" class="form-control" name="delivery_amount" value="{{ $deliveryReport->delivery_amount }}"
+                            oninput="this.value = Math.abs(this.value)" required>
+                    </div>
+                </div>
                 <div class="col-md-12 mt-3">
                     <button type="submit" class="btn btn-primary btn-block">เพิ่มการแจ้งจัดส่งสินค้า</button>
                 </div>
