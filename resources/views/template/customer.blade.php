@@ -18,10 +18,9 @@
         <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
         <link href="{{ URL::asset('css/landing-page.css') }}?v=<?=time()?>" type="text/css" rel="stylesheet">
         <link href="{{ URL::asset('css/app.css') }}?v=<?=time()?>" type="text/css" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
         <script src="{{ URL::asset('vendor/jquery/jquery.min.js') }}"></script>
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
+        <link rel="stylesheet" href="{{ URL::asset('css/select2.min.css') }}">
+        <script src="{{ URL::asset('js/select2.min.js') }}"></script>
         @yield('head')
     </head>
     <body>
@@ -54,7 +53,7 @@
                     url: '{{ url("customer/cart/product/count") }}',
                     type: 'get',
                     success: function(result) {
-                        console.log('result', result)
+                        //console.log('result', result)
                         $('#productCount').text(result.productCount);
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
