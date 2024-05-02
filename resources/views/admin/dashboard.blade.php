@@ -6,7 +6,7 @@
     color: #fff;
     background-color: #2e6bd3;
 }
- 
+
 .nav-pills .nav-link > a {
     color: #2e6bd3;
 }
@@ -155,12 +155,12 @@
   </div>
 </div>
 @endsection
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.49.0/apexcharts.min.js" integrity="sha512-NpRqjS1hba1uc6270PmwsKwQti3CSCDkZD9/dlen3+ytOUb/azIyuaGtyewUkjazLMSdl7Zy2CVWMvGxR6vFWg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @section('script')
 <script>
   var customerActive = {{ $customerActive }};
-        var customerPending = {{ $customerPending }}; 
-        var customerSuspend = {{ $customerSuspend }};  
+        var customerPending = {{ $customerPending }};
+        var customerSuspend = {{ $customerSuspend }};
        var options = {
           series: [{
           data: [customerActive, customerPending, customerSuspend]
@@ -206,9 +206,9 @@
 <script>
   var orderPending = {{ $orderPending }};
         var orderPayment = {{ $orderPayment }};
-        var orderCredit = {{ $orderCredit }};  
-        var orderSuccess = {{ $orderSuccess }};  
-        var orderCancel = {{ $orderCancel }};  
+        var orderCredit = {{ $orderCredit }};
+        var orderSuccess = {{ $orderSuccess }};
+        var orderCancel = {{ $orderCancel }};
         var options = {
           series: [{
           data: [orderPending, orderPayment, orderCredit, orderSuccess, orderCancel]
