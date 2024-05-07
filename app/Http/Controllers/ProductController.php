@@ -660,11 +660,20 @@ class ProductController extends Controller
         $productCategories = $product->categories()->pluck('category_id');
         $categoryProducts = CategoryProduct::whereIn('category_id', $productCategories)->pluck('product_id');
         if (count($categoryProducts) == 0) {
-            $similarProducts = Product::where('id', '!=', $product->id)->inRandomOrder()->take(3)->get();
+            $similarProducts = Product::where('id', '!=', $product->id)
+            ->where('status', 'active')
+            ->where('quantity', '>', 0)
+            ->inRandomOrder()->take(3)->get();
         } else if (count($categoryProducts) > 1) {
-            $similarProducts = Product::where('id', '!=', $product->id)->inRandomOrder()->take(3)->get();
+            $similarProducts = Product::where('id', '!=', $product->id)
+            ->where('status', 'active')
+            ->where('quantity', '>', 0)
+            ->inRandomOrder()->take(3)->get();
         } else {
-            $similarProducts = Product::where('id', '!=', $product->id)->whereIn('id', $categoryProducts)->take(3)->get();
+            $similarProducts = Product::where('id', '!=', $product->id)
+            ->where('status', 'active')
+            ->where('quantity', '>', 0)
+            ->whereIn('id', $categoryProducts)->take(3)->get();
         }
 
         if (count($product->categories()->pluck('category_id')) == 0) {
