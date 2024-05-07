@@ -654,7 +654,7 @@ class ProductController extends Controller
             ->with('tags')
             ->first();
 
-        $productImages = $product->detailImages()->get();
+        //$productImages = $product->detailImages()->get();
 
         $productType = $product->categories()->pluck('category_id');
         $productCategories = $product->categories()->pluck('category_id');
@@ -678,7 +678,7 @@ class ProductController extends Controller
 
         return view('customer.show', [
             'product' => $product,
-            'productImages' => $productImages,
+            //'productImages' => $productImages,
             'similarProducts' => $similarProducts,
             'productNameText' => $productNameText,
             'productCategoryText' => $productCategoryText,
