@@ -215,7 +215,7 @@
                 <p class="text-muted text-center" style="margin-top: 5px; margin-bottom: 0px !important;">
                     Copyright &copy; <?php echo date("Y"); ?> บริษัท เลิศยาภัณฑ์ จำกัด. All Rights Reserved.
                     Powered by <a class="text-muted" href="https://stellarcozy.com/" target="_blank"
-                    style="font-weight: 500;">StellarCozy</a>
+                    style="font-weight: 500;">StellarCozy</a>.
                 </p>
             </div>
         </div>
