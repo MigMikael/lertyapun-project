@@ -1,7 +1,7 @@
 @extends('template.customer')
 
 @section('content')
-<!-- Masthead -->
+<!-- Start Master Header -->
 <header class="masthead text-white text-center bg-landing-page" style="margin-top: 0px !important;">
     <div class="masthead-overlay"></div>
     <div class="container">
@@ -12,8 +12,9 @@
         </div>
     </div>
 </header>
+<!-- End Master Header -->
 
-<!-- Icons Grid -->
+<!-- Start Services -->
 <section class="features-icons bg-white text-center">
     <div class="container">
         <div class="row">
@@ -50,8 +51,9 @@
         </div>
     </div>
 </section>
+<!-- End Services -->
 
-<!-- Image Showcases -->
+<!-- Start Showcases -->
 <section class="showcase">
     <div class="container-fluid p-0">
         <div class="row no-gutters">
@@ -88,8 +90,9 @@
         </div>
     </div>
 </section>
+<!-- End Showcases -->
 
-<!-- Testimonials -->
+<!-- Start Testimonials -->
 <section class="testimonials text-center bg-white">
     <div class="container">
         <h2 class="mb-5">บุคลากรของเรา</h2>
@@ -98,28 +101,29 @@
                 <div class="testimonial-item mx-auto mb-5 mb-lg-0">
                     <img class="img-fluid rounded-circle mb-3" src="img/mix.jpg" alt="">
                     <h5>พลาพล บรรจงคชาธาร</h5>
-                    <p class="font-weight-light mb-0">เภสัชศาสตรบัณฑิต (ภ.บ.)<br>วิทยาลัยเภสัชศาสตร์ มหาวิทยาลัยรังสิต</p>
+                    <p class="font-weight-light mb-0">วิทยาลัยเภสัชศาสตร์ มหาวิทยาลัยรังสิต</p>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="testimonial-item mx-auto mb-5 mb-lg-0">
                     <img class="img-fluid rounded-circle mb-3" src="img/man.jpg" alt="">
                     <h5>พลาเลิศ บรรจงคชาธาร</h5>
-                    <p class="font-weight-light mb-0">บริหารธุรกิจบัณฑิต (บธ.บ)<br>คณะบริหารธุรกิจ มหาวิทยาลัยรังสิต</p>
+                    <p class="font-weight-light mb-0">คณะบริหารธุรกิจ มหาวิทยาลัยรังสิต</p>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="testimonial-item mx-auto mb-5 mb-lg-0">
                     <img class="img-fluid rounded-circle mb-3" src="img/mint.jpg" alt="">
                     <h5>พลาพร บรรจงคชาธาร</h5>
-                    <p class="font-weight-light mb-0">กำลังศึกษาคณะเภสัชศาสตร์<br>มหาวิทยาลัยศิลปากร</p>
+                    <p class="font-weight-light mb-0">คณะเภสัชศาสตร์ มหาวิทยาลัยศิลปากร</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<!-- End Testimonials -->
 
-<!-- Call to Action -->
+<!-- Start Call to Action -->
 <section class="call-to-action text-white text-center">
     <div class="call-to-action-overlay"></div>
     <div class="container">
@@ -142,7 +146,9 @@
         </div>
     </div>
 </section>
+<!-- End Call to Action -->
 
+<!-- Start Contact -->
 <section class="testimonials text-center bg-white" id="contactUs">
     <div class="container">
         <h2 class="mb-5">ติดต่อเรา</h2>
@@ -155,15 +161,6 @@
                     อ.ท่ามะกา จ.กาญจนบุรี 71130</p>
                 </div>
             </div>
-            <!--
-            <div class="col-lg-4">
-                <div class="contact-box">
-                    <h5 class="mb-3"><i class="fas fa-phone-alt text-primary"></i> เบอร์โทรศัพท์</h5>
-                    <p>034-561-128<br>
-                    095-254-4525</p>
-                </div>
-            </div>
-            -->
             <div class="col-lg-4">
                 <div class="contact-box" style="min-height: 250px;">
                     <h5 class="mb-3"><i class="fas fa-clock text-primary"></i> เวลาเปิดทำการ</h5>
@@ -203,8 +200,9 @@
         </div>
     </div>
 </section>
+<!-- End Contact -->
 
-<!-- Footer -->
+<!-- Start Footer -->
 <footer class="footer bg-white">
     <div class="container">
         <div class="row">
@@ -218,5 +216,6 @@
         </div>
     </div>
 </footer>
+<!-- End Footer -->
 
 @endsection
