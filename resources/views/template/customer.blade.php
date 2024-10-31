@@ -3,12 +3,10 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="keywords" CONTENT="เลิศยาภัณฑ์, ร้านขายยา, ร้านยา, ร้านยาราคาถูก, ร้านยาคุณภาพ, ร้านยาปลีก-ส่ง, ร้านยาโดยเภสัชกร, ร้านยาเภสัช">
-        <meta name="description" content="เลิศยาภัณฑ์ ร้านยาคุณภาพ ราคาถูก ปลีก-ส่ง พร้อมบริการปรึกษาปัญหาทางสุขภาพและมีกิจกรรมตรวจสุขภาพฟรีตลอดทั้งปี">
+        <meta name="keywords" CONTENT="เลิศยาภัณฑ์, ร้านขายยา, ร้านยา, ร้านยาราคาถูก, ร้านยาปลีก-ส่ง, ร้านยาโดยเภสัชกร, ร้านยาเภสัช">
+        <meta name="description" content="เลิศยาภัณฑ์ ร้านขายยา ราคาถูก ปลีก-ส่ง พร้อมบริการปรึกษาปัญหาทางสุขภาพและมีกิจกรรมตรวจสุขภาพฟรีตลอดทั้งปี">
         <meta name="author" content="เลิศยาภัณฑ์">
-
-        <title>@yield('title', 'เลิศยาภัณฑ์ ร้านยาคุณภาพ ราคาถูก ปลีก-ส่ง')</title>
-
+        <title>@yield('title', 'เลิศยาภัณฑ์ ร้านขายยา ราคาถูก ปลีก-ส่ง')</title>
         <link href="{{ URL::asset('css/bootstrap.min.css') }}" type="text/css" rel="stylesheet">
         <link rel="shortcut icon" href="{{ URL::asset('favicon.ico') }}" type="image/x-icon">
         <link rel="icon" href="{{ URL::asset('favicon.ico') }}" type="image/x-icon">
@@ -36,7 +34,6 @@
             </div>
         </nav>
         @endif
-
         @include('customer._errorModal')
         @yield('content')
         <script src="{{ URL::asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

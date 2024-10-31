@@ -4,8 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>@yield('title', 'เลิศยาภัณฑ์ ร้านยาคุณภาพ ราคาถูก ปลีก-ส่ง')</title>
-
+        <title>@yield('title', 'เลิศยาภัณฑ์ ร้านขายยา ราคาถูก ปลีก-ส่ง')</title>
         <link rel="shortcut icon" href="{{ URL::asset('favicon.ico') }}" type="image/x-icon">
         <link rel="icon" href="{{ URL::asset('favicon.ico') }}" type="image/x-icon">
         <link href="{{ URL::asset('css/bootstrap.min.css') }}" type="text/css" rel="stylesheet">
