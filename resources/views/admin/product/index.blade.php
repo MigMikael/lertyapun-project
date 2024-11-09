@@ -91,6 +91,7 @@
                 <th scope="col">รหัสสินค้า</th>
                 <th scope="col">รูปสินค้า</th>
                 <th scope="col">ชื่อสินค้า</th>
+                <th scope="col">จำนวน</th>
                 <th class="text-center">สถานะ</th>
                 <th class="text-center">จัดการ</th>
                 <th class="text-center">ดูข้อมูล</th>
@@ -115,6 +116,9 @@
                             @if($product->quantity <= 0)
                                 <span class="badge badge-danger-secondary">สินค้าหมด</span>
                             @endif
+                        </td>
+                        <td>
+                            {{ $product->quantity }}
                         </td>
                         <td class="text-center">
                             @if($product->status == 'active')

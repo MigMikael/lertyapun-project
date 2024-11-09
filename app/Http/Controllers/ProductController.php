@@ -37,6 +37,7 @@ class ProductController extends Controller
     public $productAmountStatus = [
         'all' => 'ทั้งหมด',
         'has' => 'มีสินค้า',
+        'almost_empty' => 'สินค้าใกล้หมด',
         'empty' => 'สินค้าหมด',
     ];
 
@@ -53,7 +54,8 @@ class ProductController extends Controller
         $statusAmountSearch = $request->query('statusAmountSearch');
         $productStatusSearch = $request->query('productStatusSearch');
 
-        if ($statusAmountSearch == "all") {
+        if ($statusAmountSearch == "all")
+        {
             $products = Product::where("status", "active")
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%' . $search . '%')
@@ -62,7 +64,9 @@ class ProductController extends Controller
                         ->orderBy('created_at', 'DESC')
                         ->with('image');
                 })->paginate($page);
-        } else if ($statusAmountSearch == "has") {
+        }
+        else if ($statusAmountSearch == "has")
+        {
             $products = Product::where("status", "active")
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%' . $search . '%')
@@ -71,7 +75,20 @@ class ProductController extends Controller
                         ->orderBy('created_at', 'DESC')
                         ->with('image');
                 })->where("products.quantity", ">", 0)->paginate($page);
-        } else if ($statusAmountSearch == "empty") {
+        }
+        else if ($statusAmountSearch == "almost_empty")
+        {
+            $products = Product::where("status", "active")
+                ->where(function ($query) use ($search) {
+                    $query->where('name', 'like', '%' . $search . '%')
+                        ->orWhere('keyword_search', "like", "%" . $search . "%")
+                        ->orWhere('barcode', "like", "%" . $search . "%")
+                        ->orderBy('created_at', 'DESC')
+                        ->with('image');
+                })->where("products.quantity", "<=", 10)->paginate($page);
+        }
+        else if ($statusAmountSearch == "empty")
+        {
             $products = Product::where("status", "active")
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%' . $search . '%')
@@ -80,7 +97,9 @@ class ProductController extends Controller
                         ->orderBy('created_at', 'DESC')
                         ->with('image');
                 })->where("products.quantity", "<=", 0)->paginate($page);
-        } else {
+        }
+        else
+        {
             $products = Product::where("status", "active")
                 ->where(function ($query) use ($search) {
                     $query->where('name', 'like', '%' . $search . '%')
