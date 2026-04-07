@@ -129,14 +129,6 @@
                             <span class="badge badge-danger">ไม่ได้ใช้งาน</span>
                             @endif
                         </td>
-                        <!--
-                        <td class="text-right" onclick="window.location='{{ url('admin/products/'.$product->slug) }}'">
-                            {{ number_format($product->units['0']->pricePerUnit) }}
-                        </td>
-                        <td class="text-right" onclick="window.location='{{ url('admin/products/'.$product->slug) }}'">
-                            {{ number_format($product->quantity) }} {{ $product->units['0']->unitName }}
-                        </td>
-                        -->
                         <td class="text-center">
                             <div class="btn-group">
                                 <a href="{{ url('admin/products/'.$product->slug.'/edit') }}" class="btn btn-warning btn-sm">
