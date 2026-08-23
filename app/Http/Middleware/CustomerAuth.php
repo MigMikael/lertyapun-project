@@ -18,8 +18,8 @@ class CustomerAuth
      */
     public function handle(Request $request, Closure $next, $guard = 'customer')
     {
-        // 1. ยกเว้น Request ที่เกี่ยวกับรูปภาพทั้งหมด
-        if ($request->is('image/*') || $request->is('*/image/*')) {
+        // ตรวจสอบว่า URL มีคำว่า image/ อยู่หรือไม่ ถ้ามีให้ข้ามทันที
+        if (str_contains($request->getRequestUri(), 'image/')) {
             return $next($request);
         }
 

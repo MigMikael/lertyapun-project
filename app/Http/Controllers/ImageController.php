@@ -48,6 +48,7 @@ class ImageController extends Controller
     public function show(Image $image)
     {
         $file = Storage::disk('local')->get($image->name);
+        $image->getConnection()->disconnect();
         return response($file, 200)->header('Content-type', $image->mime);
     }
 
