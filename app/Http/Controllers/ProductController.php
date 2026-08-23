@@ -502,7 +502,7 @@ class ProductController extends Controller
 
     public function indexCustomerProductAll(Request $request)
     {
-        $page = 20;
+        $page = 16;
         $query = "";
         $category = [];
         //$category_slug = $request->query('category');
@@ -579,7 +579,7 @@ class ProductController extends Controller
      */
     public function indexCustomerProduct(Request $request)
     {
-        $page = 20;
+        $page = 16;
         $query = "";
         $category = [];
         //$category_slug = $request->query('category');

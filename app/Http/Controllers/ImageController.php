@@ -46,33 +46,11 @@ class ImageController extends Controller
      * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
-    {
-        // 1. ดึงเฉพาะ field ที่จำเป็น
-        $image = DB::table('images')->select('name', 'mime')->where('slug', $slug)->first();
-
-        // 2. สั่งปิด Connection ทันที เพื่อไม่ให้ค้างในเซิร์ฟเวอร์
-        DB::disconnect();
-
-        if (!$image || !Storage::disk('local')->exists($image->name)) {
-            abort(404);
-        }
-
-        // 3. สตรีมไฟล์ออกไป (ไม่กิน RAM)
-        return Storage::disk('local')->response($image->name, null, [
-            'Content-Type' => $image->mime,
-            'Cache-Control' => 'public, max-age=604800, immutable', // เบราว์เซอร์จะจำ Cache 7 วัน ไม่โหลดซ้ำ
-        ]);
-    }
-
-    /*
     public function show(Image $image)
     {
         $file = Storage::disk('local')->get($image->name);
-        $image->getConnection()->disconnect();
         return response($file, 200)->header('Content-type', $image->mime);
     }
-    */
 
     /**
      * Display the specified resource.
