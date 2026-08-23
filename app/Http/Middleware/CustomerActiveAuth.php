@@ -17,6 +17,11 @@ class CustomerActiveAuth
      */
     public function handle(Request $request, Closure $next, $guard = 'customer')
     {
+        // 1. ยกเว้น Request ที่เกี่ยวกับรูปภาพทั้งหมด
+        if ($request->is('image/*') || $request->is('*/image/*')) {
+            return $next($request);
+        }
+
         $customer = Auth::guard($guard)->user();
         if ($customer != null) {
             if ($customer->status == 'pending') {
