@@ -19,7 +19,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 form-group">
-                {!! Form::open(['method' => 'post', 'url' => 'customer/products/search', 'id' => 'search-product-form']) !!}
+                {!! Form::open(['method' => 'post', 'url' => 'customer/products/search', 'id' => 'search-product-form', 'accept-charset' => 'UTF-8']) !!}
                 <div class="row">
                     <div class="col-md-4 form-group">
                         <select class="form-control select-product-category" name="category" style="width: 100%;">

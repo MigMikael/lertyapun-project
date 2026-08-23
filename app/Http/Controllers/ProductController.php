@@ -505,8 +505,10 @@ class ProductController extends Controller
         $page = 20;
         $query = "";
         $category = [];
-        $category_slug = $request->query('category');
-        $search = $request->query('query');
+        //$category_slug = $request->query('category');
+        //$search = $request->query('query');
+        $category_slug = $request->input('category');
+        $search = $request->input('query');
 
         if ($category_slug != "") {
             if ($category_slug == "all") {
@@ -580,8 +582,10 @@ class ProductController extends Controller
         $page = 20;
         $query = "";
         $category = [];
-        $category_slug = $request->query('category');
-        $search = $request->query('query');
+        //$category_slug = $request->query('category');
+        //$search = $request->query('query');
+        $category_slug = $request->input('category');
+        $search = $request->input('query');
 
         if ($category_slug != "") {
             if ($category_slug == "all") {
